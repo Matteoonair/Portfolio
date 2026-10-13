@@ -146,6 +146,8 @@ section.block{padding-block:96px 24px;scroll-margin-top:60px}
 .tile.s-t{grid-column:span 4;grid-row:span 2}
 .tile.s-w{grid-column:span 6}
 .tile.s-full{grid-column:1/-1}
+.tile.s-8{grid-column:span 8}
+.pjgal img,.tile .tbg{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
 .tile::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(110% 90% at 100% 0%,var(--c2) 0%,transparent 62%);transition:transform .5s}
 .tile:hover::before{transform:scale(1.15)}
 .tile .slate{position:absolute;top:14px;left:16px;right:16px;display:flex;justify-content:space-between;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);opacity:.85}
@@ -166,7 +168,7 @@ section.block{padding-block:96px 24px;scroll-margin-top:60px}
 @media (max-width:860px){
   .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:150px}
   .tile,.tile.s-t{grid-column:span 1}
-  .tile.s-xl,.tile.s-l,.tile.s-w,.tile.s-full{grid-column:1/-1}
+  .tile.s-xl,.tile.s-l,.tile.s-w,.tile.s-8,.tile.s-full{grid-column:1/-1}
   .tile.s-xl,.tile.s-l{grid-row:span 2}
   .tile .big{font-size:30px}
   .tile .stat{display:none}
@@ -464,13 +466,18 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 /* ───────── Projets ───────── */
 const PROJECTS=[
   /* video:"media/xxx.mp4" + poster:"media/xxx.jpg" → la vidéo se lit directement dans la fiche du projet */
-  {id:'snow',size:'s-xl',cat:'video',c1:'#0D2A44',c2:'#5BB8F0',ink:'#EAF5FD',big:'Snowflake<br>World Tour',kicker:'Aftermovie · YO Agency',stat:['06.10','2025'],video:'media/snowflake.mp4',poster:'media/snowflake.jpg',
+  {id:'octrose',size:'s-xl',cat:'identite print',c1:'#3A1026',c2:'#FF8FC0',ink:'#FFF0F6',big:'Octobre<br>Rose',kicker:'Textile · Metropolitans × Institut Rafaël',poster:'media/octobre-rose.jpg',images:[['media/octobre-rose.jpg','T-shirt Octobre Rose : recto « Never Give Up » et verso Institut Rafaël']],
+   titre:'T-shirt Octobre Rose',tags:['Textile','Octobre Rose','Partenariat','Metropolitans'],
+   obj:"Créer le t-shirt solidaire du club pour Octobre Rose, en partenariat avec l'Institut Rafaël, et sensibiliser à la lutte contre le cancer du sein.",
+   brief:"Maquette recto-verso : au recto, le ruban rose, les logos des Levallois Metropolitans et du Levallois Sporting Club et le message « Never Give Up » ; au verso, le partenaire Institut Rafaël – santé intégrative.",
+   pb:"Comment fédérer joueurs, supporters et partenaire autour d'un message fort, lisible et porté fièrement ?"},
+  {id:'snow',size:'s-l',cat:'video',c1:'#0D2A44',c2:'#5BB8F0',ink:'#EAF5FD',big:'Snowflake<br>World Tour',kicker:'Aftermovie · YO Agency',stat:['06.10','2025'],video:'media/snowflake.mp4',poster:'media/snowflake.jpg',
    titre:'Snowflake World Tour',tags:['Tournage','Montage','Événementiel'],
    obj:"Présenter l'événement de manière claire et dynamique, valoriser les projets clients et les échanges avec les partenaires.",
    brief:"Réaliser une vidéo résumé (60 à 90 secondes) du Snowflake World Tour du 6 octobre 2025 pour une diffusion interne et externe.",
    pb:"Comment synthétiser un événement riche en contenu en moins de 90 secondes tout en valorisant la dynamique de participation et les échanges ?",
    res:[['2','diffusions : interne + externe'],['↑','engagement post-événement'],['✓','validée par les responsables événementiels']]},
-  {id:'ftf',size:'s-l',cat:'identite video print',c1:'#3A1530',c2:'#FF7AB6',ink:'#FFF0F7',big:'File tes<br>fringues&nbsp;!',kicker:'Événement solidaire',stat:['+50 kg','collectés'],video:'media/ftf.mp4',poster:'media/ftf.jpg',horizontal:true,
+  {id:'ftf',size:'s-t',cat:'identite video print',c1:'#3A1530',c2:'#FF7AB6',ink:'#FFF0F7',big:'File tes<br>fringues&nbsp;!',kicker:'Événement solidaire',stat:['+50 kg','collectés'],video:'media/ftf.mp4',poster:'media/ftf.jpg',horizontal:true,
    titre:'File tes fringues !',tags:['Identité','Affiche','Teasing vidéo'],
    obj:"Collecter un maximum de vêtements pour financer les actions de l'association Cop'1.",
    brief:"Organiser un vide-dressing solidaire à l'école Igensia et créer une identité visuelle qui attire les étudiants.",
@@ -487,7 +494,7 @@ const PROJECTS=[
    obj:"Présenter les services de l'agence de manière innovante.",
    brief:"Réalisation d'une vidéo courte de présentation.",
    pb:"Comment capter l'attention dès les premières secondes ?"},
-  {id:'affiches',size:'',cat:'print',c1:'#0F2B1A',c2:'#C23B3B',ink:'#F3F7EE',big:'Noël &amp;<br>St-Patrick',kicker:'Affiches · A3',poster:'media/affiche-stpatrick.jpg',images:[['media/affiche-noel.jpg','Affiche Goûter de Noël : jeudi 18 décembre au RIE d\'Arc de Seine'],['media/affiche-stpatrick.jpg','Affiche Saint-Patrick : soirée irlandaise au Social Hub, 17 mars']],
+  {id:'affiches',size:'s-8',cat:'print',c1:'#0F2B1A',c2:'#C23B3B',ink:'#F3F7EE',big:'Noël &amp;<br>St-Patrick',kicker:'Affiches · A3',poster:'media/affiche-stpatrick.jpg',images:[['media/affiche-noel.jpg','Affiche Goûter de Noël : jeudi 18 décembre au RIE d\'Arc de Seine'],['media/affiche-stpatrick.jpg','Affiche Saint-Patrick : soirée irlandaise au Social Hub, 17 mars']],
    titre:'Affiches d\'animation interne',tags:['Print','Comm\' interne','IDEX'],
    obj:"Renforcer la cohésion d'équipe et animer la vie de bureau autour de deux temps forts.",
    brief:"Une affiche chaleureuse pour le goûter de Noël et une affiche ludique (vert, trèfles) pour la Saint-Patrick.",
@@ -606,6 +613,7 @@ function projectSheet(p){
   }
 })();
 
+document.addEventListener('contextmenu',e=>{if(e.target.closest('.pjgal img,.tile,.paper'))e.preventDefault();});
 /* CV */
 function showCv(){const im=el('img');im.src='media/cv.jpg';im.alt='CV de Mattéo Vandenesse';openViewer([im]);}
 $('cv-open').addEventListener('click',showCv);
