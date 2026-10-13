@@ -303,6 +303,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 .pjsplit{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:4px;align-items:start;padding:20px 0 0 20px}
 .pjsplit .bd{padding-top:4px}
 .pjgal{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
+.pjgal figure.wide{grid-column:1/-1}
 .pjgal figure{margin:0;display:grid;gap:8px}
 .pjgal img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);display:block}
 .pjsplit.hz{grid-template-columns:1fr;padding:20px 20px 0}
@@ -524,10 +525,10 @@ const PROJECTS=[
    brief:"Réaliser une vidéo résumé (60 à 90 secondes) du Snowflake World Tour du 6 octobre 2025 pour une diffusion interne et externe.",
    pb:"Comment synthétiser un événement riche en contenu en moins de 90 secondes tout en valorisant la dynamique de participation et les échanges ?",
    res:[['2','diffusions : interne + externe'],['↑','engagement post-événement'],['✓','validée par les responsables événementiels']]},
-  {id:'ftf',size:'s-t',cat:'identite video print',c1:'#3A1530',c2:'#FF7AB6',ink:'#FFF0F7',big:'File tes<br>fringues&nbsp;!',kicker:'Événement solidaire',stat:['+50 kg','collectés'],video:'media/ftf.mp4',poster:'media/ftf.jpg',horizontal:true,
+  {id:'ftf',size:'s-t',cat:'identite video print',c1:'#3A1530',c2:'#FF7AB6',ink:'#FFF0F7',big:'File tes<br>fringues&nbsp;!',kicker:'Événement solidaire',stat:['+50 kg','collectés'],video:'media/ftf.mp4',poster:'media/ftf.jpg',horizontal:true,images:[['media/ftf-frise.jpg','Frise en 3 visuels : File · Tes · Fringues → Solidarités Co-P1','w'],['media/ftf-wallpaper.jpg','Fond d’écran de la collecte','w'],['media/ftf-banniere-process.jpg','Bannière : déposer, dénicher, contribuer','w'],['media/ftf-banniere-dates.jpg','Bannière : collecte jusqu’au 25 novembre, vide-dressing le 27','w'],['media/ftf-affiche-collecte.jpg','Affiche de la collecte'],['media/ftf-affiche-vide-dressing.jpg','Affiche du vide-dressing'],['media/ftf-affiche-pop-up.jpg','Affiche du pop-up store'],['media/ftf-affiche-dons.jpg','Affiche « Collecte de dons »'],['media/ftf-saviez-vous-1.jpg','Le saviez-vous ? · 50 % de textiles en plus'],['media/ftf-saviez-vous-2.jpg','Le saviez-vous ? · 26 kg par an'],['media/ftf-saviez-vous-3.jpg','Le saviez-vous ? · 40 % jamais portés'],['media/ftf-infographie.jpg','Infographie sur l’impact du textile'],['media/ftf-signaletique.jpg','Signalétique des bacs de collecte'],['media/ftf-stickers.jpg','Stickers UPCY’COM']],
    titre:'File tes fringues !',tags:['Identité','Affiche','Teasing vidéo'],
    obj:"Collecter un maximum de vêtements pour financer les actions de l'association Cop'1.",
-   brief:"Organiser un vide-dressing solidaire à l'école Igensia et créer une identité visuelle qui attire les étudiants.",
+   brief:"Organiser un vide-dressing solidaire à l'école Igensia et créer toute la communication : identité, frise, bannières, affiches, série « Le saviez-vous ? » sur l'impact du textile, signalétique des bacs de collecte et stickers.",
    pb:"Comment créer une identité claire et impactante pour générer un fort taux de participation ?",
    res:[['+50 kg','de vêtements collectés'],['≈500 €','reversés à l\'association']]},
   {id:'ody',size:'',cat:'print digital',c1:'#2A0F1C',c2:'#E86A9A',ink:'#FCE9F0',big:'Odysséa',kicker:'Newsletter · RSE',stat:['110','inscrits'],poster:'media/odyssea-formulaire.jpg',images:[['media/odyssea-formulaire.jpg','Formulaire d\'inscription : prénom, nom, taille de T-shirt et choix de l\'épreuve'],['media/odyssea-pourquoi.jpg','Pourquoi participer : solidarité, team spirit, vague rose et infos pratiques']],
@@ -611,7 +612,7 @@ function projectSheet(p){
   const qa=el('div','qa');
   [['Objectif',p.obj],['Brief',p.brief],['Problématique',p.pb]].forEach(([k,v])=>{if(!v)return;const d=el('div');d.appendChild(el('span','mono acc',k));d.appendChild(el('p',null,v));qa.appendChild(d);});
   bd.appendChild(qa);
-  if(p.images){const g=el('div','pjgal');p.images.forEach(([src,alt])=>{const f=el('figure');const im=el('img');im.src=src;im.alt=alt;im.loading='lazy';f.appendChild(im);f.appendChild(el('figcaption','mono',alt.split(' :')[0]));g.appendChild(f);});bd.appendChild(g);}
+  if(p.images){const g=el('div','pjgal');p.images.forEach(([src,alt,wide])=>{const f=el('figure',wide?'wide':null);const im=el('img');im.src=src;im.alt=alt;im.loading='lazy';f.appendChild(im);f.appendChild(el('figcaption','mono',alt.split(' :')[0]));g.appendChild(f);});bd.appendChild(g);}
   if(p.res){const r=el('div','res');p.res.forEach(([b,s])=>{const d=el('div');d.appendChild(el('b',null,b));d.appendChild(el('span',null,s));r.appendChild(d);});bd.appendChild(r);}
   if(p.links){const l=el('div','row');p.links.forEach(([t,h])=>{const a=el('a','btn small',t);a.href=h;a.target='_blank';a.rel='noopener';l.appendChild(a);});bd.appendChild(l);}
   if(p.video){
