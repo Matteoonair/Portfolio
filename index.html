@@ -258,7 +258,8 @@ section.block{padding-block:96px 24px;scroll-margin-top:60px}
 .lang span{color:var(--muted);font-family:var(--f-mono);font-size:12px}
 
 /* contact */
-.contact{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:32px;align-items:end;padding-block:110px 56px;scroll-margin-top:60px}
+.contact{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:32px;align-items:start;padding-block:110px 56px;scroll-margin-top:60px}
+@media (min-width:861px){.contact h2{position:sticky;top:120px}}
 .contact h2{font-size:clamp(52px,8.6vw,124px);font-weight:900;font-stretch:66%;text-transform:uppercase;line-height:.84}
 .contact h2 em{font-style:normal;color:var(--accent);display:block;padding-left:.4em}
 .ccard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:16px;min-width:0}
@@ -285,6 +286,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 .viewer{position:fixed;inset:0;z-index:50;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:rgba(6,7,9,.94);display:flex;align-items:flex-start;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 60px) 16px calc(env(safe-area-inset-bottom,0px) + 24px);overflow-y:auto}
 .viewer .stage{display:flex;flex-direction:column;gap:14px;width:min(100%,900px);align-items:center;margin:auto;flex-shrink:0}
 .viewer .stage>video,.viewer .stage>img{max-width:100%;max-height:calc(100dvh - 200px);border-radius:12px;background:#000}
+.viewer .stage>img.doc{width:min(100%,1000px);max-height:none;border-radius:6px;background:#fff}
 .viewer .cap{max-width:60ch;color:#D4D1CB;font-size:15px;text-align:center}
 .viewer .close{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);right:16px;z-index:2;background:var(--bg)}
 .pj{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
@@ -430,7 +432,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
     </div>
     <div class="cvgrid">
       <div class="paper">
-        <button class="sheet" type="button" id="cv-open" aria-label="Voir le CV en grand"><img src="media/cv.jpg" alt="CV de Mattéo Vandenesse" width="1000" height="1414"></button>
+        <button class="sheet" type="button" id="cv-open" aria-label="Voir le CV en grand"><img src="media/cv.jpg" alt="CV de Mattéo Vandenesse" width="1588" height="2246"></button>
         <div class="act">
           <a class="btn primary" id="cv-dl" href="media/cv-matteo-vandenesse.pdf" download="CV-Matteo-Vandenesse.pdf">Télécharger le CV (PDF)</a>
           <button class="btn" type="button" id="cv-big">Voir en grand</button>
@@ -660,7 +662,7 @@ function projectSheet(p){
 
 document.addEventListener('contextmenu',e=>{if(e.target.closest('.pjgal img,.tile,.paper'))e.preventDefault();});
 /* CV */
-function showCv(){const im=el('img');im.src='media/cv.jpg';im.alt='CV de Mattéo Vandenesse';openViewer([im]);}
+function showCv(){const im=el('img','doc');im.src='media/cv.jpg';im.alt='CV de Mattéo Vandenesse';openViewer([im]);}
 $('cv-open').addEventListener('click',showCv);
 $('cv-big').addEventListener('click',showCv);
 const note=$('cv-note');
