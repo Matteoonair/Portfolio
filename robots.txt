@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vdnsocialstudio.netlify.app/sitemap.xml

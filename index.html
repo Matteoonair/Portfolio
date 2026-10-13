@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="index, follow">
 <meta name="description" content="Mattéo Vandenesse · VDN Social Studio — création graphique, contenus réseaux sociaux et vidéo. Community manager aux Levallois Metropolitans.">
 <meta property="og:title" content="Mattéo Vandenesse · VDN Social Studio">
 <meta property="og:description" content="Création graphique, contenus réseaux sociaux et vidéo. Ouvert aux missions freelance.">
@@ -19,7 +20,7 @@
 <link rel="manifest" href="site.webmanifest?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
-<title>Mattéo Vandenesse</title>
+<title>Mattéo Vandenesse · VDN Social Studio — Création graphique & vidéo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -279,6 +280,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--accent)}
 .fld input::placeholder,.fld textarea::placeholder{color:#5E636C}
 .cform .btn.primary{justify-content:center}
+.legal{font-size:12px;line-height:1.5;color:var(--muted)}
 .fnote{font-size:14px;padding:10px 12px;border-radius:10px;background:var(--bg);border:1px solid var(--line)}
 .fnote.ok{border-color:#2E7D4F;color:#9BE3B5}
 .fnote.err{border-color:#7D2E33;color:#F2A8AC}
@@ -321,6 +323,8 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 .res span{font-size:12px;color:var(--muted)}
 @media (max-width:700px){.pjsplit.hz{padding:16px 16px 0}.pjsplit.hz .pjv{max-width:100%}}
 </style>
+<script data-goatcounter="https://vdnsocialstudio.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Mattéo Vandenesse", "url": "https://vdnsocialstudio.netlify.app/", "image": "https://vdnsocialstudio.netlify.app/media/matteo.jpg", "jobTitle": "Création graphique, vidéo et community management", "worksFor": {"@type": "Organization", "name": "Levallois Metropolitans"}, "brand": {"@type": "Brand", "name": "VDN Social Studio"}, "address": {"@type": "PostalAddress", "addressLocality": "Enghien-les-Bains", "addressCountry": "FR"}, "email": "mailto:matteo.vandenesse@gmail.com", "sameAs": ["https://www.instagram.com/vdnsocialstudio/", "https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab"]}</script>
 </head>
 <body>
 
@@ -484,11 +488,13 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
         <label class="fld"><span class="mono">Message</span><textarea id="f-msg" name="message" rows="4" required placeholder="Votre besoin, vos délais, un lien vers vos réseaux…"></textarea></label>
         <button class="btn primary" type="submit" id="f-send">Envoyer ma demande</button>
         <p class="fnote" id="f-note" role="status" hidden></p>
+        <p class="legal">Vos informations servent uniquement à répondre à votre demande. Elles ne sont ni revendues ni utilisées pour de la prospection, et vous pouvez demander leur suppression à tout moment par e-mail.</p>
       </form>
       <span class="mono" style="margin-top:4px">Ou directement</span>
       <span class="mail" id="mail">matteo.vandenesse@gmail.com</span>
       <div class="row">
         <button class="btn" type="button" id="copy">Copier l'adresse</button>
+        <a class="btn" href="https://www.instagram.com/vdnsocialstudio/" target="_blank" rel="noopener">Instagram ↗</a>
         <a class="btn" href="https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab" target="_blank" rel="noopener">LinkedIn ↗</a>
         <a class="btn" href="https://wa.me/33698069145" target="_blank" rel="noopener">WhatsApp ↗</a>
       </div>
@@ -681,6 +687,16 @@ if(cform){cform.addEventListener('submit',async e=>{
   }catch(err){note.textContent="L'envoi n'a pas fonctionné. Écrivez-moi directement à matteo.vandenesse@gmail.com.";note.classList.add('err');}
   note.hidden=false;btn.disabled=false;btn.textContent='Envoyer ma demande';
 });}
+/* statistiques : projets, stories et CV consultés */
+function track(name){try{window.goatcounter&&window.goatcounter.count&&window.goatcounter.count({path:name,title:name,event:true});}catch(e){}}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('.tile[aria-label]');if(t)track('projet: '+t.getAttribute('aria-label').replace('Voir le projet ',''));
+  const po=e.target.closest('.post');if(po)track('metropolitans: '+(po.querySelector('.kind')||{}).textContent);
+  if(e.target.closest('#cv-dl'))track('cv: téléchargement');
+  if(e.target.closest('#cv-big,#cv-open'))track('cv: aperçu');
+  const ext=e.target.closest('a[href^="http"]');if(ext&&!ext.href.includes('netlify.app'))track('lien: '+new URL(ext.href).hostname);
+});
+const cf=document.getElementById('cform');if(cf)cf.addEventListener('submit',()=>track('formulaire: envoi'));
 /* copy mail */
 const copyBtn=$('copy');
 copyBtn.addEventListener('click',()=>{
