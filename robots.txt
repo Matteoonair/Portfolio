@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vdnsocialstudio.matteo-metropolitans.workers.dev/sitemap.xml
+Sitemap: https://vdnsocialstudio.com/sitemap.xml
