@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vdnsocialstudio.netlify.app/sitemap.xml
+Sitemap: https://portfolio.matteo-metropolitans.workers.dev/sitemap.xml
