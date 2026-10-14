@@ -188,6 +188,12 @@ section.block{padding-block:96px 24px;scroll-margin-top:60px}
 .metro .dock p{color:var(--muted)}
 .counter{display:flex;align-items:baseline;gap:10px}
 .counter b{font-family:var(--f-display);font-weight:900;font-stretch:70%;font-size:72px;line-height:.8;color:var(--accent);font-variant-numeric:tabular-nums}
+.mgroups{display:grid;gap:40px;min-width:0}
+.mgroup{display:grid;gap:14px;min-width:0}
+.mghead{display:flex;justify-content:space-between;align-items:end;gap:16px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.mghead h3{font-family:var(--f-display);font-weight:900;font-stretch:72%;text-transform:uppercase;font-size:clamp(24px,3vw,34px);line-height:1}
+.mghead p{color:var(--muted);font-size:14px;margin-top:6px;max-width:52ch}
+.mghead .mono{white-space:nowrap}
 .reel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:16px;margin-right:-20px;padding-right:20px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
 .reel>*{scroll-snap-align:start;flex:0 0 auto}
 .post{width:250px;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-align:left;padding:0;cursor:pointer;transition:border-color .2s}
@@ -415,7 +421,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
         <div class="counter"><b id="post-count">00</b><span class="mono">créations<br>publiées</span></div>
         <div class="filters" id="pfilters" role="group" aria-label="Filtrer par réseau" hidden></div>
       </div>
-      <div class="reel" id="posts" tabindex="0" aria-label="Créations pour le club, défilement horizontal"></div>
+      <div class="mgroups" id="posts"></div>
     </div>
   </section>
 
@@ -663,17 +669,18 @@ function projectSheet(p){
       if(p.lien){const l=el('a','btn small','Voir la publication ↗');l.href=p.lien;l.target='_blank';l.rel='noopener';nodes.push(l);}
       openViewer(nodes);
     });
-    wrap.appendChild(a);return a;
+    return a;
   });
-  const present=[...new Set(POSTS.map(p=>p.reseau))];
-  if(present.length>1){
-    pf.hidden=false;
-    ['all',...present].forEach((key,i)=>{
-      const b=el('button',null,key==='all'?'Tout':(RESEAUX[key]||{nom:key}).nom);b.type='button';b.setAttribute('aria-pressed',i===0?'true':'false');
-      b.addEventListener('click',()=>{pf.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));els.forEach(e=>e.hidden=!(key==='all'||e.dataset.r===key));wrap.scrollLeft=0;});
-      pf.appendChild(b);
-    });
-  }
+  const CATS=[['stories','Stories Instagram','Vidéos verticales tournées et montées pour le compte Instagram du club.'],['linkedin','Rédaction LinkedIn','Textes écrits pour la page LinkedIn du club : annonces de match, comptes rendus, vie du groupe.'],['visuels','Visuels','Créations graphiques pour les réseaux du club.'],['tiktok','TikTok','Formats courts verticaux.'],['youtube','YouTube','Vidéos longues et résumés.']];
+  const catOf=p=>p.reseau==='tiktok'?'tiktok':p.reseau==='youtube'?'youtube':p.copy?'linkedin':(p.reseau==='instagram'&&p.type==='Story')?'stories':'visuels';
+  CATS.forEach(([k,t,d])=>{
+    const items=els.filter((e,i)=>catOf(POSTS[i])===k);if(!items.length)return;
+    const g=el('div','mgroup');const h=el('div','mghead');
+    const ht=el('div');ht.appendChild(el('h3',null,t));ht.appendChild(el('p',null,d));
+    h.append(ht,el('span','mono acc',String(items.length).padStart(2,'0')+(items.length>1?' créations':' création')));
+    const r=el('div','reel');r.tabIndex=0;r.setAttribute('aria-label',t+', défilement horizontal');items.forEach(e=>r.appendChild(e));
+    g.append(h,r);wrap.appendChild(g);
+  });
 })();
 
 document.addEventListener('contextmenu',e=>{if(e.target.closest('.pjgal img,.tile,.paper'))e.preventDefault();});
