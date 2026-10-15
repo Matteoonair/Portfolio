@@ -321,6 +321,21 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 .pj .qa p{color:var(--soft);font-size:15px}
 .pjsplit{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:4px;align-items:start;padding:20px 0 0 20px}
 .pjsplit .bd{padding-top:4px}
+.pjcar{position:relative;width:100%;max-width:520px;margin:4px auto 0}
+.pjcar .track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:12px;border:1px solid var(--line);background:#000;outline-offset:3px}
+.pjcar .track::-webkit-scrollbar{display:none}
+.pjcar figure{flex:0 0 100%;margin:0;scroll-snap-align:start;scroll-snap-stop:always}
+.pjcar img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
+.pjcar .nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(14,16,19,.72);color:#fff;font-size:28px;line-height:1;display:grid;place-items:center;cursor:pointer;transition:opacity .2s,background .2s}
+.pjcar .nav:hover{background:var(--accent);color:#0E1013}
+.pjcar .nav[disabled]{opacity:0;pointer-events:none}
+.pjcar .prev{left:10px}.pjcar .next{right:10px}
+.pjcar+.foot{max-width:520px;width:100%;margin:12px auto 0;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pjcar+.foot .dots{display:flex;gap:4px;flex-wrap:wrap}
+.pjcar+.foot .dot{width:22px;height:22px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+.pjcar+.foot .dot::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .2s,transform .2s}
+.pjcar+.foot .dot.on::before{background:var(--accent);transform:scale(1.25)}
+.pjcar+.foot+.cap{display:block;max-width:520px;margin:6px auto 0;color:var(--muted);text-align:center}
 .pjgal{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
 .pjgal figure.wide{grid-column:1/-1}
 .pjgal figure{margin:0;display:grid;gap:8px}
@@ -543,7 +558,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 const PROJECTS=[
   /* video:"media/xxx.mp4" + poster:"media/xxx.jpg" → la vidéo se lit directement dans la fiche du projet */
   {id:'orcar',size:'',cat:'print digital',c1:'#3A1026',c2:'#FF4FA3',ink:'#FFF0F6',big:'Octobre<br>Rose',kicker:'Carrousel Instagram · Metropolitans',poster:'media/or-carrousel-1.jpg',images:[['media/or-carrousel-1.jpg','Slide 1 : accroche « Il n’y a pas de temps mort contre le cancer »'],['media/or-carrousel-2.jpg','Slide 2 : pourquoi le basket se met au rose chaque octobre'],['media/or-carrousel-3.jpg','Slide 3 : Tiana Mangakahia, elle s’est battue sur et en dehors du terrain'],['media/or-carrousel-4.jpg','Slide 4 : son retour sur le parquet'],['media/or-carrousel-5.jpg','Slide 5 : Roland « Fatty » Taylor, un pionnier dans le combat'],['media/or-carrousel-6.jpg','Slide 6 : le basket utilise sa visibilité pour la cause'],['media/or-carrousel-7.jpg','Slide 7 : solidarité sur et en dehors du terrain'],['media/or-carrousel-8.jpg','Slide 8 : le chiffre à retenir, 61 214 nouveaux cas en 2023'],['media/or-carrousel-9.jpg','Slide 9 : annonce du match Metropolitans – Orléans du 23 octobre']],
-   titre:'Carrousel Octobre Rose',tags:['Carrousel','Instagram','Octobre Rose','Metropolitans'],
+   carousel:true,titre:'Carrousel Octobre Rose',tags:['Carrousel','Instagram','Octobre Rose','Metropolitans'],
    obj:"Sensibiliser la communauté du club au cancer du sein pendant Octobre Rose et annoncer le match aux couleurs roses du 23 octobre.",
    brief:"Un carrousel Instagram de 9 slides : l'accroche « Il n'y a pas de temps mort contre le cancer », pourquoi le basket se met au rose, les histoires de Tiana Mangakahia et de Roland « Fatty » Taylor, le chiffre à retenir (61 214 nouveaux cas en 2023, source INCa) et l'annonce du match Metropolitans – Orléans.",
    pb:"Comment parler d'un sujet grave avec l'énergie du basket, et donner envie de swiper jusqu'à la dernière slide ?"},
@@ -683,7 +698,20 @@ function projectSheet(p){
   const qa=el('div','qa');
   [['Objectif',p.obj],['Brief',p.brief],['Problématique',p.pb]].forEach(([k,v])=>{if(!v)return;const d=el('div');d.appendChild(el('span','mono acc',k));d.appendChild(el('p',null,v));qa.appendChild(d);});
   bd.appendChild(qa);
-  if(p.images){const g=el('div','pjgal');p.images.forEach(([src,alt,wide])=>{const f=el('figure',wide?'wide':null);const im=el('img');im.src=src;im.alt=alt;im.loading='lazy';f.appendChild(im);f.appendChild(el('figcaption','mono',alt.split(' :')[0]));g.appendChild(f);});bd.appendChild(g);}
+  if(p.images&&p.carousel){
+    const c=el('div','pjcar');const tr=el('div','track');tr.tabIndex=0;tr.setAttribute('aria-label',p.titre+', carrousel de '+p.images.length+' slides');
+    p.images.forEach(([src,alt])=>{const f=el('figure');const im=el('img');im.src=src;im.alt=alt;im.loading='lazy';im.draggable=false;f.appendChild(im);tr.appendChild(f);});
+    const pv=el('button','nav prev','‹'),nx=el('button','nav next','›');pv.type=nx.type='button';pv.setAttribute('aria-label','Slide précédente');nx.setAttribute('aria-label','Slide suivante');
+    const ft=el('div','foot'),dots=el('div','dots'),cnt=el('span','mono',''),cap=el('span','mono cap','');
+    const ds=p.images.map((_,i)=>{const d=el('button','dot');d.type='button';d.setAttribute('aria-label','Aller à la slide '+(i+1));d.addEventListener('click',()=>go(i));dots.appendChild(d);return d;});
+    const n=p.images.length;let cur=0;
+    function go(i){i=Math.max(0,Math.min(n-1,i));tr.scrollTo({left:i*tr.clientWidth,behavior:'smooth'});}
+    function upd(){cur=Math.round(tr.scrollLeft/Math.max(1,tr.clientWidth));pv.disabled=cur===0;nx.disabled=cur===n-1;ds.forEach((d,i)=>d.classList.toggle('on',i===cur));cnt.textContent=(cur+1)+' / '+n;cap.textContent=p.images[cur][1].split(' : ').slice(1).join(' : ');}
+    pv.addEventListener('click',()=>go(cur-1));nx.addEventListener('click',()=>go(cur+1));
+    tr.addEventListener('scroll',()=>{clearTimeout(tr._t);tr._t=setTimeout(upd,60);},{passive:true});
+    tr.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(cur+1);}if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1);}});
+    ft.append(cnt,dots);c.append(tr,pv,nx);bd.append(c,ft,cap);upd();
+  } else if(p.images){const g=el('div','pjgal');p.images.forEach(([src,alt,wide])=>{const f=el('figure',wide?'wide':null);const im=el('img');im.src=src;im.alt=alt;im.loading='lazy';f.appendChild(im);f.appendChild(el('figcaption','mono',alt.split(' :')[0]));g.appendChild(f);});bd.appendChild(g);}
   if(p.res){const r=el('div','res');p.res.forEach(([b,s])=>{const d=el('div');d.appendChild(el('b',null,b));d.appendChild(el('span',null,s));r.appendChild(d);});bd.appendChild(r);}
   if(p.links){const l=el('div','row');p.links.forEach(([t,h])=>{const a=el('a','btn small',t);a.href=h;a.target='_blank';a.rel='noopener';l.appendChild(a);});bd.appendChild(l);}
   if(p.video){
