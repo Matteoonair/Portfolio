@@ -200,6 +200,8 @@ section.block{padding-block:96px 24px;scroll-margin-top:60px}
 .post:hover{border-color:var(--accent)}
 .post.v{width:220px}
 .post.h{width:340px}
+.post.p{width:270px}
+.post.p .thumb{aspect-ratio:4/5}
 .post .thumb{aspect-ratio:1/1;position:relative;overflow:hidden;background:linear-gradient(160deg,#1A2233,#0E1013);display:flex;align-items:flex-end;padding:12px}
 .post.v .thumb{aspect-ratio:9/16}
 .post.h .thumb{aspect-ratio:16/9}
@@ -540,6 +542,11 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 /* ───────── Projets ───────── */
 const PROJECTS=[
   /* video:"media/xxx.mp4" + poster:"media/xxx.jpg" → la vidéo se lit directement dans la fiche du projet */
+  {id:'orcar',size:'',cat:'print digital',c1:'#3A1026',c2:'#FF4FA3',ink:'#FFF0F6',big:'Octobre<br>Rose',kicker:'Carrousel Instagram · Metropolitans',poster:'media/or-carrousel-1.jpg',images:[['media/or-carrousel-1.jpg','Slide 1 : accroche « Il n’y a pas de temps mort contre le cancer »'],['media/or-carrousel-2.jpg','Slide 2 : pourquoi le basket se met au rose chaque octobre'],['media/or-carrousel-3.jpg','Slide 3 : Tiana Mangakahia, elle s’est battue sur et en dehors du terrain'],['media/or-carrousel-4.jpg','Slide 4 : son retour sur le parquet'],['media/or-carrousel-5.jpg','Slide 5 : Roland « Fatty » Taylor, un pionnier dans le combat'],['media/or-carrousel-6.jpg','Slide 6 : le basket utilise sa visibilité pour la cause'],['media/or-carrousel-7.jpg','Slide 7 : solidarité sur et en dehors du terrain'],['media/or-carrousel-8.jpg','Slide 8 : le chiffre à retenir, 61 214 nouveaux cas en 2023'],['media/or-carrousel-9.jpg','Slide 9 : annonce du match Metropolitans – Orléans du 23 octobre']],
+   titre:'Carrousel Octobre Rose',tags:['Carrousel','Instagram','Octobre Rose','Metropolitans'],
+   obj:"Sensibiliser la communauté du club au cancer du sein pendant Octobre Rose et annoncer le match aux couleurs roses du 23 octobre.",
+   brief:"Un carrousel Instagram de 9 slides : l'accroche « Il n'y a pas de temps mort contre le cancer », pourquoi le basket se met au rose, les histoires de Tiana Mangakahia et de Roland « Fatty » Taylor, le chiffre à retenir (61 214 nouveaux cas en 2023, source INCa) et l'annonce du match Metropolitans – Orléans.",
+   pb:"Comment parler d'un sujet grave avec l'énergie du basket, et donner envie de swiper jusqu'à la dernière slide ?"},
   {id:'octrose',size:'s-xl',cat:'identite print',c1:'#3A1026',c2:'#FF8FC0',ink:'#FFF0F6',big:'Octobre<br>Rose',kicker:'Textile · Metropolitans × Institut Rafaël',poster:'media/octobre-rose.jpg',images:[['media/octobre-rose.jpg','T-shirt Octobre Rose : recto « Never Give Up » et verso Institut Rafaël']],
    titre:'T-shirt Octobre Rose',tags:['Textile','Octobre Rose','Partenariat','Metropolitans'],
    obj:"Créer le t-shirt solidaire du club pour Octobre Rose, en partenariat avec l'Institut Rafaël, et sensibiliser à la lutte contre le cancer du sein.",
@@ -573,6 +580,11 @@ const PROJECTS=[
    obj:"Renforcer la cohésion d'équipe et animer la vie de bureau autour de deux temps forts.",
    brief:"Une affiche chaleureuse pour le goûter de Noël et une affiche ludique (vert, trèfles) pour la Saint-Patrick.",
    pb:"Comment créer des visuels qui donnent envie de se rassembler tout en respectant l'identité de l'entreprise ?"},
+  {id:'ft',size:'',cat:'print digital',c1:'#111111',c2:'#FFE000',ink:'#FFFBE0',big:'La minute<br>de l’emploi',kicker:'Partenariat · France Travail × Metropolitans',poster:'media/ft-metropolitans-1.jpg',images:[['media/ft-metropolitans-1.jpg','Visuel 1 : annonce de « La minute de l’emploi »','w'],['media/ft-metropolitans-2.jpg','Visuel 2 : l’offre du jour, avec QR code pour postuler','w']],
+   titre:'France Travail × Metropolitans',tags:['Partenariat','Emploi','Format 16:9','Metropolitans'],
+   obj:"Mettre en avant le partenariat entre France Travail et les Metropolitans autour de « La minute de l'emploi ».",
+   brief:"Deux visuels 16:9 aux couleurs du club : l'annonce du dispositif, puis une « offre du jour » avec le poste, l'entreprise, le lieu, le contrat, le salaire et un QR code pour postuler en un scan.",
+   pb:"Comment rendre une offre d'emploi aussi lisible et rythmée qu'un temps fort de match ?"},
   {id:'sdlv',size:'s-full',cat:'identite',c1:'#14324F',c2:'#5FA3D6',ink:'#EEF6FD',big:'Sport dans la Ville<br>× Metropolitans',kicker:'Logo · Co-branding',poster:'media/sdlv-banniere.jpg',images:[['media/sdlv-logo.jpg','Logo commun : Sport dans la Ville × Metropolitans'],['media/sdlv-banniere.jpg','Visuel d\'annonce du partenariat']],
    titre:'Sport dans la Ville × Metropolitans',tags:['Logo','Co-branding','Partenariat','Metropolitans'],
    obj:"Créer un logo commun pour le partenariat entre l'association Sport dans la Ville et les Levallois Metropolitans, autour de l'insertion professionnelle par le sport.",
@@ -610,9 +622,9 @@ $('viewer-close').addEventListener('click',closeViewer);
 viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!viewer.hidden)closeViewer();});
 
-const HOME={octrose:['metro','design'],sdlv:['metro','design'],snow:['yo','video'],mallette:['yo','video'],ody:['yo','interne'],affiches:['yo','interne']};
+const HOME={orcar:['metro','design'],octrose:['metro','design'],ft:['metro','design'],sdlv:['metro','design'],snow:['yo','video'],mallette:['yo','video'],ody:['yo','interne'],affiches:['yo','interne']};
 function projCard(p){
-  const fc=(p.video&&!p.horizontal)?'v':(['octrose','sdlv','ftf'].includes(p.id)?'h':'');
+  const fc=(p.video&&!p.horizontal)?'v':p.id==='orcar'?'p':(['octrose','sdlv','ftf','ft'].includes(p.id)?'h':'');
   const a=el('button','post '+fc);a.type='button';
   const th=el('div','thumb');
   if(p.poster){const im=el('img');im.src=p.poster;im.alt='';im.loading='lazy';th.appendChild(im);}
@@ -731,7 +743,7 @@ function projectSheet(p){
     const r=el('div','reel');r.tabIndex=0;r.setAttribute('aria-label',t+', défilement horizontal');items.forEach(e=>r.appendChild(e));
     g.append(h,r);wrap.appendChild(g);
   });
-  if(metroProj.length){const dg=groupBlock('Design','Créations graphiques pour le club : textile solidaire, logos de partenariat.',metroProj.map(projCard));const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);}
+  if(metroProj.length){const dg=groupBlock('Design','Créations graphiques pour le club : carrousel Instagram, textile solidaire, visuels et logos de partenariat.',metroProj.map(projCard));const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);}
 })();
 
 document.addEventListener('contextmenu',e=>{if(e.target.closest('.pjgal img,.tile,.paper'))e.preventDefault();});
