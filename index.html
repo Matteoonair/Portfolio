@@ -298,6 +298,12 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 .viewer .copy{width:100%;max-width:640px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:20px 22px;display:grid;gap:12px;text-align:left}
 .viewer .copytext{white-space:pre-line;font-size:15px;line-height:1.6;color:var(--fg)}
 .viewer .stage>img.copyimg{max-width:min(100%,640px);max-height:none;border-radius:12px}
+.post .thumb.copyonly img{filter:grayscale(.7) brightness(.45)}
+.rolebadge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:13px;padding:8px 14px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.post .pb p.role{font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);-webkit-line-clamp:2}
+.viewer .copynote{font-size:14px;color:var(--muted);margin:-4px 0 4px}
+.viewer .ctxlabel{width:100%;max-width:640px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-top:1px dashed var(--line);padding-top:14px;margin-top:6px;text-align:left}
+.viewer .stage>img.copyimg,.viewer .cgal{opacity:.85}
 .viewer .cgal{width:100%;max-width:640px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .viewer .cgal img{width:100%;height:auto;border-radius:8px;display:block}
 .viewer .cap{max-width:60ch;color:#D4D1CB;font-size:15px;text-align:center}
@@ -694,13 +700,15 @@ function projectSheet(p){
     if(p.image){const im=el('img');im.src=p.image;im.alt='';im.loading='lazy';th.appendChild(im);}
     else if(p.video){const v=el('video');v.src=p.video+'#t=0.5';v.muted=true;v.playsInline=true;v.preload='metadata';th.appendChild(v);}
     if(p.video||r.video)th.appendChild(el('span','play','▶'));
-    th.appendChild(el('span','kind',r.nom+' · '+p.type));
-    const pb=el('div','pb');if(p.texte)pb.appendChild(el('p',null,p.texte));
+    if(p.copy){th.classList.add('copyonly');th.appendChild(el('span','rolebadge','✍ Rédaction uniquement'));}
+    th.appendChild(el('span','kind',p.copy?r.nom+' · Texte':r.nom+' · '+p.type));
+    const pb=el('div','pb');if(p.copy)pb.appendChild(el('p','role','Ma part : le texte. Visuel et photos : le club.'));if(p.texte)pb.appendChild(el('p',null,p.texte));
     const m=el('div','meta');m.appendChild(el('span',null,p.date?fmt(p.date):'Saison 2026-27'));m.appendChild(el('b',null,p.copy?'Lire le texte':(p.video?'Lire ▶':'Agrandir')));pb.appendChild(m);
     a.append(th,pb);
     a.addEventListener('click',()=>{
       const nodes=[];
-      if(p.copy){const c=el('article','copy');c.appendChild(el('span','mono acc','Texte rédigé par Mattéo · '+r.nom));c.appendChild(el('div','copytext',p.copy));nodes.push(c);}
+      if(p.copy){const c=el('article','copy');c.appendChild(el('span','mono acc','Ma contribution : rédaction du texte · '+r.nom));c.appendChild(el('p','copynote','J’ai écrit ce texte. Le visuel et les photos de la publication ont été réalisés par le club, pas par moi.'));c.appendChild(el('div','copytext',p.copy));nodes.push(c);}
+      if(p.copy)nodes.push(el('p','ctxlabel','Pour contexte : visuels publiés avec le texte, réalisés par Levallois Metropolitans'));
       if(p.video){const v=el('video');v.src=p.video;v.controls=true;v.playsInline=true;if(p.image)v.poster=p.image;nodes.push(v);}
       else if(p.image){const im=el('img',p.copy?'copyimg':null);im.src=p.image;im.alt=p.texte||'';nodes.push(im);}
       if(p.gallery){const g=el('div','cgal');p.gallery.forEach(src=>{const im=el('img');im.src=src;im.alt='';im.loading='lazy';g.appendChild(im);});nodes.push(g);}
@@ -710,7 +718,7 @@ function projectSheet(p){
     });
     return a;
   });
-  const CATS=[['stories','Stories Instagram','Vidéos verticales tournées et montées pour le compte Instagram du club.'],['linkedin','Rédaction LinkedIn','Textes écrits pour la page LinkedIn du club : annonces de match, comptes rendus, vie du groupe.'],['visuels','Visuels réseaux','Visuels créés pour les réseaux du club.'],['tiktok','TikTok','Formats courts verticaux.'],['youtube','YouTube','Vidéos longues et résumés.']];
+  const CATS=[['stories','Stories Instagram','Vidéos verticales tournées et montées pour le compte Instagram du club.'],['linkedin','Rédaction LinkedIn','Uniquement la rédaction : j’écris les textes des posts LinkedIn du club. Les visuels et photos qui les accompagnent sont réalisés par le club.'],['visuels','Visuels réseaux','Visuels créés pour les réseaux du club.'],['tiktok','TikTok','Formats courts verticaux.'],['youtube','YouTube','Vidéos longues et résumés.']];
   const catOf=p=>p.reseau==='tiktok'?'tiktok':p.reseau==='youtube'?'youtube':p.copy?'linkedin':(p.reseau==='instagram'&&p.type==='Story')?'stories':'visuels';
   const metroProj=PROJECTS.filter(p=>HOME[p.id]&&HOME[p.id][0]==='metro');
   count.textContent=String(POSTS.length+metroProj.length).padStart(2,'0');
