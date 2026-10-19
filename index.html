@@ -103,7 +103,9 @@ nav a.btn.primary{color:var(--accent-ink)}
 .portrait figcaption{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;display:flex;justify-content:space-between;gap:8px;color:var(--fg);font-size:11px}
 .badge{position:absolute;left:-46px;bottom:18%;width:120px;height:120px;z-index:3;color:var(--accent-ink)}
 .badge svg{width:100%;height:100%;animation:spin 18s linear infinite}
-.badge .core{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:30px;font-stretch:80%}
+.badge .core{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5%;font-family:var(--f-display);color:#17130A;pointer-events:none}
+.badge .core b{font-weight:900;font-size:34px;line-height:.8;font-stretch:66%;letter-spacing:-.01em;margin-bottom:6%}
+.badge .core .bdot{width:7%;aspect-ratio:1;border-radius:50%;background:#E5484D}
 @keyframes spin{to{transform:rotate(360deg)}}
 .intro{grid-column:1/7;grid-row:3;display:grid;gap:26px;align-content:start;z-index:2}
 .intro .lead{font-size:clamp(17px,1.8vw,20px);max-width:52ch;color:#D4D1CB}
@@ -115,6 +117,7 @@ nav a.btn.primary{color:var(--accent-ink)}
   .hero h1{grid-row:3}
   .intro{grid-row:4}
   .badge{left:auto;right:-14px;bottom:-14px;width:104px;height:104px}
+  .badge .core b{font-size:29px}
 }
 @media (prefers-reduced-motion:reduce){.rec b,.badge svg,.marquee .track{animation:none}}
 
@@ -423,8 +426,8 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
         <figcaption class="mono"><span>Cam A · 4:5</span><span>Mattéo Vandenesse</span></figcaption>
       </div>
       <div class="badge" aria-hidden="true">
-        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="60" fill="#F2B33D"/><defs><path id="circ" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><text font-family="JetBrains Mono, monospace" font-size="10.4" letter-spacing="2.2" fill="#17130A"><textPath href="#circ">DISPO FREELANCE • DISPO FREELANCE • </textPath></text></svg>
-        <span class="core">✦</span>
+        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="60" fill="#F2B33D"/><defs><path id="circ" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/></defs><text font-family="JetBrains Mono, monospace" font-size="8.6" font-weight="500" fill="#17130A"><textPath href="#circ" textLength="292" lengthAdjust="spacing">CRÉATION &amp; VIDÉO • VDN SOCIAL STUDIO • </textPath></text></svg>
+        <span class="core"><i class="bdot"></i><b>VDN</b></span>
       </div>
     </figure>
     <div class="intro">
