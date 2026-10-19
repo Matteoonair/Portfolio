@@ -393,8 +393,65 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 </style>
 <script data-goatcounter="https://vdnsocialstudio.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Mattéo Vandenesse", "url": "https://vdnsocialstudio.com/", "image": "https://vdnsocialstudio.com/media/matteo.jpg", "jobTitle": "Création graphique, vidéo et community management", "worksFor": {"@type": "Organization", "name": "Levallois Metropolitans"}, "brand": {"@type": "Brand", "name": "VDN Social Studio"}, "address": {"@type": "PostalAddress", "addressLocality": "Enghien-les-Bains", "addressCountry": "FR"}, "email": "mailto:matteo.vandenesse@gmail.com", "sameAs": ["https://www.instagram.com/vdnsocialstudio/", "https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab"]}</script>
+<script>try{if(sessionStorage.getItem('vdnIntro')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('nointro');}catch(e){}</script>
+<style>
+#intro{position:fixed;inset:0;z-index:9999;background:#0E1013;display:grid;place-items:center;overflow:hidden;color:#EDEAE4}
+html.nointro #intro{display:none}
+html:not(.nointro) body{overflow:hidden}
+#intro .c{position:absolute;width:12vmin;height:12vmin;max-width:90px;max-height:90px;border:2px solid rgba(237,234,228,.55)}
+#intro .c.tl{top:0;left:0;border-right:0;border-bottom:0;--to:translate(max(5vmin,calc(16px + env(safe-area-inset-left,0px))),max(5vmin,calc(16px + env(safe-area-inset-top,0px))));--fr:translate(-8vmin,-8vmin)}
+#intro .c.tr{top:0;right:0;border-left:0;border-bottom:0;--to:translate(min(-5vmin,calc(-16px - env(safe-area-inset-right,0px))),max(5vmin,calc(16px + env(safe-area-inset-top,0px))));--fr:translate(8vmin,-8vmin)}
+#intro .c.bl{bottom:0;left:0;border-right:0;border-top:0;--to:translate(max(5vmin,calc(16px + env(safe-area-inset-left,0px))),min(-5vmin,calc(-16px - env(safe-area-inset-bottom,0px))));--fr:translate(-8vmin,8vmin)}
+#intro .c.br{bottom:0;right:0;border-left:0;border-top:0;--to:translate(min(-5vmin,calc(-16px - env(safe-area-inset-right,0px))),min(-5vmin,calc(-16px - env(safe-area-inset-bottom,0px))));--fr:translate(8vmin,8vmin)}
+#intro .c{transform:var(--to);animation:ic .7s cubic-bezier(.2,.9,.2,1) .1s both}
+#intro .hud,#intro .ft{position:absolute;left:calc(max(5vmin,calc(16px + env(safe-area-inset-left,0px))) + 4vmin);right:calc(max(5vmin,calc(16px + env(safe-area-inset-right,0px))) + 4vmin);display:flex;justify-content:space-between;font-family:"JetBrains Mono",ui-monospace,monospace;letter-spacing:.1em;color:#C9C6C0}
+#intro .hud{top:calc(max(5vmin,calc(16px + env(safe-area-inset-top,0px))) + 4vmin);font-size:clamp(11px,2.2vmin,16px);animation:ifade .3s .5s both}
+#intro .ft{bottom:calc(max(5vmin,calc(16px + env(safe-area-inset-bottom,0px))) + 4vmin);font-size:clamp(9px,1.6vmin,12px);text-transform:uppercase;color:#8E939C;animation:ifade .4s 1.6s both}
+#intro .r{display:flex;align-items:center;gap:8px}
+#intro .r i{width:10px;height:10px;border-radius:50%;background:#E5484D;animation:iblink .8s steps(1) .5s infinite}
+#intro .m{display:grid;justify-items:center;gap:3.5vmin}
+#intro .w{font-family:"Archivo","Arial Narrow",sans-serif;font-weight:900;font-stretch:66%;font-size:clamp(110px,30vmin,240px);line-height:.8;animation:ifocus 1s cubic-bezier(.3,.7,.2,1) .7s both}
+#intro .w span{color:#F2B33D}
+#intro .b{background:#F2B33D;color:#17130A;font-family:"Archivo","Arial Narrow",sans-serif;font-weight:900;font-stretch:72%;text-transform:uppercase;font-size:clamp(24px,6.2vmin,50px);padding:.2em .55em;transform:rotate(-3deg);animation:iband .4s cubic-bezier(.2,1.3,.3,1) 1.5s both}
+#intro .fl{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#intro .skip{position:absolute;right:calc(max(5vmin,calc(16px + env(safe-area-inset-right,0px))) + 4vmin);bottom:calc(max(5vmin,calc(16px + env(safe-area-inset-bottom,0px))) + 9vmin);font:600 13px "Manrope",system-ui,sans-serif;color:#8E939C;background:transparent;border:1px solid #262A31;border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer;animation:ifade .3s .9s both}
+#intro .skip:hover,#intro .skip:focus-visible{color:#EDEAE4;border-color:#8E939C;outline:none}
+#intro.out .fl{animation:iflash .5s ease-out both}
+#intro.out{animation:igone .01s .12s both}
+@keyframes ic{from{transform:var(--fr)}to{transform:var(--to)}}
+@keyframes ifade{from{opacity:0}to{opacity:1}}
+@keyframes iblink{50%{opacity:.15}}
+@keyframes ifocus{0%{opacity:0;filter:blur(14px);transform:scale(1.12)}55%{opacity:1;filter:blur(0);transform:scale(.97)}70%{filter:blur(2px)}100%{opacity:1;filter:blur(0);transform:scale(1)}}
+@keyframes iband{from{opacity:0;transform:rotate(-12deg) scale(1.6)}to{opacity:1;transform:rotate(-3deg) scale(1)}}
+@keyframes iflash{0%{opacity:0}15%{opacity:.95}100%{opacity:0}}
+@keyframes igone{to{opacity:0;visibility:hidden}}
+</style>
 </head>
 <body>
+<div id="intro">
+  <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+  <div class="hud"><span class="r"><i></i>REC</span><span id="intro-tc">00:00:00:00</span></div>
+  <div class="m"><div class="w"><span>V</span>DN</div><div class="b">Social studio</div></div>
+  <div class="ft"><span>Paris · 2026</span><span>Création &amp; vidéo</span></div>
+  <button class="skip" id="intro-skip" type="button" aria-label="Passer l’intro">Passer</button>
+  <div class="fl"></div>
+</div>
+<script>
+(function(){
+  var el=document.getElementById('intro');if(!el)return;
+  var root=document.documentElement;
+  if(root.classList.contains('nointro')){el.remove();return;}
+  try{sessionStorage.setItem('vdnIntro','1');}catch(e){}
+  var tc=document.getElementById('intro-tc'),t0=Date.now(),done=false;
+  var iv=setInterval(function(){var ms=Date.now()-t0,s=Math.floor(ms/1000),f=Math.floor((ms%1000)/40);tc.textContent='00:00:'+(s<10?'0':'')+s+':'+(f<10?'0':'')+f;},40);
+  function end(){if(done)return;done=true;clearInterval(iv);el.classList.add('out');setTimeout(function(){el.remove();root.classList.add('nointro');},650);}
+  var t=setTimeout(end,2400);
+  document.getElementById('intro-skip').addEventListener('click',function(){clearTimeout(t);end();});
+  el.addEventListener('click',function(e){if(e.target===el){clearTimeout(t);end();}});
+  document.addEventListener('keydown',function k(e){if(e.key==='Escape'||e.key==='Enter'||e.key===' '){clearTimeout(t);end();document.removeEventListener('keydown',k);}});
+})();
+</script>
+
 
 
 <header class="top">
