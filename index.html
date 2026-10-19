@@ -333,6 +333,8 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 .lmhead b{font-size:17px}
 .lmhead .mono{color:var(--muted)}
 .lmhead .btn{margin-left:auto}
+.lscore{font-family:var(--f-mono,'JetBrains Mono',monospace);font-size:13px;font-weight:700;letter-spacing:.04em;padding:4px 10px;border-radius:6px;border:1px solid var(--line);background:var(--surface)}
+.lscore.w{background:var(--accent);color:var(--accent-ink,#0E1013);border-color:var(--accent)}
 .livebadge{position:absolute;top:10px;left:10px;z-index:1;display:inline-flex;align-items:center;gap:6px;background:#E5484D;color:#fff;font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:6px}
 .livebadge::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
 .lplayer{position:relative;width:min(100%,calc((100dvh - 200px)*9/16),420px);aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#000;border:1px solid var(--line)}
@@ -641,7 +643,7 @@ const PROJECTS=[
 /* ───────── En direct des matchs : vidéos filmées au téléphone, publiées en story sans montage — ajouter le dernier match en haut ─────────
  {match:"…", date:"AAAA-MM-JJ", lieu:"…", cover:n (index du clip pour la miniature), clips:[['fichier sans extension dans media/live/','HH:MM'], …]} */
 const LIVE=[
-  {match:'Metropolitans – Alliance Sport Alsace',date:'2026-10-16',lieu:'Palais des Sports Marcel-Cerdan',comp:'ÉLITE 2',cover:3,clips:[['m1016-01','20:33'],['m1016-02','20:35'],['m1016-03','20:42'],['m1016-04','20:46'],['m1016-05','20:47'],['m1016-06','20:53'],['m1016-07','20:58'],['m1016-08','21:06'],['m1016-09','21:07'],['m1016-10','21:09'],['m1016-11','21:12'],['m1016-12','21:19'],['m1016-13','21:21'],['m1016-14','21:41'],['m1016-15','21:42'],['m1016-16','21:45'],['m1016-17','22:07'],['m1016-18','22:14'],['m1016-19','22:15'],['m1016-20','22:30']]},
+  {match:'Metropolitans – Alliance Sport Alsace',date:'2026-10-16',lieu:'Palais des Sports Marcel-Cerdan',comp:'ÉLITE 2',score:'89-78',win:true,cover:3,clips:[['m1016-01','20:33'],['m1016-02','20:35'],['m1016-03','20:42'],['m1016-04','20:46'],['m1016-05','20:47'],['m1016-06','20:53'],['m1016-07','20:58'],['m1016-08','21:06'],['m1016-09','21:07'],['m1016-10','21:09'],['m1016-11','21:12'],['m1016-12','21:19'],['m1016-13','21:21'],['m1016-14','21:41'],['m1016-15','21:42'],['m1016-16','21:45'],['m1016-17','22:07'],['m1016-18','22:14'],['m1016-19','22:15'],['m1016-20','22:30']]},
 ];
 
 const POSTS=[
@@ -683,7 +685,9 @@ function liveClipCard(m,i){
 function liveBlock(m){
   const fmt=new Date(m.date+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
   const b=el('div','lmatch');const h=el('div','lmhead');
-  h.appendChild(el('b',null,m.match));h.appendChild(el('span','mono',fmt+' · '+m.clips.length+' stories'));
+  h.appendChild(el('b',null,m.match));h.appendChild(el('span','mono',fmt));
+  if(m.score){const sc=el('span','lscore'+(m.win===true?' w':m.win===false?' l':''),(m.win===true?'Victoire ':m.win===false?'Défaite ':'')+m.score);h.appendChild(sc);}
+  h.appendChild(el('span','mono',m.clips.length+' stories'));
   const all=el('button','btn small','Tout regarder ▶');all.type='button';all.addEventListener('click',()=>openViewer(livePlayer(m,0)));h.appendChild(all);
   const r=el('div','reel');r.tabIndex=0;r.setAttribute('aria-label','Vidéos du match '+m.match+', défilement horizontal');m.clips.forEach((_,i)=>r.appendChild(liveClipCard(m,i)));
   b.append(h,r);return b;
@@ -708,7 +712,7 @@ function livePlayer(m,start){
   const pz=el('button','pause','❚❚');pz.type='button';pz.setAttribute('aria-label','Pause ou lecture');
   box.append(v,bars,head,tl,tr,pz,mu);
   const nav=el('div','lnav');const pv=el('button','btn small','‹ Précédente'),cnt=el('span','mono',''),nx=el('button','btn small','Suivante ›');pv.type=nx.type='button';nav.append(pv,cnt,nx);
-  const cap=el('p','cap',(m.comp?m.comp+' · ':'')+m.lieu+' · '+new Date(m.date+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+'. Vidéos filmées au téléphone pendant le match et publiées en direct en story Instagram, sans montage.');
+  const cap=el('p','cap',(m.comp?m.comp+' · ':'')+(m.score?(m.win===true?'Victoire ':m.win===false?'Défaite ':'')+m.score+' · ':'')+m.lieu+' · '+new Date(m.date+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+'. Vidéos filmées au téléphone pendant le match et publiées en direct en story Instagram, sans montage.');
   function load(i){
     if(i<0)i=0;if(i>=n){fills.forEach(f=>f.style.width='100%');v.pause();return;}
     cur=i;fills.forEach((f,k)=>f.style.width=k<i?'100%':'0');
