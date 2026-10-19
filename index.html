@@ -276,6 +276,9 @@ section.block{padding-block:96px 24px;scroll-margin-top:60px}
 @media (max-width:560px){.sk,.sk.w,.sk.n{grid-column:1/-1}}
 .tools{display:flex;flex-wrap:wrap;gap:8px}
 .tools span{padding:6px 11px;border:1px solid var(--line);border-radius:6px;font-size:14px;background:var(--bg)}
+.tgroups{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px 28px}
+.tg{display:grid;gap:8px;align-content:start}
+.tg small{font-family:var(--f-mono,"JetBrains Mono",monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
 .lang{display:grid;gap:10px}
 .lang div{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:14px}
 .lang i{height:4px;border-radius:2px;background:var(--line);position:relative;overflow:hidden}
@@ -580,7 +583,7 @@ html:not(.nointro) body{overflow:hidden}
           <li><span class="mono">2024</span><h3>Baccalauréat général</h3><div class="org">Lycée Notre-Dame-Providence</div></li>
         </ul>
         <div class="skills">
-          <div class="sk w"><span class="mono">Outils</span><div class="tools"><span>Photoshop</span><span>InDesign</span><span>Canva</span><span>CapCut</span></div></div>
+          <div class="sk w"><span class="mono">Outils</span><div class="tgroups"><div class="tg"><small>Création</small><div class="tools"><span>Photoshop</span><span>Illustrator</span><span>InDesign</span><span>Lightroom</span><span>Canva</span></div></div><div class="tg"><small>Vidéo &amp; tournage</small><div class="tools"><span>CapCut</span><span>iPhone</span><span>Appareil hybride</span><span>Stabilisateur</span></div></div><div class="tg"><small>Réseaux sociaux</small><div class="tools"><span>Meta Business Suite</span><span>Statistiques des réseaux</span><span>Montage Reels &amp; TikTok</span></div></div><div class="tg"><small>Bureautique &amp; IA</small><div class="tools"><span>Pack Office</span><span>Google Workspace</span><span>IA générative</span></div></div></div></div>
           <div class="sk n"><span class="mono">Langues</span><div class="lang"><div>Anglais<i style="--v:72%"></i><span>B2</span></div><div>Espagnol<i style="--v:32%"></i><span>A2</span></div></div></div>
           <div class="sk"><span class="mono">Savoir-faire</span><div class="tools"><span>Graphisme</span><span>Vidéo</span><span>Photo</span><span>Social media</span><span>Gestion de projet</span></div></div>
           <div class="sk"><span class="mono">Qualités</span><div class="tools"><span>Méticuleux</span><span>Autonome</span><span>Travailleur</span><span>Ponctuel</span></div></div>
