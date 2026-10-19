@@ -393,7 +393,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 </style>
 <script data-goatcounter="https://vdnsocialstudio.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Mattéo Vandenesse", "url": "https://vdnsocialstudio.com/", "image": "https://vdnsocialstudio.com/media/matteo.jpg", "jobTitle": "Création graphique, vidéo et community management", "worksFor": {"@type": "Organization", "name": "Levallois Metropolitans"}, "brand": {"@type": "Brand", "name": "VDN Social Studio"}, "address": {"@type": "PostalAddress", "addressLocality": "Enghien-les-Bains", "addressCountry": "FR"}, "email": "mailto:matteo.vandenesse@gmail.com", "sameAs": ["https://www.instagram.com/vdnsocialstudio/", "https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab"]}</script>
-<script>try{if(sessionStorage.getItem('vdnIntro')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('nointro');}catch(e){}</script>
+<script>try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('nointro');}catch(e){}</script>
 <style>
 #intro{position:fixed;inset:0;z-index:9999;background:#0E1013;display:grid;place-items:center;overflow:hidden}
 html.nointro #intro{display:none}
@@ -431,7 +431,6 @@ html:not(.nointro) body{overflow:hidden}
   var el=document.getElementById('intro');if(!el)return;
   var root=document.documentElement;
   if(root.classList.contains('nointro')){el.remove();return;}
-  try{sessionStorage.setItem('vdnIntro','1');}catch(e){}
   var done=false;
   function end(){if(done)return;done=true;el.classList.add('out');setTimeout(function(){el.remove();root.classList.add('nointro');},900);}
   var t=setTimeout(end,2400);
