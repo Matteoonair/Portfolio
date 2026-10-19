@@ -325,6 +325,23 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 .pj .qa p{color:var(--soft);font-size:15px}
 .pjsplit{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:4px;align-items:start;padding:20px 0 0 20px}
 .pjsplit .bd{padding-top:4px}
+.lcard .thumb{aspect-ratio:9/16}
+.livebadge{position:absolute;top:10px;left:10px;z-index:1;display:inline-flex;align-items:center;gap:6px;background:#E5484D;color:#fff;font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:6px}
+.livebadge::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+.lplayer{position:relative;width:min(100%,calc((100dvh - 200px)*9/16),420px);aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#000;border:1px solid var(--line)}
+.lplayer video{width:100%;height:100%;object-fit:cover;display:block}
+.lplayer .bars{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:3px;z-index:3}
+.lplayer .bars span{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden}
+.lplayer .bars i{display:block;height:100%;width:0;background:#fff}
+.lplayer .lhead{position:absolute;top:22px;left:12px;right:12px;z-index:3;display:flex;justify-content:space-between;align-items:center;gap:8px;color:#fff;font-size:13px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.lplayer .lhead .mono{font-size:12px;opacity:.9}
+.lplayer::after{content:"";position:absolute;inset:0 0 auto 0;height:90px;background:linear-gradient(rgba(0,0,0,.45),transparent);z-index:2;pointer-events:none}
+.lplayer .tap{position:absolute;top:60px;bottom:60px;width:40%;z-index:2;background:none;border:0;cursor:pointer}
+.lplayer .tap.l{left:0}.lplayer .tap.r{right:0}
+.lplayer .mute{position:absolute;right:12px;bottom:12px;z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.5);color:#fff;font-size:12px;font-weight:800;cursor:pointer}
+.lplayer .pause{position:absolute;left:12px;bottom:12px;z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.5);color:#fff;font-size:15px;cursor:pointer}
+.lnav{display:flex;gap:10px;align-items:center;justify-content:center}
+.lnav .mono{min-width:70px;text-align:center}
 .pjcar{position:relative;width:100%;max-width:520px;margin:4px auto 0}
 .pjcar .track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:12px;border:1px solid var(--line);background:#000;outline-offset:3px}
 .pjcar .track::-webkit-scrollbar{display:none}
@@ -614,6 +631,12 @@ const PROJECTS=[
 /* ───────── Créations Metropolitans — ajouter les plus récentes en haut ─────────
  { reseau:"linkedin|instagram|tiktok|youtube", date:"AAAA-MM-JJ", type:"Visuel match|Story|Reel|Vidéo|Annonce", texte:"…",
    image:"media/xxx.jpg" (visuel ou miniature), video:"media/xxx.mp4" (optionnel, lue dans la page), lien:"https://…" (optionnel) } */
+/* ───────── En direct des matchs : vidéos filmées au téléphone, publiées en story sans montage — ajouter le dernier match en haut ─────────
+ {match:"…", date:"AAAA-MM-JJ", lieu:"…", cover:n (index du clip pour la miniature), clips:[['fichier sans extension dans media/live/','HH:MM'], …]} */
+const LIVE=[
+  {match:'Metropolitans – Alliance Sport Alsace',date:'2026-10-16',lieu:'Palais des Sports Marcel-Cerdan',comp:'ÉLITE 2',cover:3,clips:[['m1016-01','20:33'],['m1016-02','20:35'],['m1016-03','20:42'],['m1016-04','20:46'],['m1016-05','20:47'],['m1016-06','20:53'],['m1016-07','20:58'],['m1016-08','21:06'],['m1016-09','21:07'],['m1016-10','21:09'],['m1016-11','21:12'],['m1016-12','21:19'],['m1016-13','21:21'],['m1016-14','21:41'],['m1016-15','21:42'],['m1016-16','21:45'],['m1016-17','22:07'],['m1016-18','22:14'],['m1016-19','22:15'],['m1016-20','22:30']]},
+];
+
 const POSTS=[
   {"reseau": "linkedin", "type": "Rédaction", "texte": "Lancement de la série Metros on Tour, épisode 1 à Denain : « Ce que vous n’avez pas vu à Denain. »", "copy": "Ce que vous n’avez pas vu à Denain. 🎬\n\nLe bus au petit matin.\nLes écouteurs vissés sur les oreilles.\nLe dernier mot du coach dans le vestiaire.\nLe cercle avant l’entre-deux.\nEt le silence du retour.\n\nOn a tout filmé.\n\nMetros on Tour, c’est notre nouvelle série. Elle raconte la vie du groupe pendant nos déplacements d’ÉLITE 2 : de l’intérieur, sans filtre, comme si vous étiez dans le bus avec nous.\n\nÉpisode 1 : Déplacement à Denain. Une défaite 78-71, mais un groupe qui reste soudé.\n\n▶️ L’épisode complet est disponible sur YouTube :\n\nhttps://youtu.be/tFW6AoJGXgs?si=KLEN0UA25ldqvCNe\n\nEt ce soir, place au retour à Marcel-Cerdan face à l’Alliance Sport Alsace.\n\nCoup d’envoi à 20h30. \n\n#Metropolitans #Levallois #Elite2 #Basketball #MetrosOnTour #Coulisses", "credit": "Visuel : Levallois Metropolitans", "image": "media/li-metros-on-tour.jpg"},
   {"reseau": "linkedin", "type": "Rédaction", "texte": "Annonce du match contre l’Alliance Sport Alsace : « 7 points. C’est ce qu’on a laissé à Denain. Vendredi, on vient les chercher à la maison. »", "copy": "7 points. C’est ce qu’on a laissé à Denain. Vendredi, on vient les chercher à la maison.\n\nLes Metropolitans retrouvent le Palais des Sports Marcel-Cerdan pour recevoir l’Alliance Sport Alsace en ÉLITE 2. On a besoin de vous dans les tribunes pour faire la différence.\n\n📅 Vendredi 16 octobre\n⏰ Rendez-vous dès 20h15, coup d’envoi à 20h30\n📍 Palais des Sports Marcel-Cerdan, Levallois\n\nVenez en famille, entre amis ou entre collègues. L’ambiance d’un match à Marcel-Cerdan, ça se vit en vrai.\n\n🎟️ Réservez vos places ici :\nhttps://lnkd.in/ebzmn5_9\n\nQui sera là vendredi pour pousser avec nous ? 👇\n\n#Metropolitans #Levallois #Elite2 #Basketball #SortiesLevallois #Afterwork", "credit": "Visuel : Levallois Metropolitans", "image": "media/li-jour-de-match.jpg"},
@@ -642,6 +665,45 @@ $('viewer-close').addEventListener('click',closeViewer);
 viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!viewer.hidden)closeViewer();});
 
+
+/* En direct des matchs */
+function liveCard(m){
+  const fmt=d=>new Date(d+'T12:00:00').toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'});
+  const a=el('button','post v lcard');a.type='button';
+  const th=el('div','thumb');const im=el('img');im.src='media/live/'+m.clips[m.cover||0][0]+'.jpg';im.alt='';im.loading='lazy';th.appendChild(im);
+  th.appendChild(el('span','livebadge','En direct'));th.appendChild(el('span','play','▶'));th.appendChild(el('span','kind','Instagram · '+m.clips.length+' stories'));
+  const pb=el('div','pb');pb.appendChild(el('p',null,m.match+' — filmé au téléphone pendant le match et publié en story, sans montage.'));
+  const mt=el('div','meta');mt.appendChild(el('span',null,fmt(m.date)));mt.appendChild(el('b',null,'Regarder ▶'));pb.appendChild(mt);
+  a.append(th,pb);a.addEventListener('click',()=>openViewer(livePlayer(m)));return a;
+}
+function livePlayer(m){
+  const n=m.clips.length;let cur=0,muted=false;
+  const box=el('div','lplayer');const bars=el('div','bars');const fills=m.clips.map(()=>{const s=el('span');const i=el('i');s.appendChild(i);bars.appendChild(s);return i;});
+  const head=el('div','lhead');const ht=el('span',null,m.match);const hm=el('span','mono','');head.append(ht,hm);
+  const v=el('video');v.playsInline=true;v.setAttribute('playsinline','');v.preload='auto';
+  const tl=el('button','tap l');tl.type='button';tl.setAttribute('aria-label','Vidéo précédente');
+  const tr=el('button','tap r');tr.type='button';tr.setAttribute('aria-label','Vidéo suivante');
+  const mu=el('button','mute','SON');mu.type='button';mu.setAttribute('aria-label','Couper ou remettre le son');
+  const pz=el('button','pause','❚❚');pz.type='button';pz.setAttribute('aria-label','Pause ou lecture');
+  box.append(v,bars,head,tl,tr,pz,mu);
+  const nav=el('div','lnav');const pv=el('button','btn small','‹ Précédente'),cnt=el('span','mono',''),nx=el('button','btn small','Suivante ›');pv.type=nx.type='button';nav.append(pv,cnt,nx);
+  const cap=el('p','cap',(m.comp?m.comp+' · ':'')+m.lieu+' · '+new Date(m.date+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+'. Vidéos filmées au téléphone pendant le match et publiées en direct en story Instagram, sans montage.');
+  function load(i){
+    if(i<0)i=0;if(i>=n){fills.forEach(f=>f.style.width='100%');v.pause();return;}
+    cur=i;fills.forEach((f,k)=>f.style.width=k<i?'100%':'0');
+    v.src='media/live/'+m.clips[i][0]+'.mp4';v.poster='media/live/'+m.clips[i][0]+'.jpg';v.muted=muted;
+    hm.textContent=m.clips[i][1];cnt.textContent=(i+1)+' / '+n;pv.disabled=i===0;nx.disabled=i===n-1;
+    const p=v.play();if(p&&p.catch)p.catch(()=>{muted=true;v.muted=true;mu.textContent='MUET';v.play().catch(()=>{});});pz.textContent='❚❚';
+  }
+  v.addEventListener('timeupdate',()=>{if(v.duration)fills[cur].style.width=(v.currentTime/v.duration*100)+'%';});
+  v.addEventListener('ended',()=>load(cur+1));
+  tl.addEventListener('click',()=>load(cur-1));tr.addEventListener('click',()=>load(cur+1));pv.addEventListener('click',()=>load(cur-1));nx.addEventListener('click',()=>load(cur+1));
+  mu.addEventListener('click',()=>{muted=!muted;v.muted=muted;mu.textContent=muted?'MUET':'SON';});
+  pz.addEventListener('click',()=>{if(v.paused){v.play();pz.textContent='❚❚';}else{v.pause();pz.textContent='▶';}});
+  box.tabIndex=0;box.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();load(cur+1);}if(e.key==='ArrowLeft'){e.preventDefault();load(cur-1);}if(e.key===' '){e.preventDefault();pz.click();}});
+  setTimeout(()=>load(0),0);
+  return [box,nav,cap];
+}
 const HOME={orcar:['metro','design'],octrose:['metro','design'],ft:['metro','design'],sdlv:['metro','design'],snow:['yo','video'],mallette:['yo','video'],ody:['yo','interne'],affiches:['yo','interne']};
 function projCard(p){
   const fc=(p.video&&!p.horizontal)?'v':p.id==='orcar'?'p':(['octrose','sdlv','ftf','ft'].includes(p.id)?'h':'');
@@ -767,7 +829,7 @@ function projectSheet(p){
   const CATS=[['stories','Stories Instagram','Vidéos verticales tournées et montées pour le compte Instagram du club.'],['linkedin','Rédaction LinkedIn','Uniquement la rédaction : j’écris les textes des posts LinkedIn du club. Les visuels et photos qui les accompagnent sont réalisés par le club.'],['visuels','Visuels réseaux','Visuels créés pour les réseaux du club.'],['tiktok','TikTok','Formats courts verticaux.'],['youtube','YouTube','Vidéos longues et résumés.']];
   const catOf=p=>p.reseau==='tiktok'?'tiktok':p.reseau==='youtube'?'youtube':p.copy?'linkedin':(p.reseau==='instagram'&&p.type==='Story')?'stories':'visuels';
   const metroProj=PROJECTS.filter(p=>HOME[p.id]&&HOME[p.id][0]==='metro');
-  count.textContent=String(POSTS.length+metroProj.length).padStart(2,'0');
+  count.textContent=String(POSTS.length+metroProj.length+LIVE.length).padStart(2,'0');
   CATS.forEach(([k,t,d])=>{
     const items=els.filter((e,i)=>catOf(POSTS[i])===k);if(!items.length)return;
     const g=el('div','mgroup');const h=el('div','mghead');
@@ -777,6 +839,7 @@ function projectSheet(p){
     g.append(h,r);wrap.appendChild(g);
   });
   if(metroProj.length){const dg=groupBlock('Design','Créations graphiques pour le club : carrousel Instagram, textile solidaire, visuels et logos de partenariat.',metroProj.map(projCard));const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);}
+  if(LIVE.length){const lg=groupBlock('En direct des matchs','Filmé au téléphone pendant les matchs et publié tout de suite en story Instagram, sans aucun montage.',LIVE.map(liveCard));lg.querySelector('.mghead .mono').textContent=String(LIVE.length).padStart(2,'0')+(LIVE.length>1?' matchs':' match');const g0=wrap.querySelector('.mgroup');g0?wrap.insertBefore(lg,g0.nextSibling):wrap.appendChild(lg);}
 })();
 
 document.addEventListener('contextmenu',e=>{if(e.target.closest('.pjgal img,.tile,.paper'))e.preventDefault();});
