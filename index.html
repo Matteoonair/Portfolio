@@ -604,11 +604,6 @@ const PROJECTS=[
    obj:"Mettre en avant le partenariat entre France Travail et les Metropolitans autour de « La minute de l'emploi ».",
    brief:"Deux visuels 16:9 aux couleurs du club : l'annonce du dispositif, puis une « offre du jour » avec le poste, l'entreprise, le lieu, le contrat, le salaire et un QR code pour postuler en un scan.",
    pb:"Comment rendre une offre d'emploi aussi lisible et rythmée qu'un temps fort de match ?"},
-  {id:'vip',size:'',cat:'print digital',c1:'#111111',c2:'#FFE000',ink:'#FFFBE0',big:'Salon<br>VIP',kicker:'Écran · Salon VIP Metropolitans',poster:'media/ecran-salon-vip.jpg',images:[['media/ecran-salon-vip.jpg','Écran du salon VIP : bienvenue à nos partenaires','w']],
-   titre:'Écran partenaires du salon VIP',tags:['Écran 16:9','Partenaires','Événementiel','Metropolitans'],
-   obj:"Remercier les partenaires du club et les mettre en valeur auprès des invités du salon VIP.",
-   brief:"Un visuel 16:9 pour les écrans du salon VIP du Palais des Sports Marcel-Cerdan : les logos du club et de l'équipementier officiel, un message de bienvenue et les 12 partenaires réunis dans une grille aux couleurs du club.",
-   pb:"Comment faire cohabiter 12 logos très différents dans un visuel lisible de loin et fidèle à l'identité du club ?"},
   {id:'sdlv',size:'s-full',cat:'identite',c1:'#14324F',c2:'#5FA3D6',ink:'#EEF6FD',big:'Sport dans la Ville<br>× Metropolitans',kicker:'Logo · Co-branding',poster:'media/sdlv-banniere.jpg',images:[['media/sdlv-logo.jpg','Logo commun : Sport dans la Ville × Metropolitans'],['media/sdlv-banniere.jpg','Visuel d\'annonce du partenariat']],
    titre:'Sport dans la Ville × Metropolitans',tags:['Logo','Co-branding','Partenariat','Metropolitans'],
    obj:"Créer un logo commun pour le partenariat entre l'association Sport dans la Ville et les Levallois Metropolitans, autour de l'insertion professionnelle par le sport.",
@@ -647,9 +642,9 @@ $('viewer-close').addEventListener('click',closeViewer);
 viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!viewer.hidden)closeViewer();});
 
-const HOME={orcar:['metro','design'],octrose:['metro','design'],ft:['metro','design'],vip:['metro','design'],sdlv:['metro','design'],snow:['yo','video'],mallette:['yo','video'],ody:['yo','interne'],affiches:['yo','interne']};
+const HOME={orcar:['metro','design'],octrose:['metro','design'],ft:['metro','design'],sdlv:['metro','design'],snow:['yo','video'],mallette:['yo','video'],ody:['yo','interne'],affiches:['yo','interne']};
 function projCard(p){
-  const fc=(p.video&&!p.horizontal)?'v':p.id==='orcar'?'p':(['octrose','sdlv','ftf','ft','vip'].includes(p.id)?'h':'');
+  const fc=(p.video&&!p.horizontal)?'v':p.id==='orcar'?'p':(['octrose','sdlv','ftf','ft'].includes(p.id)?'h':'');
   const a=el('button','post '+fc);a.type='button';
   const th=el('div','thumb');
   if(p.poster){const im=el('img');im.src=p.poster;im.alt='';im.loading='lazy';th.appendChild(im);}
@@ -781,7 +776,7 @@ function projectSheet(p){
     const r=el('div','reel');r.tabIndex=0;r.setAttribute('aria-label',t+', défilement horizontal');items.forEach(e=>r.appendChild(e));
     g.append(h,r);wrap.appendChild(g);
   });
-  if(metroProj.length){const dg=groupBlock('Design','Créations graphiques pour le club : carrousel Instagram, textile solidaire, écrans, visuels et logos de partenariat.',metroProj.map(projCard));const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);}
+  if(metroProj.length){const dg=groupBlock('Design','Créations graphiques pour le club : carrousel Instagram, textile solidaire, visuels et logos de partenariat.',metroProj.map(projCard));const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);}
 })();
 
 document.addEventListener('contextmenu',e=>{if(e.target.closest('.pjgal img,.tile,.paper'))e.preventDefault();});
