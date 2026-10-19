@@ -393,8 +393,59 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 </style>
 <script data-goatcounter="https://vdnsocialstudio.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Mattéo Vandenesse", "url": "https://vdnsocialstudio.com/", "image": "https://vdnsocialstudio.com/media/matteo.jpg", "jobTitle": "Création graphique, vidéo et community management", "worksFor": {"@type": "Organization", "name": "Levallois Metropolitans"}, "brand": {"@type": "Brand", "name": "VDN Social Studio"}, "address": {"@type": "PostalAddress", "addressLocality": "Enghien-les-Bains", "addressCountry": "FR"}, "email": "mailto:matteo.vandenesse@gmail.com", "sameAs": ["https://www.instagram.com/vdnsocialstudio/", "https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab"]}</script>
+<script>try{if(sessionStorage.getItem('vdnIntro')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('nointro');}catch(e){}</script>
+<style>
+#intro{position:fixed;inset:0;z-index:9999;background:#0E1013;display:grid;place-items:center;overflow:hidden}
+html.nointro #intro{display:none}
+html:not(.nointro) body{overflow:hidden}
+#intro .st{position:relative;width:min(62vmin,360px);aspect-ratio:1}
+#intro .disc{position:absolute;inset:0;border-radius:50%;background:#F2B33D;transform:scale(0);animation:tdisc .7s cubic-bezier(.2,1.4,.4,1) .55s both}
+#intro .ring{position:absolute;inset:0;width:100%;height:100%;opacity:0;animation:tfade .5s ease-out 1.35s both,tspin 6s linear 1.35s infinite}
+#intro .ring text{font-family:"JetBrains Mono",ui-monospace,monospace;font-weight:500;font-size:8.6px;fill:#17130A}
+#intro .core{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5%}
+#intro .dot{flex:none;width:6.5%;aspect-ratio:1;border-radius:50%;background:#E5484D;opacity:0;animation:tfade .01s .15s both,tblink .9s steps(1) .15s 2}
+#intro .w{display:flex;font-family:"Archivo","Arial Narrow",sans-serif;font-weight:900;font-stretch:66%;color:#17130A;font-size:min(23vmin,132px);line-height:.8;margin-bottom:6%}
+#intro .w i{font-style:normal;display:inline-block;opacity:0;animation:tslam .42s cubic-bezier(.2,1.2,.3,1) both}
+#intro .w i:nth-child(1){animation-delay:.95s}#intro .w i:nth-child(2){animation-delay:1.07s}#intro .w i:nth-child(3){animation-delay:1.19s}
+#intro .skip{position:absolute;right:max(20px,calc(16px + env(safe-area-inset-right,0px)));bottom:max(20px,calc(16px + env(safe-area-inset-bottom,0px)));font:600 13px "Manrope",system-ui,sans-serif;color:#8E939C;background:transparent;border:1px solid #262A31;border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer;animation:tfade .3s .8s both}
+#intro .skip:hover,#intro .skip:focus-visible{color:#EDEAE4;border-color:#8E939C;outline:none}
+#intro.out .st{animation:tzoom .65s cubic-bezier(.7,0,.3,1) both}
+#intro.out .skip{opacity:0}
+#intro.out{animation:tgone .4s ease-in .45s both}
+@keyframes tdisc{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes tfade{from{opacity:0}to{opacity:1}}
+@keyframes tspin{to{transform:rotate(360deg)}}
+@keyframes tblink{50%{opacity:.15}}
+@keyframes tslam{from{opacity:0;transform:scale(1.8);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes tzoom{to{transform:scale(9)}}
+@keyframes tgone{to{opacity:0;visibility:hidden}}
+</style>
 </head>
 <body>
+<div id="intro">
+  <div class="st" aria-hidden="true">
+    <div class="disc"></div>
+    <svg class="ring" viewBox="0 0 120 120"><defs><path id="intro-circ" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/></defs><text><textPath href="#intro-circ" textLength="292" lengthAdjust="spacing">CRÉATION &amp; VIDÉO • VDN SOCIAL STUDIO • </textPath></text></svg>
+    <div class="core"><span class="dot"></span><span class="w"><i>V</i><i>D</i><i>N</i></span></div>
+  </div>
+  <button class="skip" id="intro-skip" type="button" aria-label="Passer l’intro">Passer</button>
+</div>
+<script>
+(function(){
+  var el=document.getElementById('intro');if(!el)return;
+  var root=document.documentElement;
+  if(root.classList.contains('nointro')){el.remove();return;}
+  try{sessionStorage.setItem('vdnIntro','1');}catch(e){}
+  var done=false;
+  function end(){if(done)return;done=true;el.classList.add('out');setTimeout(function(){el.remove();root.classList.add('nointro');},900);}
+  var t=setTimeout(end,2400);
+  function now(){clearTimeout(t);end();}
+  document.getElementById('intro-skip').addEventListener('click',now);
+  el.addEventListener('click',function(e){if(e.target===el)now();});
+  document.addEventListener('keydown',function k(e){if(e.key==='Escape'||e.key==='Enter'||e.key===' '){now();document.removeEventListener('keydown',k);}});
+})();
+</script>
+
 
 
 <header class="top">
