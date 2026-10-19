@@ -407,10 +407,7 @@ html:not(.nointro) body{overflow:hidden}
 #intro .w{display:flex;font-family:"Archivo","Arial Narrow",sans-serif;font-weight:900;font-stretch:66%;color:#17130A;font-size:min(23vmin,132px);line-height:.8;margin-bottom:6%}
 #intro .w i{font-style:normal;display:inline-block;opacity:0;animation:tslam .42s cubic-bezier(.2,1.2,.3,1) both}
 #intro .w i:nth-child(1){animation-delay:.95s}#intro .w i:nth-child(2){animation-delay:1.07s}#intro .w i:nth-child(3){animation-delay:1.19s}
-#intro .skip{position:absolute;right:max(20px,calc(16px + env(safe-area-inset-right,0px)));bottom:max(20px,calc(16px + env(safe-area-inset-bottom,0px)));font:600 13px "Manrope",system-ui,sans-serif;color:#8E939C;background:transparent;border:1px solid #262A31;border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer;animation:tfade .3s .8s both}
-#intro .skip:hover,#intro .skip:focus-visible{color:#EDEAE4;border-color:#8E939C;outline:none}
 #intro.out .st{animation:tzoom .65s cubic-bezier(.7,0,.3,1) both}
-#intro.out .skip{opacity:0}
 #intro.out{animation:tgone .4s ease-in .45s both}
 @keyframes tdisc{from{transform:scale(0)}to{transform:scale(1)}}
 @keyframes tfade{from{opacity:0}to{opacity:1}}
@@ -428,7 +425,6 @@ html:not(.nointro) body{overflow:hidden}
     <svg class="ring" viewBox="0 0 120 120"><defs><path id="intro-circ" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/></defs><text><textPath href="#intro-circ" textLength="292" lengthAdjust="spacing">CRÉATION &amp; VIDÉO • VDN SOCIAL STUDIO • </textPath></text></svg>
     <div class="core"><span class="dot"></span><span class="w"><i>V</i><i>D</i><i>N</i></span></div>
   </div>
-  <button class="skip" id="intro-skip" type="button" aria-label="Passer l’intro">Passer</button>
 </div>
 <script>
 (function(){
@@ -440,8 +436,7 @@ html:not(.nointro) body{overflow:hidden}
   function end(){if(done)return;done=true;el.classList.add('out');setTimeout(function(){el.remove();root.classList.add('nointro');},900);}
   var t=setTimeout(end,2400);
   function now(){clearTimeout(t);end();}
-  document.getElementById('intro-skip').addEventListener('click',now);
-  el.addEventListener('click',function(e){if(e.target===el)now();});
+  el.addEventListener('click',now);
   document.addEventListener('keydown',function k(e){if(e.key==='Escape'||e.key==='Enter'||e.key===' '){now();document.removeEventListener('keydown',k);}});
 })();
 </script>
