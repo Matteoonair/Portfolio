@@ -733,7 +733,7 @@ function livePlayer(m,start){
   setTimeout(()=>load(start||0),0);
   return [box,nav,cap];
 }
-const HOME={orcar:['metro','design'],octrose:['metro','design'],ft:['metro','design'],sdlv:['metro','design'],snow:['yo','video'],mallette:['yo','video'],ody:['yo','interne'],affiches:['yo','interne']};
+const HOME={orcar:['metro','insta'],octrose:['metro','design'],ft:['metro','design'],sdlv:['metro','design'],snow:['yo','video'],mallette:['yo','video'],ody:['yo','interne'],affiches:['yo','interne']};
 function projCard(p){
   const fc=(p.video&&!p.horizontal)?'v':p.id==='orcar'?'p':(['octrose','sdlv','ftf','ft'].includes(p.id)?'h':'');
   const a=el('button','post '+fc);a.type='button';
@@ -867,7 +867,9 @@ function projectSheet(p){
     const r=el('div','reel');r.tabIndex=0;r.setAttribute('aria-label',t+', défilement horizontal');items.forEach(e=>r.appendChild(e));
     g.append(h,r);wrap.appendChild(g);
   });
-  if(metroProj.length){const dg=groupBlock('Design','Créations graphiques pour le club : carrousel Instagram, textile solidaire, visuels et logos de partenariat.',metroProj.map(projCard));const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);}
+  const dz=metroProj.filter(p=>HOME[p.id][1]==='design'),ig=metroProj.filter(p=>HOME[p.id][1]==='insta');
+  if(dz.length){const dg=groupBlock('Design','Créations graphiques pour le club : textile solidaire, visuels et logos de partenariat.',dz.map(projCard));const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);
+    if(ig.length){const igb=groupBlock('Posts Instagram','Carrousels et posts conçus pour le feed Instagram du club.',ig.map(projCard));wrap.insertBefore(igb,dg.nextSibling);}}
   if(LIVE.length){const lg=groupBlock('En direct des matchs','Filmé au téléphone pendant les matchs et publié tout de suite en story Instagram, sans aucun montage.',[]);lg.querySelector('.reel').remove();LIVE.forEach(m=>lg.appendChild(liveBlock(m)));const tot=LIVE.reduce((t,m)=>t+m.clips.length,0);lg.querySelector('.mghead .mono').textContent=tot+' vidéos · '+LIVE.length+(LIVE.length>1?' matchs':' match');const g0=wrap.querySelector('.mgroup');g0?wrap.insertBefore(lg,g0.nextSibling):wrap.appendChild(lg);}
 })();
 
