@@ -737,7 +737,7 @@ html:not(.nointro) body{overflow:hidden}
     </div>
     <div class="qstep qdone" data-k="done" hidden>
       <span class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-      <h4>Demande prête !</h4>
+      <h4>Demande envoyée !</h4>
       <p id="qdonetxt"></p>
     </div>
     <div class="qnav" id="qnav"><button type="button" class="qback" id="qback" hidden>← Retour</button><button type="button" class="qnext" id="qnext" disabled>Suivant</button></div>
@@ -745,7 +745,7 @@ html:not(.nointro) body{overflow:hidden}
 </div>
 
 <script>
-/* Devis : bouton sur chaque service + questionnaire → e-mail prérempli */
+/* Devis : bouton sur chaque service + questionnaire → envoi via FormSubmit (comme le formulaire de contact) */
 (function(){
   const MAIL='matteo.vandenesse@gmail.com';
   const NEEDS={
@@ -786,10 +786,16 @@ html:not(.nointro) body{overflow:hidden}
     const body=['Bonjour Mattéo,','','Je souhaite un devis pour : '+svc,'',
       'Profil : '+ans.profil.join(', '),'Besoin : '+ans.besoin.join(', '),'Délai : '+ans.delai.join(', '),'Budget : '+ans.budget.join(', '),'',
       msg?'Mon projet : '+msg+'\n':'','Nom : '+nom,'E-mail : '+mail,'','Envoyé depuis vdnsocialstudio.com'].join('\n');
-    const url='mailto:'+MAIL+'?subject='+encodeURIComponent('Demande de devis · '+svc+' · '+nom)+'&body='+encodeURIComponent(body);
-    window.location.href=url;
-    document.getElementById('qdonetxt').innerHTML='Votre messagerie s\'ouvre avec la demande déjà rédigée : il ne reste qu\'à appuyer sur « Envoyer ». Rien ne s\'ouvre ? Écrivez directement à <a href="mailto:'+MAIL+'">'+MAIL+'</a>.';
-    i=steps.length-1;update();
+    next.disabled=true;next.textContent='Envoi…';
+    const data={_subject:'Demande de devis · '+svc+' · '+nom,_template:'table',_replyto:mail,_honey:'',
+      service:svc,profil:ans.profil.join(', '),besoin:ans.besoin.join(', '),delai:ans.delai.join(', '),budget:ans.budget.join(', '),
+      nom:nom,email:mail,message:msg||'—',source:'Bouton devis (services)'};
+    fetch('https://formsubmit.co/ajax/'+MAIL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+      .then(async r=>{const j=await r.json().catch(()=>({}));if(!r.ok||j.success===false||j.success==='false')throw new Error(r.status);
+        document.getElementById('qdonetxt').textContent='Merci ! Votre demande de devis est bien envoyée, je vous réponds sous 48 h.';
+        document.querySelector('#qd .qdone h4').textContent='Demande envoyée !';i=steps.length-1;update();
+        try{window.goatcounter&&window.goatcounter.count&&window.goatcounter.count({path:'devis: '+svc,title:'devis: '+svc,event:true});}catch(e){}})
+      .catch(()=>{err.textContent="L'envoi n'a pas fonctionné. Réessayez ou écrivez-moi directement à "+MAIL+'.';next.disabled=false;next.textContent='Envoyer la demande';});
   }
   function open(name,btn){svc=name;opener=btn;ans={};i=0;form.reset();document.getElementById('qerr').textContent='';document.getElementById('qsvc').textContent=name;
     steps.forEach(s=>{const k=s.dataset.k;if(OPTS[k])chips(s,OPTS[k]);if(k==='besoin')chips(s,NEEDS[name]||[]);});
