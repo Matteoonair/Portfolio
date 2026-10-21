@@ -201,6 +201,10 @@ section.block{padding-block:96px 24px;scroll-margin-top:60px}
 .metro{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:32px;align-items:start}
 .metro .dock{position:sticky;top:90px;display:grid;gap:18px}
 .metro .dock h2{font-size:clamp(44px,6.4vw,86px);font-weight:900;font-stretch:66%;text-transform:uppercase;line-height:.86}
+.mtitle{display:flex;align-items:center;gap:clamp(12px,1.6vw,20px)}
+.mtitle h2{margin:0;min-width:0}
+.metro .dock .mtitle h2{font-size:clamp(44px,5.5vw,78px)}
+.clublogo{flex:none;width:clamp(58px,6.6vw,92px);height:auto;filter:drop-shadow(0 6px 18px rgba(0,0,0,.45))}
 .metro .dock p{color:var(--muted)}
 .counter{display:flex;align-items:baseline;gap:10px}
 .counter b{font-family:var(--f-display);font-weight:900;font-stretch:70%;font-size:72px;line-height:.8;color:var(--accent);font-variant-numeric:tabular-nums}
@@ -516,7 +520,7 @@ html:not(.nointro) body{overflow:hidden}
     <div class="metro">
       <div class="dock">
         <span class="mono"><span class="rec"><b></b>Saison 2026-27</span></span>
-        <h2>Metro&shy;politans</h2>
+        <div class="mtitle"><img src="media/metropolitans-logo.png" alt="Logo Levallois Metropolitans" class="clublogo" width="160" height="160"><h2>Metro&shy;politans</h2></div>
         <p>Mes créations pour le Levallois Metropolitans Basketball Club : publications LinkedIn, stories Instagram, TikTok et vidéos YouTube. Touchez une création pour la voir en grand.</p>
         <div class="counter"><b id="post-count">00</b><span class="mono">créations<br>publiées</span></div>
         <div class="filters" id="pfilters" role="group" aria-label="Filtrer par réseau" hidden></div>
