@@ -212,6 +212,18 @@ section.block{padding-block:96px 24px;scroll-margin-top:60px}
 .mgroup{display:grid;gap:14px;min-width:0}
 .mghead{display:flex;justify-content:space-between;align-items:end;gap:16px;border-bottom:1px solid var(--line);padding-bottom:12px}
 .mghead h3{font-family:var(--f-display);font-weight:900;font-stretch:72%;text-transform:uppercase;font-size:clamp(24px,3vw,34px);line-height:1}
+.mghead h3{display:flex;align-items:center;gap:.36em}
+.neticon{position:relative;flex:none;display:grid;place-items:center;width:1.12em;height:1.12em;border-radius:.3em;color:#fff}
+.neticon svg{width:.62em;height:.62em;fill:currentColor}
+.ni-ig,.ni-live{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}
+.ni-li{background:#0A66C2}
+.ni-tt{background:#000;box-shadow:inset 0 0 0 1px #2a2d33,-1.5px -1px 0 #25F4EE,1.5px 1px 0 #FE2C55}
+.ni-yt{background:#FF0000}
+.ni-design{background:var(--accent);color:var(--ink,#17130A)}
+.ni-live i{position:absolute;top:-.12em;right:-.12em;width:.32em;height:.32em;border-radius:50%;background:#E5484D;box-shadow:0 0 0 .07em var(--bg);animation:nipulse 1.2s steps(1) infinite}
+@keyframes nipulse{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.ni-live i{animation:none}}
+
 .mghead p{color:var(--muted);font-size:14px;margin-top:6px;max-width:52ch}
 .mghead .mono{white-space:nowrap}
 .reel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:16px;margin-right:-20px;padding-right:20px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
@@ -810,9 +822,11 @@ function projCard(p){
   const m=el('div','meta');m.appendChild(el('span',null,p.tags.slice(0,2).join(' · ')));m.appendChild(el('b',null,'Voir le projet'));pb.appendChild(m);
   a.append(th,pb);a.addEventListener('click',()=>openViewer([projectSheet(p)]));return a;
 }
-function groupBlock(title,desc,cards){
+const NETICONS={"ig": "<rect x=\"2.5\" y=\"2.5\" width=\"19\" height=\"19\" rx=\"5.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\"/><circle cx=\"12\" cy=\"12\" r=\"4.3\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\"/><circle cx=\"17.6\" cy=\"6.4\" r=\"1.4\"/>", "tt": "<path d=\"M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.020.37-.63.41-1.11 1.04-1.36 1.750-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z\"/>", "li": "<path d=\"M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z\"/>", "yt": "<path d=\"M9 7.2v9.6l8-4.8z\"/>", "design": "<path d=\"M4 20l4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linejoin=\"round\"/><path d=\"M13.5 7.5l3 3\" stroke=\"currentColor\" stroke-width=\"2.2\"/>"};
+function netIcon(k){const t=el('span','neticon ni-'+k);t.setAttribute('aria-hidden','true');t.innerHTML='<svg viewBox="0 0 24 24">'+NETICONS[k==='live'?'ig':k]+'</svg>'+(k==='live'?'<i></i>':'');return t;}
+function groupBlock(title,desc,cards,icon){
   const g=el('div','mgroup');const h=el('div','mghead');
-  const ht=el('div');ht.appendChild(el('h3',null,title));ht.appendChild(el('p',null,desc));
+  const ht=el('div');const h3=el('h3',null,title);if(icon)h3.prepend(netIcon(icon));ht.appendChild(h3);ht.appendChild(el('p',null,desc));
   h.append(ht,el('span','mono acc',String(cards.length).padStart(2,'0')+(cards.length>1?' projets':' projet')));
   const r=el('div','reel');r.tabIndex=0;r.setAttribute('aria-label',title+', défilement horizontal');cards.forEach(c=>r.appendChild(c));
   g.append(h,r);return g;
@@ -920,6 +934,7 @@ function projectSheet(p){
     });
     return a;
   });
+  const CATI={stories:'ig',linkedin:'li',visuels:'ig',tiktok:'tt',youtube:'yt'};
   const CATS=[['stories','Stories Instagram','Vidéos verticales tournées et montées pour le compte Instagram du club.'],['linkedin','Rédaction LinkedIn','J’écris les textes des posts LinkedIn du club. Sauf mention « Design + rédaction », les visuels et photos qui les accompagnent sont réalisés par le club.'],['visuels','Visuels réseaux','Visuels créés pour les réseaux du club.'],['tiktok','TikTok','Formats courts verticaux.'],['youtube','YouTube','Vidéos longues et résumés.']];
   const catOf=p=>p.reseau==='tiktok'?'tiktok':p.reseau==='youtube'?'youtube':p.copy?'linkedin':(p.reseau==='instagram'&&p.type==='Story')?'stories':'visuels';
   const metroProj=PROJECTS.filter(p=>HOME[p.id]&&HOME[p.id][0]==='metro');
@@ -927,15 +942,15 @@ function projectSheet(p){
   CATS.forEach(([k,t,d])=>{
     const items=els.filter((e,i)=>catOf(POSTS[i])===k);if(!items.length)return;
     const g=el('div','mgroup');const h=el('div','mghead');
-    const ht=el('div');ht.appendChild(el('h3',null,t));ht.appendChild(el('p',null,d));
+    const ht=el('div');const h3=el('h3',null,t);h3.prepend(netIcon(CATI[k]));ht.appendChild(h3);ht.appendChild(el('p',null,d));
     h.append(ht,el('span','mono acc',String(items.length).padStart(2,'0')+(items.length>1?' créations':' création')));
     const r=el('div','reel');r.tabIndex=0;r.setAttribute('aria-label',t+', défilement horizontal');items.forEach(e=>r.appendChild(e));
     g.append(h,r);wrap.appendChild(g);
   });
   const dz=metroProj.filter(p=>HOME[p.id][1]==='design'),ig=metroProj.filter(p=>HOME[p.id][1]==='insta');
-  if(dz.length){const dg=groupBlock('Design','Créations graphiques pour le club : textile solidaire, visuels et logos de partenariat.',dz.map(projCard));const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);
-    if(ig.length){const igb=groupBlock('Posts Instagram','Carrousels et posts conçus pour le feed Instagram du club.',ig.map(projCard));wrap.insertBefore(igb,dg.nextSibling);}}
-  if(LIVE.length){const lg=groupBlock('En direct des matchs','Filmé au téléphone pendant les matchs et publié tout de suite en story Instagram, sans aucun montage.',[]);lg.querySelector('.reel').remove();LIVE.forEach(m=>lg.appendChild(liveBlock(m)));const tot=LIVE.reduce((t,m)=>t+m.clips.length,0);lg.querySelector('.mghead .mono').textContent=tot+' vidéos · '+LIVE.length+(LIVE.length>1?' matchs':' match');const g0=wrap.querySelector('.mgroup');g0?wrap.insertBefore(lg,g0.nextSibling):wrap.appendChild(lg);}
+  if(dz.length){const dg=groupBlock('Design','Créations graphiques pour le club : textile solidaire, visuels et logos de partenariat.',dz.map(projCard),'design');const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);
+    if(ig.length){const igb=groupBlock('Posts Instagram','Carrousels et posts conçus pour le feed Instagram du club.',ig.map(projCard),'ig');wrap.insertBefore(igb,dg.nextSibling);}}
+  if(LIVE.length){const lg=groupBlock('En direct des matchs','Filmé au téléphone pendant les matchs et publié tout de suite en story Instagram, sans aucun montage.',[],'live');lg.querySelector('.reel').remove();LIVE.forEach(m=>lg.appendChild(liveBlock(m)));const tot=LIVE.reduce((t,m)=>t+m.clips.length,0);lg.querySelector('.mghead .mono').textContent=tot+' vidéos · '+LIVE.length+(LIVE.length>1?' matchs':' match');const g0=wrap.querySelector('.mgroup');g0?wrap.insertBefore(lg,g0.nextSibling):wrap.appendChild(lg);}
 })();
 
 document.addEventListener('contextmenu',e=>{if(e.target.closest('.pjgal img,.tile,.paper'))e.preventDefault();});
