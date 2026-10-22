@@ -250,6 +250,7 @@ section.block{padding-block:96px 24px;scroll-margin-top:60px}
 .slot b{font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:22px;text-transform:uppercase;line-height:1}
 @media (max-width:860px){.metro{grid-template-columns:1fr}.metro .dock{position:static}}
 
+img,video{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-user-drag:none}
 /* services — oversized rows */
 .svc-list{border-top:1px solid var(--line)}
 .svc{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,5fr) minmax(0,5fr);gap:20px;align-items:center;padding-block:26px;border-bottom:1px solid var(--line);position:relative;transition:padding .3s}
@@ -869,6 +870,8 @@ const PROJECTS=[
    obj:"Renforcer la cohésion d'équipe et animer la vie de bureau autour de deux temps forts.",
    brief:"Une affiche chaleureuse pour le goûter de Noël et une affiche ludique (vert, trèfles) pour la Saint-Patrick.",
    pb:"Comment créer des visuels qui donnent envie de se rassembler tout en respectant l'identité de l'entreprise ?"},
+  {id:"bil",size:"",cat:"print digital",c1:"#111111",c2:"#FFE000",ink:"#FFFBE0",big:"Billets &amp;<br>signatures",kicker:"Supports de marque · Metropolitans",poster:"media/billet-echarpe.jpg",images:[["media/billet-porte-cles.jpg", "Billet : pack billet + porte-clés"], ["media/billet-echarpe.jpg", "Billet : pack billet + écharpe"], ["media/sig-01.jpg", "Signature mail : 23 oct. · J6 · Orléans", "w"], ["media/sig-02.jpg", "Signature mail : 3 nov. · J12 · Poitiers", "w"], ["media/sig-03.jpg", "Signature mail : 6 nov. · J8 · Fos Provence", "w"], ["media/sig-04.jpg", "Signature mail : 22 nov. · J11 · Rouen", "w"], ["media/sig-05.jpg", "Signature mail : 18 déc. · J15 · Hyères-Toulon", "w"], ["media/sig-06.jpg", "Signature mail : 22 déc. · J16 · Évreux", "w"], ["media/sig-07.jpg", "Signature mail : 8 janv. · J18 · Blois", "w"], ["media/sig-08.jpg", "Signature mail : 22 janv. · J20 · La Rochelle", "w"], ["media/sig-09.jpg", "Signature mail : 5 févr. · J22 · Le Havre (STB)", "w"], ["media/sig-10.jpg", "Signature mail : 12 févr. · J24 · Denain", "w"], ["media/sig-11.jpg", "Signature mail : 12 mars · J26 · Champagne Basket", "w"], ["media/sig-12.jpg", "Signature mail : 26 mars · J29 · Antibes", "w"], ["media/sig-13.jpg", "Signature mail : 30 mars · J30 · Saint-Chamond", "w"], ["media/sig-14.jpg", "Signature mail : 13 avr. · J33 · Nantes", "w"], ["media/sig-15.jpg", "Signature mail : 23 avr. · J35 · Quimper (UJAP)", "w"], ["media/sig-16.jpg", "Signature mail : 30 avr. · J36 · Caen (CBC)", "w"], ["media/sig-17.jpg", "Signature mail : 14 mai · J38 · Aix Maurienne", "w"]],
+   titre:"Billets & signatures mail",tags:["Billetterie", "Signature mail", "Print", "Metropolitans"],obj:"Faire vivre l'identité des Metropolitans jusque dans les supports du quotidien : les billets reçus par les spectateurs et les signatures mail de l'équipe.",brief:"Deux billets électroniques pour les offres « Pack billet + porte-clés » et « Pack billet + écharpe », avec la promotion de la Double Game Week, et une série de 17 bannières « Prochain match » pour les signatures mail : une par match à domicile de la saison d'ÉLITE 2, avec l'adversaire, la date, la journée et un joueur différent à chaque fois.",pb:"Comment rendre des supports très fonctionnels, un billet et une signature mail, aussi attractifs qu'un visuel de match, tout en gardant les informations pratiques lisibles ?"},
   {id:'ft',size:'',cat:'print digital',c1:'#111111',c2:'#FFE000',ink:'#FFFBE0',big:'La minute<br>de l’emploi',kicker:'Partenariat · France Travail × Metropolitans',poster:'media/ft-metropolitans-1.jpg',images:[['media/ft-metropolitans-1.jpg','Visuel 1 : annonce de « La minute de l’emploi »','w'],['media/ft-metropolitans-2.jpg','Visuel 2 : l’offre du jour, avec QR code pour postuler','w']],
    titre:'France Travail × Metropolitans',tags:['Partenariat','Emploi','Format 16:9','Metropolitans'],
    obj:"Mettre en avant le partenariat entre France Travail et les Metropolitans autour de « La minute de l'emploi ».",
@@ -981,7 +984,7 @@ function livePlayer(m,start){
   setTimeout(()=>load(start||0),0);
   return [box,nav,cap];
 }
-const HOME={orcar:['metro','insta'],octrose:['metro','design'],ft:['metro','design'],sdlv:['metro','design'],snow:['yo','video'],mallette:['yo','video'],ody:['yo','interne'],affiches:['yo','interne']};
+const HOME={orcar:['metro','insta'],octrose:['metro','design'],ft:['metro','design'],bil:['metro','design'],sdlv:['metro','design'],snow:['yo','video'],mallette:['yo','video'],ody:['yo','interne'],affiches:['yo','interne']};
 function projCard(p){
   const fc=(p.video&&!p.horizontal)?'v':p.id==='orcar'?'p':(['octrose','sdlv','ftf','ft'].includes(p.id)?'h':'');
   const a=el('button','post '+fc);a.type='button';
@@ -1120,12 +1123,15 @@ function projectSheet(p){
     g.append(h,r);wrap.appendChild(g);
   });
   const dz=metroProj.filter(p=>HOME[p.id][1]==='design'),ig=metroProj.filter(p=>HOME[p.id][1]==='insta');
-  if(dz.length){const dg=groupBlock('Design','Créations graphiques pour le club : textile solidaire, visuels et logos de partenariat.',dz.map(projCard),'design');const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);
+  if(dz.length){const dg=groupBlock('Design','Créations graphiques pour le club : textile solidaire, visuels et logos de partenariat, billets et signatures mail.',dz.map(projCard),'design');const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);
     if(ig.length){const igb=groupBlock('Posts Instagram','Carrousels et posts conçus pour le feed Instagram du club.',ig.map(projCard),'ig');wrap.insertBefore(igb,dg.nextSibling);}}
   if(LIVE.length){const lg=groupBlock('En direct des matchs','Filmé au téléphone pendant les matchs et publié tout de suite en story Instagram, sans aucun montage.',[],'live');lg.querySelector('.reel').remove();LIVE.forEach(m=>lg.appendChild(liveBlock(m)));const tot=LIVE.reduce((t,m)=>t+m.clips.length,0);lg.querySelector('.mghead .mono').textContent=tot+' vidéos · '+LIVE.length+(LIVE.length>1?' matchs':' match');const g0=wrap.querySelector('.mgroup');g0?wrap.insertBefore(lg,g0.nextSibling):wrap.appendChild(lg);}
 })();
 
-document.addEventListener('contextmenu',e=>{if(e.target.closest('.pjgal img,.tile,.paper'))e.preventDefault();});
+/* protection des visuels : pas de clic droit, d'appui long ni de glisser-déposer sur les images et vidéos */
+document.addEventListener('contextmenu',e=>{if(e.target.closest('img,video,picture,.tile,.post,.paper,.thumb,.pjcar,.pjgal,.lplayer'))e.preventDefault();});
+document.addEventListener('dragstart',e=>{if(e.target.closest('img,video'))e.preventDefault();});
+new MutationObserver(()=>document.querySelectorAll('video:not([controlslist])').forEach(v=>{v.setAttribute('controlslist','nodownload noplaybackrate');v.disablePictureInPicture=true;})).observe(document.body,{childList:true,subtree:true});
 /* CV */
 function showCv(){const im=el('img','doc');im.src='media/cv.jpg';im.alt='CV de Mattéo Vandenesse';openViewer([im]);}
 $('cv-open').addEventListener('click',showCv);
