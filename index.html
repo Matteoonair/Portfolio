@@ -473,6 +473,10 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 .pjcar+.foot+.cap{display:block;max-width:520px;margin:6px auto 0;color:var(--muted);text-align:center}
 .pjgal{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
 .pjgal figure.wide{grid-column:1/-1}
+.pjvh{display:block;margin-top:8px}
+.pjvids{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.pjvids figure{margin:0;display:grid;gap:6px}
+.pjvids video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#000;display:block}
 .pjgal figure{margin:0;display:grid;gap:8px}
 .pjgal img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);display:block}
 .pjsplit.hz{grid-template-columns:1fr;padding:20px 20px 0}
@@ -837,7 +841,7 @@ const PROJECTS=[
    obj:"Sensibiliser la communauté du club au cancer du sein pendant Octobre Rose et annoncer le match aux couleurs roses du 23 octobre.",
    brief:"Un carrousel Instagram de 9 slides : l'accroche « Il n'y a pas de temps mort contre le cancer », pourquoi le basket se met au rose, les histoires de Tiana Mangakahia et de Roland « Fatty » Taylor, le chiffre à retenir (61 214 nouveaux cas en 2023, source INCa) et l'annonce du match Metropolitans – Orléans.",
    pb:"Comment parler d'un sujet grave avec l'énergie du basket, et donner envie de swiper jusqu'à la dernière slide ?"},
-  {id:'octrose',size:'s-xl',cat:'identite print',c1:'#3A1026',c2:'#FF8FC0',ink:'#FFF0F6',big:'Octobre<br>Rose',kicker:'Textile · Metropolitans × Institut Rafaël',poster:'media/octobre-rose.jpg',images:[['media/octobre-rose.jpg','T-shirt Octobre Rose : recto « Never Give Up » et verso Institut Rafaël'],['media/octobre-rose-porte-1.jpg','Le t-shirt porté : les joueurs à la présentation'],['media/octobre-rose-porte-2.jpg','Le t-shirt porté : check avant le match'],['media/octobre-rose-porte-3.jpg','Le t-shirt porté : le banc des Metropolitans'],['media/octobre-rose-porte-4.jpg','Le t-shirt porté : recto « Never Give Up » sur le staff'],['media/octobre-rose-porte-5.jpg','Le t-shirt porté : verso Institut Rafaël'],['media/octobre-rose-porte-6.jpg','Le t-shirt porté : le staff à l’échauffement']],
+  {id:'octrose',size:'s-xl',cat:'identite print',c1:'#3A1026',c2:'#FF8FC0',ink:'#FFF0F6',big:'Octobre<br>Rose',kicker:'Textile · Metropolitans × Institut Rafaël',poster:'media/octobre-rose.jpg',images:[['media/octobre-rose.jpg','T-shirt Octobre Rose : recto « Never Give Up » et verso Institut Rafaël'],['media/octobre-rose-porte-1.jpg','Le t-shirt porté : les joueurs à la présentation'],['media/octobre-rose-porte-2.jpg','Le t-shirt porté : check avant le match'],['media/octobre-rose-porte-3.jpg','Le t-shirt porté : le banc des Metropolitans'],['media/octobre-rose-porte-4.jpg','Le t-shirt porté : recto « Never Give Up » sur le staff'],['media/octobre-rose-porte-5.jpg','Le t-shirt porté : verso Institut Rafaël'],['media/octobre-rose-porte-6.jpg','Le t-shirt porté : le staff à l’échauffement']],vids:[['or-tshirt-01','Échauffement'],['or-tshirt-02','Échauffement'],['or-tshirt-03','Échauffement'],['or-tshirt-04','Échauffement'],['or-tshirt-05','Échauffement'],['or-tshirt-06','Échauffement'],['or-tshirt-07','Échauffement'],['or-tshirt-08','Présentation des joueurs'],['or-tshirt-09','Présentation des joueurs'],['or-tshirt-10','Présentation des joueurs'],['or-tshirt-11','Présentation des joueurs'],['or-tshirt-12','Présentation des joueurs'],['or-tshirt-13','Présentation des joueurs'],['or-tshirt-14','Présentation des joueurs'],['or-tshirt-15','Présentation des joueurs'],['or-tshirt-16','Présentation des joueurs'],['or-tshirt-17','Présentation des joueurs'],['or-tshirt-18','Présentation des joueurs'],['or-tshirt-19','Présentation des joueurs'],['or-tshirt-20','Échauffement'],['or-tshirt-21','Le banc']],
    titre:'T-shirt Octobre Rose',tags:['Textile','Octobre Rose','Partenariat','Metropolitans'],
    obj:"Créer le t-shirt solidaire du club pour Octobre Rose, en partenariat avec l'Institut Rafaël, et sensibiliser à la lutte contre le cancer du sein.",
    brief:"Maquette recto-verso : au recto, le ruban rose, les logos des Levallois Metropolitans et du Levallois Sporting Club et le message « Never Give Up » ; au verso, le partenaire Institut Rafaël – santé intégrative.",
@@ -1063,6 +1067,9 @@ function projectSheet(p){
     tr.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(cur+1);}if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1);}});
     ft.append(cnt,dots);c.append(tr,pv,nx);bd.append(c,ft,cap);upd();
   } else if(p.images){const g=el('div','pjgal');p.images.forEach(([src,alt,wide])=>{const f=el('figure',wide?'wide':null);const im=el('img');im.src=src;im.alt=alt;im.loading='lazy';f.appendChild(im);f.appendChild(el('figcaption','mono',alt.split(' :')[0]));g.appendChild(f);});bd.appendChild(g);}
+  if(p.vids){const h=el('span','mono acc pjvh','Le t-shirt en vidéo');bd.appendChild(h);const g=el('div','pjvids');
+    p.vids.forEach(([n,cap])=>{const f=el('figure');const v=el('video');v.src='media/or-tshirt/'+n+'.mp4';v.poster='media/or-tshirt/'+n+'.jpg';v.controls=true;v.playsInline=true;v.setAttribute('playsinline','');v.preload='none';
+      v.addEventListener('play',()=>g.querySelectorAll('video').forEach(o=>{if(o!==v)o.pause();}));f.appendChild(v);f.appendChild(el('figcaption','mono',cap));g.appendChild(f);});bd.appendChild(g);}
   if(p.res){const r=el('div','res');p.res.forEach(([b,s])=>{const d=el('div');d.appendChild(el('b',null,b));d.appendChild(el('span',null,s));r.appendChild(d);});bd.appendChild(r);}
   if(p.links){const l=el('div','row');p.links.forEach(([t,h])=>{const a=el('a','btn small',t);a.href=h;a.target='_blank';a.rel='noopener';l.appendChild(a);});bd.appendChild(l);}
   if(p.video){
