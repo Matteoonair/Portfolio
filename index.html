@@ -127,7 +127,7 @@ html.vcur-on input,html.vcur-on textarea,html.vcur-on select{cursor:text!importa
 @keyframes land{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
 .tl.draw{position:relative;border-left-color:transparent}
 .tl.draw::before{content:"";position:absolute;left:-1px;top:0;bottom:0;width:1px;background:var(--line)}
-.tl.draw::after{content:"";position:absolute;left:-1.5px;top:0;width:2px;height:calc(var(--p,0) * 1%);background:var(--accent);box-shadow:0 0 10px rgba(242,179,61,.5);transition:height .15s linear}
+.tl.draw::after{content:"";position:absolute;left:-1.5px;top:0;width:2px;height:100%;transform-origin:50% 0;transform:scaleY(var(--p,0));will-change:transform;background:var(--accent);box-shadow:0 0 10px rgba(242,179,61,.5)}
 .tl.draw li::before{left:-8px;transition:background .4s,border-color .4s,box-shadow .4s;z-index:1}
 .tl.draw li:not(.lit)::before{background:var(--bg)!important;border-color:var(--muted)!important;box-shadow:none!important}
 .tl.draw li.lit::before{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px rgba(242,179,61,.18)}
@@ -1332,8 +1332,12 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
       if(k<1)requestAnimationFrame(f);else{el.classList.remove('flip');el.classList.add('land');}})(t0);},.8);
   /* 4. parcours qui se dessine au scroll */
   document.querySelectorAll('.tl').forEach(tl=>{tl.classList.add('draw');const lis=[...tl.children];
-    const up=()=>{const r=tl.getBoundingClientRect(),mark=innerHeight*.7;const p=Math.max(0,Math.min(1,(mark-r.top)/r.height));tl.style.setProperty('--p',(p*100).toFixed(1));const y=r.top+p*r.height;lis.forEach(li=>li.classList.toggle('lit',li.getBoundingClientRect().top+8<=y));};
-    addEventListener('scroll',up,{passive:true});addEventListener('resize',up);up();});
+    /* la ligne suit le scroll en continu (interpolation à chaque image) pour rester fluide */
+    let cur=0,run=false,vis=false;const target=()=>{const r=tl.getBoundingClientRect();return Math.max(0,Math.min(1,(innerHeight*.7-r.top)/r.height));};
+    const tick=()=>{const t=target();cur+=(t-cur)*.18;if(Math.abs(t-cur)<.0005)cur=t;tl.style.setProperty('--p',cur.toFixed(4));const r=tl.getBoundingClientRect(),y=r.top+cur*r.height;lis.forEach(li=>li.classList.toggle('lit',li.getBoundingClientRect().top+8<=y));
+      if(vis||cur!==t)requestAnimationFrame(tick);else run=false;};
+    const go=()=>{if(!run){run=true;requestAnimationFrame(tick);}};
+    new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis)go();},{rootMargin:'200px 0px'}).observe(tl);addEventListener('scroll',go,{passive:true});addEventListener('resize',go);go();});
   /* 5. ouverture des projets en zoom depuis la carte */
   let from=null;
   document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest(T);if(t){from={r:t.getBoundingClientRect(),t:Date.now()};}},true);
