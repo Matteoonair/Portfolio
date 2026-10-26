@@ -110,6 +110,32 @@ nav a.btn.primary{color:var(--accent-ink)}
 .portrait img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.88) contrast(1.05)}
 .portrait .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(14,16,19,.75))}
 .portrait figcaption{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;display:flex;justify-content:space-between;gap:8px;color:var(--fg);font-size:11px}
+
+/* accueil : mur de projets hors cadre (remplace la photo) */
+.portrait.free .ph{border:0;background:transparent;transform:none;overflow:visible;aspect-ratio:4/5}
+.portrait.free .ph::after{display:none}
+.hwall{position:absolute;inset:0;-webkit-mask-image:linear-gradient(180deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(180deg,transparent,#000 14%,#000 86%,transparent)}
+.hwall .grid{position:absolute;left:-12%;right:-20%;top:-30%;bottom:-30%;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;transform:rotate(-6deg);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.hwall .col{display:flex;flex-direction:column;gap:14px;animation:hwup 44s linear infinite}
+.hwall .col.r{animation-name:hwdown;animation-duration:50s}
+.hwall .col:nth-child(2){margin-top:-30%}
+.hwall:hover .col{animation-play-state:paused}
+@keyframes hwup{to{transform:translateY(-50%)}}
+@keyframes hwdown{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+.hwall .tile{position:relative;display:block;width:100%;padding:0;border:0;border-radius:10px;overflow:hidden;flex:none;cursor:pointer;background:#16191E;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.hwall .tile img,.hwall .tile video{width:100%;height:100%;object-fit:cover;display:block}
+.hwall .p45{aspect-ratio:4/5}.hwall .p916{aspect-ratio:9/16}.hwall .p169{aspect-ratio:16/10}
+.hwall .chip{position:absolute;left:8px;bottom:8px;right:8px;font:600 10px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;text-align:left;color:var(--fg);background:rgba(14,16,19,.88);border-radius:6px;padding:5px 7px;opacity:0;transform:translateY(6px);transition:.25s}
+.hwall .vt{position:absolute;top:8px;left:8px;font:700 10px var(--f-mono);color:#fff;background:var(--rec);border-radius:4px;padding:2px 6px}
+.hwall .tile:hover,.hwall .tile:focus-visible{transform:scale(1.05);box-shadow:0 0 0 3px var(--accent),0 20px 40px rgba(0,0,0,.55);z-index:3;outline:none}
+.hwall .tile:hover .chip,.hwall .tile:focus-visible .chip{opacity:1;transform:none}
+.hpill{position:absolute;left:-8%;bottom:9%;z-index:5;display:flex;align-items:center;gap:10px;background:rgba(14,16,19,.92);border:1px solid var(--line);border-radius:999px;padding:8px 14px 8px 12px;font:600 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg);box-shadow:0 12px 30px rgba(0,0,0,.45);text-decoration:none}
+.hpill i{width:8px;height:8px;border-radius:50%;background:var(--rec);animation:hwblink 1.1s steps(1) infinite}
+.hpill b{color:var(--accent)}
+.hpill:hover{border-color:var(--accent)}
+@keyframes hwblink{50%{opacity:.2}}
+@media (max-width:760px){.hpill{left:4%}.hwall .grid{left:-6%;right:-6%}}
+@media (prefers-reduced-motion:reduce){.hwall .col,.hpill i{animation:none}}
 .badge{position:absolute;left:-46px;bottom:18%;width:120px;height:120px;z-index:3;color:var(--accent-ink)}
 .badge svg{width:100%;height:100%;animation:spin 18s linear infinite}
 .badge .core{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5%;font-family:var(--f-display);color:#17130A;pointer-events:none}
@@ -569,8 +595,7 @@ html:not(.nointro) body{overflow:hidden}
     <h1>Création<br><span class="ind">graphique</span><br><span class="amp">&amp;</span> <span class="thin">vidéo</span></h1>
     <figure class="portrait">
       <div class="ph">
-        <img src="media/matteo.jpg" alt="Portrait de Mattéo Vandenesse" width="880" height="1100">
-        <figcaption class="mono"><span>Cam A · 4:5</span><span>Mattéo Vandenesse</span></figcaption>
+        <div class="hwall" id="hwall" aria-label="Aperçu de mes projets"></div>
       </div>
       <div class="badge" aria-hidden="true">
         <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="60" fill="#F2B33D"/><defs><path id="circ" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/></defs><text font-family="JetBrains Mono, monospace" font-size="8.6" font-weight="500" fill="#17130A"><textPath href="#circ" textLength="292" lengthAdjust="spacing">CRÉATION &amp; VIDÉO • VDN SOCIAL STUDIO • </textPath></text></svg>
@@ -1216,5 +1241,34 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
 })();
 </script>
 
+<script>
+/* Accueil : mur de projets. [fichier dans media/, titre, format, vidéo, cible]
+   cible = id de projet (PROJECTS), 'post:chemin vidéo' (POSTS) ou 'live:indexMatch:indexClip' (LIVE) */
+(function(){
+  const fig=document.querySelector('.portrait'),box=document.getElementById('hwall');if(!fig||!box)return;
+  const P=[['or-carrousel-v3-1','Carrousel Octobre Rose','p45',0,'orcar'],['story-workday-v2','Story · Workday','p916',1,'post:media/story-workday-v2.mp4'],['sdlv-banniere','Sport dans la Ville','p169',0,'sdlv'],['octobre-rose-porte-1','T-shirt Octobre Rose','p45',0,'octrose'],['billet-echarpe','Billet Metropolitans','p45',0,'bil'],['live/m1023-04','En direct · Orléans','p916',1,'live:0:3'],['ft-metropolitans-1','La Minute de l’Emploi','p169',0,'ft'],['affiche-stpatrick','Affiche Saint-Patrick','p45',0,'affiches'],['sdlv-logo','Logo Sport dans la Ville','p45',0,'sdlv'],['story-shooting','Story · Shooting','p916',1,'post:media/story-shooting.mp4'],['octobre-rose','T-shirt Octobre Rose','p169',0,'octrose'],['ftf-affiche-collecte','File tes fringues !','p45',0,'ftf'],['li-partouche','Coulisses Partouche','p916',1,'post:media/li-partouche.mp4'],['or-carrousel-v3-5','Carrousel Octobre Rose','p45',0,'orcar'],['sig-01','Signature mail','p169',0,'bil'],['affiche-noel','Affiche de Noël','p45',0,'affiches'],['story-j2-clichy','Story · J-2 Clichy','p916',1,'post:media/story-j2-clichy.mp4'],['ftf-saviez-vous-1','Le saviez-vous ?','p45',0,'ftf'],['snowflake','Aftermovie Snowflake','p169',1,'snow'],['odyssea-pourquoi','Newsletter Odysséa','p45',0,'ody'],['or-carrousel-v3-2','Carrousel Octobre Rose','p45',0,'orcar']];
+  function open(t){
+    if(t.startsWith('live:')){const [,m,c]=t.split(':');if(LIVE[+m])openViewer(livePlayer(LIVE[+m],+c));return;}
+    if(t.startsWith('post:')){const i=POSTS.findIndex(p=>p.video===t.slice(5));const p0=POSTS[i];const card=p0&&[...document.querySelectorAll('#posts .post')].find(x=>x.textContent.includes(p0.texte.slice(0,40)));if(card){card.click();return;}
+      const p=POSTS[i];if(p){const v=document.createElement('video');v.src=p.video;v.controls=true;v.playsInline=true;v.autoplay=true;openViewer([v]);}return;}
+    const p=PROJECTS.find(x=>x.id===t);if(p)openViewer([projectSheet(p)]);
+  }
+  fig.classList.add('free');
+  const g=document.createElement('div');g.className='grid';
+  for(let c=0;c<3;c++){const col=document.createElement('div');col.className='col'+(c%2?' r':'');const set=P.filter((_,i)=>i%3===c);
+    [...set,...set].forEach(([n,t,f,v,tg],k)=>{const b=document.createElement('button');b.type='button';b.className='tile '+f;b.setAttribute('aria-label',t);if(k>=set.length){b.tabIndex=-1;b.setAttribute('aria-hidden','true');}
+      if(v){const m=document.createElement('video');m.src='media/'+n+'.mp4';m.poster='media/'+n+'.jpg';m.muted=true;m.loop=true;m.playsInline=true;m.setAttribute('playsinline','');m.preload='none';b.appendChild(m);const vt=document.createElement('span');vt.className='vt';vt.textContent='▶ VIDÉO';b.appendChild(vt);}
+      else{const i=document.createElement('img');i.src='media/'+n+'.jpg';i.alt='';i.loading='lazy';b.appendChild(i);}
+      const ch=document.createElement('span');ch.className='chip';ch.textContent=t;b.appendChild(ch);
+      b.addEventListener('click',()=>open(tg));col.appendChild(b);});
+    g.appendChild(col);}
+  box.appendChild(g);
+  const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting&&!matchMedia('(prefers-reduced-motion: reduce)').matches)v.play().catch(()=>{});else v.pause();}),{threshold:.1});
+  box.querySelectorAll('video').forEach(v=>io.observe(v));
+  if(matchMedia('(hover:hover)').matches)window.addEventListener('mousemove',e=>{const r=fig.getBoundingClientRect();if(r.bottom<0)return;const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;g.style.transform='rotate(-6deg) translate('+(x*-18)+'px,'+(y*-14)+'px)';});
+  const n=(document.getElementById('post-count')||{}).textContent||'';
+  const pill=document.createElement('a');pill.className='hpill';pill.href='#metropolitans';pill.innerHTML='<i></i><span>REC · <b>'+(+n||'')+'</b> créations</span><span aria-hidden="true">→</span>';fig.appendChild(pill);
+})();
+</script>
 </body>
 </html>
