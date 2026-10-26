@@ -111,6 +111,30 @@ nav a.btn.primary{color:var(--accent-ink)}
 .portrait .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(14,16,19,.75))}
 .portrait figcaption{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;display:flex;justify-content:space-between;gap:8px;color:var(--fg);font-size:11px}
 
+/* ── animations : curseur viseur, compteurs, score, parcours, ouverture en zoom ── */
+#vcur{position:fixed;left:0;top:0;z-index:95;pointer-events:none;width:14px;height:14px;margin:-7px 0 0 -7px;opacity:0;transform:translate3d(-200px,-200px,0);transition:opacity .15s}
+#vcur .in{position:absolute;inset:0;border-radius:50%;background:var(--rec);box-shadow:0 0 0 4px rgba(229,72,77,.22),0 0 14px rgba(229,72,77,.55);transform:scale(.4);transition:transform .25s cubic-bezier(.2,1.4,.4,1)}
+#vcur.on{opacity:1}
+#vcur.on .in{transform:scale(1)}
+html.vcur-on,html.vcur-on *{cursor:none!important}
+html.vcur-on input,html.vcur-on textarea,html.vcur-on select{cursor:text!important}
+#vcur.big .in{transform:scale(1.7)}
+#vcur.press .in{transform:scale(.7)}
+.lscore .dg{display:inline-block;font-variant-numeric:tabular-nums}
+.lscore.flip .dg{animation:dgflip .09s linear}
+@keyframes dgflip{0%{transform:translateY(-35%);opacity:.3}100%{transform:none;opacity:1}}
+.lscore.land{animation:land .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes land{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+.tl.draw{position:relative;border-left-color:transparent}
+.tl.draw::before{content:"";position:absolute;left:-1px;top:0;bottom:0;width:1px;background:var(--line)}
+.tl.draw::after{content:"";position:absolute;left:-1.5px;top:0;width:2px;height:calc(var(--p,0) * 1%);background:var(--accent);box-shadow:0 0 10px rgba(242,179,61,.5);transition:height .15s linear}
+.tl.draw li::before{left:-8px;transition:background .4s,border-color .4s,box-shadow .4s;z-index:1}
+.tl.draw li:not(.lit)::before{background:var(--bg)!important;border-color:var(--muted)!important;box-shadow:none!important}
+.tl.draw li.lit::before{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px rgba(242,179,61,.18)}
+.tl.draw li>*{opacity:.4;transform:translateX(10px);transition:opacity .5s,transform .5s}
+.tl.draw li.lit>*{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){#vcur{display:none}.tl.draw li>*{opacity:1;transform:none}}
+
 /* accueil : mur de projets hors cadre (remplace la photo) */
 .portrait.free .ph{border:0;background:transparent;transform:none;overflow:visible;aspect-ratio:4/5}
 .portrait.free .ph::after{display:none}
@@ -1267,6 +1291,48 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   if(matchMedia('(hover:hover)').matches)window.addEventListener('mousemove',e=>{const r=fig.getBoundingClientRect();if(r.bottom<0)return;const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;g.style.transform='rotate(-6deg) translate('+(x*-18)+'px,'+(y*-14)+'px)';});
   const n=(document.getElementById('post-count')||{}).textContent||'';
   const pill=document.createElement('a');pill.className='hpill';pill.href='#metropolitans';pill.innerHTML='<i></i><span>REC · <b>'+(+n||'')+'</b> créations</span><span aria-hidden="true">→</span>';fig.appendChild(pill);
+})();
+</script>
+<script>
+/* animations : curseur viseur, compteurs, score, parcours, ouverture en zoom */
+(function(){
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;if(RM)return;
+  const T='.hwall .tile,#posts .post,.tile,.lclip,.lcard,.pjgal figure,.pjcar .track,.sheet,.pjvids figure';
+  /* 1. curseur viseur (ordinateur uniquement) */
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+    const c=document.createElement('div');c.id='vcur';c.setAttribute('aria-hidden','true');c.innerHTML='<div class="in"></div>';document.body.appendChild(c);
+    document.documentElement.classList.add('vcur-on');
+    const mark=()=>document.querySelectorAll(T).forEach(e=>e.classList.add('vcur-t'));mark();new MutationObserver(mark).observe(document.body,{childList:true,subtree:true});
+    let x=-100,y=-100,cx=-100,cy=-100,cur=null;
+    const check=tg=>{const t=tg&&tg.closest&&tg.closest(T);if(t!==cur){cur=t;c.classList.toggle('big',!!t);}};
+    addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY;c.classList.add('on');check(e.target);},{passive:true});
+    addEventListener('mousedown',()=>c.classList.add('press'));addEventListener('mouseup',()=>c.classList.remove('press'));
+    addEventListener('scroll',()=>{check(document.elementFromPoint(x,y));},{passive:true});
+    document.addEventListener('mouseleave',()=>c.classList.remove('on'));document.addEventListener('click',()=>{c.classList.remove('big');cur=null;},true);
+    (function loop(){cx+=(x-cx)*.5;cy+=(y-cy)*.5;c.style.transform='translate3d('+cx+'px,'+cy+'px,0)';requestAnimationFrame(loop);})();
+  }
+  /* 2. compteurs qui défilent à l'apparition */
+  const ease=t=>1-Math.pow(1-t,3);
+  function countUp(el,dur){const txt=el.textContent;const m=txt.match(/^([^\d]*)(\d+)(.*)$/s);if(!m||/^[.:,]\d/.test(m[3]))return;const to=+m[2],pad=m[2].length,t0=performance.now();
+    (function f(now){const k=Math.min(1,(now-t0)/dur),v=Math.round(to*ease(k));el.textContent=m[1]+String(v).padStart(pad,'0')+m[3];if(k<1)requestAnimationFrame(f);})(t0);}
+  const once=(els,fn,th)=>{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.unobserve(e.target);fn(e.target);}}),{threshold:th||.6});els.forEach(e=>io.observe(e));};
+  once([...document.querySelectorAll('#post-count,.mghead .mono.acc,.hpill b')],e=>countUp(e,1400));
+  new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1){const r=n.querySelectorAll?n.querySelectorAll('.res b'):[];once([...r],e=>countUp(e,1200),.3);}}))).observe(document.getElementById('viewer')||document.body,{childList:true,subtree:true});
+  /* 3. score façon tableau d'affichage */
+  once([...document.querySelectorAll('.lscore')],el=>{const txt=el.textContent;const m=txt.match(/^(.*?)(\d+)-(\d+)$/);if(!m)return;const a=+m[2],b=+m[3],t0=performance.now(),dur=1600;el.innerHTML='';const pre=document.createTextNode(m[1]);const da=document.createElement('span'),db=document.createElement('span');da.className=db.className='dg';el.append(pre,da,'-',db);let last=-1;
+    (function f(now){const k=Math.min(1,(now-t0)/dur),e=ease(k),va=Math.round(a*e),vb=Math.round(b*e);if(va+vb!==last){last=va+vb;da.textContent=va;db.textContent=vb;el.classList.remove('flip');void el.offsetWidth;el.classList.add('flip');}
+      if(k<1)requestAnimationFrame(f);else{el.classList.remove('flip');el.classList.add('land');}})(t0);},.8);
+  /* 4. parcours qui se dessine au scroll */
+  document.querySelectorAll('.tl').forEach(tl=>{tl.classList.add('draw');const lis=[...tl.children];
+    const up=()=>{const r=tl.getBoundingClientRect(),mark=innerHeight*.7;const p=Math.max(0,Math.min(1,(mark-r.top)/r.height));tl.style.setProperty('--p',(p*100).toFixed(1));const y=r.top+p*r.height;lis.forEach(li=>li.classList.toggle('lit',li.getBoundingClientRect().top+8<=y));};
+    addEventListener('scroll',up,{passive:true});addEventListener('resize',up);up();});
+  /* 5. ouverture des projets en zoom depuis la carte */
+  let from=null;
+  document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest(T);if(t){from={r:t.getBoundingClientRect(),t:Date.now()};}},true);
+  if(typeof openViewer==='function'){const _ov=openViewer;openViewer=function(nodes){_ov(nodes);const v=document.getElementById('viewer'),st=document.getElementById('viewer-stage');if(!from||Date.now()-from.t>900||!st)return;const r1=from.r;from=null;
+    const target=st.firstElementChild||st;const r2=target.getBoundingClientRect();if(!r2.width)return;const s=Math.max(.15,r1.width/r2.width);
+    target.style.transformOrigin='0 0';target.animate([{transform:'translate('+(r1.left-r2.left)+'px,'+(r1.top-r2.top)+'px) scale('+s+')',opacity:.5,borderRadius:'14px'},{transform:'none',opacity:1,borderRadius:'14px'}],{duration:520,easing:'cubic-bezier(.2,.8,.2,1)'});
+    v.animate([{backgroundColor:'rgba(6,7,9,0)'},{backgroundColor:'rgba(6,7,9,.94)'}],{duration:380,easing:'ease-out'});};}
 })();
 </script>
 </body>
