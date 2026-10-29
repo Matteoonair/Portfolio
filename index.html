@@ -551,6 +551,10 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 <script data-goatcounter="https://vdnsocialstudio.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Mattéo Vandenesse", "url": "https://vdnsocialstudio.com/", "image": "https://vdnsocialstudio.com/media/matteo.jpg", "jobTitle": "Création graphique, vidéo et community management", "worksFor": {"@type": "Organization", "name": "Levallois Metropolitans"}, "brand": {"@type": "Brand", "name": "VDN Social Studio"}, "address": {"@type": "PostalAddress", "addressLocality": "Enghien-les-Bains", "addressCountry": "FR"}, "email": "mailto:matteo.vandenesse@gmail.com", "sameAs": ["https://www.instagram.com/vdnsocialstudio/", "https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab"]}</script>
 <script>/* à chaque chargement, le site repart du début de la page */try{if('scrollRestoration' in history)history.scrollRestoration='manual';if(location.hash)history.replaceState(null,'',location.pathname+location.search);}catch(e){}addEventListener('load',function(){scrollTo(0,0);});addEventListener('pageshow',function(e){if(e.persisted)scrollTo(0,0);});</script>
+<script>
+/* notification push (appli ntfy, abonnement au sujet ci-dessous) à chaque demande envoyée depuis le site */
+window.vdnNotify=function(title,body,tags){try{fetch('https://ntfy.sh/',{method:'POST',body:JSON.stringify({topic:'vdn-24b509aeabc3',title:title,message:body,tags:(tags||'yellow_circle').split(','),priority:4,click:'https://mail.google.com/'})}).catch(function(){});}catch(e){}};
+</script>
 <script>(function(){var r=document.documentElement,L=null;
 try{var q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='fr'){L=q;localStorage.setItem('vdn-lang',q);}else L=localStorage.getItem('vdn-lang');}catch(e){}
 if(L!=='en'&&L!=='fr')L=(!/bot|crawl|spider|slurp|lighthouse/i.test(navigator.userAgent)&&!/^fr/i.test(navigator.language||'fr'))?'en':'fr';
@@ -860,6 +864,7 @@ html:not(.nointro) body{overflow:hidden}
       nom:nom,email:mail,message:msg||'—',source:'Bouton devis (services)'};
     fetch('https://formsubmit.co/ajax/'+MAIL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
       .then(async r=>{const j=await r.json().catch(()=>({}));if(!r.ok||j.success===false||j.success==='false')throw new Error(r.status);
+        window.vdnNotify&&vdnNotify('Nouveau devis · '+svc+' · '+nom,data.profil+' · '+data.budget+' · '+data.delai+'\nBesoin : '+data.besoin+(msg?'\n'+msg:'')+'\n'+mail,'yellow_circle,moneybag');
         document.getElementById('qdonetxt').textContent='Merci ! Votre demande de devis est bien envoyée, je vous réponds sous 48 h.';
         document.querySelector('#qd .qdone h4').textContent='Demande envoyée !';i=steps.length-1;update();
         try{window.goatcounter&&window.goatcounter.count&&window.goatcounter.count({path:'devis: '+svc,title:'devis: '+svc,event:true});}catch(e){}})
@@ -1215,6 +1220,7 @@ if(cform){cform.addEventListener('submit',async e=>{
     const r=await fetch('https://formsubmit.co/ajax/matteo.vandenesse@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(cform)))});
     const j=await r.json().catch(()=>({}));
     if(!r.ok||j.success===false||j.success==='false')throw new Error(r.status);
+    {const fd=Object.fromEntries(new FormData(cform));window.vdnNotify&&vdnNotify('Nouveau message · '+(fd.nom||''),(fd.projet?fd.projet+(fd.budget?' · '+fd.budget:'')+'\n':'')+(fd.message||'')+'\n'+(fd.email||''),'yellow_circle,envelope');}
     cform.reset();note.textContent='Merci ! Votre demande est bien envoyée, je vous réponds sous 48 h.';note.classList.add('ok');
   }catch(err){note.textContent="L'envoi n'a pas fonctionné. Écrivez-moi directement à matteo.vandenesse@gmail.com.";note.classList.add('err');}
   note.hidden=false;btn.disabled=false;btn.textContent='Envoyer ma demande';
