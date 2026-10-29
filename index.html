@@ -555,6 +555,16 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 /* notification push (appli ntfy, abonnement au sujet ci-dessous) à chaque demande envoyée depuis le site */
 window.vdnNotify=function(title,body,tags){try{fetch('https://ntfy.sh/',{method:'POST',body:JSON.stringify({topic:'vdn-24b509aeabc3',title:title,message:body,tags:(tags||'yellow_circle').split(','),priority:4,click:'https://mail.google.com/'})}).catch(function(){});}catch(e){}};
 </script>
+<script>
+/* envoi des formulaires : formulaire classique vers FormSubmit dans une iframe cachée (pas de blocage CORS) */
+window.vdnSend=function(data){return new Promise(function(res){try{
+  var id='vdnf'+Date.now(),ifr=document.createElement('iframe');ifr.name=id;ifr.style.display='none';ifr.setAttribute('aria-hidden','true');document.body.appendChild(ifr);
+  var f=document.createElement('form');f.method='POST';f.action='https://formsubmit.co/matteo.vandenesse@gmail.com';f.target=id;f.style.display='none';
+  var d=Object.assign({_captcha:'false',_template:'table'},data);Object.keys(d).forEach(function(k){var i=document.createElement('input');i.type='hidden';i.name=k;i.value=d[k]==null?'':String(d[k]);f.appendChild(i);});
+  document.body.appendChild(f);var done=false,fin=function(){if(done)return;done=true;res(true);setTimeout(function(){f.remove();ifr.remove();},4000);};
+  ifr.addEventListener('load',fin);setTimeout(fin,2500);f.submit();
+}catch(e){res(false);}});};
+</script>
 <script>(function(){var r=document.documentElement,L=null;
 try{var q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='fr'){L=q;localStorage.setItem('vdn-lang',q);}else L=localStorage.getItem('vdn-lang');}catch(e){}
 if(L!=='en'&&L!=='fr')L=(!/bot|crawl|spider|slurp|lighthouse/i.test(navigator.userAgent)&&!/^fr/i.test(navigator.language||'fr'))?'en':'fr';
@@ -862,8 +872,8 @@ html:not(.nointro) body{overflow:hidden}
     const data={_subject:'Demande de devis · '+svc+' · '+nom,_template:'table',_replyto:mail,_honey:'',
       service:svc,profil:ans.profil.join(', '),besoin:ans.besoin.join(', '),delai:ans.delai.join(', '),budget:ans.budget.join(', '),
       nom:nom,email:mail,message:msg||'—',source:'Bouton devis (services)'};
-    fetch('https://formsubmit.co/ajax/'+MAIL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
-      .then(async r=>{const j=await r.json().catch(()=>({}));if(!r.ok||j.success===false||j.success==='false')throw new Error(r.status);
+    window.vdnSend(data)
+      .then(ok=>{if(!ok)throw new Error('envoi');
         window.vdnNotify&&vdnNotify('Nouveau devis · '+svc+' · '+nom,data.profil+' · '+data.budget+' · '+data.delai+'\nBesoin : '+data.besoin+(msg?'\n'+msg:'')+'\n'+mail,'yellow_circle,moneybag');
         document.getElementById('qdonetxt').textContent='Merci ! Votre demande de devis est bien envoyée, je vous réponds sous 48 h.';
         document.querySelector('#qd .qdone h4').textContent='Demande envoyée !';i=steps.length-1;update();
@@ -1217,9 +1227,8 @@ if(cform){cform.addEventListener('submit',async e=>{
   e.preventDefault();const btn=document.getElementById('f-send'),note=document.getElementById('f-note');
   btn.disabled=true;btn.textContent='Envoi…';note.hidden=true;note.className='fnote';
   try{
-    const r=await fetch('https://formsubmit.co/ajax/matteo.vandenesse@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(cform)))});
-    const j=await r.json().catch(()=>({}));
-    if(!r.ok||j.success===false||j.success==='false')throw new Error(r.status);
+    const ok=await window.vdnSend(Object.fromEntries(new FormData(cform)));
+    if(!ok)throw new Error('envoi');
     {const fd=Object.fromEntries(new FormData(cform));window.vdnNotify&&vdnNotify('Nouveau message · '+(fd.nom||''),(fd.projet?fd.projet+(fd.budget?' · '+fd.budget:'')+'\n':'')+(fd.message||'')+'\n'+(fd.email||''),'yellow_circle,envelope');}
     cform.reset();note.textContent='Merci ! Votre demande est bien envoyée, je vous réponds sous 48 h.';note.classList.add('ok');
   }catch(err){note.textContent="L'envoi n'a pas fonctionné. Écrivez-moi directement à matteo.vandenesse@gmail.com.";note.classList.add('err');}
