@@ -127,7 +127,35 @@ header.top.sc{border-color:var(--line)}
 .status{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:14px;color:var(--gris)}
 .status i{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(255,107,53,.18);animation:pulse 2.4s infinite}
 @keyframes pulse{50%{box-shadow:0 0 0 7px rgba(255,107,53,.05)}}
-.reel{position:relative;justify-self:center;width:min(100%,440px)}
+.side{justify-self:center;width:min(100%,460px);display:grid;justify-items:center;gap:34px}
+.reel{position:relative;justify-self:center;width:min(100%,360px)}
+/* enseigne néon : tubes visibles en plein jour, fixés sur une plaque de plexiglas */
+.sign{position:relative;padding-top:14px;width:100%;display:grid;justify-items:center}
+.sign .cable{position:absolute;top:-26px;width:1.5px;height:42px;background:linear-gradient(rgba(28,28,30,.12),rgba(28,28,30,.45))}
+.sign .cable.l{left:24%}.sign .cable.r{right:24%}
+.plate{position:relative;display:grid;justify-items:center;gap:4px;padding:22px 38px 18px;border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.6),rgba(255,255,255,.2));box-shadow:inset 0 0 0 1px rgba(255,255,255,.85),0 26px 44px -28px rgba(28,28,30,.35)}
+.plate .sc{position:absolute;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#C9C3BB 60%,#9A938A);box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.plate .s1{left:13px;top:13px}.plate .s2{right:13px;top:13px}.plate .s3{left:13px;bottom:13px}.plate .s4{right:13px;bottom:13px}
+.neon{display:flex;font:900 clamp(78px,8vw,120px)/.92 var(--f-t);font-variation-settings:'SOFT' 100,'opsz' 144;letter-spacing:.02em}
+.neon b{font-weight:900;color:rgba(255,190,160,.35);-webkit-text-stroke:2px rgba(220,150,120,.55);text-shadow:5px 9px 9px rgba(28,28,30,.12);transition:color .05s,text-shadow .05s}
+.neon b.lit{color:#FFF1E6;-webkit-text-stroke:3px var(--gold);text-shadow:0 0 2px #FF8A5B,0 0 10px rgba(255,107,53,.9),0 0 24px rgba(255,107,53,.6),0 0 54px rgba(255,107,53,.32),7px 12px 14px rgba(160,60,20,.18)}
+.neon b.buzz{animation:buzz 7s infinite}
+@keyframes buzz{0%,41%,43.5%,45%,100%{opacity:1}42%,44%{opacity:.45}}
+.studio{font:700 clamp(13px,1.3vw,17px)/1 var(--f-b);letter-spacing:.42em;padding-left:.42em;color:rgba(140,120,200,.35);transition:color .05s,text-shadow .05s}
+.studio.lit{color:var(--crep);text-shadow:0 0 6px rgba(140,115,255,.8),0 0 18px rgba(91,63,224,.45),3px 7px 9px rgba(40,20,120,.15)}
+.nsig{font:600 14px var(--f-b);color:rgba(230,150,180,.45);margin-top:4px;letter-spacing:.06em;transition:color .3s,text-shadow .3s}
+.nsig.lit{color:#C93A6B;text-shadow:0 0 6px rgba(255,143,177,.9),0 0 16px rgba(255,143,177,.45)}
+/* terrain qui se dessine (Jour de match) */
+.match-mode .court{position:absolute;inset:0;pointer-events:none;z-index:0}
+.match-mode .wrap{position:relative;z-index:1}
+.court svg{position:absolute;right:-6%;top:50%;width:min(820px,80%);transform:translateY(-50%) rotate(-8deg);opacity:.85}
+.court .ln{fill:none;stroke:rgba(247,245,242,.14);stroke-width:2;stroke-linecap:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 8s ease-in-out infinite alternate}
+.court .ln.g{stroke:rgba(255,107,53,.6);stroke-width:3}
+@keyframes draw{0%{stroke-dashoffset:1400}60%,100%{stroke-dashoffset:0}}
+.court .cglow{position:absolute;right:6%;top:18%;width:40%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(232,68,46,.4),rgba(255,107,53,.14) 55%,transparent);filter:blur(20px);animation:cpulse 5s ease-in-out infinite}
+@keyframes cpulse{50%{opacity:.55;transform:scale(1.08)}}
+.court .ball{position:absolute;left:0;top:0;width:14px;height:14px;border-radius:50%;background:var(--gold);box-shadow:0 0 22px 6px rgba(255,107,53,.55);offset-path:path('M 520 520 C 760 120, 1060 120, 1220 330');animation:shot 4.8s cubic-bezier(.45,.05,.55,.95) infinite}
+@keyframes shot{0%{offset-distance:0%;opacity:0}10%{opacity:1}85%{opacity:1}100%{offset-distance:100%;opacity:0}}
 .reel .halo{position:absolute;inset:-22%;background:var(--halo);filter:blur(30px);z-index:0;opacity:0;transform:scale(.6);animation:bloom 1.6s var(--ease) .15s forwards}
 @keyframes bloom{to{opacity:1;transform:scale(1)}}
 .reel .vf{z-index:1;opacity:0;transform:translateY(16px) scale(.98);animation:rise .9s var(--ease) .35s forwards}
@@ -314,6 +342,7 @@ footer nav a{text-decoration:none}footer nav a:hover{color:var(--graphite)}
 .mock{background:var(--graphite);color:var(--coton);text-align:center;font:500 13px var(--f-b);padding:9px 16px}
 
 @media (max-width:1000px){
+  .side{justify-self:start;gap:28px}.court svg{width:120%;right:-40%;opacity:.5}.court .ball{display:none}
   .nav{display:none}
   .hero{grid-template-columns:1fr;gap:40px;padding-top:32px;overflow-x:clip}
   .reel{width:min(100%,380px);justify-self:start}
@@ -396,11 +425,21 @@ try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)r.classList.add('n
       </div>
       <div class="status rv"><i aria-hidden="true"></i><span>Dispo en freelance · réponse sous 48 h</span></div>
     </div>
+    <div class="side">
+    <div class="sign" id="sign" aria-label="Enseigne néon VDN Social Studio">
+      <span class="cable l" aria-hidden="true"></span><span class="cable r" aria-hidden="true"></span>
+      <div class="plate"><span class="sc s1"></span><span class="sc s2"></span><span class="sc s3"></span><span class="sc s4"></span>
+        <div class="neon" id="neon" aria-hidden="true"><b>V</b><b>D</b><b>N</b></div>
+        <div class="studio" id="nstudio" aria-hidden="true">SOCIAL STUDIO</div>
+        <div class="nsig" id="nsig">Créé avec fierté.</div>
+      </div>
+    </div>
     <div class="reel">
       <div class="halo" aria-hidden="true"></div>
       <div class="vf"><div class="m"><video id="reel" src="media/showreel.mp4?v=3" poster="media/showreel.jpg?v=3" muted loop playsinline preload="none" aria-label="Showreel : extraits de matchs, d'événements et de tournages"></video></div></div>
       <span class="cap" aria-hidden="true"><i></i>Showreel 2026</span>
       <button class="tog" id="reeltog" type="button" aria-label="Mettre le showreel en pause">❚❚</button>
+    </div>
     </div>
   </section>
 
@@ -413,6 +452,9 @@ try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)r.classList.add('n
   </section>
 
   <div class="match-mode" id="match">
+    <div class="court" aria-hidden="true"><span class="cglow"></span>
+      <svg viewBox="0 0 700 420"><rect class="ln" x="20" y="20" width="660" height="380" rx="24"/><line class="ln" x1="350" y1="20" x2="350" y2="400"/><circle class="ln" cx="350" cy="210" r="60"/><path class="ln" d="M20 70 H120 A140 140 0 0 1 120 350 H20"/><path class="ln" d="M680 70 H580 A140 140 0 0 0 580 350 H680"/><rect class="ln g" x="560" y="150" width="120" height="120" rx="10"/><circle class="ln g" cx="620" cy="210" r="16"/></svg>
+      <span class="ball"></span></div>
     <div class="wrap">
       <div class="sh rv"><div><span class="lbl">Mode Match</span><h2 class="t">Jour de match, en direct.</h2><p>Les matchs que je filme en direct pour les Levallois Metropolitans. Touche un match pour voir les vidéos.</p></div><span class="live">En direct</span></div>
       <div class="matches" id="matches"></div>
@@ -742,6 +784,12 @@ $('#cform').addEventListener('submit',async e=>{e.preventDefault();const note=$(
   catch(x){err("L'envoi n'a pas marché. Écris-moi directement à matteo.vandenesse@gmail.com.");}btn.disabled=false;});
 $('#copy').addEventListener('click',()=>{const t=$('#mail').textContent.trim();(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{$('#copy').textContent='E-mail copié ✓';setTimeout(()=>$('#copy').textContent='Copier l’e-mail',1800);}).catch(()=>location.href='mailto:'+t);});
 
+/* ── enseigne néon : s'allume lettre par lettre à l'arrivée ── */
+(function(){const L=[...document.querySelectorAll('#neon b')],st=$('#nstudio'),sg=$('#nsig');if(!L.length)return;
+  if(RM){L.forEach(b=>b.classList.add('lit'));st.classList.add('lit');sg.classList.add('lit');return;}
+  const at=(ms,f)=>setTimeout(f,ms);
+  const flick=(el,start,seq)=>{let t=start;seq.forEach((s,i)=>{at(t,()=>el.classList.toggle('lit',i%2===0));t+=s;});at(t,()=>el.classList.add('lit'));return t;};
+  let t=500;L.forEach((b,i)=>flick(b,t+i*260,[60,90,40,160,50]));const e=flick(st,t+3*260+250,[50,120,40]);at(e+350,()=>sg.classList.add('lit'));at(e+600,()=>L[1].classList.add('buzz'));})();
 /* ── showreel, apparitions, chiffres ── */
 const reel=$('#reel'),tog=$('#reeltog');
 /* le showreel démarre une fois la page chargée : il ne ralentit pas l'arrivée sur le site */
