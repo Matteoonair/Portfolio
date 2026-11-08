@@ -13,12 +13,12 @@
 <link rel="canonical" href="https://vdnsocialstudio.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0F0F0F">
-<link rel="icon" href="icon-d.svg" type="image/svg+xml">
-<link rel="icon" type="image/png" sizes="32x32" href="icon-d-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="icon-d-16.png">
-<link rel="shortcut icon" href="icon-d.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="icon-d-180.png">
-<link rel="manifest" href="site.webmanifest?v=4">
+<link rel="icon" href="icon-b.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-b-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icon-b-16.png">
+<link rel="shortcut icon" href="icon-b.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-b-180.png">
+<link rel="manifest" href="site.webmanifest?v=5">
 <meta name="apple-mobile-web-app-title" content="VDN Studio">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -68,7 +68,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .top.sc{border-color:var(--trait)}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:20px;height:70px}
 .logo{display:flex;align-items:center;gap:12px}
-.logo .W{font-size:28px;letter-spacing:-.03em;line-height:1}
+.logo img{height:30px;width:auto}
+.logo .mono{font-size:9.5px;line-height:1.15;letter-spacing:.12em;color:var(--blanc);padding-left:12px;border-left:1px solid var(--trait)}
+.sbar .logo img{height:26px}
 .logo sup{font:700 11px var(--fm);color:var(--sig);vertical-align:top;margin-left:2px}
 .nav{display:flex;gap:28px}
 .nav a{font:700 13px var(--f);font-variation-settings:'wdth' 110;letter-spacing:.06em;text-transform:uppercase;color:var(--gris);transition:color .2s}
@@ -240,7 +242,8 @@ footer{margin-top:clamp(110px,12vw,170px);border-top:1px solid var(--trait);over
 .fl nav{display:flex;gap:22px;flex-wrap:wrap}
 .fl nav a{font:700 13px var(--f);font-variation-settings:'wdth' 110;text-transform:uppercase;letter-spacing:.05em}
 .fl nav a:hover{color:var(--sig)}
-.giant{font:900 30vw/.78 var(--f);font-variation-settings:'wdth' 125;letter-spacing:-.06em;color:var(--sig);text-align:center;margin-bottom:-4vw;user-select:none;white-space:nowrap}
+.giant{padding:20px var(--pad) clamp(28px,4vw,56px);user-select:none}
+.giant img{width:100%;height:auto;max-width:1400px;margin:0 auto}
 
 /* apparitions */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s var(--ease)}
@@ -323,7 +326,7 @@ footer{margin-top:clamp(110px,12vw,170px);border-top:1px solid var(--trait);over
   .cta-sim{grid-template-columns:1fr}
 }
 @media (max-width:600px){
-  .woven.hd{display:none}
+  .logo .hd{display:none}
   .right .btn{display:none}
   .tag{left:-14px;top:-40px;width:128px}
   .camp{width:min(100%,330px);margin-left:auto;margin-right:0}
@@ -371,7 +374,7 @@ try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)r.classList.add('n
 <body>
 <header class="top" id="hdr">
   <div class="wrap bar">
-    <a class="logo" href="#top" aria-label="VDN Social Studio, retour en haut"><span class="W">VDN<sup>®</sup></span><span class="woven hd">Social Studio</span></a>
+    <a class="logo" href="#top" aria-label="VDN Social Studio, retour en haut"><img src="logo/vdn-logo-court-blanc.svg" alt="" width="104" height="30"><span class="mono hd">Social<br>Studio</span></a>
     <nav class="nav" aria-label="Navigation principale"><a href="#projets">Collection</a><a href="#match">Matchday</a><a href="#apropos">Le studio</a><a href="#contact">Contact</a></nav>
     <div class="right"><button class="langbtn" id="langbtn" type="button"></button><a class="btn s" href="#contact" data-door="projet">Lancer un projet</a></div>
   </div>
@@ -482,11 +485,11 @@ try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)r.classList.add('n
 
 <footer>
   <div class="wrap fl"><span class="mono">© 2026 VDN Social Studio · Créé avec fierté</span><nav aria-label="Réseaux"><a href="https://www.instagram.com/vdnsocialstudio/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab" target="_blank" rel="noopener">LinkedIn</a><a href="https://wa.me/33698069145" target="_blank" rel="noopener">WhatsApp</a></nav></div>
-  <div class="giant" aria-hidden="true">VDN®</div>
+  <div class="giant" aria-hidden="true"><img src="logo/vdn-logo-lilas.svg" alt=""></div>
 </footer>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="s-title" aria-hidden="true">
-  <div class="sbar"><div class="wrap"><button class="back" id="s-back" type="button">← Collection</button><a class="logo" href="#top" aria-hidden="true" tabindex="-1"><span class="W">VDN<sup>®</sup></span></a><button class="btn s sm" type="button" id="s-sim2">Un projet similaire ?</button></div></div>
+  <div class="sbar"><div class="wrap"><button class="back" id="s-back" type="button">← Collection</button><a class="logo" href="#top" aria-hidden="true" tabindex="-1"><img src="logo/vdn-logo-court-blanc.svg" alt="" width="90" height="26"></a><button class="btn s sm" type="button" id="s-sim2">Un projet similaire ?</button></div></div>
   <div id="s-body"></div>
 </div>
 
