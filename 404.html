@@ -3,31 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Page introuvable · VDN Social Studio</title>
+<title>Mauvais tunnel · VDN Social Studio</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0F0F0F">
+<meta name="theme-color" content="#0D0D10">
 <link rel="icon" href="/icon-b.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=Doto:wght@900&display=swap">
 <style>
-:root{--sig:#BBA5FF;--noir:#0F0F0F;--blanc:#F3F1EC;--gris:#A09D96;--carton:#EDE7DA;--encre:#171513}
+:root{--sig:#BBA5FF;--nuit:#0D0D10;--blanc:#F4F1EC;--gris:#9E9AA6}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--noir);color:var(--blanc);font:400 17px/1.6 Archivo,Arial,sans-serif;padding:24px}
-main{text-align:center;max-width:620px}
-.tag{display:inline-block;background:var(--carton);color:var(--encre);border-radius:4px;padding:14px 18px;font:400 11px/1.5 "Space Mono",monospace;text-transform:uppercase;transform:rotate(-4deg)}
-.tag b{display:block;font:900 22px/1 Archivo,sans-serif;font-variation-settings:'wdth' 125;margin-bottom:6px}
-h1{font:900 clamp(44px,9vw,96px)/.94 Archivo,sans-serif;font-variation-settings:'wdth' 125;text-transform:uppercase;letter-spacing:-.02em;margin:28px 0 16px}
-h1 span{color:var(--sig)}
-p{color:#CFCCC5;margin:0 0 28px}
-a{display:inline-flex;align-items:center;min-height:48px;background:var(--sig);color:var(--encre);text-decoration:none;border-radius:999px;padding:0 26px;font:800 14px Archivo,sans-serif;font-variation-settings:'wdth' 112;text-transform:uppercase;letter-spacing:.04em}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;color:var(--blanc);font:400 19px/1.5 "Instrument Serif",Georgia,serif;
+  background:radial-gradient(30% 40% at 50% 50%,rgba(187,165,255,.18),transparent 70%),url(/media/tunnel/poster.jpg) center/cover #0D0D10}
+body::before{content:"";position:fixed;inset:0;background:rgba(13,13,16,.72)}
+main{position:relative;text-align:center;max-width:640px}
+.n{font:900 120px/1 "Doto","JetBrains Mono",monospace;color:var(--sig);text-shadow:0 0 18px rgba(187,165,255,.6)}
+h1{font:900 clamp(56px,10vw,110px)/.86 "Big Shoulders Display","Arial Narrow",sans-serif;text-transform:uppercase;margin:10px 0 0}
+h1 em{display:block;font:italic 400 .55em "Instrument Serif",serif;text-transform:none;color:var(--sig)}
+p{color:#DCD7E2;margin:18px 0 28px}
+a{display:inline-flex;align-items:center;min-height:50px;padding:0 26px;border-radius:999px;background:var(--sig);color:#14121A;text-decoration:none;font:900 16px "Big Shoulders Display",sans-serif;letter-spacing:.08em;text-transform:uppercase}
 </style>
 </head>
 <body>
 <main>
-  <span class="tag"><b>VDN®</b>Erreur 404 · Taille introuvable</span>
-  <h1>Pièce <span>épuisée.</span></h1>
-  <p>Cette page n'existe pas, ou elle a changé d'adresse. La collection, elle, est toujours là.</p>
-  <a href="/">Retour à la collection →</a>
+  <div class="n">404</div>
+  <h1>Mauvais tunnel.<em>celui-ci ne mène nulle part.</em></h1>
+  <p>Cette page n'existe pas, ou elle a changé d'adresse. Le terrain, lui, est toujours là.</p>
+  <a href="/">Retour au tunnel →</a>
 </main>
 </body>
 </html>
