@@ -617,6 +617,17 @@ html:not(.nointro) body{overflow:hidden}
 .hl-t{margin:12px 0 0}
 @media (prefers-reduced-motion:reduce){.hl-ring{transition:none}}
 </style>
+<style>
+/* lettres colorées : dégradé qui change en continu */
+@keyframes vdnFlow{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+.acc,.brand span,.hero h1 .amp,.counter b,.qtop h3 span,.contact h2 em,.res b,.tl .org,.svc:hover h3{
+  background-image:linear-gradient(100deg,#F2B33D 0%,#FF8A3D 16%,#FF5A5F 33%,#FF6FB5 50%,#FF8A3D 66%,#F2B33D 83%,#FFD45C 100%);
+  background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent;
+  animation:vdnFlow 9s linear infinite}
+.hero h1 .amp,.contact h2 em{animation-duration:12s}
+@media (prefers-reduced-motion:reduce){.acc,.brand span,.hero h1 .amp,.counter b,.qtop h3 span,.contact h2 em,.res b,.tl .org,.svc:hover h3{animation:none;background-position:20% 50%}}
+@media (forced-colors:active){.acc,.brand span,.hero h1 .amp,.counter b,.qtop h3 span,.contact h2 em,.res b,.tl .org{-webkit-text-fill-color:currentColor;color:CanvasText!important;background:none}}
+</style>
 <style>html,body{overflow-x:clip}@media (max-width:480px){.brand{font-size:0!important;gap:0!important}.brand .sep{display:none}}</style>
 </head>
 <body>
