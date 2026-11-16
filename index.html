@@ -663,6 +663,22 @@ html:not(.nointro) body{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.u-f,.viewer[data-u=film] .u-extra{animation:none!important}}
 </style>
 <style>
+/* univers : toute la fiche prend la couleur du projet (fonds, cartes, filets, textes secondaires) */
+.viewer[data-u=rose]{background:#1C0912!important;--bg:#1C0912;--surface:#2A1020;--surface-2:#3A1529;--line:#5A2440;--muted:#D9A0BD;--soft:#F4CFE1}
+.viewer[data-u=neige]{background:#071526!important;--bg:#071526;--surface:#0E2236;--surface-2:#13304A;--line:#1F4566;--muted:#93BCDD;--soft:#D3E7F7}
+.viewer[data-u=fetes]{background:#0A1530!important;--bg:#0A1530;--surface:#0F1E3A;--surface-2:#152A4C;--line:#243D66;--muted:#AAB9D8;--soft:#DEE6F6}
+.viewer[data-u=fringues]{background:#0E221D!important;--bg:#0E221D;--surface:#15302A;--surface-2:#1C3D35;--line:#2C5A4D;--muted:#A2C9B5;--soft:#D8ECDF}
+.viewer[data-u=ville]{background:#081D36!important;--bg:#081D36;--surface:#0E2744;--surface-2:#133358;--line:#1F4C7E;--muted:#96BEE8;--soft:#D5E7FB}
+.viewer[data-u=metros]{background:#121104!important;--bg:#121104;--surface:#1C1A08;--surface-2:#27240B;--line:#4A430E;--muted:#CABF6C;--soft:#EEE7B2}
+.viewer[data-u=emploi]{background:#121104!important;--bg:#121104;--surface:#1C1A08;--surface-2:#27240B;--line:#4A430E;--muted:#CABF6C;--soft:#EEE7B2}
+.viewer[data-u=film]{background:#120A0C!important;--bg:#120A0C;--surface:#1C1114;--surface-2:#28171C;--line:#43252C;--muted:#C6989F;--soft:#ECD5D8}
+.viewer[data-u=terrain]{background:#151006!important;--bg:#151006;--surface:#1F180A;--surface-2:#2B210D;--line:#4B3B16;--muted:#CFB68C;--soft:#EFDFBE}
+.viewer[data-u] .pj{background:var(--surface);border-color:var(--line)}
+.viewer[data-u] .tag{border-color:var(--line);color:var(--soft)}
+.viewer[data-u] .close{background:var(--surface);border-color:var(--accent);color:var(--fg)}
+.viewer[data-u] .acc,.viewer[data-u] .res b{animation:none;color:var(--accent)}
+</style>
+<style>
 /* lettres colorées : une seule couleur à la fois, qui glisse très lentement vers la suivante (aucun dégradé, donc aucune ligne) */
 @keyframes vdnTint{
   0%,100%{color:#F2B33D}
