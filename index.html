@@ -600,6 +600,23 @@ html:not(.nointro) body{overflow:hidden}
 @keyframes tzoom{to{transform:scale(9)}}
 @keyframes tgone{to{opacity:0;visibility:hidden}}
 </style>
+<style>
+.hl{margin-top:22px}
+.hl-h{display:flex;align-items:center;gap:8px;margin:0 0 12px}
+.hl-h .rec-dot{width:8px;height:8px;border-radius:50%;background:var(--rec,#E5484D);box-shadow:0 0 0 4px rgba(229,72,77,.18)}
+.hl-row{display:flex;gap:14px;flex-wrap:wrap}
+.hl-b{background:none;border:0;padding:0;cursor:pointer;display:grid;justify-items:center;gap:4px;width:74px;color:var(--fg,#EDEAE4);font:inherit}
+.hl-ring{position:relative;width:70px;height:70px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#F2B33D,#E5484D)}
+.hl-ring.w{background:linear-gradient(135deg,#F2B33D,#FFD978)}
+.hl-ring>img:first-child{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid var(--bg,#0E1013);display:block}
+.hl-logo{position:absolute;right:-2px;bottom:-2px;width:26px;height:26px;border-radius:50%;background:#fff;padding:2px;object-fit:contain;border:2px solid var(--bg,#0E1013)}
+.hl-b:hover .hl-ring,.hl-b:focus-visible .hl-ring{transform:scale(1.05)}
+.hl-ring{transition:transform .2s}
+.hl-n{font-size:13px;font-weight:600;line-height:1.1}
+.hl-s{font-size:11px!important;letter-spacing:.04em}
+.hl-t{margin:12px 0 0}
+@media (prefers-reduced-motion:reduce){.hl-ring{transition:none}}
+</style>
 <style>html,body{overflow-x:clip}@media (max-width:480px){.brand{font-size:0!important;gap:0!important}.brand .sep{display:none}}</style>
 </head>
 <body>
@@ -1218,7 +1235,17 @@ function projectSheet(p){
   const dz=metroProj.filter(p=>HOME[p.id][1]==='design'),ig=metroProj.filter(p=>HOME[p.id][1]==='insta');
   if(dz.length){const dg=groupBlock('Design','Créations graphiques pour le club : textile solidaire, visuels et logos de partenariat, billets et signatures mail.',dz.map(projCard),'design');const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);
     if(ig.length){const igb=groupBlock('Posts Instagram','Carrousels et posts conçus pour le feed Instagram du club.',ig.map(projCard),'ig');wrap.insertBefore(igb,dg.nextSibling);}}
-  if(LIVE.length){const lg=groupBlock('En direct des matchs','Filmé au téléphone pendant les matchs et publié tout de suite en story Instagram, sans aucun montage.',[],'live');lg.querySelector('.reel').remove();LIVE.forEach(m=>lg.appendChild(liveBlock(m)));const tot=LIVE.reduce((t,m)=>t+m.clips.length,0);lg.querySelector('.mghead .mono').textContent=tot+' vidéos · '+LIVE.length+(LIVE.length>1?' matchs':' match');const g0=wrap.querySelector('.mgroup');g0?wrap.insertBefore(lg,g0.nextSibling):wrap.appendChild(lg);}
+  if(LIVE.length){const dock=document.querySelector('#metropolitans .dock'),cnt=dock&&dock.querySelector('.counter');if(cnt){
+    const hl=el('div','hl');const tot=LIVE.reduce((t,m)=>t+m.clips.length,0);
+    const hh=el('p','mono hl-h');hh.appendChild(el('span','rec-dot'));hh.appendChild(document.createTextNode('En direct des matchs'));hl.appendChild(hh);
+    const row=el('div','hl-row');const NM={fos:'Fos',poitiers:'Poitiers',orleans:'Orléans',asa:'Alsace'};
+    LIVE.forEach(m=>{const k=((m.logos||[])[1]||'').split('/').pop().replace('.png','');const nm=NM[k]||(m.match.split(' – ')[1]||m.match).split(' ')[0];
+      const b=el('button','hl-b');b.type='button';b.setAttribute('aria-label',m.match+', '+(m.win===true?'victoire ':m.win===false?'défaite ':'')+(m.score||'')+', '+m.clips.length+' stories');
+      const ring=el('span','hl-ring'+(m.win===true?' w':''));const im=el('img');im.src='media/live/'+m.clips[Math.min(m.cover||0,m.clips.length-1)][0]+'.jpg';im.alt='';im.loading='lazy';ring.appendChild(im);
+      if((m.logos||[])[1]){const lg=el('img','hl-logo');lg.src=m.logos[1];lg.alt='';ring.appendChild(lg);}
+      b.appendChild(ring);b.appendChild(el('span','hl-n',nm));b.appendChild(el('span','hl-s mono',m.score||''));
+      b.addEventListener('click',()=>openViewer(livePlayer(m,0)));row.appendChild(b);});
+    hl.appendChild(row);hl.appendChild(el('p','mono hl-t',tot+' vidéos · '+LIVE.length+' matchs'));cnt.after(hl);}}
 })();
 
 /* protection des visuels : pas de clic droit, d'appui long ni de glisser-déposer sur les images et vidéos */
