@@ -341,6 +341,38 @@ html{scroll-behavior:auto}
 .s-ph .play::after{content:"";border-left:10px solid #111;border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:3px}
 @media (max-width:760px){.fcar{padding:0 20px 30px}.fcar figure{flex-basis:150px;padding:10px}}
 .fvids button::after{content:"";position:absolute;right:8px;top:8px;width:26px;height:26px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='12'%3E%3Cpath d='M0 0l10 6-10 6z' fill='%23111'/%3E%3C/svg%3E") no-repeat 9px center}
+/* fiche : en-tête de détails */
+.fh2{padding:44px 40px 40px;display:grid;gap:30px}
+.fh-top{display:flex;justify-content:space-between;align-items:flex-start;gap:30px}
+.fh2 h1{margin:0;font-size:clamp(34px,4.2vw,60px);font-weight:700;line-height:1.02;letter-spacing:-.02em;max-width:18ch}
+.fh2 h1:focus{outline:none}
+.ftags{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.ftags li{font-size:13px;font-weight:600;padding:6px 11px;border-radius:999px;background:#fff;border:1px solid #e1e1dd}
+.fh2 .nv{flex:0 0 auto;margin-top:6px}
+.fmeta{margin:0;display:grid;grid-template-columns:110px repeat(3,minmax(0,1fr));border-top:1.5px solid var(--ink)}
+.fmeta>div{padding:14px 20px 4px 0;display:grid;gap:6px;align-content:start}
+.fmeta>div+div{padding-left:20px;border-left:1px solid #dcdcd8}
+.fmeta dt{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--grey)}
+.fmeta dd{margin:0;font-size:15.5px;line-height:1.4;font-weight:500}
+.ftx{display:grid;border-top:1px solid #dcdcd8}
+.ftx section{display:grid;grid-template-columns:110px minmax(0,1fr);gap:20px;padding:18px 0;border-bottom:1px solid #dcdcd8}
+.ftx section+section{}
+.ftx h2{margin:0;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);padding-top:4px}
+.ftx p{margin:0;font-size:18px;line-height:1.55;max-width:64ch}
+@media (min-width:1100px){.ftx section{grid-template-columns:110px minmax(0,1fr)}}
+@media (max-width:760px){
+  .fh2{padding:26px 20px 28px;gap:22px}
+  .fh-top{flex-direction:column;gap:14px}
+  .fmeta{grid-template-columns:1fr 1fr}
+  .fmeta>div{padding:12px 12px 10px 0;border-left:0!important;padding-left:0!important;border-bottom:1px solid #dcdcd8}
+  .fmeta>div:nth-child(n+3){grid-column:1/-1}
+  .ftx section{grid-template-columns:1fr;gap:6px;padding:16px 0}
+  .ftx p{font-size:16px}
+}
+@media (max-width:760px){.ftx{border-top:0}.fh2{gap:18px}}
+.fpost.many{columns:2;column-gap:8px}
+.fpost.many article{break-inside:avoid;max-width:none;display:inline-block;width:100%}
+@media (max-width:900px){.fpost.many{columns:1}}
 
 </style>
 <script data-goatcounter="https://vdnsocialstudio.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
@@ -608,14 +640,16 @@ function quote(t){const m=t.match(/«\s*(.+?)\s*»/);return m?m[1]:t;}
 function postEl(q){const a=el('article');const tr=EN&&window.POST_EN&&POST_EN[POSTS.indexOf(q)]||{};if(q.image&&!q.video){const im=el('img','pi');im.src=q.image;im.alt='';im.loading='lazy';a.appendChild(im);}
   a.appendChild(el('p','lead',tr.lead||quote(q.texte)));a.appendChild(el('p','body',tr.body||q.copy));if(q.credit)a.appendChild(el('p','cr',q.credit));return a;}
 function openF(p,push){p=ALIAS[p]||p;const d=F[p];if(!d)return false;if(fi.hidden)last=document.activeElement;const i=ORD.indexOf(p),N=ORD.length;
-  const dl=[['Date',d.date],['Tags',d.tags],['Cadre',d.cadre],['Rôle',d.role],['Livrables',d.liv]].filter(x=>x[1]).map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('');
+  const meta=[['Date',d.date],['Cadre',d.cadre],['Rôle',d.role],['Livrables',d.liv]].filter(x=>x[1]).map(([a,b])=>`<div><dt>${a}</dt><dd>${b}</dd></div>`).join('');
+  const tg=((EN&&window.EN2&&EN2[d.tags])||d.tags||'').split(', ').filter(Boolean).map(x=>`<li>${x.charAt(0).toUpperCase()+x.slice(1)}</li>`).join('');
   const gal=d.g.map(([s,c,alt])=>{const src='media/'+s;
     if(c==='vid'||c==='vidh')return `<figure class="${c==='vidh'?'wide':''}"><video src="${src}" poster="${src.replace('.mp4','.jpg')}" controls playsinline preload="none" controlslist="nodownload" aria-label="${alt}"></video></figure>`;
     return `<figure class="${c}"><img src="${src}" alt="${alt}" loading="lazy"></figure>`;}).join('');
   fi.innerHTML=`<div class="fhd"><a href="./" aria-label="VDN Social Studio, accueil"><img src="logo/vdn-logo-court-noir.svg" alt=""></a><button type="button" class="fx">Fermer ×</button></div>
-  <div class="fh"><div><h1 id="f-t" tabindex="-1">${d.t}</h1><dl>${dl}</dl></div>
-   <div class="tx">${d.tx.map(([h,t])=>`<div><h4>${h}</h4><p>${t}</p></div>`).join('')}</div>
+  <div class="fh2"><div class="fh-top"><div><h1 id="f-t" tabindex="-1">${d.t}</h1>${tg?`<ul class="ftags">${tg}</ul>`:''}</div>
    <div class="nv"><button type="button" data-go="${ORD[(i+N-1)%N]}" aria-label="Projet précédent">←</button><span>${i+1}/${N}</span><button type="button" data-go="${ORD[(i+1)%N]}" aria-label="Projet suivant">→</button></div></div>
+   <dl class="fmeta">${meta}</dl>
+   <div class="ftx">${d.tx.map(([h,t])=>`<section><h2>${h}</h2><p>${t}</p></section>`).join('')}</div></div>
   ${gal?`<div class="gal">${gal}</div>`:''}`;
   if(d.vids){const P=PROJECTS.find(x=>x.id===d.vids);if(P&&P.vids){const w=el('div','fvids');w.appendChild(el('h2',null,'Vidéos du t-shirt porté en match'));const r=el('div','row');
     const list=P.vids.map(([v,l])=>({src:'media/or-tshirt/'+v+'.mp4',poster:'media/or-tshirt/'+v+'.jpg',label:l}));
@@ -623,7 +657,7 @@ function openF(p,push){p=ALIAS[p]||p;const d=F[p];if(!d)return false;if(fi.hidde
       b.addEventListener('click',()=>openPl(list,k,d.t,list.length+' vidéos'));r.appendChild(b);});w.appendChild(r);fi.appendChild(w);}}
   if(d.car){const w=el('div','fcar');w.appendChild(el('h2',null,'Carrousel Instagram'));const r=el('div','row');d.car.forEach(([src,alt])=>{const f=el('figure');const im=el('img');im.src='media/'+src;im.alt=alt;im.loading='lazy';f.appendChild(im);r.appendChild(f);});w.appendChild(r);fi.appendChild(w);}
   if(d.post!=null&&POSTS[d.post]){const w=el('div','fpost');w.appendChild(el('h2',null,'Post LinkedIn'));w.appendChild(postEl(POSTS[d.post]));fi.appendChild(w);}
-  if(d.posts==='copy'){const w=el('div','fpost');POSTS.filter(q=>q.copy&&!q.full).forEach(q=>w.appendChild(postEl(q)));fi.appendChild(w);}
+  if(d.posts==='copy'){const w=el('div','fpost many');POSTS.filter(q=>q.copy&&!q.full).forEach(q=>w.appendChild(postEl(q)));fi.appendChild(w);}
   const end=el('div','fend');end.innerHTML='<button type="button" class="fb">← Tous les projets</button><a href="#contact" class="fc">Un projet similaire ? Écrire à Mattéo →</a>';fi.appendChild(end);
   fi.hidden=false;fi.scrollTop=0;lockOn();
   fi.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>openF(b.dataset.go)));
