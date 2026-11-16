@@ -370,16 +370,6 @@ window.LANG=L;r.lang=L;})();</script>
   <a class="s-ph" href="?p=octrose" data-p="octrose" aria-label="T-shirt Octobre Rose"><img src="media/octobre-rose-porte-3.jpg" alt=""></a>
   <a class="s-car" href="?p=octrose" data-p="octrose" aria-label="Carrousel Octobre Rose"><img src="media/or-carrousel-v3-1.jpg" alt=""></a>
 </div>
-<section class="band" aria-label="Accès rapides">
-  <div class="lab" aria-hidden="true">Accès<br>rapides</div>
-  <div class="row">
-  <a class="q" href="#" id="qreel"><span class="th"><img src="media/showreel.jpg" alt=""></span><b>Showreel</b><span>Les vidéos de l'année en un montage.</span></a>
-  <a class="q" href="#bord"><span class="th"><img src="media/live/m1106-09.jpg" alt=""></span><b>Bord terrain</b><span>4 matchs filmés du bord du terrain, 78 vidéos.</span></a>
-  <a class="q" href="media/cv-matteo-vandenesse.pdf" target="_blank" rel="noopener"><span class="th"><svg viewBox="0 0 50 64" aria-hidden="true"><path d="M4 2h30l12 12v48H4z M34 2v12h12 M12 26h26 M12 34h26 M12 42h18"/></svg></span><b>CV</b><span>Parcours en une page, PDF.</span></a>
-  <a class="q" href="#studio"><span class="th"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12"/><path d="M10 62c2-14 11-22 22-22s20 8 22 22"/></svg></span><b>Studio</b><span>Alternance aux Metropolitans, 2 ans chez YO Agency.</span></a>
-  </div>
-  <div class="about"><h2>VDN Social Studio</h2><p>Identités, contenus et vidéos pour le sport, les marques et les événements.</p><a class="mail" href="#contact">matteo.vandenesse@gmail.com</a></div>
-</section>
 <main id="main">
 <div class="wh" id="projets"><div class="l"><button id="vall" type="button" aria-pressed="false">Vue d'ensemble</button><span>Filtrer</span><span class="mpict pict" role="group" aria-label="Filtrer les projets par format"><button type="button" data-f="ecran" aria-pressed="false" aria-label="Filtrer : écran 16:9"><svg viewBox="0 0 26 22" aria-hidden="true"><rect x="1.5" y="4" width="23" height="13" rx="1"/><path d="M9 20h8"/></svg></button><button type="button" data-f="vertical" aria-pressed="false" aria-label="Filtrer : vertical 9:16"><svg viewBox="0 0 26 22" aria-hidden="true"><rect x="8" y="1" width="10" height="20" rx="2"/></svg></button><button type="button" data-f="affiche" aria-pressed="false" aria-label="Filtrer : affiche et print"><svg viewBox="0 0 26 22" aria-hidden="true"><path d="M6 1h14v20H6z M9 5h8 M9 8h5"/></svg></button><button type="button" data-f="textile" aria-pressed="false" aria-label="Filtrer : textile"><svg viewBox="0 0 26 22" aria-hidden="true"><path d="M9 2 4 5l2 5 3-1v12h8V9l3 1 2-5-5-3c-1 2-2.5 3-4 3S10 4 9 2z"/></svg></button></span></div><h2>Projets</h2><span></span></div>
 <div class="wall" id="wall">
@@ -635,7 +625,7 @@ addEventListener('popstate',()=>{const p=new URLSearchParams(location.search).ge
 
 /* ── showreel ── */
 const lb=$('#lbx'),lv=$('#lbv');
-$('#qreel').addEventListener('click',e=>{e.preventDefault();last=document.activeElement;lv.src='media/showreel.mp4';lv.poster='media/showreel.jpg';lb.hidden=false;lockOn();lv.play().catch(()=>{});$('#lbc').focus();track('showreel');});
+($('#qreel')||{addEventListener(){}}).addEventListener('click',e=>{e.preventDefault();last=document.activeElement;lv.src='media/showreel.mp4';lv.poster='media/showreel.jpg';lb.hidden=false;lockOn();lv.play().catch(()=>{});$('#lbc').focus();track('showreel');});
 function closeV(){lv.pause();lv.removeAttribute('src');lv.load();lb.hidden=true;lockOff();last&&last.focus({preventScroll:true});}
 $('#lbc').addEventListener('click',closeV);
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!pl.hidden)closePl();else if(!lb.hidden)closeV();else if(!ov.hidden)closeM();else if(!fi.hidden)closeF();});
