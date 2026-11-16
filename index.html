@@ -617,6 +617,7 @@ html:not(.nointro) body{overflow:hidden}
 .hl-t{margin:12px 0 0}
 @media (prefers-reduced-motion:reduce){.hl-ring{transition:none}}
 </style>
+<style>.pj-hl{width:auto;justify-items:start;grid-template-columns:auto;margin-top:-6px}.pj-hl .hl-ring{width:84px;height:84px;background:linear-gradient(135deg,#FFB3D6,#FF4F9A)}.pj-hl .hl-n{margin-top:4px}.lnav .btn{white-space:nowrap}</style>
 <style>
 /* ── univers des projets ── */
 .viewer .u-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
@@ -1275,11 +1276,12 @@ function livePlayer(m,start){
   const pz=el('button','pause','❚❚');pz.type='button';pz.setAttribute('aria-label','Pause ou lecture');
   box.append(v,bars,head,tl,tr,pz,mu);
   const nav=el('div','lnav');const pv=el('button','btn small','‹ Précédente'),cnt=el('span','mono',''),nx=el('button','btn small','Suivante ›');pv.type=nx.type='button';nav.append(pv,cnt,nx);
-  const cap=el('p','cap',(m.comp?m.comp+' · ':'')+(m.score?(m.win===true?'Victoire ':m.win===false?'Défaite ':'')+m.score+' · ':'')+m.lieu+' · '+new Date(m.date+'T12:00:00').toLocaleDateString(window.LANG==='en'?'en-GB':'fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+'. Vidéos filmées au téléphone pendant le match et publiées en direct en story Instagram, sans montage.');
+  const cap=m.note?el('p','cap',m.note):el('p','cap',(m.comp?m.comp+' · ':'')+(m.score?(m.win===true?'Victoire ':m.win===false?'Défaite ':'')+m.score+' · ':'')+m.lieu+' · '+new Date(m.date+'T12:00:00').toLocaleDateString(window.LANG==='en'?'en-GB':'fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+'. Vidéos filmées au téléphone pendant le match et publiées en direct en story Instagram, sans montage.');
+  if(m.back){const bk=el('button','btn small','← Retour à la fiche');bk.type='button';bk.addEventListener('click',m.back);nav.prepend(bk);}
   function load(i){
     if(i<0)i=0;if(i>=n){fills.forEach(f=>f.style.width='100%');v.pause();return;}
     cur=i;fills.forEach((f,k)=>f.style.width=k<i?'100%':'0');
-    v.src='media/live/'+m.clips[i][0]+'.mp4';v.poster='media/live/'+m.clips[i][0]+'.jpg';v.muted=muted;
+    v.src=(m.dir||'media/live/')+m.clips[i][0]+'.mp4';v.poster=(m.dir||'media/live/')+m.clips[i][0]+'.jpg';v.muted=muted;
     hm.textContent=m.clips[i][1];cnt.textContent=(i+1)+' / '+n;pv.disabled=i===0;nx.disabled=i===n-1;
     const p=v.play();if(p&&p.catch)p.catch(()=>{muted=true;v.muted=true;mu.textContent='MUET';v.play().catch(()=>{});});pz.textContent='❚❚';
   }
@@ -1369,9 +1371,14 @@ function projectSheet(p){
     tr.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(cur+1);}if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1);}});
     ft.append(cnt,dots);c.append(tr,pv,nx);bd.append(c,ft,cap);upd();
   } else if(p.images){const g=el('div','pjgal');p.images.forEach(([src,alt,wide])=>{const f=el('figure',wide?'wide':null);const im=el('img');im.src=src;im.alt=alt;im.loading='lazy';f.appendChild(im);f.appendChild(el('figcaption','mono',alt.split(' :')[0]));g.appendChild(f);});bd.appendChild(g);}
-  if(p.vids){const h=el('span','mono acc pjvh','Le t-shirt en vidéo');bd.appendChild(h);const g=el('div','pjvids');
-    p.vids.forEach(([n,cap])=>{const f=el('figure');const v=el('video');v.src='media/or-tshirt/'+n+'.mp4';v.poster='media/or-tshirt/'+n+'.jpg';v.controls=true;v.playsInline=true;v.setAttribute('playsinline','');v.preload='none';
-      v.addEventListener('play',()=>g.querySelectorAll('video').forEach(o=>{if(o!==v)o.pause();}));f.appendChild(v);f.appendChild(el('figcaption','mono',cap));g.appendChild(f);});bd.appendChild(g);}
+  if(p.vids){const h=el('span','mono acc pjvh','Le t-shirt en vidéo');bd.appendChild(h);
+    const LM=LIVE.find(x=>x.date==='2026-10-23')||{};
+    const mm={match:LM.match||'Metropolitans – Orléans Loiret Basket',logos:LM.logos||[],date:'2026-10-23',lieu:LM.lieu||'Palais des Sports Marcel-Cerdan',comp:'Octobre Rose Game',dir:'media/or-tshirt/',clips:p.vids,
+      note:'Le t-shirt Octobre Rose porté par les joueurs et le staff le 23 octobre, à l’échauffement, à la présentation des joueurs et sur le banc.',back:()=>openU(p)};
+    const b=el('button','hl-b pj-hl');b.type='button';b.setAttribute('aria-label','Le t-shirt en match, '+p.vids.length+' vidéos');
+    const ring=el('span','hl-ring');const im=el('img');im.src='media/or-tshirt/'+p.vids[Math.min(7,p.vids.length-1)][0]+'.jpg';im.alt='';ring.appendChild(im);b.appendChild(ring);
+    b.appendChild(el('span','hl-n','En match'));b.appendChild(el('span','hl-s mono',p.vids.length+' vidéos'));
+    b.addEventListener('click',()=>{openViewer(livePlayer(mm,0));setU(p.id);});bd.appendChild(b);}
   if(p.res){const r=el('div','res');p.res.forEach(([b,s])=>{const d=el('div');d.appendChild(el('b',null,b));d.appendChild(el('span',null,s));r.appendChild(d);});bd.appendChild(r);}
   if(p.links){const l=el('div','row');p.links.forEach(([t,h])=>{const a=el('a','btn small',t);a.href=h;a.target='_blank';a.rel='noopener';l.appendChild(a);});bd.appendChild(l);}
   if(p.video){
