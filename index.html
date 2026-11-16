@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://vdnsocialstudio.com/">
 <link rel="canonical" href="https://vdnsocialstudio.com/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#F7F7F6">
+<meta name="theme-color" content="#0E0E0E">
 <link rel="icon" href="icon-b.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-b-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="icon-b-16.png">
@@ -374,6 +374,43 @@ html{scroll-behavior:auto}
 .fpost.many article{break-inside:avoid;max-width:none;display:inline-block;width:100%}
 @media (max-width:900px){.fpost.many{columns:1}}
 
+/* ───── thème sombre (fond noir) ───── */
+:root{--page:#0E0E0E;--plate:#1B1B1A;--band:#141414;--ink:#F2F2EF;--grey:#8F8F8A;--card:#171716;--line:#2A2A28;color-scheme:dark}
+body{background:var(--page);color:var(--ink)}
+header,.fhd{background:var(--page);border-bottom:1px solid var(--line)}
+.pict button,.menu,.fhd button,.nv button,.fend button,.fend a{color:var(--ink)}
+.ov{background:var(--page)}
+.stage{background:#161615}
+.t .nm{background:var(--ink);color:#111}
+.t .play,.s-ph .play{background:var(--ink)}
+.list a{border-color:var(--line)!important}
+.bt{background:var(--band);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mc .pf{background:#1F1F1E}
+.st-tx,.ct-f,.fpost article,.t.txt{background:var(--card);color:var(--ink)}
+.st-dl{border-color:var(--line)}
+.btn{background:var(--ink);color:#111}.btn:hover{background:#fff}
+.ct-l{background:var(--plate)}
+.ct-mail button{background:transparent;border-color:#3a3a38;color:var(--ink)}
+.ct-so a{background:var(--card);color:var(--ink)}.ct-so a:hover{background:var(--ink);color:#111}
+.ct-f legend,.ct-f label{color:#B5B5B0}
+.ct-f input:not([type=radio]),.ct-f textarea{background:#111110;border-color:#333331;color:var(--ink)}
+.ct-f select{background:#111110 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23ddd' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 14px center;border-color:#333331;color:var(--ink)}
+.chips span{border-color:#333331;color:var(--ink)}
+.chips input:checked+span{background:var(--ink);border-color:var(--ink);color:#111}
+#f-note{color:#B5B5B0}#f-note.err{color:#FF9B73}
+.lang{border-color:#333331}
+.lang:hover{border-color:var(--ink)}
+.ftags li{background:var(--card);border-color:var(--line)}
+.fmeta>div+div{border-color:var(--line)}
+.ftx,.ftx section{border-color:var(--line)}
+.t.txt .li{color:var(--grey)}
+.skip{background:var(--ink);color:#111}
+@media (max-width:760px){
+  .t .cap{background:linear-gradient(transparent,rgba(27,27,26,.96) 45%);color:var(--ink)}
+  .t:not(.obj) .cap{background:linear-gradient(transparent,rgba(0,0,0,.6));color:#fff}
+  .fmeta>div{border-color:var(--line)}
+}
+
 </style>
 <script data-goatcounter="https://vdnsocialstudio.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Mattéo Vandenesse", "url": "https://vdnsocialstudio.com/", "image": "https://vdnsocialstudio.com/media/matteo.jpg", "jobTitle": "Création graphique, vidéo et community management", "worksFor": {"@type": "Organization", "name": "Levallois Metropolitans"}, "brand": {"@type": "Brand", "name": "VDN Social Studio"}, "address": {"@type": "PostalAddress", "addressLocality": "Enghien-les-Bains", "addressCountry": "FR"}, "email": "mailto:matteo.vandenesse@gmail.com", "sameAs": ["https://www.instagram.com/vdnsocialstudio/", "https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab"]}</script>
@@ -399,13 +436,13 @@ window.LANG=L;r.lang=L;})();</script>
 <body>
 <a class="skip" href="#projets">Aller aux projets</a>
 <header id="hd">
-  <div class="brand"><a href="./" aria-label="VDN Social Studio, accueil"><img src="logo/vdn-logo-court-noir.svg" alt="" width="74" height="18"></a>
+  <div class="brand"><a href="./" aria-label="VDN Social Studio, accueil"><img src="logo/vdn-logo-court-blanc.svg" alt="" width="74" height="18"></a>
     <div class="pict" role="group" aria-label="Filtrer les projets par format"><button type="button" data-f="ecran" aria-pressed="false" aria-label="Filtrer : écran 16:9"><svg viewBox="0 0 26 22" aria-hidden="true"><rect x="1.5" y="4" width="23" height="13" rx="1"/><path d="M9 20h8"/></svg></button><button type="button" data-f="vertical" aria-pressed="false" aria-label="Filtrer : vertical 9:16"><svg viewBox="0 0 26 22" aria-hidden="true"><rect x="8" y="1" width="10" height="20" rx="2"/></svg></button><button type="button" data-f="affiche" aria-pressed="false" aria-label="Filtrer : affiche et print"><svg viewBox="0 0 26 22" aria-hidden="true"><path d="M6 1h14v20H6z M9 5h8 M9 8h5"/></svg></button><button type="button" data-f="textile" aria-pressed="false" aria-label="Filtrer : textile"><svg viewBox="0 0 26 22" aria-hidden="true"><path d="M9 2 4 5l2 5 3-1v12h8V9l3 1 2-5-5-3c-1 2-2.5 3-4 3S10 4 9 2z"/></svg></button></div></div>
   <nav aria-label="Navigation principale"><a href="#studio">Studio</a><a href="#bord">Bord terrain</a><a href="#contact">Contact</a></nav>
   <div class="rt"><button class="lang" id="langbtn" type="button"></button><a class="wr" href="#contact">Écrire à Mattéo →</a><button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="ov">Menu</button></div>
 </header>
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-label="Menu" hidden>
-  <div class="top"><img src="logo/vdn-logo-court-noir.svg" alt="VDN Social Studio" width="74" height="18"><button class="menu" id="mclose" type="button">Fermer</button></div>
+  <div class="top"><img src="logo/vdn-logo-court-blanc.svg" alt="VDN Social Studio" width="74" height="18"><button class="menu" id="mclose" type="button">Fermer</button></div>
   <ul><li><a href="#projets">Projets</a></li><li><a href="#studio">Studio</a></li><li><a href="#bord">Bord terrain</a></li><li><a href="#contact">Contact</a></li></ul>
   <a class="mail" href="mailto:matteo.vandenesse@gmail.com">matteo.vandenesse@gmail.com</a>
 </div>
@@ -485,7 +522,7 @@ window.LANG=L;r.lang=L;})();</script>
   </form>
 </section>
 </main>
-<footer class="ft"><img src="logo/vdn-logo-court-noir.svg" alt="VDN Social Studio" width="66" height="16"><span>© 2026 VDN Social Studio</span><nav aria-label="Réseaux"><a href="https://www.instagram.com/vdnsocialstudio/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab" target="_blank" rel="noopener">LinkedIn</a><a href="https://wa.me/33698069145" target="_blank" rel="noopener">WhatsApp</a></nav></footer>
+<footer class="ft"><img src="logo/vdn-logo-court-blanc.svg" alt="VDN Social Studio" width="66" height="16"><span>© 2026 VDN Social Studio</span><nav aria-label="Réseaux"><a href="https://www.instagram.com/vdnsocialstudio/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab" target="_blank" rel="noopener">LinkedIn</a><a href="https://wa.me/33698069145" target="_blank" rel="noopener">WhatsApp</a></nav></footer>
 <div class="fiche" id="fiche" role="dialog" aria-modal="true" aria-labelledby="f-t" hidden></div>
 <div class="pl" id="pl" role="dialog" aria-modal="true" aria-labelledby="pl-t" hidden>
   <div class="pl-hd"><div><h2 id="pl-t"></h2><p id="pl-m"></p></div><button id="plc" type="button">Fermer ×</button></div>
@@ -645,7 +682,7 @@ function openF(p,push){p=ALIAS[p]||p;const d=F[p];if(!d)return false;if(fi.hidde
   const gal=d.g.map(([s,c,alt])=>{const src='media/'+s;
     if(c==='vid'||c==='vidh')return `<figure class="${c==='vidh'?'wide':''}"><video src="${src}" poster="${src.replace('.mp4','.jpg')}" controls playsinline preload="none" controlslist="nodownload" aria-label="${alt}"></video></figure>`;
     return `<figure class="${c}"><img src="${src}" alt="${alt}" loading="lazy"></figure>`;}).join('');
-  fi.innerHTML=`<div class="fhd"><a href="./" aria-label="VDN Social Studio, accueil"><img src="logo/vdn-logo-court-noir.svg" alt=""></a><button type="button" class="fx">Fermer ×</button></div>
+  fi.innerHTML=`<div class="fhd"><a href="./" aria-label="VDN Social Studio, accueil"><img src="logo/vdn-logo-court-blanc.svg" alt=""></a><button type="button" class="fx">Fermer ×</button></div>
   <div class="fh2"><div class="fh-top"><div><h1 id="f-t" tabindex="-1">${d.t}</h1>${tg?`<ul class="ftags">${tg}</ul>`:''}</div>
    <div class="nv"><button type="button" data-go="${ORD[(i+N-1)%N]}" aria-label="Projet précédent">←</button><span>${i+1}/${N}</span><button type="button" data-go="${ORD[(i+1)%N]}" aria-label="Projet suivant">→</button></div></div>
    <dl class="fmeta">${meta}</dl>
