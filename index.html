@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://vdnsocialstudio.com/">
 <link rel="canonical" href="https://vdnsocialstudio.com/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0D0D10">
+<meta name="theme-color" content="#F7F7F6">
 <link rel="icon" href="icon-b.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-b-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="icon-b-16.png">
@@ -23,334 +23,315 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 <title>Mattéo Vandenesse · VDN Social Studio — Identités, contenus et vidéos</title>
-<script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.min.js"}}</script>
-<link rel="modulepreload" href="vendor/three/build/three.module.min.js">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=Doto:wght@700;900&display=swap">
+<link rel="preload" href="fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 
-/* ───────── VDN « Le Tunnel » ─────────
-   Le tunnel des joueurs, là où le sport rencontre la mode. Scène 3D (tunnel.js) en ouverture, puis
-   Fit check (projets), Matchday (en pleine lumière), le studio et l'accréditation (contact).
-   Une vraie scène 3D : on marche dans le tunnel des joueurs au défilement, puis on débouche dans la salle. */
-:root{
-  --sig:#BBA5FF;--sig-d:#7B5CE0;--nuit:#0D0D10;--beton:#1A1A1F;--trait:#2B2B33;--blanc:#F4F1EC;--gris:#9E9AA6;
-  --lum:#FFD9A0;            /* lumière du terrain, recalculée selon l'heure */
-  --f:"Big Shoulders Display","Arial Narrow",sans-serif;--s:"Instrument Serif",Georgia,serif;--m:"JetBrains Mono",ui-monospace,monospace;--led:"Doto","JetBrains Mono",monospace;
-  --pad:clamp(16px,4vw,56px);color-scheme:dark}
-*{box-sizing:border-box;margin:0}
-html{background:var(--nuit);overflow-x:clip}
-body{background:var(--nuit);color:var(--blanc);font:400 17px/1.55 var(--s);-webkit-font-smoothing:antialiased;overflow-x:clip}
-img,video{display:block;max-width:100%}
+/* Direction A — guidée par Studio Feixen : une grande image d'objet en ouverture, une bande sombre d'accès rapides,
+   puis un mur dense de réalisations posées comme des objets sur des aplats gris, sans légende (nom au survol et au focus). */
+@font-face{font-family:Figtree;src:url(fonts/figtree.woff2) format("woff2");font-weight:300 900;font-display:swap}
+:root{--page:#F7F7F6;--plate:#DCDCD9;--band:#1F1F1F;--ink:#111;--grey:#9C9C98;--lilac:#9B7BFF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:Figtree,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
-.B{font-family:var(--f);font-weight:900;text-transform:uppercase;line-height:.84;letter-spacing:.005em}
-.I{font-family:var(--s);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em}
-.mono{font:400 11.5px/1.5 var(--m);letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
-.wrap{max-width:1360px;margin:0 auto;padding-inline:var(--pad)}
-.btn{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 24px;border-radius:999px;font:700 16px var(--f);letter-spacing:.08em;text-transform:uppercase;transition:transform .2s,box-shadow .2s,background .2s,color .2s}
-.btn.s{background:var(--sig);color:#14121A;box-shadow:0 0 0 0 rgba(187,165,255,.5)}
-.btn.s:hover{transform:translateY(-2px);box-shadow:0 0 30px 0 rgba(187,165,255,.55)}
-.btn.o{border:1.5px solid rgba(244,241,236,.5)}
-.btn.o:hover{background:var(--blanc);color:var(--nuit)}
+:focus-visible{outline:2px solid var(--lilac);outline-offset:2px}
+header{position:sticky;top:0;z-index:10;height:58px;background:#fff;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 40px}
+.brand{display:flex;align-items:center;gap:34px}
+.brand img{height:18px}
+.pict{display:flex;gap:16px}
+.pict button{background:none;border:0;padding:2px;cursor:pointer;color:#111}
+.pict svg{width:26px;height:22px;display:block;fill:none;stroke:currentColor;stroke-width:1.4}
+nav{display:flex;gap:42px;font-size:14px;color:var(--grey)}
+nav a:hover{color:var(--ink)}
+.rt{justify-self:end;font-size:17px;font-weight:600;color:var(--grey)}
+.rt:hover{color:var(--ink)}
+.hero{height:600px;overflow:hidden;background:#2a2a2a}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:50% 52%}
+.band{background:var(--band);color:#fff;display:grid;grid-template-columns:110px repeat(4,minmax(0,1fr)) 1.6fr;gap:28px;padding:30px 40px 40px;font-size:14px}
+.band .lab{font-weight:600;line-height:1.25}
+.q{display:grid;gap:10px;align-content:start}
+.q .th{height:74px;display:flex;align-items:flex-end}
+.q .th img{height:74px;width:auto;border-radius:2px}
+.q .th svg{height:64px;width:auto;fill:none;stroke:#bdbdbd;stroke-width:1.3}
+.q b{font-weight:600;font-size:15px;line-height:1.2}
+.q span{color:#9a9a9a;line-height:1.35}
+.about{border-left:1px solid #3a3a3a;padding-left:28px;display:grid;gap:12px;align-content:start}
+.about h3{margin:0;font-size:15px;font-weight:600}
+.about p{margin:0;color:#c9c9c9;font-size:19px;line-height:1.35;max-width:30ch}
+.about .mail{color:#fff;border:1px solid #555;border-radius:3px;padding:9px 12px;font-size:13px;width:max-content}
+.wh{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:34px 40px 22px}
+.wh .l{display:flex;gap:30px;align-items:center;color:var(--grey);font-size:13px}
+.wh h2{margin:0;font-size:46px;font-weight:700;letter-spacing:-.01em}
+.wall{columns:5;column-gap:8px;padding:0 40px 60px}
+.t{break-inside:avoid;margin:0 0 8px;position:relative;display:block;background:var(--plate);overflow:hidden}
+.t img{display:block;width:100%;height:100%;object-fit:cover}
+.t.obj{display:flex;align-items:center;justify-content:center}
+.t.obj img{width:auto;height:auto;max-width:74%;max-height:80%;object-fit:contain;box-shadow:0 14px 24px -12px rgba(0,0,0,.45)}
+.t.phone img{border-radius:16px;border:6px solid #111;max-width:52%}
+.t .nm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;color:#111;font-size:14px;font-weight:600;padding:7px 12px;border-radius:4px;white-space:nowrap;opacity:0;transition:opacity .15s;pointer-events:none}
+.t:hover .nm,.t:focus-visible .nm,.nm.show{opacity:1}
+.t .play{position:absolute;right:10px;bottom:10px;width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.t .play::after{content:"";border-left:10px solid #111;border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:3px}
 
-/* en-tête */
-.top{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px var(--pad);transition:background .3s}
-.top.sc{background:rgba(13,13,16,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.top img{height:24px;width:auto}
-.top nav{display:flex;gap:26px}
-.top nav a{font:700 15px var(--f);letter-spacing:.1em;text-transform:uppercase;color:var(--gris)}
-.top nav a:hover{color:var(--blanc)}
-.top .r{display:flex;align-items:center;gap:10px}
-.lang{font:600 12px var(--m);min-width:44px;min-height:44px;border:1px solid var(--trait);border-radius:999px;color:var(--gris)}
-
-
-/* ───── 1. LE TUNNEL 3D ───── */
-.tunnel{position:relative;height:640svh}
-.stage{position:sticky;top:0;height:100svh;overflow:hidden;background:#050507}
-.stage .gl{position:absolute;inset:0;width:100%!important;height:100%!important;display:block}
-.poster{position:absolute;inset:0;background:url(media/tunnel/poster.jpg) center/cover;opacity:1;transition:opacity 1.2s}
-.gl-ok .poster{opacity:0}
-/* textes par-dessus la scène */
-.ov{position:absolute;inset:0;z-index:4;pointer-events:none}
-.ov>*{pointer-events:auto}
-.intro{position:absolute;left:0;right:0;bottom:0;padding:0 var(--pad) clamp(40px,7vh,80px);opacity:var(--a,1);transform:translateY(calc((1 - var(--a,1)) * -30px));visibility:var(--v,visible)}
-.intro p.k{display:flex;align-items:center;gap:10px;margin-bottom:18px;font:400 11.5px/1.5 var(--m);letter-spacing:.08em;text-transform:uppercase;color:#DCD7E2}
-.intro .k i{width:8px;height:8px;border-radius:50%;background:var(--sig);box-shadow:0 0 14px var(--sig);animation:pulse 1.6s ease-in-out infinite}
-@keyframes pulse{50%{opacity:.3}}
-.intro h1{font-size:clamp(64px,11.5vw,190px);text-shadow:0 10px 50px rgba(0,0,0,.6)}
-.intro h1 .I{font-size:.62em;display:block;color:var(--sig);margin:.08em 0 .02em;line-height:1}
-.intro .row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-top:22px}
-.intro .row p{font:400 clamp(19px,1.6vw,24px)/1.35 var(--s);max-width:40ch;color:#DCD7E2}
-.intro .cta{display:flex;gap:12px;flex-wrap:wrap}
-.hint{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);opacity:var(--h,0);transition:opacity .4s;white-space:nowrap;background:rgba(13,13,16,.6);backdrop-filter:blur(8px);padding:10px 16px;border-radius:999px;border:1px solid rgba(187,165,255,.25)}
-.hint b{color:var(--sig);font-weight:600}
-.meter{position:absolute;right:var(--pad);bottom:34px;text-align:right;opacity:var(--mo,0);transition:opacity .4s}
-.meter strong{display:block;font:900 54px/1 var(--led);color:var(--sig);text-shadow:0 0 14px rgba(187,165,255,.6)}
-.lumtag{position:absolute;left:var(--pad);top:92px}
-.lumtag b{color:var(--lum);font-weight:600}
-.sound{position:absolute;left:var(--pad);bottom:34px;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid rgba(244,241,236,.25);font:600 11.5px var(--m);letter-spacing:.08em;text-transform:uppercase;color:#DCD7E2;background:rgba(13,13,16,.5);opacity:var(--mo,1)}
-.sound[aria-pressed=true]{border-color:var(--sig);color:var(--sig)}
-.welcome{position:absolute;left:0;right:0;bottom:0;padding:0 var(--pad) clamp(40px,8vh,90px);text-align:center;opacity:var(--w,0);transform:translateY(calc((1 - var(--w,0)) * 30px));visibility:var(--wv,hidden)}
-.welcome::before{content:"";position:absolute;inset:-40% -10% 0;z-index:-1;background:radial-gradient(60% 55% at 50% 70%,rgba(8,7,12,.78),transparent 75%);pointer-events:none}
-.welcome .btn.o{background:rgba(13,13,16,.55);backdrop-filter:blur(6px)}
-.welcome h2{font-size:clamp(56px,9vw,150px);text-shadow:0 10px 60px rgba(0,0,0,.7)}
-.welcome h2 .I{display:block;color:var(--sig);font-size:.55em;line-height:1}
-.welcome p{font:400 clamp(18px,1.5vw,22px)/1.4 var(--s);color:#EDE8F2;margin:16px auto 22px;max-width:44ch;text-shadow:0 2px 20px rgba(0,0,0,.8)}
-.welcome .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.toast{position:fixed;left:50%;top:84px;transform:translate(-50%,-10px);z-index:60;background:var(--blanc);color:#14121A;border-radius:12px;padding:14px 18px;font:400 16px var(--s);box-shadow:0 20px 40px -10px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:all .3s;max-width:calc(100vw - 32px)}
-.toast.on{opacity:1;transform:translate(-50%,0)}
-.toast b{font:900 20px var(--f);text-transform:uppercase;display:block}
-/* ───── 2. FIT CHECK ───── */
-.sec{padding-block:clamp(90px,11vw,150px)}
-.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(34px,4vw,56px)}
-.sh h2{font-size:clamp(60px,9vw,150px)}
-.sh h2 .I{color:var(--sig);font-size:.7em;margin-left:.1em}
-.sh p{max-width:38ch;color:#CFCAD6;font-size:19px}
-.fits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,26px)}
-.fit{position:relative;cursor:pointer}
-.fit .ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:#000}
-.fit .ph img{width:100%;height:100%;object-fit:cover;filter:contrast(1.08) saturate(.95);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
-.fit:hover .ph img{transform:scale(1.04)}
-/* flash du photographe */
-.fit .ph::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 35%,#fff,rgba(255,255,255,.5) 40%,transparent 75%);opacity:0;pointer-events:none}
-.fit:hover .ph::after{animation:flash .55s ease-out}
-@keyframes flash{0%{opacity:0}8%{opacity:.95}100%{opacity:0}}
-.fit .n{position:absolute;left:14px;top:12px;font:900 54px/1 var(--f);color:var(--blanc);text-shadow:0 2px 20px rgba(0,0,0,.6)}
-.fit .tag{position:absolute;right:12px;top:14px;font:600 10.5px var(--m);letter-spacing:.08em;text-transform:uppercase;background:var(--sig);color:#14121A;padding:5px 8px;border-radius:999px}
-.cap{padding-top:16px;border-top:1px solid var(--trait);margin-top:14px}
-.cap h3{font:900 clamp(28px,2.6vw,40px)/.9 var(--f);text-transform:uppercase}
-.cap .by{font:italic 400 19px var(--s);color:var(--sig);margin:6px 0 10px}
-.cap dl{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;font:400 12px/1.5 var(--m);text-transform:uppercase;letter-spacing:.04em}
-.cap dt{color:var(--gris)}
-.rack{margin-top:clamp(50px,6vw,80px);border-top:1px solid var(--trait)}
-.rack .rk{display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:18px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--trait);transition:padding .3s,color .2s}
-.rack .rk:hover,.rack .rk:focus-visible{padding-left:12px;color:var(--sig)}
-.rack .nn{font:600 12px var(--m);color:var(--gris)}
-.rack b{font:900 clamp(26px,2.6vw,38px)/1 var(--f);text-transform:uppercase}
-.rack b .I{font-size:.62em;color:var(--gris);margin-left:10px;text-transform:none}
-.rack .d{font:400 12px var(--m);color:var(--gris);text-transform:uppercase}
-
-/* ───── 3. SORTIE DU TUNNEL : MATCHDAY (en pleine lumière) ───── */
-.court{position:relative;background:radial-gradient(90% 70% at 50% 0,#fff,color-mix(in srgb,var(--lum) 55%,#F3EADC) 60%,#E8DCC8);color:#16141A;overflow:hidden}
-.court::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600'%3E%3Cg fill='none' stroke='%2316141A' stroke-opacity='.10' stroke-width='3'%3E%3Crect x='20' y='20' width='960' height='560' rx='10'/%3E%3Cline x1='500' y1='20' x2='500' y2='580'/%3E%3Ccircle cx='500' cy='300' r='80'/%3E%3Cpath d='M20 110 H170 A190 190 0 0 1 170 490 H20'/%3E%3Cpath d='M980 110 H830 A190 190 0 0 0 830 490 H980'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;pointer-events:none}
-.court .mono{color:#5E5866}
-.court .sh h2 .I{color:var(--sig-d)}
-.court .sh p{color:#3A3540}
-.boards{position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 42px) / 4);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:rgba(22,20,26,.3) transparent}
-.board{scroll-snap-align:start;text-align:left;width:100%}
-.board{position:relative;background:#0E0E12;color:var(--blanc);border-radius:10px;overflow:hidden;cursor:pointer;box-shadow:0 30px 50px -24px rgba(20,16,30,.55);transition:transform .3s}
-.board:hover{transform:translateY(-6px)}
-.board .ph{aspect-ratio:4/3;position:relative;overflow:hidden}
-.board .ph img{width:100%;height:100%;object-fit:cover;opacity:.75}
-.board .ph::after{content:"▶";position:absolute;right:12px;bottom:10px;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(13,13,16,.75);font:12px var(--m)}
-.board .sc{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 4px}
-.board .sc b{font:900 46px/1 var(--led);color:var(--sig);text-shadow:0 0 12px rgba(187,165,255,.7);letter-spacing:.02em}
-.board .sc span{font:600 10.5px var(--m);text-transform:uppercase;letter-spacing:.08em;padding:5px 8px;border-radius:999px;background:rgba(244,241,236,.12)}
-.board .sc span.w{background:var(--sig);color:#14121A}
-.board .vs{padding:0 16px 16px;font:700 18px/1.1 var(--f);text-transform:uppercase;letter-spacing:.02em}
-.board .vs small{display:block;font:400 11px var(--m);color:var(--gris);margin-top:4px;letter-spacing:.06em}
-
-/* ───── 4. LE STUDIO : le tunnel walk de Mattéo ───── */
-.me{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(30px,6vw,90px);align-items:center}
-.me .ph{position:relative;aspect-ratio:4/5;overflow:hidden}
-.me .ph img{width:100%;height:100%;object-fit:cover}
-.me .ph::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 60%,rgba(13,13,16,.7)),radial-gradient(60% 50% at 50% 20%,rgba(255,255,255,.12),transparent)}
-.me .ph .mono{position:absolute;left:16px;bottom:14px;z-index:2;color:var(--blanc)}
-.me h2{font-size:clamp(56px,7.4vw,120px)}
-.me h2 .I{color:var(--sig);font-size:.66em;display:block;line-height:1;margin-top:.1em}
-.me p{color:#CFCAD6;font-size:20px;max-width:46ch;margin:22px 0}
-.me dl{display:grid;grid-template-columns:150px 1fr;border-top:1px solid var(--trait)}
-.me dt,.me dd{padding:12px 0;border-bottom:1px solid var(--trait)}
-.me dt{font:400 11.5px/1.9 var(--m);letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
-.me dd{font-size:18px}
-.me dd .I{color:var(--sig)}
-
-/* ───── 5. CONTACT : l'accréditation ───── */
-.acc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,6vw,90px);align-items:start}
-.acc h2{font-size:clamp(60px,8.4vw,140px)}
-.acc h2 .I{color:var(--sig);font-size:.62em;display:block;line-height:1}
-.acc p{color:#CFCAD6;font-size:20px;max-width:38ch;margin-top:20px}
-.badge-wrap{position:relative;padding-top:120px;display:grid;justify-items:center}
-.lanyard{position:absolute;top:-30px;left:50%;width:44px;height:170px;transform:translateX(-50%);background:repeating-linear-gradient(180deg,var(--sig) 0 22px,#a58ff2 22px 26px);clip-path:polygon(0 0,100% 0,62% 100%,38% 100%)}
-.lanyard::after{content:"VDN® · VDN® · VDN®";position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) rotate(90deg);font:600 9px var(--m);color:#14121A;white-space:nowrap;letter-spacing:.2em}
-.badge{position:relative;width:min(100%,460px);background:#F4F1EC;color:#16141A;border-radius:18px;padding:26px 26px 22px;box-shadow:0 40px 70px -30px rgba(0,0,0,.9);transform-origin:50% -120px;animation:sway 6s ease-in-out infinite}
-@keyframes sway{50%{transform:rotate(1.4deg)}}
-.badge::before{content:"";position:absolute;left:50%;top:12px;width:56px;height:10px;border-radius:6px;background:#0D0D10;transform:translateX(-50%)}
-.badge .hd{display:flex;justify-content:space-between;align-items:center;margin:12px 0 16px;padding-bottom:14px;border-bottom:2px solid #16141A}
-.badge .hd b{font:900 30px/1 var(--f);text-transform:uppercase}
-.badge .hd span{font:600 10px var(--m);text-transform:uppercase;background:#16141A;color:var(--sig);padding:6px 9px;border-radius:999px;letter-spacing:.08em}
-.badge .zone{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.badge .zone button{font:700 13px var(--f);letter-spacing:.08em;text-transform:uppercase;min-height:40px;padding:0 12px;border:1.5px solid #16141A;border-radius:8px}
-.badge .zone button[aria-pressed=true]{background:var(--sig);border-color:var(--sig)}
-.badge label{display:grid;gap:4px;margin-bottom:10px}
-.badge label span{font:600 10px var(--m);text-transform:uppercase;letter-spacing:.1em;color:#6A6472}
-.badge input,.badge select,.badge textarea{font:400 17px var(--s);color:#16141A;background:transparent;border:0;border-bottom:1.5px solid #CFC9D6;padding:6px 0;outline:none;width:100%;border-radius:0}
-.badge textarea{min-height:70px;resize:vertical}
-.badge input:focus,.badge textarea:focus,.badge select:focus{border-color:var(--sig-d)}
-.badge .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.badge .ft{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px}
-.badge .bc{display:flex;gap:2px;height:34px}
-.badge .bc i{background:#16141A}
-.badge .send{min-height:50px;padding:0 22px;border-radius:999px;background:#16141A;color:var(--sig);font:700 16px var(--f);letter-spacing:.08em;text-transform:uppercase}
-
-footer{border-top:1px solid var(--trait);padding:26px var(--pad);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-footer b{font:italic 400 20px var(--s);color:var(--sig)}
-
-.rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
-.rv.in{opacity:1;transform:none}
-
-@media (max-width:900px){
-  .top nav{display:none}
-  .meter{right:16px;bottom:18px}.meter strong{font-size:40px}
-  .hint{bottom:auto;top:118px;white-space:normal;width:calc(100% - 32px);text-align:center}
-  .sound{bottom:18px;left:16px}
-  .lumtag{top:78px}
-  .fits{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none}
-  .fit{scroll-snap-align:start}
-  .boards{grid-template-columns:1fr 1fr}
-  .me,.acc{grid-template-columns:1fr}
-  .rack .rk{grid-template-columns:40px minmax(0,1fr)}.rack .d{grid-column:2}
-}
-@media (max-width:520px){.boards{grid-template-columns:1fr}.badge .two{grid-template-columns:1fr}.me dl{grid-template-columns:1fr}.me dt{padding-bottom:0;border:0}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
-
-/* ───── compléments du site ───── */
-html{scroll-behavior:smooth}
-:focus-visible{outline:2px solid var(--sig);outline-offset:3px}
-::selection{background:var(--sig);color:#14121A}
-.top .logo{display:flex;align-items:center;min-height:44px}
-.btn.sm{min-height:44px;padding:0 18px;font-size:14px}
-.btn:disabled{opacity:.5;pointer-events:none}
-.intro h1 .w{display:inline-block;opacity:0;transform:translateY(.35em);animation:up .9s cubic-bezier(.2,.8,.2,1) forwards}
-.intro h1 .I.w{display:block}
-@keyframes up{to{opacity:1;transform:none}}
-/* filtres */
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin:-14px 0 30px}
-.chips button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--trait);font:700 15px var(--f);letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
-.chips button .n{font:600 10.5px var(--m);opacity:.7}
-.chips button[aria-pressed=true]{background:var(--sig);border-color:var(--sig);color:#14121A}
-.fit{display:block;text-align:left;width:100%}
-.fit .ph .m{position:absolute;inset:0}
-.fit .ph .m img{position:absolute;inset:0}
-.fit .ph .m .bg{filter:blur(22px) brightness(.55);transform:scale(1.2)}
-.fit .ph .m .fg{object-fit:contain}
-.cap .part{display:block;margin-top:10px;font:italic 400 17px var(--s);color:#CFCAD6}
-.cap .part b{font:600 10.5px var(--m);letter-spacing:.08em;text-transform:uppercase;font-style:normal;color:var(--gris);margin-right:6px}
-.fit.hide,.rk.hide{display:none}
-.fit.pop,.rk.pop{animation:pop .5s cubic-bezier(.2,.8,.2,1) both}
-@keyframes pop{from{opacity:0;transform:translateY(14px)}}
-.rack .rk{width:100%;text-align:left;color:var(--blanc)}
-.rack .rk .d{text-align:right}
-.rack .rk .d i{display:block;font:italic 400 16px var(--s);text-transform:none;color:#CFCAD6;margin-top:2px}
-.peek{position:fixed;left:0;top:0;z-index:40;width:240px;aspect-ratio:4/5;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.9) rotate(-3deg);transition:opacity .2s,transform .25s;overflow:hidden;background:#000;box-shadow:0 30px 60px rgba(0,0,0,.6)}
-.peek.on{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-3deg)}
-.peek img{width:100%;height:100%;object-fit:cover}
-.board .vs .lg{display:flex;gap:6px;margin-bottom:8px}
-.board .vs .lg img{width:26px;height:26px;object-fit:contain}
-.me .kk,.acc .kk{margin-bottom:14px}
-.me p+p{margin-top:-8px}
-.cta2{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.mailrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:26px}
-.mail{font:600 14px var(--m);overflow-wrap:anywhere}
-.badge .hp{position:absolute;left:-9999px}
-.badge .note{font:400 16px var(--s);margin:4px 0 0}
-.badge .note.ok{color:var(--sig-d)}.badge .note.err{color:#C0392B}
-.badge .legal{font:400 13px/1.4 var(--s);color:#6A6472;margin-top:12px}
-.badge textarea::placeholder{color:#A39DAB}
-footer nav{display:flex;gap:22px;flex-wrap:wrap}
-footer nav a{font:700 15px var(--f);letter-spacing:.1em;text-transform:uppercase;color:var(--gris)}
-footer nav a:hover{color:var(--sig)}
-footer{align-items:center}
-
-/* ───── fiche projet ───── */
-.sheet{position:fixed;inset:0;z-index:60;background:var(--nuit);overflow-y:auto;overscroll-behavior:contain;opacity:0;transform:translateY(24px);pointer-events:none;transition:opacity .4s,transform .4s cubic-bezier(.2,.8,.2,1)}
-.sheet.open{opacity:1;transform:none;pointer-events:auto}
-.sbar{position:sticky;top:0;z-index:5;background:rgba(13,13,16,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--trait)}
-.sbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:68px}
-.sbar .logo img{height:22px;width:auto}
-.back{font:700 15px var(--f);letter-spacing:.1em;text-transform:uppercase;color:var(--gris);min-height:44px}
-.back:hover{color:var(--blanc)}
-.shead{padding-block:56px 20px}
-.shead .lbl{font:600 11.5px var(--m);letter-spacing:.08em;text-transform:uppercase;color:var(--sig)}
-.shead h1{font:900 clamp(56px,9vw,150px)/.84 var(--f);text-transform:uppercase;margin:16px 0 0;max-width:14ch}
-.shead .meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,1.2fr);margin-top:36px;border-top:1px solid var(--trait);border-bottom:1px solid var(--trait)}
-.shead .meta div{padding:16px 18px 16px 0}
-.shead .meta div+div{padding-left:18px;border-left:1px solid var(--trait)}
-.shead .meta dt{font:600 10.5px var(--m);letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
-.shead .meta dd{margin:6px 0 0;font:400 18px/1.35 var(--s)}
-.shead .meta .key dd strong{display:block;font:900 44px/1 var(--led);color:var(--sig);text-shadow:0 0 14px rgba(187,165,255,.55);margin-bottom:6px}
-.shead .meta .key dd span{font-style:italic}
-.shead .part{display:inline-block;margin-top:20px;font:italic 400 19px var(--s);color:#CFCAD6}
-.shead .part b{font:600 10.5px var(--m);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--gris);margin-right:8px}
-.shero{position:relative;margin-top:30px;overflow:hidden;background:#000}
-.shero .halo{display:none}
-.shero img,.shero video{width:100%;height:auto;display:block;max-height:80vh;object-fit:contain;margin:0 auto}
-.shero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 60% at 50% 30%,#fff,transparent 70%);opacity:0;animation:flash .7s ease-out .2s}
-.story{display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;padding-block:56px;border-top:1px solid var(--trait)}
-.story>h2{font:700 15px var(--f);letter-spacing:.1em;text-transform:uppercase;color:var(--gris);display:flex;gap:14px;align-items:baseline;margin-top:6px}
-.story>h2 i{font:900 46px/1 var(--f);font-style:normal;color:var(--sig)}
-.story .c{font-size:20px;max-width:62ch;color:#DCD7E2}
-.story .c p{margin:0 0 14px}
-.story .q{font:italic 400 clamp(26px,3vw,40px)/1.15 var(--s);color:var(--blanc);margin:0;max-width:26ch}
-.story .lbl{font:600 11px var(--m);letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
-.gal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:10px}
-.gal figure{margin:0}.gal figure.wide{grid-column:1/-1}
-.gal .m{overflow:hidden;background:#000}
-.gal img{width:100%;height:auto;display:block}
-.gal figure:not(.wide) img{aspect-ratio:4/5;object-fit:cover}
-.gal figcaption{font:italic 400 16px/1.4 var(--s);color:var(--gris);margin-top:10px}
-.res{display:flex;gap:14px;flex-wrap:wrap}
-.res div{border:1px solid var(--trait);border-radius:12px;padding:18px 20px;min-width:200px;max-width:440px;background:#121217}
-.res strong{display:block;font:900 30px/1 var(--led);color:var(--sig);margin-bottom:8px}
-.res span{font-size:17px}
-.cta-sim{margin:30px 0 0;background:var(--sig);color:#14121A;border-radius:18px;padding:clamp(28px,4vw,52px);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
-.cta-sim h2{font:900 clamp(44px,5vw,80px)/.86 var(--f);text-transform:uppercase}
-.cta-sim p{margin-top:10px;font-size:19px}
-.cta-sim .btn{background:#14121A;color:var(--sig)}
-.nextp{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:40px 90px;flex-wrap:wrap}
-.nextp .btn.sec{border:1.5px solid rgba(244,241,236,.5)}
-.nextp .btn.sec:hover{background:var(--blanc);color:var(--nuit)}
-.nextp .btn.sec span span:first-child{color:var(--gris);margin-right:4px}
-.sheet .vf{max-width:760px}
-
-/* ───── lecteur vidéo ───── */
-.player{position:fixed;inset:0;z-index:70;background:rgba(8,8,10,.95);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .3s}
-.player.open{opacity:1;pointer-events:auto}
-.player .box{position:relative;height:min(86vh,760px);aspect-ratio:9/16;max-width:100vw;border-radius:12px;overflow:hidden;background:#000}
-.player video{width:100%;height:100%;object-fit:cover}
-.player .pr{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:3px;z-index:2}
-.player .pr i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden}.player .pr i b{display:block;height:100%;width:0;background:var(--sig)}
-.player .tt{position:absolute;top:22px;left:14px;right:60px;color:#fff;font:600 12px var(--m);text-transform:uppercase;letter-spacing:.06em;z-index:2;text-shadow:0 1px 4px rgba(0,0,0,.6)}
-.player .tap{position:absolute;inset:60px 0 0;display:grid;grid-template-columns:1fr 2fr;z-index:1}
-.player .x{position:absolute;top:18px;right:18px;z-index:3;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;font-size:22px}
-
-@media (max-width:1000px){
-  .boards{grid-auto-columns:min(78vw,320px)}
-  .shead .meta{grid-template-columns:1fr 1fr}
-  .shead .meta div,.shead .meta div+div{padding:14px 12px 14px 0;border-left:0;border-bottom:1px solid var(--trait)}
-  .shead .meta .key{grid-column:1/-1}
-  .story{grid-template-columns:1fr;gap:12px;padding-block:40px}
-  .cta-sim{grid-template-columns:1fr}
-}
-@media (max-width:600px){
-  .top .r .btn{display:none}
-  .gal{grid-template-columns:1fr}
-  .sbar .btn{display:none}
-  .rack .rk{grid-template-columns:40px minmax(0,1fr)}.rack .rk .d{grid-column:2;text-align:left}
+/* ouverture, option 1 : une scène composée de tes créations sur l'aplat gris des tuiles */
+.stage{position:relative;background:#D9D9D6;overflow:hidden;aspect-ratio:1440/640}
+.stage a{position:absolute;display:block;box-shadow:0 26px 40px -18px rgba(0,0,0,.45)}
+.stage a img{display:block;width:100%;height:100%;object-fit:cover}
+.stage a:focus-visible{outline:2px solid var(--lilac);outline-offset:4px}
+.s-main{left:24%;top:12%;width:54%;aspect-ratio:16/9;z-index:2}
+.s-post{left:5.5%;top:21%;width:20%;aspect-ratio:900/1273;transform:rotate(-3deg);z-index:1}
+.s-car{left:81%;top:9%;width:14.5%;aspect-ratio:3/4;transform:rotate(4deg);z-index:1}
+.s-ph{left:73%;top:50%;width:10.5%;aspect-ratio:9/16;transform:rotate(-4deg);z-index:3}
+@media (max-width:760px){
+  .stage{aspect-ratio:390/500}
+  .s-main{left:6%;top:30%;width:88%}
+  .s-post{left:5%;top:5%;width:34%;transform:rotate(-4deg)}
+  .s-car{left:62%;top:64%;width:32%;transform:rotate(5deg)}
+  .s-ph{left:58%;top:4%;width:22%;transform:rotate(4deg)}
 }
 
-@media (prefers-reduced-motion:reduce){.intro h1 .w{opacity:1;transform:none}.fit .ph::after,.shero::after{display:none}}
-.fit .ph,.fit .cap,.cap h3,.cap .by,.board .ph,.board .vs,.board .vs small{display:block}
-.board .sc{display:flex}
-.board .vs .lg{display:flex}
+/* ---- tranche : mobile, filtres, vue d'ensemble, fiche ---- */
+[hidden]{display:none!important}
+#projets,#bord,#studio,#contact{scroll-margin-top:58px}
+.menu{display:none;background:none;border:0;font:inherit;font-size:15px;font-weight:600;cursor:pointer;padding:8px 0}
+.pict button[aria-pressed="true"]{color:var(--lilac)}
+.pict button[aria-pressed="true"] svg{stroke-width:2}
+.wh .l button{background:none;border:0;font:inherit;font-size:13px;color:var(--grey);cursor:pointer;padding:4px 0}
+.wh .l button[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.t.off{display:none}
+.t .cap{display:none}
+.list{padding:0 40px 60px}
+.list a{display:grid;grid-template-columns:70px 1.4fr 1.2fr 1fr 40px;gap:20px;align-items:center;padding:14px 0;border-top:1px solid #dcdcd8;font-size:15px}
+.list a:last-child{border-bottom:1px solid #dcdcd8}
+.list a span:first-child,.list .ty{color:var(--grey)}
+.list a b{font-weight:600}
+.list a:hover b{text-decoration:underline;text-underline-offset:3px}
+.list a.off{display:none}
+.list a .ar{justify-self:end}
+.ov{position:fixed;inset:0;z-index:30;background:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:0 20px 28px}
+.ov .top{height:58px;display:flex;justify-content:space-between;align-items:center}
+.ov .top img{height:18px}
+.ov ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ov ul a{font-size:40px;font-weight:700;letter-spacing:-.01em}
+.ov .mail{font-size:15px;color:var(--grey)}
+/* fiche projet (façon Feixen : titre, texte en colonnes serrées, compteur, puis grandes images deux par deux) */
+.fiche{position:fixed;inset:0;z-index:20;background:var(--page);overflow-y:auto}
+.fiche .fhd{position:sticky;top:0;z-index:2}
+.fh{display:grid;grid-template-columns:220px 1fr 160px;gap:36px;padding:28px 40px 34px}
+.fh h1{margin:0;font-size:22px;font-weight:700;line-height:1.15}
+.fh .tx{columns:3;column-gap:28px;font-size:14px;line-height:1.5}
+.fh .tx p{margin:0 0 .9em}
+.fh .tx h4{margin:0 0 .2em;font-size:14px;font-weight:700;break-after:avoid}
+.fh dl{margin:22px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px}
+.fh dt{color:var(--grey)}
+.fh dd{margin:0}
+.nv{justify-self:end;display:flex;gap:10px;align-items:baseline;font-size:20px;font-weight:600}
+.nv button{background:none;border:0;font:inherit;cursor:pointer;padding:2px 4px}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 40px 40px}
+.gal figure{margin:0;aspect-ratio:1;background:var(--plate);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.gal figure.bleed img{width:100%;height:100%;object-fit:cover}
+.gal figure:not(.bleed) img{max-width:82%;max-height:82%;box-shadow:0 18px 30px -14px rgba(0,0,0,.45)}
+.gal figure.wide{grid-column:1/-1;aspect-ratio:2/1}
+.gal figure.wide.bleed{aspect-ratio:3/2}
+.gal video{max-height:86%;max-width:60%}
+.todo{display:inline-block;border:1.5px dashed #B0560F;color:#B0560F;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 6px}
+.fend{display:flex;justify-content:space-between;padding:20px 40px 60px;font-size:15px;font-weight:600}
+.fend button,.fend a{background:none;border:0;font:inherit;cursor:pointer;padding:0}
+.lbx{position:fixed;inset:0;z-index:40;background:rgba(17,17,17,.94);display:flex;align-items:center;justify-content:center}
+.lbx video{max-height:88vh;max-width:92vw}
+.lbx button{position:absolute;top:14px;right:18px;background:none;border:0;color:#fff;font:inherit;font-weight:600;cursor:pointer;padding:8px}
+
+@media (min-width:761px){.band .row{display:contents}}
+@media (max-width:760px){
+  header{grid-template-columns:1fr auto;padding:0 20px;height:54px}
+  header nav,header .rt,header .pict{display:none}
+  .menu{display:block}
+  .band{display:block;padding:24px 0 28px}
+  .band .lab{padding:0 20px 14px}
+  .band .row{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:20px;padding:0 20px 6px}
+  .band .q{flex:0 0 64%;scroll-snap-align:start}
+  .about{border-left:0;border-top:1px solid #3a3a3a;margin:22px 20px 0;padding:18px 0 0}
+  .about p{font-size:20px}
+  .wh{grid-template-columns:1fr;gap:14px;padding:30px 20px 16px}
+  .wh h2{order:-1;font-size:36px}
+  .wh .l{flex-wrap:wrap;gap:18px}
+  .wh .l .mpict{display:flex;gap:12px}
+  .wall{columns:2;column-gap:6px;padding:0 20px 50px}
+  .t{margin-bottom:6px}
+  .t .nm{display:none}
+  .t .cap{display:block;position:absolute;left:0;right:0;bottom:0;padding:16px 8px 6px;font-size:11.5px;font-weight:600;background:linear-gradient(transparent,rgba(220,220,217,.96) 45%)}
+  .t:not(.obj) .cap{background:linear-gradient(transparent,rgba(0,0,0,.55));color:#fff}
+  .list{padding:0 20px 50px}
+  .list a{grid-template-columns:44px 1fr 24px;gap:10px}
+  .list a .cd,.list a .ty{display:none}
+  .fh{display:block;padding:22px 20px 26px}
+  .fh h1{font-size:28px;margin-bottom:12px}
+  .fh .tx{columns:1;margin-top:22px}
+  .nv{justify-content:flex-start;margin-top:18px}
+  .gal{grid-template-columns:1fr;padding:0 20px 30px;gap:6px}
+  .gal figure.wide{aspect-ratio:1}
+  .fend{padding:20px 20px 50px;flex-direction:column;gap:14px}
+}
+
+/* ---- Bord terrain : bande sombre, quatre matchs en téléphones posés ---- */
+.bt{background:var(--band);color:#fff;padding:46px 40px 54px;margin-top:10px}
+.bt-hd{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:end;margin-bottom:30px}
+.bt h2{margin:0;font-size:46px;font-weight:700;letter-spacing:-.01em}
+.bt-hd p{margin:0;color:#bdbdbd;font-size:17px;line-height:1.45;max-width:48ch;justify-self:end}
+.bt-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.mc{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;min-width:0;width:100%;background:none;border:0;padding:0;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.mc .pf{background:#2B2B2A;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;position:relative}
+.mc .pf img{height:84%;aspect-ratio:9/16;object-fit:cover;border-radius:14px;border:5px solid #0c0c0c;box-shadow:0 20px 30px -14px rgba(0,0,0,.7);transition:transform .25s}
+.mc:hover .pf img,.mc:focus-visible .pf img{transform:translateY(-6px) rotate(-1.5deg)}
+.mc .pf .n{position:absolute;right:10px;bottom:10px;background:#fff;color:#111;font-size:12.5px;font-weight:700;padding:4px 8px;border-radius:3px}
+.mc .mt{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:14px}
+.mc .mt img{width:30px;height:30px;object-fit:contain;background:#fff;border-radius:50%;padding:3px}
+.mc .mt b{font-weight:600;line-height:1.25}
+.mc .mt small{display:block;color:#9a9a9a;font-size:12.5px;font-weight:400}
+.mc .sc{font-weight:700;font-size:15px;white-space:nowrap}
+.mc .sc i{font-style:normal;font-size:11px;font-weight:700;margin-left:6px;padding:2px 5px;border-radius:2px;background:#3a3a3a;color:#ddd}
+.mc .sc i.v{background:var(--lilac);color:#111}
+.pl{position:fixed;inset:0;z-index:40;background:#141414;color:#fff;display:flex;flex-direction:column;padding:0 40px 30px}
+.pl-hd{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.pl-hd h3{margin:0;font-size:20px;font-weight:700}.pl-hd p{margin:2px 0 0;color:#9a9a9a;font-size:14px}
+.pl-hd button{background:none;border:0;color:#fff;font:inherit;font-weight:600;cursor:pointer;padding:8px}
+.pl-bd{flex:1;min-height:0;display:grid;grid-template-columns:auto 1fr;gap:36px}
+.pl-v{height:100%;min-height:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+.pl-v video{height:100%;max-height:calc(100vh - 140px);aspect-ratio:9/16;background:#000;border-radius:12px}
+.pl-note{margin:0;color:#9a9a9a;font-size:12.5px;max-width:34ch;text-align:center}
+.pl-k{overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;align-content:start}
+.pl-k button{background:#222;border:0;padding:0;cursor:pointer;color:#fff;font:inherit;text-align:left;position:relative}
+.pl-k img{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;opacity:.75}
+.pl-k button[aria-current="true"] img,.pl-k button:hover img{opacity:1}
+.pl-k button[aria-current="true"]{outline:2px solid var(--lilac);outline-offset:2px}
+.pl-k span{position:absolute;left:6px;bottom:5px;font-size:11.5px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+/* ---- Studio ---- */
+.st{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:8px;padding:8px 40px 0}
+.st-ph{margin:0;background:var(--plate);aspect-ratio:4/5;overflow:hidden}
+.st-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.st-tx{background:#fff;padding:44px 48px;display:flex;flex-direction:column;gap:16px}
+.st h2{margin:0;font-size:46px;font-weight:700;letter-spacing:-.01em}
+.st-lead{margin:0;font-size:24px;font-weight:600}
+.st-tx>p{margin:0;font-size:16px;line-height:1.55;max-width:56ch}
+.st-dl{margin:10px 0 0;display:grid;grid-template-columns:130px 1fr;gap:12px 20px;font-size:15px;border-top:1px solid #e3e3e0;padding-top:20px}
+.st-dl dt{color:var(--grey)}.st-dl dd{margin:0;line-height:1.45}
+.st-cta{display:flex;gap:22px;align-items:center;margin-top:auto;padding-top:14px}
+.btn{display:inline-flex;align-items:center;height:44px;padding:0 18px;background:var(--ink);color:#fff;border:0;border-radius:3px;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.btn:hover{background:#333}
+.lnk{font-size:15px;font-weight:600;color:var(--grey)}.lnk:hover{color:var(--ink)}
+/* ---- Contact ---- */
+.ct{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:8px;padding:8px 40px 0}
+.ct-l{background:var(--plate);padding:44px 48px;display:flex;flex-direction:column;gap:18px}
+.ct h2{margin:0;font-size:46px;font-weight:700;letter-spacing:-.01em}
+.ct-l>p{margin:0;font-size:19px;line-height:1.4;max-width:30ch}
+.ct-mail{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:8px}
+.ct-mail a{font-size:17px;font-weight:600;text-decoration:underline;text-underline-offset:4px;word-break:break-all}
+.ct-mail button{background:#fff;border:1px solid #bdbdb8;border-radius:3px;font:inherit;font-size:13px;font-weight:600;padding:8px 12px;cursor:pointer}
+#cpyok,#ctok{font-size:13px;color:#4b4b47}
+.ct-so{list-style:none;margin:auto 0 0;padding:20px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.ct-so a{display:inline-flex;gap:8px;align-items:center;background:#fff;padding:10px 14px;border-radius:3px;font-size:14px;font-weight:600}
+.ct-so a:hover{background:var(--ink);color:#fff}
+.ct-so svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5}
+.ct-f{background:#fff;padding:40px 48px;display:grid;gap:16px;align-content:start}
+.ct-f fieldset{border:0;margin:0;padding:0}
+.ct-f legend,.ct-f label{font-size:13px;font-weight:600;color:#4b4b47}
+.ct-f legend{margin-bottom:8px}
+.ct-f label{display:grid;gap:6px}
+.ct-f input:not([type=radio]),.ct-f select,.ct-f textarea{font:inherit;font-size:16px;color:var(--ink);border:1px solid #cfcfca;border-radius:3px;padding:10px 12px;background:#fff;width:100%}
+.ct-f textarea{resize:vertical}
+.ct-f select{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23111' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 14px center;padding-right:36px}
+.ct-f .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{display:block}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips span{display:inline-block;padding:8px 12px;border:1px solid #cfcfca;border-radius:3px;font-size:14px;color:var(--ink);cursor:pointer}
+.chips input:checked+span{background:var(--ink);border-color:var(--ink);color:#fff}
+.chips input:focus-visible+span{outline:2px solid var(--lilac);outline-offset:2px}
+.send{display:flex;gap:14px;align-items:center}
+.fine{margin:0;font-size:12.5px;color:var(--grey);line-height:1.45}
+.ft{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:34px 40px 40px;font-size:13px;color:var(--grey)}
+.ft img{height:16px}.ft nav{display:flex;gap:22px}
+@media (max-width:760px){
+  .bt{padding:34px 0 40px}
+  .bt-hd{grid-template-columns:1fr;gap:12px;padding:0 20px;margin-bottom:22px}
+  .bt h2{font-size:36px}.bt-hd p{justify-self:start;font-size:16px}
+  .bt-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:20px;padding:0 20px 6px;gap:8px}
+  .mc{flex:0 0 74%;scroll-snap-align:start}
+  .pl{padding:0 0 12px}.pl-hd{padding:12px 16px}
+  .pl-bd{grid-template-columns:1fr;grid-template-rows:1fr auto;gap:12px}
+  .pl-v video{max-height:calc(100vh - 230px)}
+  .pl-k{display:flex;overflow-x:auto;padding:0 16px 4px}
+  .pl-k button{flex:0 0 64px}
+  .st,.ct{grid-template-columns:1fr;padding:6px 20px 0;gap:6px}
+  .st-tx,.ct-l,.ct-f{padding:28px 22px}
+  .st h2,.ct h2{font-size:36px}
+  .st-dl{grid-template-columns:1fr;gap:2px}.st-dl dd{margin-bottom:10px}
+  .ct-f .two{grid-template-columns:1fr}
+  .ft{flex-direction:column;align-items:flex-start;padding:28px 20px 36px}
+}
+@media (min-width:761px){.wh .l .mpict{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---- site : compléments ---- */
+html{scroll-behavior:auto}
+.skip{position:absolute;left:12px;top:-60px;z-index:50;background:#111;color:#fff;padding:10px 14px;border-radius:3px;font-size:14px;font-weight:600}
+.skip:focus{top:10px}
+.rt{display:flex;align-items:center;gap:22px;font-size:17px}
+.rt .wr:hover{color:var(--ink)}
+.lang{background:none;border:1px solid #d5d5d1;border-radius:3px;font:inherit;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--grey);min-width:40px;min-height:32px;cursor:pointer}
+.lang:hover{color:var(--ink);border-color:var(--ink)}
+.about h2{margin:0;font-size:15px;font-weight:600}
+.ov .top .menu{display:block}
+.t.txt{background:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:22px 20px 18px;color:var(--ink)}
+.t.txt .qt{font-size:clamp(20px,1.9vw,30px);font-weight:700;line-height:1.08;letter-spacing:-.01em}
+.t.txt .li{font-size:12.5px;color:var(--grey);font-weight:600}
+.t.txt .nm{display:none}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#f-note{font-size:13.5px;color:#4b4b47}
+#f-note.err{color:#A3360F}
+.btn[disabled]{opacity:.5;cursor:default}
+/* fiche */
+.fhd{position:sticky;top:0;z-index:2;height:58px;background:#fff;display:flex;justify-content:space-between;align-items:center;padding:0 40px}
+.fhd img{height:18px;width:auto}
+.fhd button{background:none;border:0;font:inherit;font-size:15px;font-weight:600;cursor:pointer;padding:8px 0}
+.fh h1:focus{outline:none}
+.fpost,.fvids{padding:0 40px 40px}
+.fpost h2,.fvids h2{margin:0 0 14px;font-size:22px;font-weight:700}
+.fpost article{background:#fff;padding:28px 30px;max-width:760px;margin-bottom:8px}
+.fpost .lead{margin:0 0 14px;font-size:20px;font-weight:700;line-height:1.25}
+.fpost .body{white-space:pre-line;font-size:15px;line-height:1.55;margin:0}
+.fpost .cr{margin:14px 0 0;font-size:13px;color:var(--grey)}
+.fpost .pi{display:block;width:100%;max-width:420px;margin:0 0 16px}
+.fvids .row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.fvids button{flex:0 0 120px;background:var(--plate);border:0;padding:0;cursor:pointer;position:relative;font:inherit}
+.fvids img{display:block;width:100%;aspect-ratio:9/16;object-fit:cover}
+.fvids span{position:absolute;left:6px;bottom:6px;right:6px;font-size:11.5px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.8);text-align:left}
+.gal figure video{max-height:86%;max-width:60%;background:#000}
+.gal figure.wide video{max-width:84%;max-height:84%}
+.gal figcaption{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* lecteur vertical */
+.pl-v{flex-direction:row;justify-content:center;align-items:center;gap:14px}
+.pl-ar{background:#2a2a2a;border:0;color:#fff;width:44px;height:44px;border-radius:50%;font:inherit;font-size:18px;cursor:pointer;flex:0 0 auto}
+.pl-ar:hover{background:#3a3a3a}.pl-ar[disabled]{opacity:.3;cursor:default}
+.pl-hd h2{margin:0;font-size:20px;font-weight:700}
+.pl-k button{aspect-ratio:9/16}
+@media (max-width:760px){
+  header .rt{display:flex;gap:14px}
+  header .rt .wr{display:none}
+  .fhd{padding:0 20px;height:54px}
+  .fpost,.fvids{padding:0 20px 30px}
+  .fpost article{padding:22px 20px}
+  .pl-ar{display:none}
+  .t.txt .qt{font-size:19px}
+}
+
+.fh .tx{columns:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 28px;align-content:start}
+.fh .tx p{margin:0}
+@media (max-width:760px){.fh .tx{grid-template-columns:1fr;gap:16px}}
+
 </style>
 <script data-goatcounter="https://vdnsocialstudio.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Mattéo Vandenesse", "url": "https://vdnsocialstudio.com/", "image": "https://vdnsocialstudio.com/media/matteo.jpg", "jobTitle": "Création graphique, vidéo et community management", "worksFor": {"@type": "Organization", "name": "Levallois Metropolitans"}, "brand": {"@type": "Brand", "name": "VDN Social Studio"}, "address": {"@type": "PostalAddress", "addressLocality": "Enghien-les-Bains", "addressCountry": "FR"}, "email": "mailto:matteo.vandenesse@gmail.com", "sameAs": ["https://www.instagram.com/vdnsocialstudio/", "https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab"]}</script>
-<script>/* à chaque chargement, le site repart du début de la page */try{if('scrollRestoration' in history)history.scrollRestoration='manual';if(location.hash)history.replaceState(null,'',location.pathname+location.search);}catch(e){}addEventListener('load',function(){scrollTo(0,0);});addEventListener('pageshow',function(e){if(e.persisted)scrollTo(0,0);});</script>
 <script>
 /* notification push (appli ntfy, abonnement au sujet ci-dessous) à chaque demande envoyée depuis le site */
 window.vdnNotify=function(title,body,tags){try{fetch('https://ntfy.sh/',{method:'POST',body:JSON.stringify({topic:'vdn-24b509aeabc3',title:title,message:body,tags:(tags||'yellow_circle').split(','),priority:4,click:'https://mail.google.com/'})}).catch(function(){});}catch(e){}};
@@ -368,119 +349,115 @@ window.vdnSend=function(data){return new Promise(function(res){try{
 <script>(function(){var r=document.documentElement,L=null;
 try{var q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='fr'){L=q;localStorage.setItem('vdn-lang',q);}else L=localStorage.getItem('vdn-lang');}catch(e){}
 if(L!=='en'&&L!=='fr')L=(!/bot|crawl|spider|slurp|lighthouse/i.test(navigator.userAgent)&&!/^fr/i.test(navigator.language||'fr'))?'en':'fr';
-window.LANG=L;r.lang=L;if(/[?&]p=/.test(location.search))r.classList.add('nointro');
-try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)r.classList.add('nointro');if(sessionStorage.getItem('vdn-skipintro')){sessionStorage.removeItem('vdn-skipintro');r.classList.add('nointro');}}catch(e){}})();</script>
+window.LANG=L;r.lang=L;})();</script>
 </head>
 <body>
-<header class="top" id="hdr">
-  <a class="logo" href="#top" aria-label="VDN Social Studio, retour en haut"><img src="logo/vdn-logo-court-blanc.svg" alt="" width="84" height="24"></a>
-  <nav aria-label="Navigation principale"><a href="#projets">Fit check</a><a href="#match">Matchday</a><a href="#apropos">Le studio</a><a href="#contact">Accréditation</a></nav>
-  <div class="r"><button class="lang langbtn" id="langbtn" type="button"></button><a class="btn s sm" href="#contact" data-door="projet">Lancer un projet</a></div>
+<a class="skip" href="#projets">Aller aux projets</a>
+<header id="hd">
+  <div class="brand"><a href="./" aria-label="VDN Social Studio, accueil"><img src="logo/vdn-logo-court-noir.svg" alt="" width="74" height="18"></a>
+    <div class="pict" role="group" aria-label="Filtrer les projets par format"><button type="button" data-f="ecran" aria-pressed="false" aria-label="Filtrer : écran 16:9"><svg viewBox="0 0 26 22" aria-hidden="true"><rect x="1.5" y="4" width="23" height="13" rx="1"/><path d="M9 20h8"/></svg></button><button type="button" data-f="vertical" aria-pressed="false" aria-label="Filtrer : vertical 9:16"><svg viewBox="0 0 26 22" aria-hidden="true"><rect x="8" y="1" width="10" height="20" rx="2"/></svg></button><button type="button" data-f="affiche" aria-pressed="false" aria-label="Filtrer : affiche et print"><svg viewBox="0 0 26 22" aria-hidden="true"><path d="M6 1h14v20H6z M9 5h8 M9 8h5"/></svg></button><button type="button" data-f="textile" aria-pressed="false" aria-label="Filtrer : textile"><svg viewBox="0 0 26 22" aria-hidden="true"><path d="M9 2 4 5l2 5 3-1v12h8V9l3 1 2-5-5-3c-1 2-2.5 3-4 3S10 4 9 2z"/></svg></button></div></div>
+  <nav aria-label="Navigation principale"><a href="#studio">Studio</a><a href="#bord">Bord terrain</a><a href="#contact">Contact</a></nav>
+  <div class="rt"><button class="lang" id="langbtn" type="button"></button><a class="wr" href="#contact">Écrire à Mattéo →</a><button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="ov">Menu</button></div>
 </header>
-
-<main id="top">
-  <section class="tunnel" id="tunnel" aria-label="Entrée : le tunnel des joueurs">
-    <div class="stage" id="stage">
-      <div class="poster" aria-hidden="true"></div>
-      <div class="ov">
-        <p class="lumtag mono" aria-hidden="true">Lumière au bout du tunnel · <b id="lumname">golden hour</b></p>
-        <div class="intro" id="intro">
-          <p class="k"><i></i>VDN® Social Studio · Mattéo Vandenesse · dispo en freelance</p>
-          <h1 class="B" id="h1">De l'idée <span class="I">jusqu'au</span> terrain.</h1>
-          <div class="row">
-            <p>Identités, contenus et vidéos pour le sport, les marques et les événements. Fais défiler pour entrer dans le tunnel.</p>
-            <div class="cta"><button class="btn s" type="button" id="enter">Entrer ↓</button><a class="btn o" href="#projets" id="skip">Passer le tunnel</a></div>
-          </div>
-        </div>
-        <p class="hint mono" id="hint">Clique sur un <b>caisson lumineux</b> pour ouvrir le projet</p>
-        <button class="sound" id="sound" type="button" aria-pressed="false">♪ Ambiance salle</button>
-        <div class="meter mono" id="meter" aria-hidden="true"><strong id="m">48 m</strong>avant le terrain</div>
-        <div class="welcome" id="welcome">
-          <h2 class="B">Bienvenue <span class="I">sur le terrain.</span></h2>
-          <p>Le showreel tourne sur le cube. Maintenant, place au jeu : mes projets, mes matchs, et le tien.</p>
-          <div class="cta"><a class="btn s" href="#projets">Voir la collection →</a><button class="btn o" type="button" id="showreel">▶ Showreel</button></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="wrap sec" id="projets">
-    <div class="sh rv">
-      <div><p class="mono" id="colcount">Le tunnel walk · collection 2026</p><h2 class="B">Fit check<span class="I">.</span></h2></div>
-      <p>Chaque projet passe dans le tunnel. Voilà ce qu'il porte, et ce que ça a donné.</p>
-    </div>
-    <div class="chips" id="filters" role="group" aria-label="Filtrer par compétence"></div>
-    <div class="fits" id="feat"></div>
-    <div class="rack" id="grid"></div>
-  </section>
-
-  <section class="court sec" id="match">
-    <div class="wrap">
-      <div class="sh rv"><div><p class="mono">Sortie du tunnel · Palais des Sports Marcel-Cerdan</p><h2 class="B">Matchday<span class="I">, en direct.</span></h2></div><p>Je filme les matchs à domicile des Levallois Metropolitans, du bord du terrain. Touche un tableau pour voir les vidéos.</p></div>
-      <div class="boards" id="matches"></div>
-    </div>
-  </section>
-
-  <section class="wrap sec" id="apropos">
-    <div class="me">
-      <div class="ph rv"><img src="media/matteo-apropos.jpg" alt="Mattéo Vandenesse, fondateur de VDN Social Studio" width="960" height="1200" loading="lazy"><span class="mono">Tunnel walk · Mattéo Vandenesse</span></div>
-      <div class="rv">
-        <p class="mono kk">Le studio</p>
-        <h2 class="B">Mattéo <span class="I">derrière VDN.</span></h2>
-        <p>Je suis community manager en alternance aux Levallois Metropolitans, en Élite 2. Visuels de match, stories, vidéos en direct du bord du terrain : je fais vivre le club sur les réseaux.</p>
-        <p>Avant, j'ai passé deux ans en agence événementielle chez YO Agency, entre salons, congrès et clients en Europe, en Asie et au Moyen-Orient. J'y ai appris à livrer vite et propre.</p>
-        <dl>
-          <dt>Il porte</dt><dd>Community manager · <span class="I">Levallois Metropolitans</span></dd>
-          <dt>Dans le sac</dt><dd>2 ans en agence événementielle · <span class="I">YO Agency</span></dd>
-          <dt>En ce moment</dt><dd>Bachelor communication audiovisuelle &amp; marketing</dd>
-          <dt>Il cherche</dt><dd>Des missions freelance pour des clubs, des marques et des événements</dd>
-          <dt>Sa règle</dt><dd>Une idée simple, poussée jusqu'au détail.</dd>
-        </dl>
-        <div class="cta2"><a class="btn s" href="#cv" id="cvbtn">Voir mon CV →</a><a class="btn o" href="media/cv-matteo-vandenesse.pdf" download="CV-Matteo-Vandenesse.pdf">Télécharger (PDF)</a></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="wrap sec" id="contact">
-    <div class="acc">
-      <div class="rv">
-        <p class="mono kk">Contact</p>
-        <h2 class="B">Ton tour <span class="I">d'entrer sur le terrain.</span></h2>
-        <p>Un logo, des visuels pour tes réseaux, une vidéo d'événement ? Remplis ton accréditation, je la valide sous 48 h, promis.</p>
-        <div class="mailrow"><span class="mail" id="mail">matteo.vandenesse@gmail.com</span><button class="btn o sm" type="button" id="copy">Copier l'e-mail</button></div>
-      </div>
-      <div class="badge-wrap rv">
-        <span class="lanyard" aria-hidden="true"></span>
-        <form class="badge" id="cform" novalidate>
-          <div class="hd"><b>Accréditation</b><span>Accès bord terrain</span></div>
-          <p class="hp"><label>Ne pas remplir <input name="_honey" id="bot-field" tabindex="-1" autocomplete="off"></label></p>
-          <div class="zone" id="ptype" role="group" aria-label="Type de projet"><button type="button" aria-pressed="false">Identité</button><button type="button" aria-pressed="false">Contenus sociaux</button><button type="button" aria-pressed="false">Vidéo</button><button type="button" aria-pressed="false">Événementiel</button><button type="button" aria-pressed="false">Autre</button></div>
-          <div class="two"><label><span>Ton nom</span><input id="f-nom" name="nom" required autocomplete="name"></label><label><span>Ton e-mail</span><input id="f-email" name="email" type="email" required autocomplete="email" inputmode="email"></label></div>
-          <div class="two"><label><span>Budget</span><select id="f-budget" name="budget"><option>Je ne sais pas encore</option><option>Moins de 300 €</option><option>300 à 800 €</option><option>800 à 1 500 €</option><option>Plus de 1 500 €</option></select></label><label><span>Échéance</span><select id="f-delai" name="delai"><option>Pas de date précise</option><option>Urgent (moins de 2 semaines)</option><option>Dans le mois</option><option>D'ici 1 à 3 mois</option></select></label></div>
-          <label><span>Ton message</span><textarea id="f-msg" name="message" required placeholder="Ce que tu veux faire, pour quand, un lien vers tes réseaux…"></textarea></label>
-          <p class="note" id="f-note" role="status" hidden></p>
-          <div class="ft"><div class="bc" id="bc" aria-hidden="true"></div><button class="send" type="submit" id="f-send">Valider →</button></div>
-          <p class="legal">Tes infos servent uniquement à te répondre. Elles ne sont ni revendues ni utilisées pour de la prospection.</p>
-        </form>
-      </div>
-    </div>
-  </section>
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="top"><img src="logo/vdn-logo-court-noir.svg" alt="VDN Social Studio" width="74" height="18"><button class="menu" id="mclose" type="button">Fermer</button></div>
+  <ul><li><a href="#projets">Projets</a></li><li><a href="#studio">Studio</a></li><li><a href="#bord">Bord terrain</a></li><li><a href="#contact">Contact</a></li></ul>
+  <a class="mail" href="mailto:matteo.vandenesse@gmail.com">matteo.vandenesse@gmail.com</a>
+</div>
+<div class="stage" aria-label="Réalisations à la une">
+  <a class="s-post" href="?p=ftf" data-p="ftf" aria-label="File tes fringues !"><img src="media/ftf-affiche-collecte.jpg" alt=""></a>
+  <a class="s-main" href="?p=ft" data-p="ft" aria-label="La Minute de l’Emploi"><img src="media/ft-metropolitans-1.jpg" alt="" fetchpriority="high"></a>
+  <a class="s-ph" href="?p=octrose" data-p="octrose" aria-label="T-shirt Octobre Rose"><img src="media/octobre-rose-porte-3.jpg" alt=""></a>
+  <a class="s-car" href="?p=octrose" data-p="octrose" aria-label="Carrousel Octobre Rose"><img src="media/or-carrousel-v3-1.jpg" alt=""></a>
+</div>
+<section class="band" aria-label="Accès rapides">
+  <div class="lab" aria-hidden="true">Accès<br>rapides</div>
+  <div class="row">
+  <a class="q" href="#" id="qreel"><span class="th"><img src="media/showreel.jpg" alt=""></span><b>Showreel</b><span>Les vidéos de l'année en un montage.</span></a>
+  <a class="q" href="#bord"><span class="th"><img src="media/live/m1106-09.jpg" alt=""></span><b>Bord terrain</b><span>4 matchs filmés du bord du terrain, 78 vidéos.</span></a>
+  <a class="q" href="media/cv-matteo-vandenesse.pdf" target="_blank" rel="noopener"><span class="th"><svg viewBox="0 0 50 64" aria-hidden="true"><path d="M4 2h30l12 12v48H4z M34 2v12h12 M12 26h26 M12 34h26 M12 42h18"/></svg></span><b>CV</b><span>Parcours en une page, PDF.</span></a>
+  <a class="q" href="#studio"><span class="th"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12"/><path d="M10 62c2-14 11-22 22-22s20 8 22 22"/></svg></span><b>Studio</b><span>Alternance aux Metropolitans, 2 ans chez YO Agency.</span></a>
+  </div>
+  <div class="about"><h2>VDN Social Studio</h2><p>Identités, contenus et vidéos pour le sport, les marques et les événements.</p><a class="mail" href="#contact">matteo.vandenesse@gmail.com</a></div>
+</section>
+<main id="main">
+<div class="wh" id="projets"><div class="l"><button id="vall" type="button" aria-pressed="false">Vue d'ensemble</button><span>Filtrer</span><span class="mpict pict" role="group" aria-label="Filtrer les projets par format"><button type="button" data-f="ecran" aria-pressed="false" aria-label="Filtrer : écran 16:9"><svg viewBox="0 0 26 22" aria-hidden="true"><rect x="1.5" y="4" width="23" height="13" rx="1"/><path d="M9 20h8"/></svg></button><button type="button" data-f="vertical" aria-pressed="false" aria-label="Filtrer : vertical 9:16"><svg viewBox="0 0 26 22" aria-hidden="true"><rect x="8" y="1" width="10" height="20" rx="2"/></svg></button><button type="button" data-f="affiche" aria-pressed="false" aria-label="Filtrer : affiche et print"><svg viewBox="0 0 26 22" aria-hidden="true"><path d="M6 1h14v20H6z M9 5h8 M9 8h5"/></svg></button><button type="button" data-f="textile" aria-pressed="false" aria-label="Filtrer : textile"><svg viewBox="0 0 26 22" aria-hidden="true"><path d="M9 2 4 5l2 5 3-1v12h8V9l3 1 2-5-5-3c-1 2-2.5 3-4 3S10 4 9 2z"/></svg></button></span></div><h2>Projets</h2><span></span></div>
+<div class="wall" id="wall">
+<a class="t obj" href="?p=ftf" data-p="ftf" data-f="affiche" style="aspect-ratio:4/5" aria-label="File tes fringues !"><img src="media/ftf-affiche-collecte.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">File tes fringues !</span><span class="cap" aria-hidden="true">File tes fringues !</span></a>
+<a class="t " href="?p=octrose" data-p="octrose" data-f="textile" style="aspect-ratio:9/14" aria-label="T-shirt Octobre Rose"><img src="media/octobre-rose-porte-1.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">T-shirt Octobre Rose</span><span class="cap" aria-hidden="true">T-shirt Octobre Rose</span></a>
+<a class="t obj" href="?p=ft" data-p="ft" data-f="ecran" style="aspect-ratio:1/1" aria-label="La Minute de l’Emploi"><img src="media/ft-metropolitans-1.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">La Minute de l’Emploi</span><span class="cap" aria-hidden="true">La Minute de l’Emploi</span></a>
+<a class="t obj phone" href="?p=snow" data-p="snow" data-f="vertical" style="aspect-ratio:4/5" aria-label="Snowflake World Tour"><img src="media/snowflake.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span><span class="nm" aria-hidden="true">Snowflake World Tour</span><span class="cap" aria-hidden="true">Snowflake World Tour</span></a>
+<a class="t obj" href="?p=octrose" data-p="octrose" data-f="vertical" style="aspect-ratio:4/5" aria-label="Carrousel Octobre Rose"><img src="media/or-carrousel-v3-1.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">Carrousel Octobre Rose</span><span class="cap" aria-hidden="true">Carrousel Octobre Rose</span></a>
+<a class="t obj phone" href="?p=partouche" data-p="partouche" data-f="vertical" style="aspect-ratio:4/5" aria-label="Coulisses du tournage avec Partouche"><img src="media/li-partouche.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span><span class="nm" aria-hidden="true">Coulisses du tournage avec Partouche</span><span class="cap" aria-hidden="true">Coulisses du tournage avec Partouche</span></a>
+<a class="t " href="?p=ft" data-p="ft" data-f="ecran" style="aspect-ratio:1/1" aria-label="La Minute de l’Emploi"><img src="media/li-ft-ecran.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">La Minute de l’Emploi</span><span class="cap" aria-hidden="true">La Minute de l’Emploi</span></a>
+<a class="t obj" href="?p=sdlv" data-p="sdlv" data-f="affiche" style="aspect-ratio:3/4" aria-label="Sport dans la Ville × Metropolitans"><img src="media/sdlv-logo.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">Sport dans la Ville × Metropolitans</span><span class="cap" aria-hidden="true">Sport dans la Ville × Metropolitans</span></a>
+<a class="t txt" href="?p=redaction" data-p="redaction" data-f="ecran" style="aspect-ratio:4/5" aria-label="Rédaction LinkedIn"><span class="qt">« Le score ne raconte pas tout. »</span><span class="li">LinkedIn · Metropolitans</span><span class="nm" aria-hidden="true">Rédaction LinkedIn</span><span class="cap" aria-hidden="true">Rédaction LinkedIn</span></a>
+<a class="t obj" href="?p=affiches" data-p="affiches" data-f="affiche" style="aspect-ratio:4/5" aria-label="Affiches d’animation interne"><img src="media/affiche-stpatrick.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">Affiches d’animation interne</span><span class="cap" aria-hidden="true">Affiches d’animation interne</span></a>
+<a class="t " href="?p=bil" data-p="bil" data-f="affiche" style="aspect-ratio:3/4" aria-label="Billets et signatures mail"><img src="media/billet-echarpe.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">Billets et signatures mail</span><span class="cap" aria-hidden="true">Billets et signatures mail</span></a>
+<a class="t obj phone" href="?p=stories" data-p="stories" data-f="vertical" style="aspect-ratio:4/5" aria-label="Stories du club"><img src="media/story-workday-v2.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span><span class="nm" aria-hidden="true">Stories du club</span><span class="cap" aria-hidden="true">Stories du club</span></a>
+<a class="t obj" href="?p=ftf" data-p="ftf" data-f="affiche" style="aspect-ratio:1/1" aria-label="File tes fringues !"><img src="media/ftf-stickers.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">File tes fringues !</span><span class="cap" aria-hidden="true">File tes fringues !</span></a>
+<a class="t obj" href="?p=ody" data-p="ody" data-f="ecran" style="aspect-ratio:4/5" aria-label="Newsletter Odysséa 2025"><img src="media/odyssea-formulaire.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">Newsletter Odysséa 2025</span><span class="cap" aria-hidden="true">Newsletter Odysséa 2025</span></a>
+<a class="t obj phone" href="?p=mallette" data-p="mallette" data-f="vertical" style="aspect-ratio:4/5" aria-label="Présentation Mallette"><img src="media/mallette.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span><span class="nm" aria-hidden="true">Présentation Mallette</span><span class="cap" aria-hidden="true">Présentation Mallette</span></a>
+<a class="t " href="?p=octrose" data-p="octrose" data-f="textile" style="aspect-ratio:3/2" aria-label="T-shirt Octobre Rose"><img src="media/or-tshirt-presentation.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">T-shirt Octobre Rose</span><span class="cap" aria-hidden="true">T-shirt Octobre Rose</span></a>
+<a class="t obj" href="?p=ft" data-p="ft" data-f="ecran" style="aspect-ratio:1/1" aria-label="La Minute de l’Emploi"><img src="media/ft-metropolitans-2.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">La Minute de l’Emploi</span><span class="cap" aria-hidden="true">La Minute de l’Emploi</span></a>
+<a class="t obj" href="?p=bil" data-p="bil" data-f="ecran" style="aspect-ratio:4/3" aria-label="Signatures mail"><img src="media/sig-01.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">Signatures mail</span><span class="cap" aria-hidden="true">Signatures mail</span></a>
+<a class="t obj" href="?p=affiches" data-p="affiches" data-f="affiche" style="aspect-ratio:4/5" aria-label="Affiches d’animation interne"><img src="media/affiche-noel.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">Affiches d’animation interne</span><span class="cap" aria-hidden="true">Affiches d’animation interne</span></a>
+<a class="t obj" href="?p=ftf" data-p="ftf" data-f="affiche" style="aspect-ratio:4/5" aria-label="File tes fringues !"><img src="media/ftf-saviez-vous-1.jpg" alt="" loading="lazy"><span class="nm" aria-hidden="true">File tes fringues !</span><span class="cap" aria-hidden="true">File tes fringues !</span></a>
+</div>
+<div class="list" id="list" hidden><a href="?p=ft" data-p="ft" data-f="ecran"><span>2026</span><b>La Minute de l’Emploi</b><span class="cd">Alternance · Metropolitans × France Travail</span><span class="ty">Écran géant</span><span class="ar" aria-hidden="true">→</span></a><a href="?p=octrose" data-p="octrose" data-f="textile vertical"><span>2026</span><b>T-shirt Octobre Rose</b><span class="cd">Alternance · Metropolitans × Institut Rafaël</span><span class="ty">Textile, carrousel</span><span class="ar" aria-hidden="true">→</span></a><a href="?p=bil" data-p="bil" data-f="affiche ecran"><span>2026</span><b>Billets et signatures mail</b><span class="cd">Alternance · Metropolitans</span><span class="ty">Supports de marque</span><span class="ar" aria-hidden="true">→</span></a><a href="?p=sdlv" data-p="sdlv" data-f="affiche"><span>2026</span><b>Sport dans la Ville × Metropolitans</b><span class="cd">Alternance · Metropolitans × Sport dans la Ville</span><span class="ty">Logo</span><span class="ar" aria-hidden="true">→</span></a><a href="?p=partouche" data-p="partouche" data-f="vertical"><span>2026</span><b>Coulisses du tournage avec Partouche</b><span class="cd">Alternance · Metropolitans</span><span class="ty">Vidéo, post LinkedIn</span><span class="ar" aria-hidden="true">→</span></a><a href="?p=stories" data-p="stories" data-f="vertical"><span>2026</span><b>Stories du club</b><span class="cd">Alternance · Metropolitans</span><span class="ty">Stories Instagram</span><span class="ar" aria-hidden="true">→</span></a><a href="?p=redaction" data-p="redaction" data-f="ecran"><span>2026</span><b>Rédaction LinkedIn</b><span class="cd">Alternance · Metropolitans</span><span class="ty">Posts LinkedIn</span><span class="ar" aria-hidden="true">→</span></a><a href="?p=ftf" data-p="ftf" data-f="affiche"><span>2025</span><b>File tes fringues !</b><span class="cd">Projet d’école · BTS Communication, Igensia</span><span class="ty">Identité, print, vidéo</span><span class="ar" aria-hidden="true">→</span></a><a href="?p=snow" data-p="snow" data-f="vertical"><span>2025</span><b>Snowflake World Tour</b><span class="cd">Alternance · YO Agency</span><span class="ty">Aftermovie</span><span class="ar" aria-hidden="true">→</span></a><a href="?p=mallette" data-p="mallette" data-f="vertical"><span>2025</span><b>Présentation Mallette</b><span class="cd">Alternance · YO Agency</span><span class="ty">Vidéo</span><span class="ar" aria-hidden="true">→</span></a><a href="?p=affiches" data-p="affiches" data-f="affiche"><span>2025</span><b>Affiches d’animation interne</b><span class="cd">Alternance · YO Agency, pour IDEX</span><span class="ty">Affiches A3</span><span class="ar" aria-hidden="true">→</span></a><a href="?p=ody" data-p="ody" data-f="ecran"><span>2025</span><b>Newsletter Odysséa 2025</b><span class="cd">Communication interne · IDEX</span><span class="ty">Newsletter</span><span class="ar" aria-hidden="true">→</span></a></div>
+<section class="bt" id="bord" aria-labelledby="bt-h">
+  <div class="bt-hd"><h2 id="bt-h">Bord terrain</h2><p>Les matchs à domicile des Levallois Metropolitans, en Élite 2, filmés du bord du terrain en vertical et publiés pendant la rencontre.</p></div>
+  <div class="bt-row" id="btrow"></div>
+</section>
+<section class="st" id="studio" aria-labelledby="st-h">
+  <figure class="st-ph"><img src="media/matteo-portrait.jpg" alt="Mattéo Vandenesse, debout devant un mur de lattes de bois, en veste sombre et t-shirt blanc" loading="lazy"></figure>
+  <div class="st-tx">
+    <h2 id="st-h">Studio</h2>
+    <p class="st-lead">Mattéo, derrière VDN.</p>
+    <p>Je suis community manager en alternance aux Levallois Metropolitans, en Élite 2. Visuels de match, stories, vidéos en direct du bord du terrain : je fais vivre le club sur les réseaux.</p>
+    <p>Avant, j’ai passé deux ans en alternance chez YO Agency, une agence événementielle, entre salons, congrès et clients en Europe, en Asie et au Moyen-Orient. J’y ai appris à livrer vite et propre.</p>
+    <dl class="st-dl">
+      <dt>En ce moment</dt><dd>Community manager en alternance, Levallois Metropolitans<br>Bachelor communication audiovisuelle &amp; marketing</dd>
+      <dt>Avant</dt><dd>BTS Communication, Igensia<br>2 ans en alternance chez YO Agency</dd>
+      <dt>Je cherche</dt><dd>Des missions freelance pour des clubs, des marques et des événements</dd>
+      <dt>Ma règle</dt><dd>Une idée simple, poussée jusqu’au détail.</dd>
+    </dl>
+    <div class="st-cta"><a class="btn" href="media/cv-matteo-vandenesse.pdf" target="_blank" rel="noopener">Voir mon CV →</a><a class="lnk" href="media/cv-matteo-vandenesse.pdf" download>Télécharger (PDF)</a></div>
+  </div>
+</section>
+<section class="ct" id="contact" aria-labelledby="ct-h">
+  <div class="ct-l">
+    <h2 id="ct-h">Contact</h2>
+    <p>Un logo, des visuels pour tes réseaux, une vidéo d’événement ? Écris-moi, je réponds sous 48 h.</p>
+    <div class="ct-mail"><a id="mail" href="mailto:matteo.vandenesse@gmail.com">matteo.vandenesse@gmail.com</a><button type="button" id="cpy">Copier l’e-mail</button></div>
+    <ul class="ct-so">
+      <li><a href="https://wa.me/33698069145" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.2-3.6A8 8 0 1 1 8 19z"/><path d="M9 9c0 3 3 6 6 6l1-1.4-2-1-1 .9c-1-.5-2-1.5-2.5-2.5l.9-1-1-2z"/></svg>WhatsApp</a></li>
+      <li><a href="https://www.instagram.com/vdnsocialstudio/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></svg>Instagram</a></li>
+      <li><a href="https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M8 10v6M8 7.5v.1M11.5 16v-6M11.5 12.5c0-1.5 1-2.5 2.3-2.5S16 11 16 12.5V16"/></svg>LinkedIn</a></li>
+    </ul>
+  </div>
+  <form class="ct-f" id="cform" novalidate>
+    <fieldset><legend>Ton projet</legend><div class="chips">
+      <label><input type="radio" name="type" value="Identité"><span>Identité</span></label><label><input type="radio" name="type" value="Contenus sociaux"><span>Contenus sociaux</span></label><label><input type="radio" name="type" value="Vidéo"><span>Vidéo</span></label><label><input type="radio" name="type" value="Événementiel"><span>Événementiel</span></label><label><input type="radio" name="type" value="Autre"><span>Autre</span></label>
+    </div></fieldset>
+    <div class="two"><label>Ton nom<input id="f-nom" name="nom" autocomplete="name"></label><label>Ton e-mail<input id="f-email" name="email" type="email" autocomplete="email"></label></div>
+    <div class="two"><label>Budget<select id="f-budget" name="budget"><option>Je ne sais pas encore</option><option>Moins de 300 €</option><option>300 à 800 €</option><option>800 à 1 500 €</option><option>Plus de 1 500 €</option></select></label>
+    <label>Échéance<select id="f-delai" name="echeance"><option>Pas de date précise</option><option>Urgent (moins de 2 semaines)</option><option>Dans le mois</option><option>D'ici 1 à 3 mois</option></select></label></div>
+    <label>Ton message<textarea id="f-msg" name="message" rows="5"></textarea></label>
+    <div class="hp" aria-hidden="true"><label>Ne pas remplir<input type="text" id="bot-field" tabindex="-1" autocomplete="off"></label></div>
+    <div class="send"><button type="submit" class="btn" id="f-send">Envoyer →</button><span id="f-note" role="status" aria-live="polite"></span></div>
+    <p class="fine">Tes infos servent uniquement à te répondre. Elles ne sont ni revendues ni utilisées pour de la prospection.</p>
+  </form>
+</section>
 </main>
-
-<footer><b>Créé avec fierté.</b><nav aria-label="Réseaux"><a href="https://www.instagram.com/vdnsocialstudio/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab" target="_blank" rel="noopener">LinkedIn</a><a href="https://wa.me/33698069145" target="_blank" rel="noopener">WhatsApp</a></nav><span class="mono">© 2026 VDN Social Studio</span></footer>
-
-<div class="peek" id="peek" aria-hidden="true"><img alt=""></div>
-
-<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="s-title" aria-hidden="true">
-  <div class="sbar"><div class="wrap"><button class="back" id="s-back" type="button">← Collection</button><a class="logo" href="#top" aria-hidden="true" tabindex="-1"><img src="logo/vdn-logo-court-blanc.svg" alt="" width="76" height="22"></a><button class="btn s sm" type="button" id="s-sim2">Un projet similaire ?</button></div></div>
-  <div id="s-body"></div>
+<footer class="ft"><img src="logo/vdn-logo-court-noir.svg" alt="VDN Social Studio" width="66" height="16"><span>© 2026 VDN Social Studio</span><nav aria-label="Réseaux"><a href="https://www.instagram.com/vdnsocialstudio/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/in/matt%C3%A9o-vandenesse-512bbb2ab" target="_blank" rel="noopener">LinkedIn</a><a href="https://wa.me/33698069145" target="_blank" rel="noopener">WhatsApp</a></nav></footer>
+<div class="fiche" id="fiche" role="dialog" aria-modal="true" aria-labelledby="f-t" hidden></div>
+<div class="pl" id="pl" role="dialog" aria-modal="true" aria-labelledby="pl-t" hidden>
+  <div class="pl-hd"><div><h2 id="pl-t"></h2><p id="pl-m"></p></div><button id="plc" type="button">Fermer ×</button></div>
+  <div class="pl-bd"><div class="pl-v"><button class="pl-ar" id="plp" type="button" aria-label="Vidéo précédente">←</button><video id="plv" playsinline controls controlslist="nodownload noplaybackrate" disablepictureinpicture></video><button class="pl-ar" id="pln" type="button" aria-label="Vidéo suivante">→</button></div>
+  <div class="pl-k" id="plk"></div></div>
 </div>
-
-<div class="player" id="player" role="dialog" aria-modal="true" aria-label="Vidéos">
-  <button class="x" id="p-x" type="button" aria-label="Fermer">×</button>
-  <div class="box"><div class="pr" id="p-pr"></div><div class="tt" id="p-tt"></div><video id="p-v" playsinline muted></video><div class="tap"><button id="p-prev" type="button" aria-label="Vidéo précédente"></button><button id="p-next" type="button" aria-label="Vidéo suivante"></button></div></div>
-</div>
-
+<div class="lbx" id="lbx" role="dialog" aria-modal="true" aria-label="Lecteur vidéo" hidden><button id="lbc" type="button">Fermer ×</button><video id="lbv" controls playsinline controlslist="nodownload"></video></div>
 <script>
 const PROJECTS=[
   /* video:"media/xxx.mp4" + poster:"media/xxx.jpg" → la vidéo se lit directement dans la fiche du projet */
@@ -570,253 +547,116 @@ const POSTS=[
 ];
 
 
-/* ───────── VDN « Le Tunnel » : accueil (tunnel 3D dans tunnel.js), Fit check, fiches projet, Matchday, studio, accréditation ─────────
-   Les données (PROJECTS, POSTS, LIVE) sont au-dessus. CARDS fixe ce qui apparaît dans la grille, dans quel ordre et à quelle taille.
-   CASES contient les études de cas rédigées (en-tête, contexte, problématique, parti pris, réalisation, résultat, ce que j'en retiens). */
+
+const F={"ft": {"t": "La Minute de l’Emploi", "date": "2026", "tags": "Création graphique, écran géant", "cadre": "Alternance aux Levallois Metropolitans, partenariat avec France Travail", "role": "Design des visuels écran géant et texte du post LinkedIn", "liv": "Visuel d’annonce 16:9, une « offre du jour » par match, post LinkedIn", "tx": [["Contexte", "France Travail et les Levallois Metropolitans lancent La Minute de l’Emploi. À chaque match à domicile, une offre d’emploi locale passe sur l’écran géant du Palais des Sports Marcel-Cerdan, devant le public."], ["Idée créative", "Les couleurs du club, un chrono qui donne le rythme, et une hiérarchie pensée pour être lue de loin, en quelques secondes : le poste, l’entreprise, le lieu, le contrat, le salaire. Un appel à l’action en trois temps : « Scanne › Postule › Décroche ! », avec un QR code pour postuler en un scan."], ["Mise en application", "Dès le premier match à domicile, une offre en CDI de diagnostiqueur smartphones chez Pixamania, à Levallois-Perret, a été diffusée sur l’écran géant, avec un QR code pour postuler."], ["Ce que j’en retiens", "Un écran géant, c’est trois secondes d’attention. J’ai appris à couper tout ce qui ne sert pas, et à garder ce qui donne envie de sortir son téléphone pour scanner."]], "g": [["ft-metropolitans-1.jpg", "wide", "Visuel d’annonce de La Minute de l’Emploi"], ["li-ft-ecran.jpg", "bleed", "Le visuel sur l’écran géant du Palais des Sports"], ["ft-metropolitans-2.jpg", "", "Offre du jour sur l’écran géant"], ["ft-metropolitans-3.jpg", "wide", "Déclinaison de l’offre du jour"]], "post": 5}, "octrose": {"t": "T-shirt Octobre Rose", "date": "2026", "tags": "Campagne, textile, Instagram", "cadre": "Alternance aux Levallois Metropolitans, avec le LSC et l’Institut Rafaël", "role": "Design du t-shirt et du carrousel Instagram", "liv": "T-shirt recto verso, carrousel de 9 slides", "tx": [["Contexte", "Le t-shirt solidaire du club pour Octobre Rose, en partenariat avec l’Institut Rafaël, pour sensibiliser à la lutte contre le cancer du sein."], ["Idée créative", "Réunir le club et la santé sur un même vêtement : les Metropolitans, le LSC et l’Institut Rafaël côte à côte, pour que le t-shirt porte l’équipe autant que la cause."], ["Mise en application", "Le t-shirt a été produit à partir de ma maquette, puis porté par les joueurs et le staff le 23 octobre, contre Orléans."]], "g": [["or-tshirt-presentation.jpg", "wide bleed", "T-shirt Octobre Rose : recto « Never Give Up » et verso Institut Rafaël"], ["octobre-rose-porte-3.jpg", "bleed", "Le t-shirt porté : le banc des Metropolitans"], ["octobre-rose-porte-4.jpg", "bleed", "Le t-shirt porté : recto « Never Give Up » sur le staff"], ["or-carrousel-v3-1.jpg", "", "Slide 1 : accroche « Il n’y a pas de temps mort contre le cancer »"], ["or-carrousel-v3-2.jpg", "", "Slide 2 : pourquoi le basket se met au rose chaque octobre"], ["or-carrousel-v3-3.jpg", "", "Slide 3 : Tiana Mangakahia, elle s’est battue sur et en dehors du terrain"], ["or-carrousel-v3-4.jpg", "", "Slide 4 : son retour sur le parquet"], ["or-carrousel-v3-5.jpg", "", "Slide 5 : Roland « Fatty » Taylor, un pionnier dans le combat"], ["or-carrousel-v3-6.jpg", "", "Slide 6 : le basket utilise sa visibilité pour la cause"], ["or-carrousel-v3-7.jpg", "", "Slide 7 : solidarité sur et en dehors du terrain"], ["or-carrousel-v3-8.jpg", "", "Slide 8 : le chiffre à retenir, 61 214 nouveaux cas en 2023"], ["or-carrousel-v3-9.jpg", "", "Slide 9 : annonce du match Metropolitans – Orléans du 23 octobre"], ["octobre-rose-porte-1.jpg", "bleed", "Le t-shirt porté : les joueurs à la présentation"]], "vids": "octrose"}, "bil": {"t": "Billets et signatures mail", "date": "2026", "tags": "Supports de marque, billetterie, e-mail", "cadre": "Alternance aux Levallois Metropolitans", "role": "Design des billets et des signatures mail", "liv": "2 billets électroniques, 17 bannières « Prochain match »", "tx": [["Contexte", "Faire vivre l’identité des Metropolitans jusque dans les supports du quotidien : les billets reçus par les spectateurs et les signatures mail de l’équipe."], ["Problématique", "Comment rendre un billet et une signature mail aussi attractifs qu’un visuel de match, tout en gardant les informations pratiques lisibles ?"], ["Réalisation", "Deux billets pour les offres « billet + porte-clés » et « billet + écharpe », avec la promotion de la Double Game Week. Puis une bannière par match à domicile de la saison d’Élite 2 : l’adversaire, la date, la journée, et un joueur différent à chaque fois."]], "g": [["billet-echarpe.jpg", "", "Billet : pack billet + écharpe"], ["billet-porte-cles.jpg", "", "Billet : pack billet + porte-clés"], ["sig-01.jpg", "wide", "Signature mail : 23 oct. · J6 · Orléans"], ["sig-03.jpg", "", "Signature mail : 6 nov. · J8 · Fos Provence"], ["sig-09.jpg", "", "Signature mail : 5 févr. · J22 · Le Havre (STB)"], ["sig-14.jpg", "wide", "Signature mail : 13 avr. · J33 · Nantes"]]}, "sdlv": {"t": "Sport dans la Ville × Metropolitans", "date": "2026", "tags": "Logo, co-branding", "cadre": "Alternance aux Levallois Metropolitans, partenariat avec l’association Sport dans la Ville", "role": "Création du logo commun et du visuel d’annonce", "liv": "Logo commun, visuel d’annonce du partenariat", "tx": [["Contexte", "Un partenariat entre l’association Sport dans la Ville et les Levallois Metropolitans, autour de l’insertion professionnelle par le sport."], ["Problématique", "Comment associer deux identités fortes dans un seul logo, sans que l’une n’efface l’autre ?"], ["Idée créative", "Garder la silhouette urbaine et le message « Du Sport à l’Emploi » de Sport dans la Ville, et placer le blason des Metropolitans à la place du « O » de SPORT."]], "g": [["sdlv-logo.jpg", "wide", "Logo commun : Sport dans la Ville × Metropolitans"], ["sdlv-banniere.jpg", "wide", "Visuel d'annonce du partenariat"]]}, "partouche": {"t": "Coulisses du tournage avec Partouche", "date": "2026", "tags": "Vidéo, post LinkedIn", "cadre": "Alternance aux Levallois Metropolitans", "role": "Tournage, montage et texte", "liv": "Une vidéo verticale, un post LinkedIn", "tx": [["Contexte", "Le club tourne un contenu sur mesure pour son partenaire Partouche. Je filme les coulisses, je monte la vidéo et j’écris le post LinkedIn qui l’accompagne."]], "g": [["li-partouche.mp4", "vid", "Vidéo des coulisses du tournage avec Partouche"]], "post": 3}, "stories": {"t": "Stories du club", "date": "2026", "tags": "Vidéo verticale, Instagram", "cadre": "Alternance aux Levallois Metropolitans", "role": "Tournage et montage", "liv": "4 stories Instagram", "tx": [["Contexte", "Les coulisses de l’équipe en format story : entraînements, shooting, avant-match. Filmé au téléphone, monté pour Instagram."]], "g": [["story-workday-v2.mp4", "vid", "« Workday today » : séance d'entraînement des joueurs"], ["story-entrainement.mp4", "vid", "Ambiance d'entraînement au gymnase"], ["story-shooting.mp4", "vid", "Séance de shooting à la salle"], ["story-j2-clichy.mp4", "vid", "J-2 avant le match contre Clichy"]]}, "redaction": {"t": "Rédaction LinkedIn", "date": "2026", "tags": "Rédaction, LinkedIn", "cadre": "Alternance aux Levallois Metropolitans", "role": "Le texte uniquement. Visuels et photos : le club.", "liv": "11 posts LinkedIn", "tx": [["Contexte", "Après-match, annonces, partenaires, coulisses : j’écris les posts LinkedIn du club, avec une accroche qui donne envie de cliquer sur « voir plus »."]], "g": [], "posts": "copy"}, "ftf": {"t": "File tes fringues !", "date": "2025", "tags": "Identité visuelle, print, événement solidaire", "cadre": "Projet d’école, en 1re année de BTS Communication chez Igensia", "role": "Identité visuelle, affiches et print", "liv": "Identité, frise, bannières, affiches, série « Le saviez-vous ? », signalétique des bacs, stickers, vidéo", "tx": [["Contexte", "Organiser un vide-dressing solidaire à l’école Igensia et créer toute sa communication, pour collecter un maximum de vêtements et financer les actions de l’association Cop’1."], ["Problématique", "Comment créer une identité claire et impactante pour générer un fort taux de participation ?"], ["Résultat", "Plus de 50 kg de vêtements collectés et environ 500 € reversés à l’association."]], "g": [["ftf-frise.jpg", "wide", "Frise en 3 visuels : File · Tes · Fringues → Solidarités Co-P1"], ["ftf-affiche-collecte.jpg", "", "Affiche de la collecte"], ["ftf-affiche-vide-dressing.jpg", "", "Affiche du vide-dressing"], ["ftf-saviez-vous-1.jpg", "", "Le saviez-vous ? · 50 % de textiles en plus"], ["ftf-saviez-vous-2.jpg", "", "Le saviez-vous ? · 26 kg par an"], ["ftf-signaletique.jpg", "", "Signalétique des bacs de collecte"], ["ftf-stickers.jpg", "", "Stickers UPCY’COM"], ["ftf.mp4", "vidh", "Vidéo de l’opération File tes fringues !"]]}, "snow": {"t": "Snowflake World Tour", "date": "2025", "tags": "Vidéo, aftermovie", "cadre": "Alternance chez YO Agency", "role": "Tout : préparation, tournage, montage", "liv": "Une vidéo résumé pour une diffusion interne et externe", "tx": [["Contexte", "Le Snowflake World Tour du 6 octobre 2025 : présenter l’événement clairement et valoriser les projets clients et les échanges avec les partenaires."], ["Diffusion", "Interne et externe. Vidéo validée par les responsables événementiels."]], "g": [["snowflake.mp4", "vid", "Aftermovie du Snowflake World Tour"], ["snow-4.jpg", "bleed", "Image extraite de l’aftermovie"], ["snow-12.jpg", "bleed", "Image extraite de l’aftermovie"], ["snow-21.jpg", "bleed", "Image extraite de l’aftermovie"]]}, "mallette": {"t": "Présentation Mallette", "date": "2025", "tags": "Vidéo courte, présentation", "cadre": "Alternance chez YO Agency", "role": "Tout, de l’idée au montage", "liv": "Une vidéo courte de présentation", "tx": [["Contexte", "Présenter les services de l’agence de manière innovante."], ["Problématique", "Comment capter l’attention dès les premières secondes ?"]], "g": [["mallette.mp4", "vid", "Vidéo de présentation Mallette"]]}, "affiches": {"t": "Affiches d’animation interne", "date": "2025", "tags": "Affiches A3, communication interne", "cadre": "Alternance chez YO Agency, pour IDEX", "role": "Design complet", "liv": "2 affiches A3", "tx": [["Contexte", "Renforcer la cohésion d’équipe et animer la vie de bureau autour de deux temps forts : le goûter de Noël et la Saint-Patrick."], ["Problématique", "Comment donner envie de se rassembler tout en respectant l’identité de l’entreprise ?"], ["Parti pris", "Une affiche chaleureuse pour Noël, une affiche ludique en vert, avec des trèfles, pour la Saint-Patrick."]], "g": [["affiche-noel.jpg", "", "Affiche Goûter de Noël : jeudi 18 décembre au RIE d'Arc de Seine"], ["affiche-stpatrick.jpg", "", "Affiche Saint-Patrick : soirée irlandaise au Social Hub, 17 mars"]]}, "ody": {"t": "Newsletter Odysséa 2025", "date": "2025", "tags": "Newsletter, communication interne, RSE", "cadre": "Communication interne pour IDEX", "role": "Design", "liv": "Newsletter interne", "tx": [["Contexte", "Une newsletter interne pour mobiliser les collaborateurs autour d’Odysséa, la course contre le cancer du sein, avec des contraintes de calendrier et de dossards."], ["Problématique", "Comment informer, sensibiliser et faire s’inscrire les collaborateurs en respectant les codes de la communication interne ?"], ["Résultat", "110 participants de tous niveaux."]], "g": [["odyssea-formulaire.jpg", "", "Formulaire d'inscription : prénom, nom, taille de T-shirt et choix de l'épreuve"], ["odyssea-pourquoi.jpg", "", "Pourquoi participer : solidarité, team spirit, vague rose et infos pratiques"]]}};
+const ORD=["ft", "octrose", "bil", "sdlv", "partouche", "stories", "redaction", "ftf", "snow", "mallette", "affiches", "ody"];
+window.POST_EN={"0": {"lead": "The score doesn’t tell the whole story.", "body": "💛 FRIDAY NIGHT WAS A WIN. BUT THE SCORE DOESN’T TELL THE WHOLE STORY\n\n78-74 on the scoreboard against Fos Provence Basket. But this game was won far beyond the numbers…\n\nWe saw it on the court: a teammate on the floor, picked straight back up by the others. We saw it on the bench, on their feet for every three. And we saw it right up to the buzzer, in a tight game where nobody gave an inch.\n\nMatchday 8 of ÉLITE 2, and this group showed what it can do when it plays together.\n\nThank you to everyone who was at Marcel-Cerdan. This win is yours too.\n\n#Metropolitans #Levallois #Elite2 #Basketball #Victoire"}, "1": {"lead": "An everyday need nobody talks about in the stands.", "body": "🩵 AN EVERYDAY NEED NOBODY TALKS ABOUT IN THE STANDS\n\nSo we decided to talk about it, and above all to act.\nThe Metropolitans are teaming up with Periods, alongside the Métropolitaines du Mont-Valérien, to make period products freely available to all women.\n\nA Periods box is now installed at the Palais des Sports Marcel-Cerdan. Just download the free app and scan the QR code on the box. Every woman is entitled to 2 free hygiene kits a month, and access to partner toilets.\n\n“Sport is a powerful driver of change.” It’s a belief we share with Periods, and one we’re proud to bring to life in our arena.\n\nBecause sport stands up for women too.\n\n#Metropolitans #Levallois #Periods #PrecaritéMenstruelle #SportEtEngagement"}, "2": {"lead": "On Friday night, the most important thing wasn’t happening on the court."}, "3": {"lead": "Today, the Metros bet on something other than basketball."}, "4": {"lead": "On Friday, we won’t just be playing for ourselves."}, "5": {"lead": "On Friday night, our big screen offered a permanent job."}, "6": {"lead": "On Friday night, we won more than a game."}, "7": {"lead": "What you didn’t see in Denain."}, "8": {"lead": "7 points. That’s what we left in Denain. On Friday, we’re getting them back at home."}, "9": {"lead": "Falling is part of the game. Getting back up together is our culture."}, "10": {"lead": "You know the players. But do you know the people supporting them behind the scenes?"}, "11": {"lead": "What if Friday’s real MVP was in the stands?"}, "12": {"lead": "Everything built over the last few weeks is finally coming to life."}};
+window.EN2={"Création graphique, écran géant": "Graphic design, big screen", "Alternance aux Levallois Metropolitans, partenariat avec France Travail": "Work-study at Levallois Metropolitans, partnership with France Travail", "Design des visuels écran géant et texte du post LinkedIn": "Design of the big-screen visuals and copy of the LinkedIn post", "Visuel d’annonce 16:9, une « offre du jour » par match, post LinkedIn": "16:9 announcement visual, one “job of the day” per game, LinkedIn post", "Contexte": "Context", "France Travail et les Levallois Metropolitans lancent La Minute de l’Emploi. À chaque match à domicile, une offre d’emploi locale passe sur l’écran géant du Palais des Sports Marcel-Cerdan, devant le public.": "France Travail and the Levallois Metropolitans launch La Minute de l’Emploi (the Job Minute). At every home game, a local job offer is shown on the big screen of the Palais des Sports Marcel-Cerdan, in front of the crowd.", "Idée créative": "Creative idea", "Les couleurs du club, un chrono qui donne le rythme, et une hiérarchie pensée pour être lue de loin, en quelques secondes : le poste, l’entreprise, le lieu, le contrat, le salaire. Un appel à l’action en trois temps : « Scanne › Postule › Décroche ! », avec un QR code pour postuler en un scan.": "The club colours, a stopwatch that sets the pace, and a hierarchy designed to be read from afar in a few seconds: the job, the company, the place, the contract, the salary. A three-step call to action, “Scan › Apply › Get it!”, with a QR code to apply in one scan.", "Mise en application": "Put into practice", "Dès le premier match à domicile, une offre en CDI de diagnostiqueur smartphones chez Pixamania, à Levallois-Perret, a été diffusée sur l’écran géant, avec un QR code pour postuler.": "From the first home game, a permanent job offer as a smartphone technician at Pixamania, in Levallois-Perret, was shown on the big screen, with a QR code to apply.", "Ce que j’en retiens": "What I took from it", "Un écran géant, c’est trois secondes d’attention. J’ai appris à couper tout ce qui ne sert pas, et à garder ce qui donne envie de sortir son téléphone pour scanner.": "A big screen means three seconds of attention. I learned to cut everything that doesn’t help, and keep what makes people reach for their phone to scan.", "Visuel d’annonce de La Minute de l’Emploi": "La Minute de l’Emploi announcement visual", "Le visuel sur l’écran géant du Palais des Sports": "The visual on the big screen of the Palais des Sports", "Offre du jour sur l’écran géant": "Job of the day on the big screen", "Déclinaison de l’offre du jour": "Job of the day, variation", "T-shirt Octobre Rose": "Pink October T-shirt", "Campagne, textile, Instagram": "Campaign, textile, Instagram", "Alternance aux Levallois Metropolitans, avec le LSC et l’Institut Rafaël": "Work-study at Levallois Metropolitans, with the LSC and Institut Rafaël", "Design du t-shirt et du carrousel Instagram": "Design of the T-shirt and the Instagram carousel", "T-shirt recto verso, carrousel de 9 slides": "Two-sided T-shirt, 9-slide carousel", "Le t-shirt solidaire du club pour Octobre Rose, en partenariat avec l’Institut Rafaël, pour sensibiliser à la lutte contre le cancer du sein.": "The club’s charity T-shirt for Pink October, in partnership with Institut Rafaël, to raise awareness of the fight against breast cancer.", "Réunir le club et la santé sur un même vêtement : les Metropolitans, le LSC et l’Institut Rafaël côte à côte, pour que le t-shirt porte l’équipe autant que la cause.": "Bringing the club and health together on one garment: the Metropolitans, the LSC and Institut Rafaël side by side, so the T-shirt carries the team as much as the cause.", "Le t-shirt a été produit à partir de ma maquette, puis porté par les joueurs et le staff le 23 octobre, contre Orléans.": "The T-shirt was produced from my mock-up, then worn by the players and staff on 23 October, against Orléans.", "T-shirt Octobre Rose : recto « Never Give Up » et verso Institut Rafaël": "Pink October T-shirt: “Never Give Up” front and Institut Rafaël back", "Billets et signatures mail": "Tickets and email signatures", "Supports de marque, billetterie, e-mail": "Brand materials, ticketing, email", "Alternance aux Levallois Metropolitans": "Work-study at Levallois Metropolitans", "Design des billets et des signatures mail": "Design of the tickets and email signatures", "2 billets électroniques, 17 bannières « Prochain match »": "2 e-tickets, 17 “Next game” banners", "Faire vivre l’identité des Metropolitans jusque dans les supports du quotidien : les billets reçus par les spectateurs et les signatures mail de l’équipe.": "Carrying the Metropolitans identity into everyday materials: the tickets fans receive and the team’s email signatures.", "Problématique": "Challenge", "Comment rendre un billet et une signature mail aussi attractifs qu’un visuel de match, tout en gardant les informations pratiques lisibles ?": "How do you make a ticket and an email signature as attractive as a game visual, while keeping the practical information readable?", "Réalisation": "Execution", "Deux billets pour les offres « billet + porte-clés » et « billet + écharpe », avec la promotion de la Double Game Week. Puis une bannière par match à domicile de la saison d’Élite 2 : l’adversaire, la date, la journée, et un joueur différent à chaque fois.": "Two tickets for the “ticket + keyring” and “ticket + scarf” offers, promoting Double Game Week. Then one banner per home game of the Élite 2 season: the opponent, the date, the matchday, and a different player each time.", "Logo, co-branding": "Logo, co-branding", "Alternance aux Levallois Metropolitans, partenariat avec l’association Sport dans la Ville": "Work-study at Levallois Metropolitans, partnership with the Sport dans la Ville charity", "Création du logo commun et du visuel d’annonce": "Design of the joint logo and the announcement visual", "Logo commun, visuel d’annonce du partenariat": "Joint logo, partnership announcement visual", "Un partenariat entre l’association Sport dans la Ville et les Levallois Metropolitans, autour de l’insertion professionnelle par le sport.": "A partnership between the Sport dans la Ville charity and the Levallois Metropolitans, around getting young people into work through sport.", "Comment associer deux identités fortes dans un seul logo, sans que l’une n’efface l’autre ?": "How do you combine two strong identities in a single logo without one erasing the other?", "Garder la silhouette urbaine et le message « Du Sport à l’Emploi » de Sport dans la Ville, et placer le blason des Metropolitans à la place du « O » de SPORT.": "Keeping Sport dans la Ville’s urban skyline and its “From Sport to Work” message, and placing the Metropolitans crest in place of the “O” in SPORT.", "Coulisses du tournage avec Partouche": "Behind the scenes of the Partouche shoot", "Vidéo, post LinkedIn": "Video, LinkedIn post", "Tournage, montage et texte": "Filming, editing and copy", "Une vidéo verticale, un post LinkedIn": "A vertical video, a LinkedIn post", "Le club tourne un contenu sur mesure pour son partenaire Partouche. Je filme les coulisses, je monte la vidéo et j’écris le post LinkedIn qui l’accompagne.": "The club shoots tailor-made content for its partner Partouche. I film the behind the scenes, edit the video and write the LinkedIn post that goes with it.", "Vidéo des coulisses du tournage avec Partouche": "Behind-the-scenes video of the Partouche shoot", "Stories du club": "Club stories", "Vidéo verticale, Instagram": "Vertical video, Instagram", "Tournage et montage": "Filming and editing", "4 stories Instagram": "4 Instagram stories", "Les coulisses de l’équipe en format story : entraînements, shooting, avant-match. Filmé au téléphone, monté pour Instagram.": "The team behind the scenes in story format: training, shooting, pre-game. Shot on a phone, edited for Instagram.", "Rédaction, LinkedIn": "Copywriting, LinkedIn", "Le texte uniquement. Visuels et photos : le club.": "The copy only. Visuals and photos: the club.", "11 posts LinkedIn": "11 LinkedIn posts", "Après-match, annonces, partenaires, coulisses : j’écris les posts LinkedIn du club, avec une accroche qui donne envie de cliquer sur « voir plus ».": "Post-game, announcements, partners, behind the scenes: I write the club’s LinkedIn posts, with a hook that makes people click “see more”.", "Identité visuelle, print, événement solidaire": "Visual identity, print, charity event", "Projet d’école, en 1re année de BTS Communication chez Igensia": "School project, first year of my BTS in Communication at Igensia", "Identité visuelle, affiches et print": "Visual identity, posters and print", "Identité, frise, bannières, affiches, série « Le saviez-vous ? », signalétique des bacs, stickers, vidéo": "Identity, frieze, banners, posters, “Did you know?” series, bin signage, stickers, video", "Organiser un vide-dressing solidaire à l’école Igensia et créer toute sa communication, pour collecter un maximum de vêtements et financer les actions de l’association Cop’1.": "Organising a charity clothing sale at Igensia school and creating all its communication, to collect as many clothes as possible and fund the work of the Cop’1 charity.", "Comment créer une identité claire et impactante pour générer un fort taux de participation ?": "How do you create a clear, striking identity that drives strong participation?", "Résultat": "Result", "Plus de 50 kg de vêtements collectés et environ 500 € reversés à l’association.": "Over 50 kg of clothes collected and around €500 donated to the charity.", "Vidéo de l’opération File tes fringues !": "Video of the File tes fringues! operation", "Vidéo, aftermovie": "Video, aftermovie", "Alternance chez YO Agency": "Work-study at YO Agency", "Tout : préparation, tournage, montage": "Everything: preparation, filming, editing", "Une vidéo résumé pour une diffusion interne et externe": "A recap video for internal and external release", "Le Snowflake World Tour du 6 octobre 2025 : présenter l’événement clairement et valoriser les projets clients et les échanges avec les partenaires.": "The Snowflake World Tour on 6 October 2025: presenting the event clearly and showcasing client projects and conversations with partners.", "Diffusion": "Release", "Interne et externe. Vidéo validée par les responsables événementiels.": "Internal and external. Video approved by the event managers.", "Aftermovie du Snowflake World Tour": "Snowflake World Tour aftermovie", "Image extraite de l’aftermovie": "Still from the aftermovie", "Vidéo courte, présentation": "Short video, presentation", "Tout, de l’idée au montage": "Everything, from the idea to the edit", "Une vidéo courte de présentation": "A short presentation video", "Présenter les services de l’agence de manière innovante.": "Presenting the agency’s services in an original way.", "Comment capter l’attention dès les premières secondes ?": "How do you grab attention from the very first seconds?", "Vidéo de présentation Mallette": "Mallette presentation video", "Affiches d’animation interne": "Internal event posters", "Affiches A3, communication interne": "A3 posters, internal communication", "Alternance chez YO Agency, pour IDEX": "Work-study at YO Agency, for IDEX", "Design complet": "Full design", "2 affiches A3": "2 A3 posters", "Renforcer la cohésion d’équipe et animer la vie de bureau autour de deux temps forts : le goûter de Noël et la Saint-Patrick.": "Building team spirit and livening up office life around two highlights: the Christmas afternoon tea and St Patrick’s Day.", "Comment donner envie de se rassembler tout en respectant l’identité de l’entreprise ?": "How do you make people want to get together while respecting the company’s identity?", "Parti pris": "Approach", "Une affiche chaleureuse pour Noël, une affiche ludique en vert, avec des trèfles, pour la Saint-Patrick.": "A warm poster for Christmas, a playful green one with shamrocks for St Patrick’s Day.", "Newsletter, communication interne, RSE": "Newsletter, internal communication, CSR", "Communication interne pour IDEX": "Internal communication for IDEX", "Design": "Design", "Newsletter interne": "Internal newsletter", "Une newsletter interne pour mobiliser les collaborateurs autour d’Odysséa, la course contre le cancer du sein, avec des contraintes de calendrier et de dossards.": "An internal newsletter to rally employees around Odysséa, the run against breast cancer, with calendar and bib constraints.", "Comment informer, sensibiliser et faire s’inscrire les collaborateurs en respectant les codes de la communication interne ?": "How do you inform, raise awareness and get employees to sign up while respecting the codes of internal communication?", "110 participants de tous niveaux.": "110 participants of all levels.", "Carrousel Octobre Rose": "Pink October carousel", "Signatures mail": "Email signatures", "« Le score ne raconte pas tout. »": "“The score doesn’t tell the whole story.”", "Alternance · Metropolitans × France Travail": "Work-study · Metropolitans × France Travail", "Écran géant": "Big screen", "Alternance · Metropolitans × Institut Rafaël": "Work-study · Metropolitans × Institut Rafaël", "Textile, carrousel": "Textile, carousel", "Alternance · Metropolitans": "Work-study · Metropolitans", "Supports de marque": "Brand materials", "Alternance · Metropolitans × Sport dans la Ville": "Work-study · Metropolitans × Sport dans la Ville", "Stories Instagram": "Instagram stories", "Posts LinkedIn": "LinkedIn posts", "Projet d’école · BTS Communication, Igensia": "School project · BTS in Communication, Igensia", "Identité, print, vidéo": "Identity, print, video", "Alternance · YO Agency": "Work-study · YO Agency", "Vidéo": "Video", "Alternance · YO Agency, pour IDEX": "Work-study · YO Agency, for IDEX", "Affiches A3": "A3 posters", "Communication interne · IDEX": "Internal communication · IDEX", "Filtrer : écran 16:9": "Filter: 16:9 screen", "Filtrer : vertical 9:16": "Filter: vertical 9:16", "Filtrer : affiche et print": "Filter: poster and print", "Filtrer : textile": "Filter: textile", "Projets": "Projects", "Bord terrain": "Courtside", "Écrire à Mattéo →": "Write to Mattéo →", "Fermer": "Close", "Accès": "Quick", "rapides": "links", "Les vidéos de l'année en un montage.": "The year’s videos in one edit.", "4 matchs filmés du bord du terrain, 78 vidéos.": "4 games filmed courtside, 78 videos.", "Parcours en une page, PDF.": "My background on one page, PDF.", "Alternance aux Metropolitans, 2 ans chez YO Agency.": "Work-study at the Metropolitans, 2 years at YO Agency.", "Identités, contenus et vidéos pour le sport, les marques et les événements.": "Identities, content and videos for sport, brands and events.", "Vue d'ensemble": "Overview", "Filtrer": "Filter", "Réalisations à la une": "Featured work", "Accès rapides": "Quick links", "Navigation principale": "Main navigation", "Filtrer les projets par format": "Filter projects by format", "Aller aux projets": "Skip to projects", "VDN Social Studio, accueil": "VDN Social Studio, home", "Mattéo, derrière VDN.": "Mattéo, behind VDN.", "Je suis community manager en alternance aux Levallois Metropolitans, en Élite 2. Visuels de match, stories, vidéos en direct du bord du terrain : je fais vivre le club sur les réseaux.": "I’m a work-study community manager at the Levallois Metropolitans, in Élite 2. Game visuals, stories, live videos from courtside: I bring the club to life on social media.", "Avant, j’ai passé deux ans en alternance chez YO Agency, une agence événementielle, entre salons, congrès et clients en Europe, en Asie et au Moyen-Orient. J’y ai appris à livrer vite et propre.": "Before that, I spent two years as a work-study student at YO Agency, an events agency, working on trade shows, conferences and clients in Europe, Asia and the Middle East. That’s where I learned to deliver fast and clean.", "En ce moment": "Right now", "Community manager en alternance, Levallois Metropolitans": "Work-study community manager, Levallois Metropolitans", "Bachelor communication audiovisuelle & marketing": "Bachelor’s in audiovisual communication & marketing", "Avant": "Before", "BTS Communication, Igensia": "BTS in Communication, Igensia", "2 ans en alternance chez YO Agency": "2 years of work-study at YO Agency", "Je cherche": "Looking for", "Des missions freelance pour des clubs, des marques et des événements": "Freelance work for clubs, brands and events", "Ma règle": "My rule", "Une idée simple, poussée jusqu’au détail.": "A simple idea, pushed down to the last detail.", "Voir mon CV →": "See my CV →", "Télécharger (PDF)": "Download (PDF)", "Mattéo Vandenesse, debout devant un mur de lattes de bois, en veste sombre et t-shirt blanc": "Mattéo Vandenesse, standing in front of a wooden slat wall, in a dark jacket and white T-shirt", "Un logo, des visuels pour tes réseaux, une vidéo d’événement ? Écris-moi, je réponds sous 48 h.": "A logo, visuals for your socials, an event video? Write to me, I reply within 48 hours.", "Copier l’e-mail": "Copy email", "E-mail copié ✓": "Email copied ✓", "Ton projet": "Your project", "Identité": "Identity", "Contenus sociaux": "Social content", "Événementiel": "Events", "Autre": "Other", "Ton nom": "Your name", "Ton e-mail": "Your email", "Échéance": "Deadline", "Ton message": "Your message", "Envoyer →": "Send →", "Tes infos servent uniquement à te répondre. Elles ne sont ni revendues ni utilisées pour de la prospection.": "Your details are only used to reply to you. They are never sold or used for prospecting.", "Dis-moi ton nom ou celui de ta structure.": "Tell me your name or your organisation’s.", "Ton e-mail semble incomplet.": "Your email looks incomplete.", "Écris-moi quelques mots sur ton projet.": "Write me a few words about your project.", "Merci ! C’est bien parti, je te réponds sous 48 h.": "Thanks! It’s on its way, I’ll reply within 48 hours.", "L'envoi n'a pas marché. Écris-moi directement à matteo.vandenesse@gmail.com.": "Sending failed. Email me directly at matteo.vandenesse@gmail.com.", "Je ne sais pas encore": "Not sure yet", "Moins de 300 €": "Under €300", "300 à 800 €": "€300 to €800", "800 à 1 500 €": "€800 to €1,500", "Plus de 1 500 €": "Over €1,500", "Pas de date précise": "No set date", "Urgent (moins de 2 semaines)": "Urgent (under 2 weeks)", "Dans le mois": "Within the month", "D'ici 1 à 3 mois": "In 1 to 3 months", "Réseaux": "Social", "Tags": "Tags", "Cadre": "Setting", "Rôle": "Role", "Livrables": "Deliverables", "← Tous les projets": "← All projects", "Un projet similaire ? Écrire à Mattéo →": "A similar project? Write to Mattéo →", "Projet précédent": "Previous project", "Projet suivant": "Next project", "Fermer ×": "Close ×", "Lecteur vidéo": "Video player", "Vidéo précédente": "Previous video", "Vidéo suivante": "Next video", "Post LinkedIn": "LinkedIn post", "Vidéos du t-shirt porté en match": "Videos of the T-shirt worn at the game", "Échauffement": "Warm-up", "Présentation des joueurs": "Player introductions", "Le banc": "The bench", "Les matchs à domicile des Levallois Metropolitans, en Élite 2, filmés du bord du terrain en vertical et publiés pendant la rencontre.": "Levallois Metropolitans home games in Élite 2, filmed courtside in vertical and posted during the game.", "Victoire": "Win", "Défaite": "Loss", "Le t-shirt porté : le banc des Metropolitans": "The T-shirt worn: the Metropolitans bench", "Le t-shirt porté : recto « Never Give Up » sur le staff": "The T-shirt worn: “Never Give Up” front on the staff", "Le t-shirt porté : les joueurs à la présentation": "The T-shirt worn: the players at the introductions", "La Minute de l’Emploi": "La Minute de l’Emploi (Job Minute)"};
 (function(){
-const $=s=>document.querySelector(s);
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const EN=window.LANG==='en',RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;};
-(function(){const h=document.getElementById('h1');if(!h)return;
-  if(window.LANG==='en')h.innerHTML='From the idea <span class="I">all the way to</span> the court.';
-  /* titre révélé mot par mot (retours à la ligne naturels) */
-  let k=0;const wrap=node=>{[...node.childNodes].forEach(n=>{if(n.nodeType===3){const f=document.createDocumentFragment();n.nodeValue.split(/(\s+)/).forEach(p=>{if(!p)return;if(/^\s+$/.test(p)){f.appendChild(document.createTextNode(p));return;}const s=document.createElement('span');s.className='w';s.style.animationDelay=(0.08+k++*0.045).toFixed(2)+'s';s.textContent=p;f.appendChild(s);});n.replaceWith(f);}else if(n.nodeType===1){n.classList.add('w');n.style.animationDelay=(0.08+k++*0.045).toFixed(2)+'s';}});};
-  wrap(h);h.setAttribute('aria-label',h.textContent.replace(/\s+/g,' ').trim());})();
-const RM=matchMedia('(prefers-reduced-motion: reduce)').matches, TOUCH=matchMedia('(hover:none)').matches;
-const P=id=>PROJECTS.find(p=>p.id===id);
-const FILTERS={identite:'Identité',contenus:'Contenus sociaux',video:'Vidéo',evenementiel:'Événementiel'};
 function track(n){try{window.goatcounter&&goatcounter.count&&goatcounter.count({path:n,title:n,event:true});}catch(e){}}
-function vid(src,poster){const v=el('video');v.src=src;if(poster)v.poster=poster;v.playsInline=true;v.setAttribute('playsinline','');v.setAttribute('controlslist','nodownload noplaybackrate');v.disablePictureInPicture=true;return v;}
+const ALIAS={orcar:'octrose',or:'octrose',sn:'snow',mal:'mallette',aff:'affiches'};
+let last=null;
+const lockOn=()=>{document.documentElement.style.overflow='hidden';},lockOff=()=>{if($('#fiche').hidden&&$('#pl').hidden&&$('#lbx').hidden&&$('#ov').hidden)document.documentElement.style.overflow='';};
 
-/* ── études de cas ── */
-const CASES={
-  ft:{titre:'La Minute de l’Emploi',client:'France Travail × Levallois Metropolitans',annee:'2026',role:'Design des visuels écran géant et texte du post LinkedIn',
-    livrables:'Visuel d’annonce 16:9, une « offre du jour » par match, post LinkedIn',key:['1 offre','d’emploi locale à chaque match à domicile'],
-    brand:'rgba(255,214,0,.55)',
-    contexte:['France Travail et les Levallois Metropolitans lancent La Minute de l’Emploi. À chaque match à domicile, une offre d’emploi locale passe sur l’écran géant du Palais des Sports Marcel-Cerdan, devant le public du match.'],
-    pb:'Comment rendre une offre d’emploi aussi lisible et rythmée qu’un temps fort de match ?',
-    parti:['Traiter l’offre comme un moment du match, pas comme une annonce administrative. Les couleurs du club, un chrono qui donne le rythme, et une hiérarchie pensée pour être lue de loin, en quelques secondes : le poste, l’entreprise, le lieu, le contrat, le salaire.','Un appel à l’action en trois temps, comme une action de jeu : « Scanne › Postule › Décroche ! », avec un QR code pour postuler en un scan.'],
-    real:['Un visuel d’annonce du dispositif, puis un gabarit « offre du jour » décliné à chaque match, et le post LinkedIn qui raconte la première.'],
-    imgs:[['media/ft-metropolitans-1.jpg','Visuel 1 : annonce de « La minute de l’emploi »','wide'],['media/li-ft-ecran.jpg','L’offre du jour sur l’écran géant, pendant le match'],['media/ft-metropolitans-2.jpg','Visuel 2 : l’offre du jour, avec QR code pour postuler'],['media/ft-metropolitans-3.jpg','Visuel 3 : nouvelle offre du jour, agent d’entretien à la piscine de Neuilly','wide']],
-    res:[['Dès le 1er match','Un CDI de diagnostiqueur smartphones chez Pixamania, à Levallois-Perret, en ligne sur l’écran géant et accessible en un scan']],
-    retiens:'Un écran géant, c’est trois secondes d’attention, pas une de plus. J’ai appris à couper tout ce qui ne sert pas, et à garder ce qui donne envie de sortir son téléphone pour scanner.',
-    part:'le design des visuels et le texte du post LinkedIn'},
-  octrose:{client:'Levallois Metropolitans × Institut Rafaël',annee:'2026',role:'Design du t-shirt et du carrousel Instagram',livrables:'T-shirt recto verso, carrousel de 9 slides',key:['23.10','t-shirt porté par les joueurs et le staff en match'],
-    extra:'orcar',part:'le design du t-shirt et du carrousel'},
-  ftf:{client:'Cop’1 Solidarités étudiantes',annee:'2025',role:'Identité, supports print et vidéo',livrables:'Identité, affiches, bannières, infographie, stickers, signalétique, vidéo',key:['+50 kg','de vêtements collectés · ≈500 € reversés'],part:'toute la communication : identité, print et vidéo'}
-};
+/* ── filtres par format ── */
+let cur=null;
+function filt(f){cur=cur===f?null:f;$$('.pict button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.f===cur)));
+  $$('#wall .t,#list a').forEach(t=>t.classList.toggle('off',!!cur&&!t.dataset.f.split(' ').includes(cur)));
+  if(cur){track('filtre: '+cur);$('#projets').scrollIntoView({behavior:RM?'auto':'smooth'});}}
+$$('.pict button').forEach(b=>b.addEventListener('click',()=>filt(b.dataset.f)));
+/* ── vue d'ensemble ── */
+$('#vall').addEventListener('click',e=>{const on=e.currentTarget.getAttribute('aria-pressed')!=='true';e.currentTarget.setAttribute('aria-pressed',String(on));$('#wall').hidden=on;$('#list').hidden=!on;});
+/* ── menu mobile ── */
+const ov=$('#ov'),mb=$('#menu');
+mb.addEventListener('click',()=>{ov.hidden=false;mb.setAttribute('aria-expanded','true');lockOn();$('#mclose').focus();});
+function closeM(){ov.hidden=true;mb.setAttribute('aria-expanded','false');lockOff();mb.focus();}
+$('#mclose').addEventListener('click',closeM);ov.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ov.hidden=true;mb.setAttribute('aria-expanded','false');lockOff();}));
 
-/* ── grille ── */
-const CARDS=[
-  {id:'ft',size:'big',f:['contenus','evenementiel']},
-  {id:'octrose',size:'big',f:['identite','contenus','evenementiel'],cover:'media/octobre-rose-porte-1.jpg'},
-  {id:'ftf',size:'big',f:['identite','evenementiel','video'],cover:'media/ftf-affiche-collecte.jpg'},
-  {id:'snow',size:'h',f:['video','evenementiel'],part:'tournage + montage'},
-  {stories:1,size:'h',f:['video','contenus'],part:'tournage + montage'},
-  {id:'ody',f:['contenus','evenementiel'],key:['110','inscrits'],part:'design'},
-  {id:'mallette',size:'h',f:['video'],part:'tournage + montage'},
-  {id:'sdlv',size:'w',f:['identite'],cover:'media/sdlv-banniere.jpg',part:'logo'},
-  {post:1,size:'h',f:['video','contenus'],part:'tournage, montage, texte'},
-  {copy:1,size:'w',f:['contenus'],part:'texte uniquement'},
-  {id:'bil',f:['identite'],part:'design'},
-  {id:'affiches',f:['evenementiel'],part:'design'},
-];
-const grid=$('#grid'),filters=$('#filters');
-const IG=POSTS.filter(p=>p.reseau==='instagram'&&p.video);
-const COPY=POSTS.filter(p=>p.copy&&!p.full);
-const BEST=[POSTS[2],POSTS[8],POSTS[9]].filter(Boolean);
+/* ── lecteur vertical (Bord terrain, vidéos du t-shirt) ── */
+const pl=$('#pl'),pv=$('#plv'),pk=$('#plk');let PL=[],pj=0;
+function loadP(){const s=PL[pj];pv.src=s.src;pv.poster=s.poster||'';pv.muted=false;pv.play().catch(()=>{pv.muted=true;pv.play().catch(()=>{});});
+  pk.querySelectorAll('button').forEach((b,i)=>{b.setAttribute('aria-current',String(i===pj));if(i===pj)b.scrollIntoView({block:'nearest',inline:'nearest'});});
+  $('#plp').disabled=pj===0;$('#pln').disabled=pj===PL.length-1;}
+function openPl(list,start,title,meta){last=document.activeElement;PL=list;pj=start||0;$('#pl-t').textContent=title;$('#pl-m').textContent=meta||'';
+  pk.innerHTML='';PL.forEach((s,i)=>{const b=el('button');b.type='button';b.setAttribute('aria-label',(EN?'Video ':'Vidéo ')+(i+1)+(s.label?', '+s.label:''));
+    const im=el('img');im.src=s.poster;im.alt='';im.loading='lazy';b.appendChild(im);if(s.label)b.appendChild(el('span',null,s.label));b.addEventListener('click',()=>{pj=i;loadP();});pk.appendChild(b);});
+  pl.hidden=false;lockOn();loadP();$('#plc').focus();}
+function closePl(){pv.pause();pv.removeAttribute('src');pv.load();pl.hidden=true;lockOff();last&&last.focus({preventScroll:true});}
+pv.addEventListener('ended',()=>{if(pj<PL.length-1){pj++;loadP();}});
+$('#plp').addEventListener('click',()=>{if(pj>0){pj--;loadP();}});$('#pln').addEventListener('click',()=>{if(pj<PL.length-1){pj++;loadP();}});
+$('#plc').addEventListener('click',closePl);
+
+/* ── Bord terrain ── */
+const fmtD=d=>new Date(d+'T12:00:00').toLocaleDateString(EN?'en-GB':'fr-FR',{day:'numeric',month:'short',year:'numeric'});
+const opp=m=>(m.match.split(' – ')[1]||m.match);
+LIVE.forEach((m,i)=>{const cv=m.clips[Math.min(m.cover||0,m.clips.length-1)][0];const n=m.clips.length;
+  const b=el('button','mc');b.type='button';
+  b.setAttribute('aria-label',m.match+', '+fmtD(m.date)+', '+m.score+' ('+(m.win?(EN?'win':'victoire'):(EN?'loss':'défaite'))+'), '+n+(EN?' videos':' vidéos'));
+  b.innerHTML=`<span class="pf"><img src="media/live/${cv}.jpg" alt="" loading="lazy"><span class="n">${n} vidéos</span></span><span class="mt"><img src="${(m.logos||[])[1]||''}" alt=""><b>${opp(m)}<small>${fmtD(m.date)} · ${m.comp}</small></b><span class="sc">${m.score||''}<i class="${m.win?'v':''}">${m.win?(EN?'W':'V'):(EN?'L':'D')}</i></span></span>`;
+  b.addEventListener('click',()=>{track('bord terrain: '+opp(m));openPl(m.clips.map(([c,h])=>({src:'media/live/'+c+'.mp4',poster:'media/live/'+c+'.jpg',label:h})),0,m.match,fmtD(m.date)+' · '+m.comp+' · '+m.score+' · '+n+' vidéos');});
+  $('#btrow').appendChild(b);});
+
+/* ── fiches projets ── */
+const fi=$('#fiche');
 function quote(t){const m=t.match(/«\s*(.+?)\s*»/);return m?m[1]:t;}
-/* images chargées seulement à l'approche (premier chargement léger) */
-const lazyIO='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;lazyIO.unobserve(e.target);e.target.querySelectorAll('img[data-src]').forEach(i=>{i.src=i.dataset.src;i.removeAttribute('data-src');});}),{rootMargin:'250px 0px'}):null;
-function media(box,src,alt){const bg=el('img','bg');bg.dataset.src=src;bg.alt='';bg.setAttribute('aria-hidden','true');bg.loading='lazy';bg.draggable=false;
-  const im=el('img');im.dataset.src=src;im.alt=alt;im.decoding='async';im.draggable=false;box.append(bg,im);if(lazyIO)lazyIO.observe(box);else{im.src=src;bg.src=src;}
-  const fit=()=>{const r=im.naturalWidth/im.naturalHeight,b=box.getBoundingClientRect(),rb=b.width/Math.max(1,b.height);const on=Math.abs(r-rb)/rb>.28;im.classList.toggle('fg',on);bg.style.display=on?'':'none';};
-  if(im.complete&&im.naturalWidth)fit();else im.addEventListener('load',fit);addEventListener('resize',()=>{if(im.naturalWidth)fit();});}
-const YEAR={ft:'2026',octrose:'2026',ftf:'2025',snow:'2025',ody:'2025',mallette:'2025',sdlv:'2026',affiches:'2025',bil:'2026'};
-/* légendes « fit check » des trois projets phares */
-const FIT={ft:[['Haut','Contenus sociaux'],['Bas','Écran géant'],['Détail','Un QR code à scanner']],
-  octrose:[['Haut','T-shirt dessiné par moi'],['Bas','Carrousel Instagram'],['Détail','Porté en match']],
-  ftf:[['Haut','Identité visuelle'],['Bas','Affiches et vidéo'],['Détail','≈ 500 € reversés']]};
-const feat=$('#feat');let num=0;
-const peek=$('#peek'),peekImg=peek.querySelector('img');
-const tiles=CARDS.map(c=>{
-  const p=c.id?P(c.id):null;const cs=c.id&&CASES[c.id];num++;
-  let title,kicker,key=cs?cs.key:c.key,part=cs?cs.part:c.part,cover,yr='2026';
-  if(p){title=(cs&&cs.titre)||p.titre;kicker=p.kicker;cover=c.cover||p.poster;yr=YEAR[c.id]||yr;}
-  else if(c.stories){title='Stories vidéo du club';kicker='Instagram · Metropolitans';cover=IG[0]&&IG[0].image;}
-  else if(c.post!=null){const q=POSTS[c.post];title='Coulisses du tournage avec Partouche';kicker='Vidéo + post LinkedIn · Metropolitans';cover=q.image;}
-  if(c.copy){title='Rédaction LinkedIn';kicker='Posts LinkedIn · Metropolitans';yr='×'+COPY.length;cover=(BEST[0]&&BEST[0].image)||'media/li-ft-ecran.jpg';}
-  const open=()=>{if(c.copy)openCopy();else if(c.stories)openPlayer(IG.map(q=>({src:q.video,poster:q.image,t:q.texte})),0,'Stories du club');else if(c.post!=null)openPost(POSTS[c.post]);else openCase(c.id);};
-  const nn='N°'+String(num).padStart(2,'0');let b;
-  if(c.size==='big'){
-    b=el('button','fit rv');b.type='button';
-    const ph=el('span','ph');const m=el('span','m');ph.appendChild(m);media(m,cover,title);
-    ph.appendChild(el('span','n',String(num).padStart(2,'0')));if(key)ph.appendChild(el('span','tag',key[0]));b.appendChild(ph);
-    const cp=el('span','cap');cp.appendChild(el('h3',null,title));cp.appendChild(el('span','by',(window.LANG==='en'?'worn by ':'porté par ')+((cs&&cs.client)||kicker)));
-    if(FIT[c.id]){const dl=el('dl');FIT[c.id].forEach(([k,v])=>{dl.appendChild(el('dt',null,k));dl.appendChild(el('dd',null,v));});cp.appendChild(dl);}
-    if(part){const pt=el('span','part');pt.appendChild(el('b',null,'Ma part'));pt.appendChild(document.createTextNode(part));cp.appendChild(pt);}
-    b.appendChild(cp);feat.appendChild(b);
-  }else{
-    b=el('button','rk rv');b.type='button';
-    b.appendChild(el('span','nn',nn));
-    const t=el('b',null,title+' ');t.appendChild(el('span','I',kicker.split(' · ')[0]));b.appendChild(t);
-    const d=el('span','d',(kicker.split(' · ')[1]||'')+' · '+yr);if(part){const ii=el('i');ii.appendChild(document.createTextNode('Ma part : '));ii.appendChild(document.createTextNode(part));d.appendChild(ii);}b.appendChild(d);
-    if(!TOUCH&&cover){b.addEventListener('mouseenter',()=>{peekImg.src=cover;peek.classList.add('on');});b.addEventListener('mouseleave',()=>peek.classList.remove('on'));
-      b.addEventListener('mousemove',e=>{peek.style.left=e.clientX+'px';peek.style.top=e.clientY+'px';});}
-    grid.appendChild(b);
-  }
-  b.dataset.f=c.f.join(' ');b.setAttribute('aria-label',title);b.addEventListener('click',()=>{peek.classList.remove('on');open();});
-  return b;});
-$('#colcount').textContent=(window.LANG==='en'?'The tunnel walk · collection 2026 · ':'Le tunnel walk · collection 2026 · ')+tiles.length+(window.LANG==='en'?' pieces':' pièces');
-/* filtres */
-[['all','Tout'],...Object.entries(FILTERS)].forEach(([k,v])=>{const b=el('button');b.type='button';b.dataset.f=k;b.setAttribute('aria-pressed',String(k==='all'));
-  b.appendChild(document.createTextNode(v));b.appendChild(el('span','n',String(k==='all'?tiles.length:tiles.filter(t=>t.dataset.f.split(' ').includes(k)).length)));
-  b.addEventListener('click',()=>{[...filters.children].forEach(x=>x.setAttribute('aria-pressed',String(x===b)));let n=0;
-    tiles.forEach(t=>{const on=k==='all'||t.dataset.f.split(' ').includes(k);t.classList.toggle('hide',!on);t.classList.remove('pop');if(on&&!RM){void t.offsetWidth;t.style.animationDelay=(n++)*40+'ms';t.classList.add('pop');}});});
-  filters.appendChild(b);});
+function postEl(q){const a=el('article');const tr=EN&&window.POST_EN&&POST_EN[POSTS.indexOf(q)]||{};if(q.image&&!q.video){const im=el('img','pi');im.src=q.image;im.alt='';im.loading='lazy';a.appendChild(im);}
+  a.appendChild(el('p','lead',tr.lead||quote(q.texte)));a.appendChild(el('p','body',tr.body||q.copy));if(q.credit)a.appendChild(el('p','cr',q.credit));return a;}
+function openF(p,push){p=ALIAS[p]||p;const d=F[p];if(!d)return false;if(fi.hidden)last=document.activeElement;const i=ORD.indexOf(p),N=ORD.length;
+  const dl=[['Date',d.date],['Tags',d.tags],['Cadre',d.cadre],['Rôle',d.role],['Livrables',d.liv]].filter(x=>x[1]).map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('');
+  const gal=d.g.map(([s,c,alt])=>{const src='media/'+s;
+    if(c==='vid'||c==='vidh')return `<figure class="${c==='vidh'?'wide':''}"><video src="${src}" poster="${src.replace('.mp4','.jpg')}" controls playsinline preload="none" controlslist="nodownload" aria-label="${alt}"></video></figure>`;
+    return `<figure class="${c}"><img src="${src}" alt="${alt}" loading="lazy"></figure>`;}).join('');
+  fi.innerHTML=`<div class="fhd"><a href="./" aria-label="VDN Social Studio, accueil"><img src="logo/vdn-logo-court-noir.svg" alt=""></a><button type="button" class="fx">Fermer ×</button></div>
+  <div class="fh"><div><h1 id="f-t" tabindex="-1">${d.t}</h1><dl>${dl}</dl></div>
+   <div class="tx">${d.tx.map(([h,t])=>`<div><h4>${h}</h4><p>${t}</p></div>`).join('')}</div>
+   <div class="nv"><button type="button" data-go="${ORD[(i+N-1)%N]}" aria-label="Projet précédent">←</button><span>${i+1}/${N}</span><button type="button" data-go="${ORD[(i+1)%N]}" aria-label="Projet suivant">→</button></div></div>
+  ${gal?`<div class="gal">${gal}</div>`:''}`;
+  if(d.vids){const P=PROJECTS.find(x=>x.id===d.vids);if(P&&P.vids){const w=el('div','fvids');w.appendChild(el('h2',null,'Vidéos du t-shirt porté en match'));const r=el('div','row');
+    const list=P.vids.map(([v,l])=>({src:'media/or-tshirt/'+v+'.mp4',poster:'media/or-tshirt/'+v+'.jpg',label:l}));
+    list.forEach((s,k)=>{const b=el('button');b.type='button';b.setAttribute('aria-label',s.label+', '+(EN?'video ':'vidéo ')+(k+1));const im=el('img');im.src=s.poster;im.alt='';im.loading='lazy';b.append(im,el('span',null,s.label));
+      b.addEventListener('click',()=>openPl(list,k,d.t,list.length+' vidéos'));r.appendChild(b);});w.appendChild(r);fi.appendChild(w);}}
+  if(d.post!=null&&POSTS[d.post]){const w=el('div','fpost');w.appendChild(el('h2',null,'Post LinkedIn'));w.appendChild(postEl(POSTS[d.post]));fi.appendChild(w);}
+  if(d.posts==='copy'){const w=el('div','fpost');POSTS.filter(q=>q.copy&&!q.full).forEach(q=>w.appendChild(postEl(q)));fi.appendChild(w);}
+  const end=el('div','fend');end.innerHTML='<button type="button" class="fb">← Tous les projets</button><a href="#contact" class="fc">Un projet similaire ? Écrire à Mattéo →</a>';fi.appendChild(end);
+  fi.hidden=false;fi.scrollTop=0;lockOn();
+  fi.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>openF(b.dataset.go)));
+  fi.querySelector('.fx').addEventListener('click',closeF);fi.querySelector('.fb').addEventListener('click',closeF);
+  fi.querySelector('.fc').addEventListener('click',e=>{e.preventDefault();closeF(true);$('#contact').scrollIntoView();$('#f-nom').focus({preventScroll:true});});
+  if(push!==false)try{history.pushState({p},'','?p='+p+(location.search.includes('lang=')?'':''));}catch(e){}
+  document.title=d.t+' · Mattéo Vandenesse';track('projet: '+p);
+  setTimeout(()=>$('#f-t').focus({preventScroll:true}),30);return true;}
+const BASE_TITLE=document.title;
+function closeF(nofocus){fi.hidden=true;fi.innerHTML='';lockOff();document.title=BASE_TITLE;try{history.pushState({},'',location.pathname);}catch(e){}if(nofocus!==true&&last)last.focus({preventScroll:true});}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-p]');if(!a||a.closest('.fiche'))return;if(F[ALIAS[a.dataset.p]||a.dataset.p]){e.preventDefault();openF(a.dataset.p);}});
+addEventListener('popstate',()=>{const p=new URLSearchParams(location.search).get('p');if(p&&F[ALIAS[p]||p])openF(p,false);else if(!fi.hidden){fi.hidden=true;fi.innerHTML='';lockOff();document.title=BASE_TITLE;}});
 
-/* ── fiche projet ── */
-const sheet=$('#sheet'),sb=$('#s-body');let lastFocus=null,curId=null;
-function sec(n,label,content){const s=el('section','story wrap');const h=el('h2');h.appendChild(el('i',null,String(n).padStart(2,'0')));h.appendChild(document.createTextNode(label));s.appendChild(h);const c=el('div','c');content(c);s.appendChild(c);return s;}
-function paras(c,arr){(Array.isArray(arr)?arr:[arr]).forEach(t=>c.appendChild(el('p',null,t)));}
-function gallery(c,imgs){const g=el('div','gal');imgs.forEach(([src,alt,w])=>{const f=el('figure',w?'wide':null);const v=el('div','vf');const m=el('div','m');const im=el('img');im.src=src;im.alt=alt;im.loading='lazy';im.draggable=false;m.appendChild(im);v.appendChild(m);f.appendChild(v);f.appendChild(el('figcaption',null,alt));g.appendChild(f);});c.appendChild(g);}
-function openCase(id){
-  const p=P(id);if(!p)return;const cs=CASES[id]||{};curId=id;lastFocus=document.activeElement;track('projet: '+p.titre);
-  sb.innerHTML='';
-  if(cs.brand)sheet.style.setProperty('--brand-glow',cs.brand);else sheet.style.removeProperty('--brand-glow');
-  const hd=el('header','wrap shead');hd.appendChild(el('span','lbl',p.kicker));const h=el('h1','t',cs.titre||p.titre);h.id='s-title';hd.appendChild(h);
-  const dl=el('dl','meta');
-  [['Client',cs.client||p.kicker],['Année',cs.annee],['Mon rôle',cs.role],['Livrables',cs.livrables]].forEach(([k,v])=>{if(!v)return;const d=el('div');d.appendChild(el('dt',null,k));d.appendChild(el('dd',null,v));dl.appendChild(d);});
-  const key=cs.key||(p.res&&p.res[0]);if(key){const d=el('div','key');d.appendChild(el('dt',null,'Chiffre clé'));const dd=el('dd');dd.appendChild(el('strong',null,key[0]));dd.appendChild(el('span',null,key[1]));d.appendChild(dd);dl.appendChild(d);}
-  hd.appendChild(dl);
-  if(cs.part){const pt=el('span','part');pt.appendChild(el('b',null,'Ma part :'));pt.appendChild(document.createTextNode(' '+cs.part));hd.appendChild(pt);}
-  const hero=el('div','shero');hero.appendChild(el('div','halo'));const vf=el('div','vf');const m=el('div','m');
-  if(p.video&&id!=='ftf'){const v=vid(p.video,p.poster);v.controls=true;v.preload='metadata';m.appendChild(v);}else{const im=el('img');im.src=(cs.imgs&&cs.imgs[0][0])||p.poster;im.alt=p.titre;im.draggable=false;m.appendChild(im);}
-  vf.appendChild(m);hero.appendChild(vf);hd.appendChild(hero);sb.appendChild(hd);
-  let n=1;
-  if(cs.contexte||p.obj)sb.appendChild(sec(n++,'Contexte',c=>paras(c,cs.contexte||p.obj)));
-  if(cs.pb||p.pb)sb.appendChild(sec(n++,'Problématique',c=>c.appendChild(el('p','q',cs.pb||p.pb))));
-  if(cs.parti)sb.appendChild(sec(n++,'Parti pris',c=>paras(c,cs.parti)));
-  sb.appendChild(sec(n++,'Réalisation',c=>{paras(c,cs.real||p.brief);let imgs=cs.imgs||(p.images||[]).map(([s,a,w])=>[s,a,w?'wide':null]);
-    if(cs.extra){const x=P(cs.extra);if(x)imgs=imgs.concat(x.images.slice(0,4).map(([s,a])=>[s,a]));}if(imgs.length)gallery(c,imgs.slice(id==='ft'?1:0,id==='ft'?99:8));
-    if(p.vids&&p.vids.length){const g=el('div','gal');p.vids.slice(0,4).forEach(([nm,cap])=>{const f=el('figure');const v=vid('media/or-tshirt/'+nm+'.mp4','media/or-tshirt/'+nm+'.jpg');v.controls=true;v.preload='none';v.style.borderRadius='20px';v.style.width='100%';f.appendChild(v);f.appendChild(el('figcaption',null,cap));g.appendChild(f);});c.appendChild(g);}}));
-  const res=cs.res||p.res;if(res)sb.appendChild(sec(n++,'Résultat',c=>{const r=el('div','res');res.forEach(([a,b])=>{const d=el('div');d.appendChild(el('strong',null,a));d.appendChild(el('span',null,b));r.appendChild(d);});c.appendChild(r);}));
-  if(cs.retiens)sb.appendChild(sec(n++,'Ce que j’en retiens',c=>{c.appendChild(el('p','q',cs.retiens));}));
-  const cta=el('div','wrap');const box=el('div','cta-sim');const t=el('div');t.appendChild(el('h2','t','Un projet similaire ?'));t.appendChild(el('p',null,'Raconte-moi ton idée, je te réponds sous 48 h avec une proposition.'));
-  const bt=el('button','btn',null);bt.type='button';bt.appendChild(el('span',null,'Parlons-en'));bt.appendChild(el('b','ar','→'));bt.addEventListener('click',similar);box.append(t,bt);cta.appendChild(box);sb.appendChild(cta);
-  const order=CARDS.filter(c=>c.id).map(c=>c.id),i=order.indexOf(id),nx=order[(i+1)%order.length];
-  const np=el('div','wrap nextp');const b1=el('button','back','← Toute la collection');b1.type='button';b1.addEventListener('click',closeCase);
-  const b2=el('button','btn sec');b2.type='button';{const sp=el('span');sp.appendChild(el('span',null,'Projet suivant :'));sp.appendChild(document.createTextNode(' '));sp.appendChild(el('span',null,(CASES[nx]&&CASES[nx].titre)||P(nx).titre));b2.appendChild(sp);};b2.appendChild(el('b','ar','→'));b2.addEventListener('click',()=>{openCase(nx);sheet.scrollTo({top:0});});np.append(b1,b2);sb.appendChild(np);
-  sheet.scrollTop=0;sheet.classList.add('open');sheet.setAttribute('aria-hidden','false');document.documentElement.style.overflow='hidden';
-  try{history.replaceState(null,'','?p='+id);}catch(e){}
-  setTimeout(()=>$('#s-back').focus({preventScroll:true}),50);
-}
-function closeCase(){sheet.classList.remove('open');sheet.setAttribute('aria-hidden','true');document.documentElement.style.overflow='';sheet.querySelectorAll('video').forEach(v=>v.pause());try{history.replaceState(null,'',location.pathname);}catch(e){}if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});}
-function similar(){const map={ft:'Contenus sociaux',octrose:'Identité',ftf:'Identité',snow:'Vidéo',mallette:'Vidéo',ody:'Événementiel',affiches:'Événementiel',bil:'Identité',sdlv:'Identité'};closeCase();pick(map[curId]||'Autre');setTimeout(()=>$('#contact').scrollIntoView({behavior:RM?'auto':'smooth'}),RM?0:420);}
-$('#s-back').addEventListener('click',closeCase);$('#s-sim2').addEventListener('click',similar);
-/* posts vidéo et rédaction : version simple dans la même fiche */
-function simpleSheet(title,kicker,build){lastFocus=document.activeElement;curId=null;sb.innerHTML='';const hd=el('header','wrap shead');hd.appendChild(el('span','lbl',kicker));const h=el('h1','t',title);h.id='s-title';hd.appendChild(h);sb.appendChild(hd);build(sb);
-  const np=el('div','wrap nextp');const b1=el('button','back','← Toute la collection');b1.type='button';b1.addEventListener('click',closeCase);np.appendChild(b1);sb.appendChild(np);
-  sheet.scrollTop=0;sheet.classList.add('open');sheet.setAttribute('aria-hidden','false');document.documentElement.style.overflow='hidden';setTimeout(()=>$('#s-back').focus({preventScroll:true}),50);}
-function openCopy(){track('rédaction linkedin');simpleSheet('Rédaction LinkedIn','Contenus sociaux · Levallois Metropolitans',sb=>{
-  const w=el('div','wrap');const pt=el('span','part');pt.appendChild(el('b',null,'Ma part :'));pt.appendChild(document.createTextNode(' le texte uniquement. Visuels et photos : le club.'));w.appendChild(pt);sb.appendChild(w);
-  COPY.forEach((q,i)=>sb.appendChild(sec(i+1,'Post LinkedIn',c=>{c.appendChild(el('p','q',quote(q.texte)));const d=el('div');d.style.whiteSpace='pre-line';d.style.fontSize='16px';d.textContent=q.copy;c.appendChild(d);if(q.credit)c.appendChild(el('p','lbl',q.credit));})));});}
-function openPost(q){simpleSheet('Coulisses du tournage avec Partouche','Vidéo + post LinkedIn · Metropolitans',sb=>{
-  const w=el('div','wrap');const pt=el('span','part');pt.appendChild(el('b',null,'Ma part :'));pt.appendChild(document.createTextNode(' le tournage, le montage et le texte.'));w.appendChild(pt);
-  const hero=el('div','shero');hero.style.maxWidth='420px';const vf=el('div','vf');const m=el('div','m');const v=vid(q.video,q.image);v.controls=true;m.appendChild(v);vf.appendChild(m);hero.appendChild(vf);w.appendChild(hero);sb.appendChild(w);
-  sb.appendChild(sec(1,'Le post',c=>{const d=el('div');d.style.whiteSpace='pre-line';d.textContent=q.copy;c.appendChild(d);}));});}
-$('#cvbtn').addEventListener('click',e=>{e.preventDefault();track('cv: aperçu');simpleSheet('CV','Parcours',sb=>{const w=el('div','wrap');const vf=el('div','vf');vf.style.maxWidth='760px';const m=el('div','m');const im=el('img');im.src='media/cv.jpg';im.alt='CV de Mattéo Vandenesse';m.appendChild(im);vf.appendChild(m);w.appendChild(vf);sb.appendChild(w);});});
-
-/* ── Mode Match ── */
-const player=$('#player'),pv=$('#p-v');let PL=[],pj=0,praf=0;
-function openPlayer(list,start,title){PL=list;pj=start||0;$('#p-tt').textContent=title;$('#p-pr').innerHTML='';PL.forEach(()=>{const i=el('i');i.appendChild(el('b'));$('#p-pr').appendChild(i);});
-  player.classList.add('open');document.documentElement.style.overflow='hidden';lastFocus=document.activeElement;loadP();setTimeout(()=>$('#p-x').focus(),50);}
-function loadP(){const s=PL[pj];pv.src=s.src;pv.poster=s.poster||'';pv.muted=true;pv.play().catch(()=>{});[...$('#p-pr').children].forEach((x,k)=>x.firstChild.style.width=k<pj?'100%':'0');
-  cancelAnimationFrame(praf);const bar=$('#p-pr').children[pj];(function t(){if(pv.duration&&bar)bar.firstChild.style.width=(pv.currentTime/pv.duration*100)+'%';praf=requestAnimationFrame(t);})();}
-function nextP(){if(pj<PL.length-1){pj++;loadP();}else closeP();}
-function closeP(){cancelAnimationFrame(praf);pv.pause();player.classList.remove('open');document.documentElement.style.overflow='';if(lastFocus)lastFocus.focus({preventScroll:true});}
-pv.addEventListener('ended',nextP);$('#p-next').addEventListener('click',nextP);$('#p-prev').addEventListener('click',()=>{if(pj>0){pj--;loadP();}});$('#p-x').addEventListener('click',closeP);
-LIVE.forEach((m,mi)=>{const b=el('button','board rv');b.type='button';const c=m.clips[Math.min(m.cover||0,m.clips.length-1)][0];
-  const ph=el('span','ph');const im=el('img');im.src='media/live/'+c+'.jpg';im.alt=m.match;im.loading='lazy';ph.appendChild(im);b.appendChild(ph);
-  const sc=el('span','sc');const s=el('b',null,'0-0');const [x,z]=(m.score||'0-0').split('-');s.dataset.a=x;s.dataset.b=z;sc.appendChild(s);
-  if(m.win!=null)sc.appendChild(el('span',m.win?'w':null,m.win?'Victoire':'Défaite'));b.appendChild(sc);
-  const vs=el('span','vs');const lg=el('span','lg');(m.logos||[]).forEach((src,i)=>{const li=el('img');li.src=src;li.alt=i?(m.match.split(' – ')[1]||''):'Levallois Metropolitans';lg.appendChild(li);});vs.appendChild(lg);
-  vs.appendChild(document.createTextNode(m.match));const d=new Date(m.date+'T12:00:00');
-  vs.appendChild(el('small',null,d.toLocaleDateString(window.LANG==='en'?'en-GB':'fr-FR',{day:'2-digit',month:'2-digit'}).replace('/','.')+' · '+m.comp+' · '+m.clips.length+' vidéos'));b.appendChild(vs);
-  b.addEventListener('click',()=>openPlayer(m.clips.map(([n,h])=>({src:'media/live/'+n+'.mp4',poster:'media/live/'+n+'.jpg'})),0,m.match));
-  $('#matches').appendChild(b);});
+/* ── showreel ── */
+const lb=$('#lbx'),lv=$('#lbv');
+$('#qreel').addEventListener('click',e=>{e.preventDefault();last=document.activeElement;lv.src='media/showreel.mp4';lv.poster='media/showreel.jpg';lb.hidden=false;lockOn();lv.play().catch(()=>{});$('#lbc').focus();track('showreel');});
+function closeV(){lv.pause();lv.removeAttribute('src');lv.load();lb.hidden=true;lockOff();last&&last.focus({preventScroll:true});}
+$('#lbc').addEventListener('click',closeV);
+addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!pl.hidden)closePl();else if(!lb.hidden)closeV();else if(!ov.hidden)closeM();else if(!fi.hidden)closeF();});
 
 /* ── contact ── */
-const types=[...document.querySelectorAll('#ptype button')];let ptype='';
-function pick(t){ptype=t;types.forEach(b=>b.setAttribute('aria-pressed',String(b.textContent===t)));}
-types.forEach(b=>b.addEventListener('click',()=>pick(b.getAttribute('aria-pressed')==='true'?'':b.textContent)));
-document.querySelectorAll('[data-door="projet"]').forEach(a=>a.addEventListener('click',()=>track('porte: projet')));
-document.querySelectorAll('[data-door="recrute"]').forEach(a=>a.addEventListener('click',()=>track('porte: recrute')));
+$('#cpy').addEventListener('click',()=>{const t=$('#mail').textContent.trim(),b=$('#cpy'),lab=b.textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent=EN?'Email copied ✓':'E-mail copié ✓';setTimeout(()=>b.textContent=lab,1800);track('copie e-mail');}).catch(()=>location.href='mailto:'+t);});
 $('#cform').addEventListener('submit',async e=>{e.preventDefault();const note=$('#f-note'),btn=$('#f-send');
-  const nom=$('#f-nom').value.trim(),mail=$('#f-email').value.trim(),msg=$('#f-msg').value.trim();
-  const err=t=>{note.hidden=false;note.className='note err';note.textContent=t;};
-  if(!nom)return err('Dis-moi ton nom ou celui de ta structure.');if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail))return err('Ton e-mail semble incomplet.');if(!msg)return err('Écris-moi quelques mots sur ton projet.');
-  btn.disabled=true;const data={_subject:'Nouvelle demande depuis vdnsocialstudio.com',_template:'table',_replyto:mail,_honey:$('#bot-field').value,nom,email:mail,projet:ptype||'Non précisé',budget:$('#f-budget').value,delai:$('#f-delai').value,message:msg};
-  try{const ok=await window.vdnSend(data);if(!ok)throw 0;window.vdnNotify&&vdnNotify('Nouveau message · '+nom,(ptype?ptype+' · ':'')+data.budget+' · '+data.delai+'\n'+msg+'\n'+mail,'yellow_circle,envelope');track('formulaire: envoi');
-    $('#cform').reset();pick('');note.hidden=false;note.className='note ok';note.textContent='Merci ! C’est bien parti, je te réponds sous 48 h.';}
-  catch(x){err("L'envoi n'a pas marché. Écris-moi directement à matteo.vandenesse@gmail.com.");}btn.disabled=false;});
-$('#copy').addEventListener('click',()=>{const t=$('#mail').textContent.trim();(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{$('#copy').textContent='E-mail copié ✓';setTimeout(()=>$('#copy').textContent='Copier l’e-mail',1800);}).catch(()=>location.href='mailto:'+t);});
+  const nom=$('#f-nom').value.trim(),mail=$('#f-email').value.trim(),msg=$('#f-msg').value.trim(),tp=($('#cform input[name=type]:checked')||{}).value||'';
+  const err=(t,f)=>{note.className='err';note.textContent=t;if(f)f.focus();};
+  if(!nom)return err('Dis-moi ton nom ou celui de ta structure.',$('#f-nom'));if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail))return err('Ton e-mail semble incomplet.',$('#f-email'));if(!msg)return err('Écris-moi quelques mots sur ton projet.',$('#f-msg'));
+  btn.disabled=true;note.className='';note.textContent='';
+  const data={_subject:'Nouvelle demande depuis vdnsocialstudio.com',_template:'table',_replyto:mail,_honey:$('#bot-field').value,nom,email:mail,projet:tp||'Non précisé',budget:$('#f-budget').value,delai:$('#f-delai').value,message:msg};
+  try{const ok=await window.vdnSend(data);if(!ok)throw 0;window.vdnNotify&&vdnNotify('Nouveau message · '+nom,(tp?tp+' · ':'')+data.budget+' · '+data.delai+'\n'+msg+'\n'+mail,'yellow_circle,envelope');track('formulaire: envoi');
+    $('#cform').reset();note.className='';note.textContent='Merci ! C’est bien parti, je te réponds sous 48 h.';}
+  catch(x){err("L'envoi n'a pas marché. Écris-moi directement à "+$('#mail').textContent.trim()+".");}btn.disabled=false;});
 
-/* ── code-barres de l'étiquette ── */
-(function(){const bc=$('#bc');if(!bc)return;[2,1,3,1,1,2,1,3,2,1,1,2,3,1,2,1,1,3,1,2,2,1,3,1,1,2].forEach(w=>{const i=el('i');i.style.width=w+'px';const g=el('span');g.style.width=(w%2+1)+'px';bc.append(i,g);});})();
-/* ── showreel, apparitions, chiffres ── */
-const ease=t=>1-Math.pow(1-t,3);
-function count(e){const a=e.dataset.a,b=e.dataset.b;if(RM||a==null){if(a!=null)e.textContent=a+'-'+b;return;}const t0=performance.now();(function f(n){const k=Math.min(1,(n-t0)/1400),x=ease(k);e.textContent=Math.round(a*x)+'-'+Math.round(b*x);if(k<1)requestAnimationFrame(f);})(t0);}
-const io=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;io.unobserve(en.target);en.target.classList.add('in');en.target.querySelectorAll('.sc b').forEach(count);}),{threshold:.2});
-document.querySelectorAll('.rv').forEach(x=>io.observe(x));
-addEventListener('scroll',()=>$('#hdr').classList.toggle('sc',scrollY>$('#tunnel').offsetHeight-innerHeight*1.1),{passive:true});
-
-/* ── le tunnel : textes par-dessus la scène 3D, son d'ambiance ── */
-(function(){
-  const root=document.documentElement,st=$('#stage'),m=$('#m'),sect=$('#tunnel');
-  /* la lumière au bout du tunnel suit l'heure réelle */
-  const h=new Date().getHours()+new Date().getMinutes()/60;let c='#FFF4E6',n='lumière du jour';
-  if(h>=17&&h<20.5){c='#FFB866';n='golden hour'}else if(h>=20.5||h<6.5){c='#C9B8FF';n='projecteurs de nuit'}else if(h<9){c='#FFD9B0';n='lever du jour'}
-  if(window.LANG==='en')n={'lumière du jour':'daylight','golden hour':'golden hour','projecteurs de nuit':'night floodlights','lever du jour':'sunrise'}[n];
-  root.style.setProperty('--lum',c);$('#lumname').textContent=n;
-  function ui(p,metres){
-    const a=Math.max(0,1-p*14);st.style.setProperty('--a',a);st.style.setProperty('--v',a>0?'visible':'hidden');
-    st.style.setProperty('--h',p>.06&&p<.6?1:0);st.style.setProperty('--mo',p>.03&&p<.72?1:0);
-    const w=Math.max(0,Math.min(1,(p-.86)/.08));st.style.setProperty('--w',w);st.style.setProperty('--wv',w>0?'visible':'hidden');
-    if(metres!=null)m.textContent=metres+' m';}
-  addEventListener('vdn:p',e=>ui(e.detail.p,e.detail.metres));
-  addEventListener('scroll',()=>{if(!root.classList.contains('gl-ok')){const r=sect.getBoundingClientRect();ui(Math.max(0,Math.min(1,-r.top/(sect.offsetHeight-innerHeight))));}},{passive:true});
-  $('#enter').addEventListener('click',()=>scrollTo({top:innerHeight*1.4,behavior:RM?'auto':'smooth'}));
-  $('#showreel').addEventListener('click',()=>openPlayer([{src:'media/showreel.mp4?v=3',poster:'media/showreel.jpg?v=3'}],0,'Showreel 2026'));
-  addEventListener('vdn:open',e=>{if(e.detail&&e.detail.id)openCase(e.detail.id);});
-  /* ambiance sonore synthétisée, coupée par défaut : bourdonnement du tunnel, foule qui monte, buzzer à la sortie */
-  let ctx,crowdG,humG,on=false;const btn=$('#sound');
-  function noise(){const b=ctx.createBuffer(1,ctx.sampleRate*3,ctx.sampleRate),d=b.getChannelData(0);let l=0;for(let i=0;i<d.length;i++){const w=Math.random()*2-1;l=(l+.02*w)/1.02;d[i]=l*3.5;}const s=ctx.createBufferSource();s.buffer=b;s.loop=true;return s;}
-  function start(){ctx=new (window.AudioContext||window.webkitAudioContext)();
-    const hum=ctx.createOscillator();hum.frequency.value=50;humG=ctx.createGain();humG.gain.value=.02;hum.connect(humG).connect(ctx.destination);hum.start();
-    const nz=noise(),bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=900;bp.Q.value=.6;crowdG=ctx.createGain();crowdG.gain.value=0;nz.connect(bp).connect(crowdG).connect(ctx.destination);nz.start();}
-  function buzzer(){if(!ctx||!on)return;const g=ctx.createGain(),t=ctx.currentTime;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.12,t+.03);g.gain.setValueAtTime(.12,t+.9);g.gain.exponentialRampToValueAtTime(.0001,t+1.2);
-    [220,277].forEach(f=>{const o=ctx.createOscillator();o.type='sawtooth';o.frequency.value=f;o.connect(g);o.start();o.stop(t+1.25);});g.connect(ctx.destination);}
-  btn.addEventListener('click',()=>{on=!on;btn.setAttribute('aria-pressed',String(on));if(on&&!ctx)start();if(ctx)on?ctx.resume():ctx.suspend();track('tunnel: son '+(on?'on':'off'));});
-  addEventListener('vdn:p',e=>{if(crowdG){crowdG.gain.value=.015+Math.pow(e.detail.p,3)*.16;humG.gain.value=.02*(1-e.detail.p);}});
-  addEventListener('vdn:lights',()=>{buzzer();track('tunnel: arrivée sur le terrain');});
-})();
-
-
-/* ── clavier, liens directs, protection ── */
-addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(player.classList.contains('open'))closeP();else if(sheet.classList.contains('open'))closeCase();});
-try{const q=new URLSearchParams(location.search).get('p');if(q&&P(q))setTimeout(()=>openCase(q),RM?0:300);}catch(e){}
-window.vdnOpen=id=>openCase(id);
-document.addEventListener('contextmenu',e=>{if(e.target.closest('img,video,.fit,.rk'))e.preventDefault();});
-document.addEventListener('dragstart',e=>{if(e.target.closest('img,video'))e.preventDefault();});
+/* ── lien direct ?p= ── */
+const q=new URLSearchParams(location.search);if(q.get('p'))openF(q.get('p'),false);
 })();
 
 </script>
-<script>
-/* textes alternatifs : chaque image sans alt reçoit la légende de sa carte, sinon reste décorative */
-(function(){function fix(root){(root.querySelectorAll?root:document).querySelectorAll('img:not([alt])').forEach(function(im){var c=im.closest('[aria-label]');im.alt=c?c.getAttribute('aria-label'):'';});}
-fix(document);new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1){if(n.tagName==='IMG'&&!n.hasAttribute('alt'))fix(n.parentNode);else fix(n);}});});}).observe(document.body,{childList:true,subtree:true});})();
-</script>
-<script>(function(){var b=document.getElementById('langbtn');if(b){b.textContent=window.LANG==='en'?'FR':'EN';b.setAttribute('aria-label',window.LANG==='en'?'Passer le site en français':'Switch to English');b.lang=window.LANG==='en'?'fr':'en';}})();</script>
 <script id="i18n">
 /* ───────── Version anglaise ─────────
    Le site est écrit en français ; en anglais, chaque texte affiché est remplacé grâce au dictionnaire EN (clé = texte français exact).
@@ -839,6 +679,7 @@ fix(document);new MutationObserver(function(ms){ms.forEach(function(m){m.addedNo
     [/^(.+)\. (Vidéos filmées .+)$/,m=>m[1]+'. '+tr(m[2])],
     [/^St-Patrick$/,()=>"St Patrick's"]
   ];
+  Object.assign(EN,window.EN2||{});
   function tr(s){
     if(EN[s]!=null)return EN[s];
     for(const [re,f] of RULES){const m=s.match(re);if(m)return f(m);}
@@ -874,6 +715,6 @@ fix(document);new MutationObserver(function(ms){ms.forEach(function(m){m.addedNo
 })();
 
 </script>
-<script type="module" src="tunnel.js?v=1"></script>
+<script>(function(){var b=document.getElementById('langbtn');if(b){b.textContent=window.LANG==='en'?'FR':'EN';b.setAttribute('aria-label',window.LANG==='en'?'Passer le site en français':'Switch to English');b.lang=window.LANG==='en'?'fr':'en';}})();</script>
 </body>
 </html>
