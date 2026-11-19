@@ -705,6 +705,8 @@ html:not(.nointro) body{overflow:hidden}
 @keyframes phin{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:none}}
 .phcov{display:block}.phcov svg{position:absolute;inset:0;width:100%;height:100%;display:block}.ph-li .phcov::before,.ph-dz .phcov::before{display:none}.phcov::after{background:linear-gradient(180deg,rgba(0,0,0,0) 55%,var(--surface) 100%)}
 .nr-stack,.nr-stack img{pointer-events:none;user-select:none;-webkit-user-drag:none}
+.hl-static{cursor:default}.hl-static:hover .hl-ring{transform:none}.sheet#cv-open{cursor:default}
+#bento.netlist{display:grid}
 </style>
 <style>
 /* Instagram : tuile logo + profil */
@@ -917,7 +919,7 @@ html:not(.nointro) body{overflow:hidden}
       <div class="dock">
         <span class="mono">Alternance · 2024 – 2026</span>
         <h2>YO Agency</h2>
-        <p>Mes projets en agence événementielle 360° : vidéos d'événement et communication interne pour les clients de l'agence. Touchez un projet pour voir le brief, la problématique et les résultats.</p>
+        <p>Mes projets en agence événementielle 360° : vidéos d'événement et communication interne pour les clients de l'agence. Ouvrez le feed pour voir les projets, avec le brief, la problématique et les résultats.</p>
         <div class="counter"><b id="yo-count">00</b><span class="mono">projets<br>réalisés</span></div>
       </div>
       <div class="mgroups" id="yo-groups"></div>
@@ -928,7 +930,7 @@ html:not(.nointro) body{overflow:hidden}
     <div class="sec-head">
       <span class="mono k">Formation · BTS Communication</span>
       <h2>École</h2>
-      <p>Projets menés pendant ma formation en école. Touchez un projet pour voir le brief, la problématique et les résultats.</p>
+      <p>Projets menés pendant ma formation en école. Ouvrez le feed pour voir le brief, la problématique et les résultats de chaque projet.</p>
     </div>
     <div class="bento" id="bento"></div>
   </section>
@@ -957,7 +959,7 @@ html:not(.nointro) body{overflow:hidden}
     </div>
     <div class="cvgrid">
       <div class="paper">
-        <button class="sheet" type="button" id="cv-open" aria-label="Voir le CV en grand"><img src="media/cv.jpg" alt="CV de Mattéo Vandenesse" width="1588" height="2246"></button>
+        <div class="sheet" id="cv-open"><img src="media/cv.jpg" alt="CV de Mattéo Vandenesse" width="1588" height="2246"></div>
         <div class="act">
           <a class="btn primary" id="cv-dl" href="media/cv-matteo-vandenesse.pdf" download="CV-Matteo-Vandenesse.pdf">Télécharger le CV (PDF)</a>
           <button class="btn" type="button" id="cv-big">Voir en grand</button>
@@ -1482,6 +1484,36 @@ function profHead(o){const h=el('header','ph ph-'+o.tone);
 
 const LIART='<svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="lig" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0E0D08"/><stop offset=".55" stop-color="#2A2306"/><stop offset="1" stop-color="#5A4A06"/></linearGradient></defs><rect width="1200" height="200" fill="url(#lig)"/><g fill="none" stroke="#FFE000" stroke-opacity=".28" stroke-width="2"><circle cx="600" cy="100" r="62"/><circle cx="600" cy="100" r="16"/><line x1="600" y1="-10" x2="600" y2="210"/><path d="M1210 -20 L1010 -20 L1010 220 L1210 220"/><path d="M1210 40 L1080 40 L1080 160 L1210 160"/><path d="M1080 60 A40 40 0 0 0 1080 140"/><path d="M1210 -60 A210 210 0 0 0 1210 260"/><path d="M-10 -20 L190 -20 L190 220 L-10 220"/><path d="M-10 40 L120 40 L120 160 L-10 160"/><path d="M120 60 A40 40 0 0 1 120 140"/><path d="M-10 -60 A210 210 0 0 1 -10 260"/></g><g transform="skewX(-24)"><rect x="830" y="0" width="34" height="200" fill="#FFE000" fill-opacity=".85"/><rect x="876" y="0" width="10" height="200" fill="#FFE000" fill-opacity=".5"/><rect x="898" y="0" width="4" height="200" fill="#FFE000" fill-opacity=".35"/></g></svg>';
 const DZART='<svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice"><defs><pattern id="dzd" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#fff" fill-opacity=".14"/></pattern><linearGradient id="dzg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101219"/><stop offset="1" stop-color="#1B2236"/></linearGradient></defs><rect width="1200" height="200" fill="url(#dzg)"/><rect width="1200" height="200" fill="url(#dzd)"/><g fill="none" stroke-linecap="round"><path d="M-20 170 C180 20 360 210 560 90 S900 -10 1220 120" stroke="#fff" stroke-opacity=".85" stroke-width="3"/><path d="M-20 60 C200 140 420 10 640 150 S1000 60 1220 30" stroke="#FF7FB8" stroke-opacity=".7" stroke-width="2.5"/><path d="M100 210 C300 120 500 160 700 30 S1050 170 1220 190" stroke="#7CC8FF" stroke-opacity=".55" stroke-width="2"/></g><g stroke="#8E939C" stroke-width="1.2"><line x1="560" y1="90" x2="430" y2="168"/><line x1="560" y1="90" x2="690" y2="12"/></g><circle cx="430" cy="168" r="6" fill="#FF7FB8"/><circle cx="690" cy="12" r="6" fill="#7CC8FF"/><rect x="553" y="83" width="14" height="14" rx="2" fill="#FFE000"/><rect x="633" y="143" width="12" height="12" rx="2" fill="#0E1013" stroke="#FF7FB8" stroke-width="2"/><rect x="1003" y="53" width="12" height="12" rx="2" fill="#0E1013" stroke="#fff" stroke-width="2"/><g fill="none" stroke="#FFE000" stroke-width="1.5" stroke-dasharray="6 5"><rect x="860" y="96" width="180" height="78"/></g><g fill="#0E1013" stroke="#FFE000" stroke-width="1.5"><rect x="855" y="91" width="10" height="10"/><rect x="1035" y="91" width="10" height="10"/><rect x="855" y="169" width="10" height="10"/><rect x="1035" y="169" width="10" height="10"/></g><path d="M1062 150 l22 9 -9 4 -4 9z" fill="#fff"/><g fill="#FFE000" fill-opacity=".9"><rect x="90" y="40" width="22" height="22" rx="4"/><circle cx="150" cy="51" r="11" fill="#FF7FB8"/><circle cx="185" cy="51" r="11" fill="#7CC8FF"/></g></svg>';
+
+/* ── Feeds YO Agency et École : même présentation que Design ── */
+const YOSVG='<svg viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="2.2" fill="#fff"/><path d="M15.5 10.5l5-3v9l-5-3z" fill="#fff"/><circle cx="7" cy="10" r="1.6" fill="#E8124F"/></svg>';
+const ECSVG='<svg viewBox="0 0 24 24"><path d="M12 4L1.8 9 12 14l10.2-5z" fill="#fff"/><path d="M6 11.3v4.2c0 1.6 2.7 3 6 3s6-1.4 6-3v-4.2L12 14.3z" fill="#fff" fill-opacity=".85"/><path d="M21 9.6v5.2" stroke="#FFE000" stroke-width="1.6" stroke-linecap="round"/><circle cx="21" cy="15.6" r="1.3" fill="#FFE000"/></svg>';
+const YOART='<svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="yog" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a0710"/><stop offset="1" stop-color="#3a0d1f"/></linearGradient><linearGradient id="yob" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB27A" stop-opacity=".55"/><stop offset="1" stop-color="#FFB27A" stop-opacity="0"/></linearGradient></defs><rect width="1200" height="200" fill="url(#yog)"/><g fill="url(#yob)"><path d="M180 -10 L120 210 L300 210z"/><path d="M520 -10 L420 210 L640 210z"/><path d="M880 -10 L800 210 L1000 210z"/></g><g fill="#FFD2B0"><circle cx="180" cy="0" r="9"/><circle cx="520" cy="0" r="9"/><circle cx="880" cy="0" r="9"/></g><g fill="#fff" fill-opacity=".9"><rect x="0" y="176" width="1200" height="24" fill="#0B0306"/></g><g fill="#0B0306">'+Array.from({length:40},(_,i)=>'<circle cx="'+(i*31+12)+'" cy="'+(168+(i%3)*4)+'" r="'+(10+(i%4)*2)+'"/>').join('')+'</g><g fill="none" stroke="#E8124F" stroke-width="2" stroke-opacity=".7"><rect x="1030" y="40" width="120" height="80" rx="8"/><circle cx="1050" cy="58" r="5" fill="#E8124F"/></g></svg>';
+const ECART='<svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice"><defs><pattern id="ecp" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#7CC8FF" stroke-opacity=".12"/></pattern><linearGradient id="ecg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A1A16"/><stop offset="1" stop-color="#0F2B24"/></linearGradient></defs><rect width="1200" height="200" fill="url(#ecg)"/><rect width="1200" height="200" fill="url(#ecp)"/><line x1="90" y1="0" x2="90" y2="200" stroke="#FF7FB8" stroke-opacity=".45" stroke-width="2"/><g fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2.5" stroke-linecap="round"><path d="M160 70 h220 M160 104 h160 M160 138 h190"/></g><g fill="none" stroke="#FFE000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M640 120 l18 18 34-44"/></g><g fill="none" stroke="#22D3A6" stroke-width="2.5" stroke-opacity=".8"><circle cx="840" cy="100" r="46"/><path d="M800 60 l80 80"/></g><g fill="#fff" fill-opacity=".9" transform="translate(1000 54) rotate(18)"><rect width="110" height="16" rx="3" fill="#FFE000"/><path d="M110 0 l22 8 -22 8z" fill="#F3D9B1"/><rect width="14" height="16" fill="#FF7FB8"/></g></svg>';
+const FEEDS={
+  yo:{svg:YOSVG,bg:'linear-gradient(150deg,#FF7A9C,#B4103E)',name:'YO Agency',kicker:'Agence événementielle · alternance',sub:'Assistant chef de projet · 2024-2026 · Clichy',art:YOART,
+    list:()=>PROJECTS.filter(p=>HOME[p.id]&&HOME[p.id][0]==='yo'),rowSub:n=>'Projets · '+n+' réalisations en agence',
+    chips:['Aftermovie','Vidéo','Newsletter','Affiches','Comm’ interne'],note:'Vidéos d’événement et communication interne pour les clients de l’agence. Ouvrez un projet pour voir le brief, la problématique et les résultats.'},
+  ecole:{svg:ECSVG,bg:'linear-gradient(150deg,#2FE0B4,#0A7A66)',name:'École',kicker:'Formation · BTS Communication',sub:'Projets menés pendant ma formation',art:ECART,
+    list:()=>PROJECTS.filter(p=>!HOME[p.id]),rowSub:n=>'Projets · '+n+(n>1?' projets d’école':' projet d’école'),
+    chips:null,note:'Projets menés pendant ma formation en école. Ouvrez un projet pour voir le brief, la problématique et les résultats.'}
+};
+function feedIcon(k,cls){const f=FEEDS[k];const s=el('span','dzbig '+(cls||''));s.setAttribute('aria-hidden','true');s.style.background=f.bg;s.innerHTML=f.svg;return s;}
+function feedTile(k){const f=FEEDS[k];const ps=f.list();
+  const b=netRow('Ouvrir le feed '+f.name,feedIcon(k),f.name,f.rowSub(ps.length),ps.filter(p=>p.poster).slice(0,4).map(p=>p.poster),false);
+  b.addEventListener('click',()=>openFeed(k));return b;}
+function openFeed(k){if(typeof setU==='function')setU(null);const f=FEEDS[k];const ps=f.list();const root=el('div','lip dzp');
+  const tags=f.chips||[...new Set(ps.flatMap(p=>(p.tags||[]).slice(0,1)))].slice(0,6);
+  root.appendChild(profHead({art:f.art,avatar:feedIcon(k),kicker:f.kicker,name:f.name,sub:f.sub,
+    stats:(()=>{const c=ps.reduce((t,p)=>t+(p.images||[]).length+(p.video?1:0),0),v=ps.filter(p=>p.video).length;return [[ps.length,ps.length>1?'projets':'projet'],[c,c>1?'créations':'création'],[v,v>1?'vidéos':'vidéo']];})(),chips:tags,note:f.note,tone:'dz'}));
+  const grid=el('div','ligrid');
+  ps.forEach(p=>{const b=el('button','licell');b.type='button';b.setAttribute('aria-label','Voir le projet : '+(p.titre||''));
+    if(p.poster){const im=el('img');im.src=p.poster;im.alt='';im.loading='lazy';b.appendChild(im);}else b.style.background=p.c1;
+    if(p.video)b.appendChild(el('span','livid','▶'));
+    const fo=el('span','licf');fo.appendChild(el('span','lictx',p.titre||''));fo.appendChild(el('span','mono lir','Voir le projet →'));b.appendChild(fo);
+    b.addEventListener('click',()=>{const bk=el('button','btn small dzback','← Retour au feed '+f.name);bk.type='button';bk.addEventListener('click',()=>openFeed(k));openViewer([bk,projectSheet(p)]);if(typeof setU==='function')setU(p.id);});
+    grid.appendChild(b);});
+  root.appendChild(grid);openViewer([root]);}
 $('viewer-close').addEventListener('click',closeViewer);
 viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!viewer.hidden)closeViewer();});
@@ -1573,13 +1605,14 @@ function groupBlock(title,desc,cards,icon){
   const wrap=$('yo-groups');const yo=PROJECTS.filter(p=>HOME[p.id]&&HOME[p.id][0]==='yo');
   $('yo-count').textContent=String(yo.length).padStart(2,'0');
   [['video','Vidéo','Aftermovies et vidéos de présentation, du tournage au montage.'],['interne','Communication interne · client IDEX','Newsletter et affiches pour animer la vie des collaborateurs.']].forEach(([k,t,d])=>{
-    const items=yo.filter(p=>HOME[p.id][1]===k);if(items.length)wrap.appendChild(groupBlock(t,d,items.map(projCard)));
   });
+  const g=el('div','mgroup');const list=el('div','netlist');list.appendChild(feedTile('yo'));g.appendChild(list);wrap.appendChild(g);
 })();
 /* bento */
 (function(){
   const bento=$('bento');
-  const tiles=PROJECTS.filter(p=>!HOME[p.id]).map(p=>{
+  bento.className='netlist';bento.appendChild(feedTile('ecole'));
+  const tiles=[].map(p=>{
     const t=el('button','tile '+p.size);t.type='button';t.dataset.cat=p.cat;
     t.style.cssText=`--c1:${p.c1};--c2:${p.c2};--ink:${p.ink}`;
     t.setAttribute('aria-label','Voir le projet '+p.titre);
@@ -1593,7 +1626,6 @@ function groupBlock(title,desc,cards,icon){
   });
   const next=el('div','tile next s-l');next.dataset.cat='identite video print digital';
   next.innerHTML='<div style="display:grid;gap:8px"><span class="mono acc">Un projet similaire ?</span><h3>Parlons-en</h3><p>Identité, contenus réseaux, vidéo d\'événement : décrivez votre besoin, je vous réponds sous 48 h avec une proposition.</p></div><a class="btn primary" href="#contact">Proposer un projet →</a>';
-  bento.appendChild(next);tiles.push(next);
   const btns=document.querySelectorAll('#travaux .filters button');
   btns.forEach(b=>b.addEventListener('click',()=>{
     btns.forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
@@ -1700,12 +1732,12 @@ function projectSheet(p){
     const hh=el('p','mono hl-h');hh.appendChild(el('span','rec-dot'));hh.appendChild(document.createTextNode('En direct des matchs'));hl.appendChild(hh);
     const row=el('div','hl-row');const NM={fos:'Fos',poitiers:'Poitiers',orleans:'Orléans',asa:'Alsace'};
     LIVE.forEach(m=>{const k=((m.logos||[])[1]||'').split('/').pop().replace('.png','');const nm=NM[k]||(m.match.split(' – ')[1]||m.match).split(' ')[0];
-      const b=el('button','hl-b');b.type='button';b.setAttribute('aria-label',m.match+', '+(m.win===true?'victoire ':m.win===false?'défaite ':'')+(m.score||'')+', '+m.clips.length+' stories');
+      const b=el('div','hl-b hl-static');
       const ring=el('span','hl-ring'+(m.win===true?' w':''));const im=el('img');im.src='media/live/'+m.clips[Math.min(m.cover||0,m.clips.length-1)][0]+'.jpg';im.alt='';im.loading='lazy';ring.appendChild(im);
       if((m.logos||[])[1]){const lg=el('img','hl-logo');lg.src=m.logos[1];lg.alt='';ring.appendChild(lg);}
       b.appendChild(ring);b.appendChild(el('span','hl-n',nm));b.appendChild(el('span','hl-s mono',m.score||''));
-      b.addEventListener('click',()=>openL(livePlayer(m,0)));row.appendChild(b);});
-    hl.appendChild(row);hl.appendChild(el('p','mono hl-t',tot+' vidéos · '+LIVE.length+' matchs'));cnt.after(hl);}}
+      row.appendChild(b);});
+    hl.appendChild(row);hl.appendChild(el('p','mono hl-t',tot+' vidéos · '+LIVE.length+' matchs · à voir dans Instagram, en stories à la une'));cnt.after(hl);}}
 })();
 
 /* protection des visuels : pas de clic droit, d'appui long ni de glisser-déposer sur les images et vidéos */
@@ -1714,7 +1746,7 @@ document.addEventListener('dragstart',e=>{if(e.target.closest('img,video'))e.pre
 new MutationObserver(()=>document.querySelectorAll('video:not([controlslist])').forEach(v=>{v.setAttribute('controlslist','nodownload noplaybackrate');v.disablePictureInPicture=true;})).observe(document.body,{childList:true,subtree:true});
 /* CV */
 function showCv(){const im=el('img','doc');im.src='media/cv.jpg';im.alt='CV de Mattéo Vandenesse';openViewer([im]);}
-$('cv-open').addEventListener('click',showCv);
+
 $('cv-big').addEventListener('click',showCv);
 const note=$('cv-note');
 
@@ -1821,7 +1853,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
 /* animations : curseur viseur, compteurs, score, parcours, ouverture en zoom */
 (function(){
   const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;if(RM)return;
-  const T='#posts .post,.lclip,.lcard,.pjgal figure,.pjcar .track,.sheet,.pjvids figure';
+  const T='#posts .post,.lclip,.lcard,.pjgal figure,.pjcar .track,.pjvids figure';
   /* 1. curseur viseur (ordinateur uniquement) */
   if(matchMedia('(hover:hover) and (pointer:fine)').matches){
     const c=document.createElement('div');c.id='vcur';c.setAttribute('aria-hidden','true');c.innerHTML='<div class="in"></div>';document.body.appendChild(c);
