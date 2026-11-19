@@ -621,6 +621,44 @@ html:not(.nointro) body{overflow:hidden}
 <style>#intro .disc,#intro .ring,#intro .dot{display:none!important}#intro .lg{position:relative;width:100%;aspect-ratio:636.5/205.8;margin-bottom:7%}#intro .lg img{position:absolute;inset:0;width:100%;height:100%;opacity:0;animation:tslam .42s cubic-bezier(.2,1.2,.3,1) both}#intro .lg img:nth-child(1){animation-delay:.5s}#intro .lg img:nth-child(2){animation-delay:.58s}#intro .lg img:nth-child(3){animation-delay:.66s}</style>
 <style>.badge .core img.blogo{display:block;width:62%!important;height:auto!important;max-width:none;position:static!important;inset:auto!important;object-fit:contain!important;transform:none!important;margin-bottom:6%}</style>
 <style>
+/* Instagram : tuile logo + profil */
+.igtile{display:grid;justify-items:center;gap:10px;width:min(300px,100%);padding:34px 20px 26px;border-radius:22px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;font:inherit;transition:transform .2s,border-color .2s}
+.igtile:hover,.igtile:focus-visible{transform:translateY(-3px);border-color:var(--accent)}
+.igbig{width:96px;height:96px;display:grid;place-items:center;border-radius:28px;background:radial-gradient(circle at 30% 107%,#FDD15E 0%,#F7A445 18%,#F2603D 40%,#D62C7A 62%,#8B3AC9 90%);color:#fff}
+.igbig svg{width:58px;height:58px}
+.igt-l{font-weight:700;font-size:17px}.igt-s{font-size:11px!important;color:var(--muted)}
+.igp{max-width:760px;margin:0 auto;padding:10px 0 30px;color:var(--fg)}
+.igh{display:grid;grid-template-columns:auto 1fr;gap:6px 26px;align-items:center}
+.igav{grid-row:span 2;width:120px;height:120px;border-radius:50%;padding:4px;background:linear-gradient(135deg,#FDD15E,#F2603D 45%,#D62C7A 75%,#8B3AC9)}
+.igav img{width:100%;height:100%;border-radius:50%;object-fit:contain;background:#fff;border:4px solid var(--bg);padding:10px}
+.igwho b{display:block;font-size:22px;font-weight:700}.igwho span{color:var(--muted);font-size:14px}
+.igst{display:flex;gap:28px}.igst div{display:grid}.igst b{font-size:18px}.igst span{font-size:13px;color:var(--muted)}
+.igbio{margin:18px 0 6px;font-size:14px;line-height:1.5;color:var(--soft,#D4D1CB);max-width:62ch}
+.ighl{display:flex;gap:18px;overflow-x:auto;padding:16px 2px 18px;border-bottom:1px solid var(--line)}
+.ighl .hl-b{flex:0 0 auto}
+.ighl .hl-ring{background:linear-gradient(135deg,#FDD15E,#F2603D 45%,#D62C7A 75%,#8B3AC9)}
+.igtabs{display:flex;justify-content:center;gap:40px;border-top:1px solid var(--fg);margin-top:-1px;width:max-content;margin-inline:auto;padding:12px 4px}
+.igtabs span{display:flex;gap:6px;align-items:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.igtabs svg{width:14px;height:14px}
+.iggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.igcell{position:relative;aspect-ratio:4/5;padding:0;border:0;background:var(--surface);cursor:pointer;overflow:hidden;font:inherit;color:#fff}
+.igcell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s,filter .3s}
+.igcell:hover img,.igcell:focus-visible img{transform:scale(1.04);filter:brightness(.7)}
+.igk{position:absolute;top:8px;right:8px;width:20px;height:20px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+.igcap{position:absolute;left:8px;right:8px;bottom:8px;font-size:12px;font-weight:600;text-align:left;text-shadow:0 1px 3px rgba(0,0,0,.8);opacity:0;transition:opacity .2s}
+.igcell:hover .igcap,.igcell:focus-visible .igcap{opacity:1}
+@media (hover:none){.igcap{opacity:1}}
+.igcar{max-width:520px;margin:0 auto;display:grid;gap:12px}
+.igcar figure{margin:0;aspect-ratio:4/5;background:var(--surface);border-radius:8px;overflow:hidden;touch-action:pan-y}
+.igcar figure img{width:100%;height:100%;object-fit:contain;display:block}
+.igdots{display:flex;gap:5px;justify-content:center}.igdots i{width:6px;height:6px;border-radius:50%;background:var(--line)}.igdots i.on{background:var(--accent)}
+@media (max-width:640px){.igh{grid-template-columns:auto 1fr;gap:4px 16px}.igav{width:84px;height:84px}.igst{gap:16px;grid-column:1/-1}.igwho b{font-size:18px}.iggrid{gap:2px}}
+.igp{width:100%;min-width:0;overflow:hidden;box-sizing:border-box}
+.igwho{min-width:0}.igwho span{display:block;overflow-wrap:anywhere}.igbio{overflow-wrap:anywhere}
+.lnav{flex-wrap:wrap;justify-content:center;row-gap:8px}
+@media (max-width:640px){.igp{padding:4px 2px 24px}.igcap{display:none}.igst{flex-wrap:wrap}}
+</style>
+<style>
 /* ── univers des projets ── */
 .viewer .u-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .viewer .stage{position:relative;z-index:1}
@@ -1239,6 +1277,57 @@ function setU(id){
   uDeco.innerHTML=h;UFX.start(u,uDeco);}
 function openU(p){openViewer([projectSheet(p)]);setU(p.id);}
 function openL(nodes){openViewer(nodes);setU('terrain');}
+/* ── Instagram : un logo dans la page, et au clic un profil avec les stories à la une et la grille ── */
+function igData(){
+  const tr=POSTS.filter(p=>p.reseau==='instagram'&&p.type==='Story'&&p.video);
+  const trLab=t=>(t.split(':')[0]||t).replace(/[«»]/g,'').trim().slice(0,22);
+  const train={match:'Entraînements',logos:[],date:'',lieu:'',dir:'media/',clips:tr.map(p=>[p.video.replace('media/','').replace('.mp4',''),trLab(p.texte)]),
+    note:'Stories tournées et montées pour le compte Instagram du club : séances d’entraînement, shooting, avant-match.'};
+  const car=PROJECTS.find(p=>p.id==='orcar');
+  return {tr,train,car};
+}
+function igIcon(cls){const s=el('span',cls);s.setAttribute('aria-hidden','true');s.innerHTML='<svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.25" fill="currentColor"/></svg>';return s;}
+function igTile(){
+  const {tr,car}=igData();const n=tr.length+(car?1:0)+LIVE.length;
+  const g=el('div','mgroup');const h=el('div','mghead');const ht=el('div');const h3=el('h3',null,'Instagram');h3.prepend(netIcon('ig'));ht.appendChild(h3);
+  ht.appendChild(el('p',null,'Stories et publications pour le compte Instagram du club. Touchez le logo pour ouvrir le profil.'));
+  h.append(ht,el('span','mono acc',String(n).padStart(2,'0')+' créations'));
+  const b=el('button','igtile');b.type='button';b.setAttribute('aria-label','Ouvrir le profil Instagram de mes créations');
+  b.appendChild(igIcon('igbig'));b.appendChild(el('span','igt-l','Ouvrir le profil'));b.appendChild(el('span','mono igt-s','Stories à la une · grille'));
+  b.addEventListener('click',openIG);g.append(h,b);return g;}
+function igBubble(label,img,sub,fn){const b=el('button','hl-b');b.type='button';b.setAttribute('aria-label',label+(sub?', '+sub:''));
+  const r=el('span','hl-ring');const i=el('img');i.src=img;i.alt='';i.loading='lazy';r.appendChild(i);b.appendChild(r);b.appendChild(el('span','hl-n',label));if(sub)b.appendChild(el('span','hl-s mono',sub));b.addEventListener('click',fn);return b;}
+function openIG(){
+  const {tr,train,car}=igData();
+  const back=()=>openIG();back.label='← Retour au profil';
+  const root=el('div','igp');
+  const hd=el('div','igh');const av=el('span','igav');const ai=el('img');ai.src='media/metropolitans-logo.png';ai.alt='';av.appendChild(ai);
+  const who=el('div','igwho');who.appendChild(el('b',null,'Levallois Metropolitans'));who.appendChild(el('span',null,'Mes créations pour le compte Instagram du club'));
+  const st=el('div','igst');[[car?1:0,'publication'],[tr.length,'stories'],[LIVE.reduce((t,m)=>t+m.clips.length,0),'stories en direct']].forEach(([v,l])=>{const d=el('div');d.appendChild(el('b',null,String(v)));d.appendChild(el('span',null,l));st.appendChild(d);});
+  hd.append(av,who,st);root.appendChild(hd);
+  root.appendChild(el('p','igbio','Contenus réalisés par Mattéo Vandenesse en alternance aux Levallois Metropolitans : stories d’entraînement, stories en direct des matchs et carrousels. Aperçu présenté façon profil, ce n’est pas le compte officiel.'));
+  const hl=el('div','ighl');
+  if(tr.length)hl.appendChild(igBubble('Entraînements','media/'+train.clips[0][0]+'.jpg',tr.length+' stories',()=>openViewer(livePlayer(Object.assign({},train,{back}),0))));
+  const NM={fos:'Fos',poitiers:'Poitiers',orleans:'Orléans',asa:'Alsace'};
+  LIVE.forEach(m=>{const k=((m.logos||[])[1]||'').split('/').pop().replace('.png','');const nm=NM[k]||(m.match.split(' – ')[1]||m.match).split(' ')[0];
+    hl.appendChild(igBubble(nm,'media/live/'+m.clips[Math.min(m.cover||0,m.clips.length-1)][0]+'.jpg',m.score||'',()=>openViewer(livePlayer(Object.assign({},m,{back}),0))));});
+  root.appendChild(hl);
+  const tabs=el('div','igtabs');const t1=el('span','on');t1.innerHTML='<svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';t1.appendChild(document.createTextNode('Publications'));tabs.appendChild(t1);root.appendChild(tabs);
+  const grid=el('div','iggrid');
+  const tile=(img,label,kind,fn)=>{const b=el('button','igcell');b.type='button';b.setAttribute('aria-label',label);const i=el('img');i.src=img;i.alt='';i.loading='lazy';b.appendChild(i);
+    const ic=el('span','igk '+kind);ic.setAttribute('aria-hidden','true');ic.innerHTML=kind==='car'?'<svg viewBox="0 0 24 24"><rect x="7" y="3" width="14" height="14" rx="2" fill="currentColor"/><path d="M4 7v12a2 2 0 0 0 2 2h12" fill="none" stroke="currentColor" stroke-width="2"/></svg>':'<svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg>';b.appendChild(ic);
+    b.appendChild(el('span','igcap',label));b.addEventListener('click',fn);return b;};
+  if(car&&car.images)grid.appendChild(tile(car.images[0][0],'Carrousel Octobre Rose · '+car.images.length+' slides','car',()=>igCarousel(car,back)));
+  root.appendChild(grid);
+  openViewer([root]);}
+function igCarousel(p,back){
+  const imgs=p.images;let i=0;const box=el('div','igcar');const fig=el('figure');const im=el('img');fig.appendChild(im);
+  const dots=el('div','igdots');imgs.forEach(()=>dots.appendChild(el('i')));
+  const nav=el('div','lnav');const bk=el('button','btn small','← Retour au profil'),pv=el('button','btn small','‹'),cnt=el('span','mono',''),nx=el('button','btn small','›');[bk,pv,nx].forEach(b=>b.type='button');nav.append(bk,pv,cnt,nx);
+  const show=()=>{im.src=imgs[i][0];im.alt=imgs[i][1]||'';cnt.textContent=(i+1)+' / '+imgs.length;[...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));pv.disabled=i===0;nx.disabled=i===imgs.length-1;};
+  pv.addEventListener('click',()=>{if(i>0){i--;show();}});nx.addEventListener('click',()=>{if(i<imgs.length-1){i++;show();}});bk.addEventListener('click',back);
+  let x0=null;fig.addEventListener('pointerdown',e=>x0=e.clientX);fig.addEventListener('pointerup',e=>{if(x0==null)return;const d=e.clientX-x0;x0=null;if(d<-40&&i<imgs.length-1){i++;show();}if(d>40&&i>0){i--;show();}});
+  box.append(fig,dots,nav,el('p','cap',p.titre||''));show();openViewer([box]);}
 $('viewer-close').addEventListener('click',closeViewer);
 viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!viewer.hidden)closeViewer();});
@@ -1286,7 +1375,7 @@ function livePlayer(m,start){
   box.append(v,bars,head,tl,tr,pz,mu);
   const nav=el('div','lnav');const pv=el('button','btn small','‹ Précédente'),cnt=el('span','mono',''),nx=el('button','btn small','Suivante ›');pv.type=nx.type='button';nav.append(pv,cnt,nx);
   const cap=m.note?el('p','cap',m.note):el('p','cap',(m.comp?m.comp+' · ':'')+(m.score?(m.win===true?'Victoire ':m.win===false?'Défaite ':'')+m.score+' · ':'')+m.lieu+' · '+new Date(m.date+'T12:00:00').toLocaleDateString(window.LANG==='en'?'en-GB':'fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+'. Vidéos filmées au téléphone pendant le match et publiées en direct en story Instagram, sans montage.');
-  if(m.back){const bk=el('button','btn small','← Retour à la fiche');bk.type='button';bk.addEventListener('click',m.back);nav.prepend(bk);}
+  if(m.back){const bk=el('button','btn small',m.back.label||'← Retour à la fiche');bk.type='button';bk.addEventListener('click',m.back);nav.prepend(bk);}
   function load(i){
     if(i<0)i=0;if(i>=n){fills.forEach(f=>f.style.width='100%');v.pause();return;}
     cur=i;fills.forEach((f,k)=>f.style.width=k<i?'100%':'0');
@@ -1441,7 +1530,7 @@ function projectSheet(p){
   const catOf=p=>p.reseau==='tiktok'?'tiktok':p.reseau==='youtube'?'youtube':p.copy?'linkedin':(p.reseau==='instagram'&&p.type==='Story')?'stories':'visuels';
   const metroProj=PROJECTS.filter(p=>HOME[p.id]&&HOME[p.id][0]==='metro');
   count.textContent=String(POSTS.length+metroProj.length+LIVE.length).padStart(2,'0');
-  CATS.forEach(([k,t,d])=>{
+  CATS.forEach(([k,t,d])=>{if(k==='stories')return;
     const items=els.filter((e,i)=>catOf(POSTS[i])===k);if(!items.length)return;
     const g=el('div','mgroup');const h=el('div','mghead');
     const ht=el('div');const h3=el('h3',null,t);h3.prepend(netIcon(CATI[k]));ht.appendChild(h3);ht.appendChild(el('p',null,d));
@@ -1451,7 +1540,7 @@ function projectSheet(p){
   });
   const dz=metroProj.filter(p=>HOME[p.id][1]==='design'),ig=metroProj.filter(p=>HOME[p.id][1]==='insta');
   if(dz.length){const dg=groupBlock('Design','Créations graphiques pour le club : textile solidaire, visuels et logos de partenariat, billets et signatures mail.',dz.map(projCard),'design');const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);
-    if(ig.length){const igb=groupBlock('Posts Instagram','Carrousels et posts conçus pour le feed Instagram du club.',ig.map(projCard),'ig');wrap.insertBefore(igb,dg.nextSibling);}}
+    wrap.insertBefore(igTile(),dg.nextSibling);}
   if(LIVE.length){const dock=document.querySelector('#metropolitans .dock'),cnt=dock&&dock.querySelector('.counter');if(cnt){
     const hl=el('div','hl');const tot=LIVE.reduce((t,m)=>t+m.clips.length,0);
     const hh=el('p','mono hl-h');hh.appendChild(el('span','rec-dot'));hh.appendChild(document.createTextNode('En direct des matchs'));hl.appendChild(hh);
