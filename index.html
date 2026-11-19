@@ -675,6 +675,34 @@ html:not(.nointro) body{overflow:hidden}
 .lih .dzav{position:absolute;left:20px;top:58px;border:3px solid var(--surface)}
 .dzback{margin-bottom:12px}
 @media (max-width:760px){.netrow .dzbig{width:52px;height:52px;border-radius:14px}.netrow .dzbig svg{width:36px;height:36px}}
+.ph{position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--surface);margin-bottom:18px}
+.phcov{position:relative;height:190px;display:grid;grid-template-columns:repeat(var(--n,6),minmax(0,1fr));grid-template-rows:minmax(0,1fr);gap:2px;background:#000;overflow:hidden}.phcov img{min-height:0}
+.phcov img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) brightness(.8)}
+.phcov::after{z-index:1;content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,var(--surface) 100%)}
+.ph-li .phcov::before,.ph-dz .phcov::before{content:"";position:absolute;inset:0;z-index:1;mix-blend-mode:soft-light;opacity:.55}
+.ph-li .phcov::before{background:linear-gradient(120deg,#0A66C2,transparent 60%)}
+.ph-dz .phcov::before{background:linear-gradient(120deg,#FF7FB8,transparent 45%,#7CC8FF)}
+.phb{position:relative;z-index:2;display:grid;grid-template-columns:auto 1fr auto;align-items:end;gap:22px;padding:0 28px}.phav{margin-top:-62px}
+.phav .liav{width:112px;height:112px;border-radius:26px;border:4px solid var(--surface);box-shadow:0 12px 30px rgba(0,0,0,.45)}
+.phav .dzbig{width:112px;height:112px;border-radius:28px;border:4px solid var(--surface);box-sizing:border-box;box-shadow:0 12px 30px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.12)}
+.phav .dzbig svg{width:70px;height:70px}
+.phid{min-width:0;padding:18px 0 4px;align-self:start}
+.phk{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.phn{margin:0;font-family:var(--f-display);font-weight:900;font-stretch:72%;text-transform:uppercase;font-size:clamp(30px,3.6vw,46px);line-height:.92;color:var(--fg)}
+.phs{margin:8px 0 0;color:var(--muted);font-size:14px}
+.phst{display:flex;gap:26px;margin:0;padding-bottom:6px}
+.phst div{display:flex;flex-direction:column-reverse;gap:2px;text-align:right}
+.phst dd{margin:0;font-family:var(--f-display);font-weight:900;font-stretch:80%;font-size:34px;line-height:1;color:var(--fg)}
+.phst dt{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);max-width:12ch;line-height:1.3}
+.phch{display:flex;flex-wrap:wrap;gap:8px;padding:20px 28px 0}
+.phch span{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;border-radius:999px;border:1px solid var(--line);color:var(--soft,#D4D1CB)}
+.phnote{margin:16px 28px 24px;font-size:14px;line-height:1.55;color:var(--soft,#D4D1CB);max-width:70ch}
+@media (max-width:760px){.phcov{height:130px;grid-template-columns:repeat(3,minmax(0,1fr))}.phcov img:nth-child(n+4){display:none}
+.phb{grid-template-columns:auto 1fr;gap:14px;padding:0 16px}.phav{margin-top:-46px}.phav .liav,.phav .dzbig{width:84px;height:84px;border-radius:22px}.phav .dzbig svg{width:54px;height:54px}
+.phst{grid-column:1/-1;justify-content:space-between;gap:10px;padding:14px 0 0;border-top:1px solid var(--line);margin-top:4px}.phst div{text-align:left}.phst dd{font-size:28px}
+.phch{padding:16px 16px 0}.phnote{margin:14px 16px 18px;font-size:13.5px}}
+@media (prefers-reduced-motion:no-preference){.phcov img{animation:phin .6s ease both}.phcov img:nth-child(2){animation-delay:.05s}.phcov img:nth-child(3){animation-delay:.1s}.phcov img:nth-child(4){animation-delay:.15s}.phcov img:nth-child(5){animation-delay:.2s}.phcov img:nth-child(6){animation-delay:.25s}}
+@keyframes phin{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:none}}
 </style>
 <style>
 /* Instagram : tuile logo + profil */
@@ -1392,10 +1420,10 @@ function liTile(){const n=liPosts().length;
   b.addEventListener('click',openLI);return b;}
 function openLI(){
   const ps=liPosts();const root=el('div','lip');
-  const hd=el('div','lih');const cov=el('div','licov');const av=el('span','liav');const ai=el('img');ai.src='media/metropolitans-logo.png';ai.alt='';av.appendChild(ai);
-  const who=el('div','liwho');who.appendChild(el('b',null,'Levallois Metropolitans'));who.appendChild(el('span',null,'Mes textes pour la page LinkedIn du club · '+ps.length+' posts'));
-  hd.append(cov,av,who);root.appendChild(hd);
-  root.appendChild(el('p','igbio','J’écris les textes de ces posts. Sauf mention contraire, les visuels et photos sont réalisés par le club. Aperçu présenté façon fil d’actualité, ce n’est pas la page officielle.'));
+  const lav=el('span','liav');const ai=el('img');ai.src='media/metropolitans-logo.png';ai.alt='';lav.appendChild(ai);
+  root.appendChild(profHead({imgs:ps.filter(p=>p.image).map(p=>p.image),avatar:lav,kicker:'LinkedIn · page du club',name:'Levallois Metropolitans',sub:'Basket · Élite 2 · Saison 2026-27',
+    stats:[[ps.length,'posts rédigés'],[ps.filter(p=>p.image||p.video).length,'avec visuels ou photos'],[ps.filter(p=>p.full).length,'visuel + texte de moi']],
+    chips:['Après-match','Annonces','Partenaires','Engagement'],note:'J’écris les textes de ces posts. Sauf mention contraire, les visuels et photos sont réalisés par le club. Aperçu façon fil d’actualité, ce n’est pas la page officielle.',tone:'li'}));
   const grid=el('div','ligrid');
   ps.forEach(p=>{const b=el('button','licell');b.type='button';b.setAttribute('aria-label','Lire le post : '+(p.texte||''));
     const q=(p.texte||'').match(/«\s*(.+?)\s*»/);const hook=q?q[1]:(p.copy.split('\n')[0]||'');
@@ -1427,10 +1455,10 @@ function dzTile(){const ps=dzProjects();
   b.addEventListener('click',openDZ);return b;}
 function openDZ(){if(typeof setU==='function')setU(null);
   const ps=dzProjects();const root=el('div','lip dzp');
-  const hd=el('div','lih dzh');hd.appendChild(el('div','licov dzcov'));const av=dzIcon('dzbig dzav');
-  const who=el('div','liwho');who.appendChild(el('b',null,'Design'));who.appendChild(el('span',null,'Créations graphiques pour les Levallois Metropolitans · '+ps.length+' projets'));
-  hd.append(av,who);root.appendChild(hd);
-  root.appendChild(el('p','igbio','Textile solidaire, visuels et logos de partenariat, billets et signatures mail. Ouvrez un projet pour voir toutes les créations.'));
+  const tags=[...new Set(ps.flatMap(p=>(p.tags||[]).slice(0,2)))].slice(0,5);
+  root.appendChild(profHead({imgs:[...ps.map(p=>p.poster),...ps.map(p=>((p.images||[])[1]||[])[0])].filter((x,i,a)=>x&&a.indexOf(x)===i),avatar:dzIcon('dzbig'),kicker:'Design · créations graphiques',name:'Design',sub:'Pour les Levallois Metropolitans · par Mattéo Vandenesse',
+    stats:[[ps.length,'projets'],[ps.reduce((t,p)=>t+(p.images||[]).length,0),'visuels'],[tags.length,'thèmes']],
+    chips:tags,note:'Textile solidaire, visuels et logos de partenariat, billets et signatures mail. Ouvrez un projet pour voir toutes les créations.',tone:'dz'}));
   const grid=el('div','ligrid');
   ps.forEach(p=>{const b=el('button','licell');b.type='button';b.setAttribute('aria-label','Voir le projet : '+(p.titre||''));
     if(p.poster){const im=el('img');im.src=p.poster;im.alt='';im.loading='lazy';b.appendChild(im);}else b.style.background=p.c1;
@@ -1439,6 +1467,16 @@ function openDZ(){if(typeof setU==='function')setU(null);
   root.appendChild(grid);openViewer([root]);}
 function openDZProject(p){const bk=el('button','btn small dzback','← Retour aux projets');bk.type='button';bk.addEventListener('click',openDZ);
   openViewer([bk,projectSheet(p)]);if(typeof setU==='function')setU(p.id);}
+
+/* ── En-tête de profil commun (LinkedIn, Design) ── */
+function profHead(o){const h=el('header','ph ph-'+o.tone);
+  const cov=el('div','phcov');cov.setAttribute('aria-hidden','true');cov.style.setProperty('--n',Math.min(6,(o.imgs||[]).length)||1);(o.imgs||[]).slice(0,6).forEach((src,i)=>{const im=el('img');im.src=src;im.alt='';im.loading=i<3?'eager':'lazy';cov.appendChild(im);});h.appendChild(cov);
+  const body=el('div','phb');const av=el('div','phav');av.appendChild(o.avatar);body.appendChild(av);
+  const id=el('div','phid');id.appendChild(el('span','mono phk',o.kicker));id.appendChild(el('h2','phn',o.name));id.appendChild(el('p','phs',o.sub));body.appendChild(id);
+  const st=el('dl','phst');o.stats.forEach(([n,l])=>{const d=el('div');d.appendChild(el('dt','mono',l));d.appendChild(el('dd',null,String(n)));st.appendChild(d);});body.appendChild(st);
+  h.appendChild(body);
+  if(o.chips&&o.chips.length){const c=el('div','phch');o.chips.forEach(t=>c.appendChild(el('span','mono',t)));h.appendChild(c);}
+  if(o.note)h.appendChild(el('p','phnote',o.note));return h;}
 $('viewer-close').addEventListener('click',closeViewer);
 viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!viewer.hidden)closeViewer();});
