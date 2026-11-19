@@ -1799,6 +1799,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     const p=PROJECTS.find(x=>x.id===t);if(p)openU(p);
   }
   window.vdnOpen=open;
+  function goSec(t){const h=(typeof HOME!=='undefined'&&HOME[t])?HOME[t][0]:'metro';const s=document.getElementById(h==='yo'?'yoagency':'metropolitans');if(s)s.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}
   fig.classList.add('free');
   const g=document.createElement('div');g.className='grid';
   for(let c=0;c<3;c++){const col=document.createElement('div');col.className='col'+(c%2?' r':'');const set=P.filter((_,i)=>i%3===c);
@@ -1806,7 +1807,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
       if(v){const m=document.createElement('video');m.src='media/'+n+'.mp4';m.poster='media/'+n+'.jpg';m.muted=true;m.loop=true;m.playsInline=true;m.setAttribute('playsinline','');m.preload='none';b.appendChild(m);const vt=document.createElement('span');vt.className='vt';vt.textContent='▶ VIDÉO';b.appendChild(vt);}
       else{const i=document.createElement('img');i.src='media/'+n+'.jpg';i.alt='';i.loading='lazy';b.appendChild(i);}
       const ch=document.createElement('span');ch.className='chip';ch.textContent=t;b.appendChild(ch);
-      b.addEventListener('click',()=>open(tg));col.appendChild(b);});
+      b.addEventListener('click',()=>goSec(tg));col.appendChild(b);});
     g.appendChild(col);}
   box.appendChild(g);
   const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting&&!matchMedia('(prefers-reduced-motion: reduce)').matches)v.play().catch(()=>{});else v.pause();}),{threshold:.1});
