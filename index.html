@@ -621,6 +621,41 @@ html:not(.nointro) body{overflow:hidden}
 <style>#intro .disc,#intro .ring,#intro .dot{display:none!important}#intro .lg{position:relative;width:100%;aspect-ratio:636.5/205.8;margin-bottom:7%}#intro .lg img{position:absolute;inset:0;width:100%;height:100%;opacity:0;animation:tslam .42s cubic-bezier(.2,1.2,.3,1) both}#intro .lg img:nth-child(1){animation-delay:.5s}#intro .lg img:nth-child(2){animation-delay:.58s}#intro .lg img:nth-child(3){animation-delay:.66s}</style>
 <style>.badge .core img.blogo{display:block;width:62%!important;height:auto!important;max-width:none;position:static!important;inset:auto!important;object-fit:contain!important;transform:none!important;margin-bottom:6%}</style>
 <style>
+.libig{width:96px;height:96px;display:grid;place-items:center;border-radius:22px;background:#0A66C2;color:#fff}.libig svg{width:60px;height:60px}
+.lip{width:100%;max-width:640px;margin:0 auto;padding:6px 0 30px;box-sizing:border-box;min-width:0;color:var(--fg)}
+.lih{position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);padding-bottom:18px}
+.licov{height:110px;background:linear-gradient(120deg,#16140a,#3a3108 50%,#F2B33D)}
+.lih .liav{position:absolute;left:20px;top:58px}
+.liav{display:block;width:96px;height:96px;border-radius:12px;background:#fff;border:3px solid var(--surface);overflow:hidden}
+.liav img{width:100%;height:100%;object-fit:contain;padding:8px;box-sizing:border-box}
+.liav.sm{width:44px;height:44px;border-radius:8px;border-width:1px;flex:0 0 auto}.liav.sm img{padding:4px}
+.liwho{padding:52px 20px 0}.liwho b{display:block;font-size:21px}.liwho span{color:var(--muted);font-size:14px}
+.lif{margin-top:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 0 12px;overflow:hidden}
+.lift{display:flex;gap:10px;align-items:center;padding:0 16px 10px}.lift b{display:block;font-size:15px}.lift span{font-size:12.5px;color:var(--muted)}
+.libody{margin:0;padding:0 16px;white-space:pre-line;font-size:15px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.libody.open{display:block;-webkit-line-clamp:unset}
+.limore{background:none;border:0;color:var(--muted);font:inherit;font-size:14px;font-weight:600;padding:2px 16px 8px;cursor:pointer;display:block;margin-left:auto}
+.limore:hover{color:var(--fg)}
+.lif .limg,.lif video{display:block;width:100%;height:auto;margin-top:10px;background:#000}
+.lif video{max-height:80vh}
+.lif .cgal{padding:6px 16px 0}
+.licred{margin:8px 16px 0;font-size:12px;color:var(--muted)}
+/* rangée réseau : logo, titre, aperçu en éventail, flèche */
+.netrow{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:22px;width:100%;padding:18px 22px;border-radius:18px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;font:inherit;text-align:left;transition:border-color .2s,background .2s}
+.netrow:hover,.netrow:focus-visible{border-color:var(--accent);background:var(--surface-2,var(--surface))}
+.netrow .igbig,.netrow .libig{width:64px;height:64px;border-radius:18px}.netrow .igbig svg,.netrow .libig svg{width:38px;height:38px}
+.nr-t b{display:block;font-family:var(--f-display);font-weight:800;font-size:clamp(22px,2.4vw,30px);letter-spacing:.01em;text-transform:uppercase;line-height:1}
+.nr-t .mono{display:block;margin-top:6px;font-size:12px;color:var(--muted)}
+.nr-stack{position:relative;width:190px;height:96px}
+.nr-stack img{position:absolute;top:50%;left:calc(var(--i)*42px);width:68px;height:85px;object-fit:cover;border-radius:8px;border:2px solid var(--bg);box-shadow:0 8px 18px -8px rgba(0,0,0,.6);transform:translateY(-50%) rotate(calc((var(--i) - 1.5)*4deg));transition:transform .3s}
+.nr-stack:not(.tall) img{height:68px}
+.netrow:hover .nr-stack img{transform:translateY(-55%) rotate(calc((var(--i) - 1.5)*7deg))}
+.nr-go{font-size:22px;color:var(--accent);transition:transform .2s}.netrow:hover .nr-go{transform:translateX(4px)}
+@media (max-width:640px){.netrow{grid-template-columns:auto 1fr auto;gap:14px;padding:14px}.nr-stack{display:none}.netrow .igbig,.netrow .libig{width:52px;height:52px;border-radius:14px}.netrow .igbig svg,.netrow .libig svg{width:30px;height:30px}}
+@media (prefers-reduced-motion:reduce){.nr-stack img,.nr-go{transition:none}}
+.netlist{display:grid;gap:10px}
+</style>
+<style>
 /* Instagram : tuile logo + profil */
 .igtile{display:grid;justify-items:center;gap:10px;width:min(300px,100%);padding:34px 20px 26px;border-radius:22px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;font:inherit;transition:transform .2s,border-color .2s}
 .igtile:hover,.igtile:focus-visible{transform:translateY(-3px);border-color:var(--accent)}
@@ -1287,14 +1322,14 @@ function igData(){
   return {tr,train,car};
 }
 function igIcon(cls){const s=el('span',cls);s.setAttribute('aria-hidden','true');s.innerHTML='<svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.25" fill="currentColor"/></svg>';return s;}
+function netRow(lab,icon,title,sub,thumbs,tall){const b=el('button','netrow');b.type='button';b.setAttribute('aria-label',lab);
+  const t=el('span','nr-t');t.appendChild(el('b',null,title));t.appendChild(el('span','mono',sub));
+  const st=el('span','nr-stack'+(tall?' tall':''));thumbs.slice(0,4).forEach((s,i)=>{const im=el('img');im.src=s;im.alt='';im.loading='lazy';im.style.setProperty('--i',i);st.appendChild(im);});
+  b.append(icon,t,st,el('span','nr-go','→'));return b;}
 function igTile(){
-  const {tr,car}=igData();const n=tr.length+(car?1:0)+LIVE.length;
-  const g=el('div','mgroup');const h=el('div','mghead');const ht=el('div');const h3=el('h3',null,'Instagram');h3.prepend(netIcon('ig'));ht.appendChild(h3);
-  ht.appendChild(el('p',null,'Stories et publications pour le compte Instagram du club. Touchez le logo pour ouvrir le profil.'));
-  h.append(ht,el('span','mono acc',String(n).padStart(2,'0')+' créations'));
-  const b=el('button','igtile');b.type='button';b.setAttribute('aria-label','Ouvrir le profil Instagram de mes créations');
-  b.appendChild(igIcon('igbig'));b.appendChild(el('span','igt-l','Ouvrir le profil'));b.appendChild(el('span','mono igt-s','Stories à la une · grille'));
-  b.addEventListener('click',openIG);g.append(h,b);return g;}
+  const {tr,car}=igData();
+  const b=netRow('Ouvrir le profil Instagram de mes créations',igIcon('igbig'),'Instagram','Profil · stories à la une · grille',[car&&car.images?car.images[0][0]:null,...tr.slice(0,3).map(p=>p.image)].filter(Boolean),true);
+  b.addEventListener('click',openIG);return b;}
 function igBubble(label,img,sub,fn){const b=el('button','hl-b');b.type='button';b.setAttribute('aria-label',label+(sub?', '+sub:''));
   const r=el('span','hl-ring');const i=el('img');i.src=img;i.alt='';i.loading='lazy';r.appendChild(i);b.appendChild(r);b.appendChild(el('span','hl-n',label));if(sub)b.appendChild(el('span','hl-s mono',sub));b.addEventListener('click',fn);return b;}
 function openIG(){
@@ -1328,6 +1363,34 @@ function igCarousel(p,back){
   pv.addEventListener('click',()=>{if(i>0){i--;show();}});nx.addEventListener('click',()=>{if(i<imgs.length-1){i++;show();}});bk.addEventListener('click',back);
   let x0=null;fig.addEventListener('pointerdown',e=>x0=e.clientX);fig.addEventListener('pointerup',e=>{if(x0==null)return;const d=e.clientX-x0;x0=null;if(d<-40&&i<imgs.length-1){i++;show();}if(d>40&&i>0){i--;show();}});
   box.append(fig,dots,nav,el('p','cap',p.titre||''));show();openViewer([box]);}
+/* ── LinkedIn : un logo dans la page, et au clic un fil d'actualité avec tous les posts rédigés ── */
+function liIcon(cls){const s=el('span',cls);s.setAttribute('aria-hidden','true');s.innerHTML='<svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7.5 10.5v6M7.5 7.4v.2M11.3 16.5v-6M11.3 13.2c0-1.7 1.1-2.8 2.5-2.8s2.4 1 2.4 2.8v3.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';return s;}
+function liPosts(){return POSTS.filter(p=>p.reseau==='linkedin'&&p.copy);}
+function liTile(){const n=liPosts().length;
+  const b=netRow('Ouvrir le fil LinkedIn de mes posts',liIcon('libig'),'LinkedIn','Fil · '+n+' posts rédigés',liPosts().filter(p=>p.image).slice(0,4).map(p=>p.image),false);
+  b.addEventListener('click',openLI);return b;}
+function openLI(){
+  const ps=liPosts();const root=el('div','lip');
+  const hd=el('div','lih');const cov=el('div','licov');const av=el('span','liav');const ai=el('img');ai.src='media/metropolitans-logo.png';ai.alt='';av.appendChild(ai);
+  const who=el('div','liwho');who.appendChild(el('b',null,'Levallois Metropolitans'));who.appendChild(el('span',null,'Mes textes pour la page LinkedIn du club · '+ps.length+' posts'));
+  hd.append(cov,av,who);root.appendChild(hd);
+  root.appendChild(el('p','igbio','J’écris les textes de ces posts. Sauf mention contraire, les visuels et photos sont réalisés par le club. Aperçu présenté façon fil d’actualité, ce n’est pas la page officielle.'));
+  ps.forEach(p=>{const c=el('article','lif');
+    const top=el('div','lift');const a=el('span','liav sm');const i=el('img');i.src='media/metropolitans-logo.png';i.alt='';a.appendChild(i);
+    const w=el('div');w.appendChild(el('b',null,'Levallois Metropolitans'));w.appendChild(el('span',null,(p.date?fmt(p.date):'Saison 2026-27')+' · '+(p.full==='video'?'vidéo + texte de Mattéo':p.full?'visuel + texte de Mattéo':'texte de Mattéo')));
+    top.append(a,w);c.appendChild(top);
+    const body=el('p','libody',p.copy.trim());c.appendChild(body);
+    const more=el('button','limore','… voir plus');more.type='button';more.addEventListener('click',()=>{body.classList.add('open');more.remove();});c.appendChild(more);
+    if(p.video){const v=el('video');v.src=p.video;v.controls=true;v.playsInline=true;v.preload='none';if(p.image)v.poster=p.image;c.appendChild(v);}
+    else if(p.image){const im=el('img','limg');im.src=p.image;im.alt=p.texte||'';im.loading='lazy';c.appendChild(im);}
+    if(p.gallery){const g=el('div','cgal');p.gallery.forEach(src=>{const im=el('img');im.src=src;im.alt='';im.loading='lazy';g.appendChild(im);});c.appendChild(g);}
+    if(p.credit)c.appendChild(el('p','licred',p.credit));
+    root.appendChild(c);
+    requestAnimationFrame(()=>{if(body.scrollHeight<=body.clientHeight+2)more.remove();});});
+  openViewer([root]);}
+function netGroup(){const g=el('div','mgroup');const h=el('div','mghead');const ht=el('div');ht.appendChild(el('h3',null,'Réseaux sociaux'));
+  ht.appendChild(el('p',null,'Ouvrez un réseau pour voir mes créations comme dans l’application : le profil Instagram avec ses stories à la une, le fil LinkedIn avec les posts dont j’écris les textes.'));
+  h.append(ht);const list=el('div','netlist');list.append(igTile(),liTile());g.append(h,list);return g;}
 $('viewer-close').addEventListener('click',closeViewer);
 viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!viewer.hidden)closeViewer();});
@@ -1530,7 +1593,7 @@ function projectSheet(p){
   const catOf=p=>p.reseau==='tiktok'?'tiktok':p.reseau==='youtube'?'youtube':p.copy?'linkedin':(p.reseau==='instagram'&&p.type==='Story')?'stories':'visuels';
   const metroProj=PROJECTS.filter(p=>HOME[p.id]&&HOME[p.id][0]==='metro');
   count.textContent=String(POSTS.length+metroProj.length+LIVE.length).padStart(2,'0');
-  CATS.forEach(([k,t,d])=>{if(k==='stories')return;
+  CATS.forEach(([k,t,d])=>{if(k==='stories')return;if(k==='linkedin'){wrap.appendChild(netGroup());return;}
     const items=els.filter((e,i)=>catOf(POSTS[i])===k);if(!items.length)return;
     const g=el('div','mgroup');const h=el('div','mghead');
     const ht=el('div');const h3=el('h3',null,t);h3.prepend(netIcon(CATI[k]));ht.appendChild(h3);ht.appendChild(el('p',null,d));
@@ -1540,7 +1603,7 @@ function projectSheet(p){
   });
   const dz=metroProj.filter(p=>HOME[p.id][1]==='design'),ig=metroProj.filter(p=>HOME[p.id][1]==='insta');
   if(dz.length){const dg=groupBlock('Design','Créations graphiques pour le club : textile solidaire, visuels et logos de partenariat, billets et signatures mail.',dz.map(projCard),'design');const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);
-    wrap.insertBefore(igTile(),dg.nextSibling);}
+    }
   if(LIVE.length){const dock=document.querySelector('#metropolitans .dock'),cnt=dock&&dock.querySelector('.counter');if(cnt){
     const hl=el('div','hl');const tot=LIVE.reduce((t,m)=>t+m.clips.length,0);
     const hh=el('p','mono hl-h');hh.appendChild(el('span','rec-dot'));hh.appendChild(document.createTextNode('En direct des matchs'));hl.appendChild(hh);
