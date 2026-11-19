@@ -600,7 +600,7 @@ html:not(.nointro) body{overflow:hidden}
 @keyframes tzoom{to{transform:scale(9)}}
 @keyframes tgone{to{opacity:0;visibility:hidden}}
 </style>
-<style>
+<style>.hwall .tile,.tile{cursor:default}.hwall .grid{pointer-events:none}</style><style>
 .hl{margin-top:22px}
 .hl-h{display:flex;align-items:center;gap:8px;margin:0 0 12px}
 .hl-h .rec-dot{width:8px;height:8px;border-radius:50%;background:var(--rec,#E5484D);box-shadow:0 0 0 4px rgba(229,72,77,.18)}
@@ -1803,13 +1803,13 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   fig.classList.add('free');
   const g=document.createElement('div');g.className='grid';
   for(let c=0;c<3;c++){const col=document.createElement('div');col.className='col'+(c%2?' r':'');const set=P.filter((_,i)=>i%3===c);
-    [...set,...set].forEach(([n,t,f,v,tg],k)=>{const b=document.createElement('button');b.type='button';b.className='tile '+f;b.setAttribute('aria-label',t);if(k>=set.length){b.tabIndex=-1;b.setAttribute('aria-hidden','true');}
+    [...set,...set].forEach(([n,t,f,v,tg],k)=>{const b=document.createElement('div');b.className='tile '+f;
       if(v){const m=document.createElement('video');m.src='media/'+n+'.mp4';m.poster='media/'+n+'.jpg';m.muted=true;m.loop=true;m.playsInline=true;m.setAttribute('playsinline','');m.preload='none';b.appendChild(m);const vt=document.createElement('span');vt.className='vt';vt.textContent='▶ VIDÉO';b.appendChild(vt);}
       else{const i=document.createElement('img');i.src='media/'+n+'.jpg';i.alt='';i.loading='lazy';b.appendChild(i);}
       const ch=document.createElement('span');ch.className='chip';ch.textContent=t;b.appendChild(ch);
-      b.addEventListener('click',()=>goSec(tg));col.appendChild(b);});
+      col.appendChild(b);});
     g.appendChild(col);}
-  box.appendChild(g);
+  g.setAttribute('aria-hidden','true');box.appendChild(g);
   const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting&&!matchMedia('(prefers-reduced-motion: reduce)').matches)v.play().catch(()=>{});else v.pause();}),{threshold:.1});
   box.querySelectorAll('video').forEach(v=>io.observe(v));
   if(matchMedia('(hover:hover)').matches)window.addEventListener('mousemove',e=>{const r=fig.getBoundingClientRect();if(r.bottom<0)return;const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;g.style.transform='rotate(-6deg) translate('+(x*-18)+'px,'+(y*-14)+'px)';});
@@ -1821,7 +1821,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
 /* animations : curseur viseur, compteurs, score, parcours, ouverture en zoom */
 (function(){
   const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;if(RM)return;
-  const T='.hwall .tile,#posts .post,.tile,.lclip,.lcard,.pjgal figure,.pjcar .track,.sheet,.pjvids figure';
+  const T='#posts .post,.lclip,.lcard,.pjgal figure,.pjcar .track,.sheet,.pjvids figure';
   /* 1. curseur viseur (ordinateur uniquement) */
   if(matchMedia('(hover:hover) and (pointer:fine)').matches){
     const c=document.createElement('div');c.id='vcur';c.setAttribute('aria-hidden','true');c.innerHTML='<div class="in"></div>';document.body.appendChild(c);
