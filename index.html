@@ -668,6 +668,13 @@ html:not(.nointro) body{overflow:hidden}
 .licell:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .lip>.btn{margin-bottom:12px}
 @media (max-width:760px){.ligrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.lihook{font-size:18px;inset:12px 12px 64px}.lictx{font-size:12px}}
+.dzbig{width:96px;height:96px;display:grid;place-items:center;border-radius:24px;background:linear-gradient(160deg,#23272F,#0B0C0F);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.dzbig svg{width:66px;height:66px}
+.netrow .dzbig{width:64px;height:64px;border-radius:18px}.netrow .dzbig svg{width:44px;height:44px}
+.dzcov{background:linear-gradient(120deg,#0B0C0F,#1d2230 55%,#2a3550)}
+.lih .dzav{position:absolute;left:20px;top:58px;border:3px solid var(--surface)}
+.dzback{margin-bottom:12px}
+@media (max-width:760px){.netrow .dzbig{width:52px;height:52px;border-radius:14px}.netrow .dzbig svg{width:36px;height:36px}}
 </style>
 <style>
 /* Instagram : tuile logo + profil */
@@ -1399,9 +1406,9 @@ function openLI(){
     b.addEventListener('click',()=>openLIPost(p));grid.appendChild(b);});
   root.appendChild(grid);
   openViewer([root]);}
-function netGroup(){const g=el('div','mgroup');const h=el('div','mghead');const ht=el('div');ht.appendChild(el('h3',null,'Réseaux sociaux'));
-  ht.appendChild(el('p',null,'Ouvrez un réseau pour voir mes créations comme dans l’application : le profil Instagram avec ses stories à la une, le fil LinkedIn avec les posts dont j’écris les textes.'));
-  h.append(ht);const list=el('div','netlist');list.append(igTile(),liTile());g.append(h,list);return g;}
+function netGroup(){const g=el('div','mgroup');const h=el('div','mghead');const ht=el('div');ht.appendChild(el('h3',null,'Réseaux & design'));
+  ht.appendChild(el('p',null,'Ouvrez un réseau pour voir mes créations comme dans l’application : le profil Instagram avec ses stories à la une, le fil LinkedIn avec les posts dont j’écris les textes, et mes créations graphiques pour le club.'));
+  h.append(ht);const list=el('div','netlist');list.append(igTile(),liTile(),dzTile());g.append(h,list);return g;}
 function openLIPost(p){const root=el('div','lip');const bk=el('button','btn small','← Retour au fil');bk.type='button';bk.addEventListener('click',openLI);root.appendChild(bk);
   const c=el('article','lif');const top=el('div','lift');const a=el('span','liav sm');const i=el('img');i.src='media/metropolitans-logo.png';i.alt='';a.appendChild(i);
   const w=el('div');w.appendChild(el('b',null,'Levallois Metropolitans'));w.appendChild(el('span',null,(p.date?fmt(p.date):'Saison 2026-27')+' · '+(p.full==='video'?'vidéo + texte de Mattéo':p.full?'visuel + texte de Mattéo':'texte de Mattéo')));
@@ -1410,6 +1417,28 @@ function openLIPost(p){const root=el('div','lip');const bk=el('button','btn smal
   else if(p.image){const im=el('img','limg');im.src=p.image;im.alt=p.texte||'';c.appendChild(im);}
   if(p.gallery){const g=el('div','cgal');p.gallery.forEach(src=>{const im=el('img');im.src=src;im.alt='';im.loading='lazy';g.appendChild(im);});c.appendChild(g);}
   if(p.credit)c.appendChild(el('p','licred',p.credit));root.appendChild(c);openViewer([root]);}
+
+/* ── Design : présenté comme une appli, comme Instagram et LinkedIn ── */
+const DZSVG='<svg viewBox="0 0 24 24"><path d="M4 18C6 8 18 8 20 18" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><path d="M4 18L9 5M20 18L15 5" fill="none" stroke="#8E939C" stroke-width="1.1"/><rect x="2" y="16" width="4" height="4" rx=".6" fill="#FFE000"/><rect x="18" y="16" width="4" height="4" rx=".6" fill="#FFE000"/><circle cx="9" cy="5" r="1.9" fill="#FF7FB8"/><circle cx="15" cy="5" r="1.9" fill="#7CC8FF"/></svg>';
+function dzIcon(cls){const s=el('span',cls);s.setAttribute('aria-hidden','true');s.innerHTML=DZSVG;return s;}
+function dzProjects(){return PROJECTS.filter(p=>HOME[p.id]&&HOME[p.id][0]==='metro'&&HOME[p.id][1]==='design');}
+function dzTile(){const ps=dzProjects();
+  const b=netRow('Ouvrir mes créations design',dzIcon('dzbig'),'Design','Projets · '+ps.length+' créations pour le club',ps.filter(p=>p.poster).slice(0,4).map(p=>p.poster),false);
+  b.addEventListener('click',openDZ);return b;}
+function openDZ(){if(typeof setU==='function')setU(null);
+  const ps=dzProjects();const root=el('div','lip dzp');
+  const hd=el('div','lih dzh');hd.appendChild(el('div','licov dzcov'));const av=dzIcon('dzbig dzav');
+  const who=el('div','liwho');who.appendChild(el('b',null,'Design'));who.appendChild(el('span',null,'Créations graphiques pour les Levallois Metropolitans · '+ps.length+' projets'));
+  hd.append(av,who);root.appendChild(hd);
+  root.appendChild(el('p','igbio','Textile solidaire, visuels et logos de partenariat, billets et signatures mail. Ouvrez un projet pour voir toutes les créations.'));
+  const grid=el('div','ligrid');
+  ps.forEach(p=>{const b=el('button','licell');b.type='button';b.setAttribute('aria-label','Voir le projet : '+(p.titre||''));
+    if(p.poster){const im=el('img');im.src=p.poster;im.alt='';im.loading='lazy';b.appendChild(im);}else b.style.background=p.c1;
+    const f=el('span','licf');f.appendChild(el('span','lictx',p.titre||''));f.appendChild(el('span','mono lir','Voir le projet →'));b.appendChild(f);
+    b.addEventListener('click',()=>openDZProject(p));grid.appendChild(b);});
+  root.appendChild(grid);openViewer([root]);}
+function openDZProject(p){const bk=el('button','btn small dzback','← Retour aux projets');bk.type='button';bk.addEventListener('click',openDZ);
+  openViewer([bk,projectSheet(p)]);if(typeof setU==='function')setU(p.id);}
 $('viewer-close').addEventListener('click',closeViewer);
 viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!viewer.hidden)closeViewer();});
@@ -1621,7 +1650,7 @@ function projectSheet(p){
     g.append(h,r);wrap.appendChild(g);
   });
   const dz=metroProj.filter(p=>HOME[p.id][1]==='design'),ig=metroProj.filter(p=>HOME[p.id][1]==='insta');
-  if(dz.length){const dg=groupBlock('Design','Créations graphiques pour le club : textile solidaire, visuels et logos de partenariat, billets et signatures mail.',dz.map(projCard),'design');const gs=wrap.querySelectorAll('.mgroup');gs.length>1?wrap.insertBefore(dg,gs[1]):wrap.appendChild(dg);
+  if(dz.length){const dg=groupBlock('Design','Créations graphiques pour le club : textile solidaire, visuels et logos de partenariat, billets et signatures mail.',dz.map(projCard),'design');window.DZ=dz;
     }
   if(LIVE.length){const dock=document.querySelector('#metropolitans .dock'),cnt=dock&&dock.querySelector('.counter');if(cnt){
     const hl=el('div','hl');const tot=LIVE.reduce((t,m)=>t+m.clips.length,0);
