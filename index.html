@@ -928,7 +928,7 @@ html:not(.nointro) body{overflow:hidden}
 
   <section class="block" id="travaux">
     <div class="sec-head">
-      <span class="mono k">Formation · BTS Communication</span>
+      <span class="mono k">Formation · BTS & Bachelor</span>
       <h2>École</h2>
       <p>Projets menés pendant ma formation en école. Ouvrez le feed pour voir le brief, la problématique et les résultats de chaque projet.</p>
     </div>
@@ -1159,6 +1159,12 @@ const PROJECTS=[
    brief:"Organiser un vide-dressing solidaire à l'école Igensia et créer toute la communication : identité, frise, bannières, affiches, série « Le saviez-vous ? » sur l'impact du textile, signalétique des bacs de collecte et stickers.",
    pb:"Comment créer une identité claire et impactante pour générer un fort taux de participation ?",
    res:[['+50 kg','de vêtements collectés'],['≈500 €','reversés à l\'association']]},
+  {id:'flunch',size:'s-xl',cat:'digital print',c1:'#5A0000',c2:'#E2231A',ink:'#FFF1EE',big:'La F!ll Box<br>× Flunch',kicker:'Séminaire ECITV × Flunch · 2026',stat:['2 / 3 / 5 €','la box'],poster:'media/flunch-02.jpg',images:[['media/flunch-01.jpg','Couverture · Breaking / Hacking the code','w'],['media/flunch-02.jpg','Le concept : la F!ll Box, dès 2 €','w'],['media/flunch-03.jpg','Diagnostic 01 · une marque à moderniser','w'],['media/flunch-04.jpg','Diagnostic 02 · 18-30 ans : budget serré, conscience engagée','w'],['media/flunch-05.jpg','Tension stratégique','w'],['media/flunch-06.jpg','Choix stratégique · Hack the code, l’offre en 3 tailles','w'],['media/flunch-07.jpg','Diagnostic 03 · opportunités face à la concurrence','w'],['media/flunch-08.jpg','Nouveau positionnement · manger malin et généreux','w'],['media/flunch-09.jpg','Concept & expérience · la F!ll Box en action','w'],['media/flunch-10.jpg','Direction créative · univers visuel et sonore','w'],['media/flunch-11.jpg','Objectifs SMART & OKR','w'],['media/flunch-12.jpg','Activation 360°','w'],['media/flunch-13.jpg','Exemple de notification push « L’heure F!ll »','w'],['media/flunch-14.jpg','Merci · « Du choix, des petits prix, zéro gâchis ! »','w']],
+   titre:'La F!ll Box × Flunch',tags:['Stratégie','Concept','Présentation'],
+   obj:"Imaginer une offre anti-gaspi qui rajeunit l’image de Flunch auprès des 18-24 ans, en gardant ce qui fait la marque : le libre-service, la générosité et les petits prix.",
+   brief:"Séminaire ECITV × Flunch « Breaking / Hacking the code », projet de groupe à cinq. Diagnostic de la marque et de la cible, choix stratégique, concept, direction créative, objectifs SMART et OKR, plan d’activation 360° et soutenance.",
+   pb:"Comment faire de la générosité de Flunch un geste anti-gaspi dont les jeunes sont fiers ?",
+   res:[['3 tailles','250, 400 et 600 g, de 2 à 5 €'],['20 Flunch','proposés pour le déploiement pilote']]},
   {id:'ody',size:'',cat:'print digital',c1:'#2A0F1C',c2:'#E86A9A',ink:'#FCE9F0',big:'Odysséa',kicker:'Newsletter · RSE',stat:['110','inscrits'],poster:'media/odyssea-formulaire.jpg',images:[['media/odyssea-formulaire.jpg','Formulaire d\'inscription : prénom, nom, taille de T-shirt et choix de l\'épreuve'],['media/odyssea-pourquoi.jpg','Pourquoi participer : solidarité, team spirit, vague rose et infos pratiques']],
    titre:'Newsletter Odysséa 2025',tags:['Comm\' interne','Newsletter','IDEX'],
    obj:"Informer sur l'événement, valoriser l'engagement RSE de l'entreprise et pousser les collaborateurs à s'inscrire.",
@@ -1494,7 +1500,7 @@ const FEEDS={
   yo:{svg:YOSVG,bg:'',name:'YO Agency',kicker:'Agence événementielle · alternance',sub:'Assistant chef de projet · 2024-2026 · Clichy',art:YOART,
     list:()=>PROJECTS.filter(p=>HOME[p.id]&&HOME[p.id][0]==='yo'),rowSub:n=>'Projets · '+n+' réalisations en agence',
     chips:['Aftermovie','Vidéo','Newsletter','Affiches','Comm’ interne'],note:'Vidéos d’événement et communication interne pour les clients de l’agence. Ouvrez un projet pour voir le brief, la problématique et les résultats.'},
-  ecole:{svg:ECSVG,bg:'',name:'École',kicker:'Formation · BTS Communication',sub:'Projets menés pendant ma formation',art:ECART,
+  ecole:{svg:ECSVG,bg:'',name:'École',kicker:'Formation · BTS & Bachelor',sub:'Projets menés pendant mes études',art:ECART,
     list:()=>PROJECTS.filter(p=>!HOME[p.id]),rowSub:n=>'Projets · '+n+(n>1?' projets d’école':' projet d’école'),
     chips:null,note:'Projets menés pendant ma formation en école. Ouvrez un projet pour voir le brief, la problématique et les résultats.'}
 };
